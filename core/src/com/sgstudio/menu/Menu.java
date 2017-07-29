@@ -5,6 +5,7 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,13 +14,17 @@ import com.sgstudio.utils.Tiles;
 
 public class Menu implements Screen {
 	private static Map<String, TextureRegion> atlasMenu;
-	private static boolean Moved[] = {false, false, false, false};
-	private static boolean Pressed[] = {false, false, false, false};
+	private static Map<String, TextureRegion> atlasSound;
+	private static boolean Moved[] = {false, false, false, false, false};
+	private static boolean Pressed[] = {false, false, false, false, false};
+	private static boolean Play = true;
 	
 	private final Main main;
 	private Tiles tiles;
 	
 	private SpriteBatch batch;
+	
+	private static Music sound;
 
 	public Menu(final Main main) {
 		this.main = main;
@@ -33,9 +38,16 @@ public class Menu implements Screen {
 		tiles.createAtlas("atlas/menu.png", 3, 4);
 		atlasMenu = tiles.getTextureRegion();
 		
+		tiles.createAtlas("atlas/sound.png", 2, 1);
+		atlasSound = tiles.getTextureRegion();
+		
 		batch = main.getBatch();
 		width = atlasMenu.get("tiles0_0").getRegionWidth();
 		height = atlasMenu.get("tiles0_0").getRegionHeight();
+		
+		sound = Gdx.audio.newMusic(Gdx.files.internal("audio/music/MainTheme.wav"));
+		sound.setLooping(true);
+		sound.setVolume(0.2f);
 		
 		Gdx.input.setInputProcessor(new InputProcessor(){
 			@Override
@@ -70,6 +82,13 @@ public class Menu implements Screen {
 				} else {
 					for(int i=0;i<4;i++) Pressed[i]=false;
 				}
+				//Button - Sound
+				if(screenX>=15 && screenX<=15+atlasSound.get("tiles0_0").getRegionWidth()){
+					if(screenY<=Gdx.graphics.getHeight()-15 && screenY>=Gdx.graphics.getHeight()-15-atlasSound.get("tiles0_0").getRegionHeight())
+						Pressed[4]=true;
+					else Pressed[4]=false;
+				} else Pressed[4]=false;
+				
 				return false;
 			}
 
@@ -77,6 +96,11 @@ public class Menu implements Screen {
 			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 				if(Moved[0] && Pressed[0]) main.setScreen(main.game);
 				if(Moved[3] && Pressed[3]) Gdx.app.exit();
+				if(Moved[4] && Pressed[4]){
+					if(Play) sound.pause();
+					else sound.play();
+					Play=!Play;
+				}
 				for(int i=0;i<4;i++) Pressed[i]=false;
 				return false;
 			}
@@ -106,13 +130,22 @@ public class Menu implements Screen {
 				} else {
 					for(int i=0;i<4;i++) Moved[i]=false;
 				}
+				//Button - Sound
+				if(screenX>=15 && screenX<=15+atlasSound.get("tiles0_0").getRegionWidth()){
+					if(screenY<=Gdx.graphics.getHeight()-15 && screenY>=Gdx.graphics.getHeight()-15-atlasSound.get("tiles0_0").getRegionHeight())
+						Moved[4]=true;
+					else Moved[4]=false;
+				} else Moved[4]=false;
 				
+				System.out.println(Moved[4] + "  " + Pressed[4]);
 				return false;
 			}
 
 			@Override
 			public boolean scrolled(int amount) { return false; }
 		});
+		
+		if(Play) sound.play();
 	}
 	
 	
@@ -133,6 +166,9 @@ public class Menu implements Screen {
 		if(!Moved[3]) batch.draw(atlasMenu.get("tiles3_0"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height-height/2);
 		else if(Pressed[3] && Moved[3]) batch.draw(atlasMenu.get("tiles3_2"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height-height/2);
 		else batch.draw(atlasMenu.get("tiles3_1"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height-height/2);
+		
+		if(Play) batch.draw(atlasSound.get("tiles0_0"), 15, 15);
+		else batch.draw(atlasSound.get("tiles0_1"), 15, 15);
 	}
 	
 	float r=0,g=0,b=0;
@@ -197,7 +233,7 @@ public class Menu implements Screen {
 
 	@Override
 	public void dispose() {
-		
+		sound.dispose();
 	}
 	
 }

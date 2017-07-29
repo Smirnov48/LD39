@@ -1,7 +1,6 @@
 package com.sgstudio.main;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.game.Defeat;
 import com.sgstudio.game.MyGame;
@@ -16,18 +15,16 @@ public class Main extends Game {
 	private Defeat defeat;
 	
 	private static SpriteBatch batch;
-	private static BitmapFont font;
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		font = new BitmapFont();
 		save = new Save();
 		game = new MyGame(this);
 		menu = new Menu(this);
 		defeat = new Defeat(this);
 		
-		setScreen(game);
+		setScreen(menu);
 	}
 	
 	@Override
@@ -48,5 +45,4 @@ public class Main extends Game {
 	}
 	
 	public SpriteBatch getBatch(){ return batch; }
-	public BitmapFont getFont(){ return font; }
 }

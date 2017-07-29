@@ -22,7 +22,7 @@ public class Train {
 	
 	public Train(SpriteBatch batch) {
 		this.batch = batch;
-		ovenWood = 10;
+		ovenWood = 100;
 		maxOvenWood = 300;
 		wood = 1000;
 		System.out.println("Train has been created.");
@@ -45,7 +45,6 @@ public class Train {
 		if(ovenWood + i <= 0) {ovenWood = 0;}
 		else if(ovenWood + i > maxOvenWood) { ovenWood = maxOvenWood;}
 		else if(ovenWood + i > 0) {ovenWood += i;}
-		else {ovenWood += i;}
 	}
 	
 	public void updSpeed(float i) {if(speed + i <= 0) {speed = 0;}
