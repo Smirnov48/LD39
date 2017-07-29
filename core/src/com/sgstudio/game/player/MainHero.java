@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.sgstudio.game.MyGame;
+import com.sgstudio.game.KeyManager;
 
 public class MainHero {
 	//Graphic
@@ -20,20 +22,16 @@ public class MainHero {
 	private Body body;
 	Vector2 vec;
 	//Player Box2D
-	final static float MAX_VELOCITY = 3f;
-	public final static float SPEED = 5f;
-	public final static float SIZE = 0.8f;
-	public Fixture playerPhysicsFixture;
-	public Fixture playerSensorFixture;
 	Body box;
 	
 	//Stats
 	private int wood;
 	private static int maxWood;
+	private KeyManager keys;
 	
 	public MainHero(SpriteBatch batch, World world){		
 		//Graphics
-		img = new Texture("hero.jpg");
+		img = new Texture("oven_3.png");
 		this.batch = MyGame.getBatch();
 		sprite = new Sprite(img);
 		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
@@ -46,23 +44,9 @@ public class MainHero {
 		
 		//box2d
 		this.world = world;
-		//createPhysics();
-		vec = new Vector2();
+		createPhysics();
 		
-		/*box = b;		
-		PolygonShape poly = new PolygonShape();		
-		poly.setAsBox(0.4f, 0.4f);
-		playerPhysicsFixture = box.createFixture(poly,0);
-		poly.dispose();
-		CircleShape circle = new CircleShape();		
-		circle.setRadius(0.4f);
-		circle.setPosition(new Vector2(0, -0.05f));
-		playerSensorFixture = box.createFixture(circle, 0);
-		//������
-		//setFriction(200F);
-		circle.dispose();		
-		box.setBullet(true);*/
-		
+		keys = new KeyManager(); 
 		
 		//Systems messages 
 		System.out.println("Main hero has been successfully created!");
@@ -70,7 +54,7 @@ public class MainHero {
 		System.out.println("MainHero has been created();");
 	}
 	
-	/*private void createPhysics() {
+	private void createPhysics() {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
 		bodyDef.position.set(sprite.getX(), sprite.getY());
@@ -86,14 +70,15 @@ public class MainHero {
 		
 		body.createFixture(fixtureDef);
 		shape.dispose();
-	}*/
+	}
 
 	public enum State {
 		NONE, WALKING, DEAD
 	}
 	
 	public void render() {
-	//	batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);	
+		update();
+		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
 	}
 	
 	public void dispose() {
@@ -102,8 +87,18 @@ public class MainHero {
 	
 	public void update() {
 		//��������������� � KeyManager
-		//body.applyforce
-		
+		//body.applyForce(, forceY, pointX, pointY, wake);
+		controller();
+		body.applyForceToCenter(-10f,0, false);
+	}
+	
+	public void controller() {
+		if(keys.getPressedLeft()) {
+			body.applyForceToCenter(-10f,0, false);
+		}
+		if(keys.getPressedRight()) {
+			body.applyForceToCenter(10f,0, false);
+		}
 	}
 	/*
 	//Box2D methods
