@@ -112,13 +112,18 @@ gradle-app.setting
 ## OS Specific
 .DS_Store
 Thumbs.db
-
-gradle/
-
-*.gradle
-
-gradlew\.bat
-
+settings.gradle
+gradlew.bat
 gradlew
-
-gradle\.properties
+gradle/wrapper/gradle-wrapper.properties
+gradle/wrapper/gradle-wrapper.jar
+desktop/build.gradle
+gradle.properties
+build.gradle
+<<<<<<< HEAD
+=======
+README.md
+README.md
+README.md
+README.md
+>>>>>>> YarikBur
