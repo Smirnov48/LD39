@@ -8,8 +8,15 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.sgstudio.game.MyGame;
+import com.sgstudio.game.village.Village;
 
 public class MainHero {
+	
+	private static long startTime;
+	private static float time = 0;
+	public void setStartTime(long startTime){ 
+		MainHero.startTime = startTime; 
+	}
 
 	float posX,posY;
 	Texture img;
@@ -86,6 +93,12 @@ public class MainHero {
 	
 	public void dispose() {
 		img.dispose();
+	}
+	
+	public void update(){
+		if(time!=(System.currentTimeMillis() - startTime) / 1000){
+			time++;
+		}
 	}
 	
 	//Get Stats Methods
