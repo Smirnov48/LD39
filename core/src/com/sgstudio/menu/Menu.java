@@ -5,6 +5,7 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,7 +25,7 @@ public class Menu implements Screen {
 	
 	private SpriteBatch batch;
 	
-	private static Sound sound;
+	private static Music sound;
 
 	public Menu(final Main main) {
 		this.main = main;
@@ -45,8 +46,9 @@ public class Menu implements Screen {
 		width = atlasMenu.get("tiles0_0").getRegionWidth();
 		height = atlasMenu.get("tiles0_0").getRegionHeight();
 		
-		sound = Gdx.audio.newSound(Gdx.files.internal("audio/sounds/MainTheme.wav"));
-		sound.loop(0.000001f);
+		sound = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/MainTheme.wav"));
+		sound.setLooping(true);
+		sound.setVolume(0.2f);
 		
 		Gdx.input.setInputProcessor(new InputProcessor(){
 			@Override
@@ -96,7 +98,7 @@ public class Menu implements Screen {
 				if(Moved[0] && Pressed[0]) main.setScreen(main.game);
 				if(Moved[3] && Pressed[3]) Gdx.app.exit();
 				if(Moved[4] && Pressed[4]){
-					if(Play) sound.stop();
+					if(Play) sound.pause();
 					else sound.play();
 					Play=!Play;
 				}
