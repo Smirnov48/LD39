@@ -2,6 +2,7 @@ package com.sgstudio.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,6 +26,7 @@ import com.sgstudio.main.Main;
 public class MyGame implements Screen {
 	public static SpriteBatch batch;
 	private final Main main;
+	private Music One, Two;
 
 	private MainHero hero;
 	private Forest forest;
@@ -92,7 +94,28 @@ public class MyGame implements Screen {
 		batch.end();
 	}
 	
+	private void music(){
+		if(One.isPlaying()){
+			float oneTime = One.getPosition();
+			if(oneTime<=4) One.setVolume(One.getVolume()+2.5f);
+			else if(oneTime<=21) One.setVolume(One.getVolume()-2.5f);
+			else if(oneTime<=24){
+				One.stop();
+				Two.play();
+			}
+		} else if(Two.isPlaying()){
+			float twoTime = Two.getPosition();
+			if(twoTime<=4) Two.setVolume(One.getVolume()+2.5f);
+			else if(twoTime<=26) Two.setVolume(One.getVolume()-2.5f);
+			else if(twoTime<=30){
+				One.play();
+				Two.stop();
+			}
+		}
+	}
+	
 	private void update() {
+		music();
 		speed = train.getSpeed()/1.5f;
 		forest.update();
 		train.updateOven();
@@ -117,6 +140,12 @@ public class MyGame implements Screen {
 		bg[0].setX(0);
 		bg[1].setX(bg[1].getRegionWidth());
 		bg[2].setX(bg[2].getRegionWidth()*2);
+		One = Gdx.audio.newMusic(Gdx.files.internal("audio/music/MainTheme.wav"));
+		One.play();
+		One.setVolume(0);
+		Two = Gdx.audio.newMusic(Gdx.files.internal("audio/music/BlueCoach.wav"));
+		Two.stop();
+		Two.setVolume(0);
 	}
 
 	@Override
