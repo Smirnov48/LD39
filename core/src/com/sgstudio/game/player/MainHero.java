@@ -14,8 +14,10 @@ import com.sgstudio.game.KeyManager;
 public class MainHero {
 	//Graphic
 	Texture img;
+	Texture[] imgs = new Texture[4];
 	SpriteBatch batch;
 	Sprite sprite;
+	
 	
 	//Box2D
 	private World world;
@@ -23,6 +25,7 @@ public class MainHero {
 	Vector2 vec;
 	//Player Box2D
 	Body box;
+	int i = 0;
 	
 	//Stats
 	private int wood;
@@ -31,7 +34,11 @@ public class MainHero {
 	
 	public MainHero(SpriteBatch batch, World world){		
 		//Graphics
-		img = new Texture("oven_3.png");
+		img = new Texture("oven1.png");
+		imgs[0] = new Texture("oven1.png");
+		imgs[1] = new Texture("oven2.png");
+		imgs[2] = new Texture("oven3.png");
+		imgs[3] = new Texture("oven4.png");
 		this.batch = MyGame.getBatch();
 		sprite = new Sprite(img);
 		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
@@ -78,7 +85,9 @@ public class MainHero {
 	
 	public void render() {
 		update();
-		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
+		i++;
+		//batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
+		batch.draw(imgs[i % 4],body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
 	}
 	
 	public void dispose() {
