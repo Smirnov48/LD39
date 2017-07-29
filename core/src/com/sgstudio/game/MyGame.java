@@ -9,6 +9,9 @@ import com.sgstudio.game.powers.Forest;
 import com.sgstudio.game.village.Village;
 import com.badlogic.gdx.math.Rectangle;
 import com.sgstudio.main.Main;
+
+import graphics.Stats;
+
 import com.sgstudio.game.player.MainHero;
 
 public class MyGame implements Screen {
@@ -20,6 +23,7 @@ public class MyGame implements Screen {
 	private Forest forest;
 	public Rectangle rec;
 	public Village village;
+	public Stats stats;
 	
 	public MyGame(final Main main) {
 		this.main = main;
@@ -40,6 +44,7 @@ public class MyGame implements Screen {
 		}
 		forest.render();
 		hero.render();
+		stats.render();
 		batch.end();
 	}
 
@@ -61,6 +66,7 @@ public class MyGame implements Screen {
 		village = new Village();
 		good = new Texture("pashasimages/good.gif"); 
 		bad = new Texture("pashasimages/bad.png"); 
+		stats = new Stats(batch,hero,village);
 	}
 	
 	private void update() {
