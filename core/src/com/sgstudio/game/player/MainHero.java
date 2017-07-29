@@ -1,7 +1,6 @@
 package com.sgstudio.game.player;
 
 import java.util.concurrent.TimeUnit;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -99,9 +98,33 @@ public class MainHero {
 	}
 	
 	public void update(){
-		if(time!=(System.currentTimeMillis() - startTime) / 1000){
-			time++;
+		time++;
+		
+		if (health > maxHealth){health = maxHealth;} 
+		if (water > maxWater){water = maxWater;}
+			else {water -= 0.4f;}
+		if (hunger > maxHunger){hunger = maxHunger;}
+			else {hunger -= 0.400000001f;}
+		
+		if (hunger < 0){hunger = 0;}
+		if (hunger == 0){
+			health -= 300;
 		}
+		
+		
+		if (water < 0){water = 0;}
+		if (water == 0){
+			health -= 400;
+		}
+		
+		if (health < 0){health = 0;}
+		/*if (thirst > 0){
+		System.out.println(hunger);
+		System.out.println(thirst);
+		} else {
+			System.out.println(hunger);
+			System.out.println(HP);
+		}*/
 	}
 	
 	//Get Stats Methods
@@ -133,10 +156,18 @@ public class MainHero {
 	}
 	
 	//Set methods
-	public void setHealth(float i) {health = i;}
-	public void setWater(float i) {water = i;}
-	public void setHunger(float i) {hunger = i;}
-	public void setMood(float i) {mood = i;}
+	public void setHealth(float i) {
+		if(i < maxHealth) {health = maxHealth;}
+		else if (i < 0) {health = 0;}}
+	public void setWater(float i) {
+		if(i < maxWater) {water = maxWater;}
+		else if (i < 0) {water = 0;}}
+	public void setHunger(float i) {
+		if(i < maxHunger) {hunger = maxHunger;}
+		else if (i < 0) {hunger = 0;}}
+	public void setMood(float i) {
+		if(i < maxMood) {mood = maxMood;}
+		else if (i < 0) {mood = 0;}}
 	public void setMaxHealth(float i) {maxHealth = i;}
 	public void setMaxWater(float i) {maxWater = i;}
 	public void setMaxMood(float i) {maxMood = i;}
@@ -153,7 +184,7 @@ public class MainHero {
 		if((mood < 0.4 * maxMood) && (mood >= 0.2 * maxMood)) {return "Poor.";}
 		if((mood < 0.2 * maxMood) && (mood >= 0.05 *maxMood)) {return "Bad.";}
 		if((mood < 0.05 * maxMood) && (mood >= 0)){return "Panic!";}
-		else {return "nuul";}
+		else {return "null";}
 	}
 	
 	public void updatePos(Rectangle rec) {

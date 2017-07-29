@@ -1,4 +1,4 @@
-package graphics;
+package com.sgstudio.game.graphics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -50,10 +50,19 @@ public class Stats {
 		smallFont.draw(batch, "Water: ", 20, 505);
 		mediumFont.draw(batch,String.valueOf((int)hero.getWater()),115,510);
 		smallFont.draw(batch, "Hunger: ", 20, 485);
-		mediumFont.draw(batch,String.valueOf((int)hero.getHealth()),115,490);
+		mediumFont.draw(batch,String.valueOf((int)hero.getHunger()),115,490);
 		smallFont.draw(batch, "Mood: ", 20, 465);
-		mediumFont.draw(batch,String.valueOf((int)hero.getHealth()),115,470);
+		mediumFont.draw(batch,
+				String.valueOf((int)hero.getMood())+ " is " + hero.strMood(hero.getMood()),
+				115,470);
+		
 		//VillageStats
 		largeFont.draw(batch,"Village:",600,580);
+		smallFont.draw(batch, "Health: ", 600, 530);
+		mediumFont.draw(batch,String.valueOf((int)village.getHealth()),730,535);
+		smallFont.draw(batch, "Water: ", 600, 505);
+		mediumFont.draw(batch,String.valueOf((int)village.getWater()),730,510);
+		smallFont.draw(batch, "Hunger: ", 600, 485);
+		mediumFont.draw(batch,String.valueOf((int)village.getHunger()),730,490);
 	}
 }

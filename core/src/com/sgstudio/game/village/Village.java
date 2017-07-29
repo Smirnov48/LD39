@@ -11,11 +11,11 @@ public class Village {
 	}
 	
 	private float maxHP = 10000f;
-	private static float maxthirst = 100f;
-	private static float maxhunger = 100f;
+	private static float maxThirst = 100f;
+	private static float maxHunger = 100f;
 
-	private static float thirst = maxthirst;
-	private static float hunger = maxhunger;
+	private static float thirst = maxThirst;
+	private static float hunger = maxHunger;
 	public float HP = maxHP;
 	
 	private final int DEATH = 0;
@@ -25,8 +25,8 @@ public class Village {
 			time++;
 			
 			if (HP > maxHP){HP = maxHP;}
-			if (thirst > maxthirst){thirst = maxthirst;}
-			if (hunger > maxhunger){hunger = maxhunger;}
+			if (thirst > maxThirst){thirst = maxThirst;}
+			if (hunger > maxHunger){hunger = maxHunger;}
 			
 			hunger -= 0.333333333333333333333333333333f;
 			thirst -= 0.416666666666666666666666666666f;
@@ -53,8 +53,8 @@ public class Village {
 			}*/
 		}
 	}
-	public float getHp() {return HP;}
-	public float getThirst() {return thirst;}
+	public float getHealth() {return HP;}
+	public float getWater() {return thirst;}
 	public float getHunger() {return hunger;}
 	
 	
@@ -63,22 +63,22 @@ public class Village {
 			hunger = 0;
 		} else if(hunger + i > 0) {
 			hunger += i;
-		} else if(hunger + i > maxhunger) { 
-			hunger = maxhunger;
+		} else if(hunger + i > maxHunger) { 
+			hunger = maxHunger;
 		} else {hunger += i;}
 	}
 	
-	public void updThirst(float i) {
+	public void updWater(float i) {
 		if(thirst + i <= 0) {
 			thirst = 0;
 		} else if(thirst + i > 0) {
 			thirst += i;
-		} else if(thirst + i > maxthirst) { 
-			thirst = maxthirst;
+		} else if(thirst + i > maxThirst) { 
+			thirst = maxThirst;
 		} else {thirst += i;}
 	}
 	
-	public void updHp(float i) {
+	public void updHealth(float i) {
 		if(HP + i <= 0) {
 			HP = 0;
 		} else if(HP + i > 0) {
@@ -89,8 +89,16 @@ public class Village {
 	}
 	
 	
-	public void setHealth(float i) {HP = i;}
-	public void setWater(float i) {thirst = i;}
-	public void setHunger(float i) {hunger = i;}
+	public void setHealth(float i) {
+		if(i < maxHP) {HP = maxHP;}
+		else if (i < 0) {HP = 0;}}
+	public void setWater(float i) {
+		if(i < maxThirst) {thirst = maxThirst;}
+		else if (i < 0) {thirst = 0;}}
+	public void setHunger(float i) {
+		if(i < maxHunger) {hunger = maxHunger;}
+		else if (i < 0) {hunger = 0;}}
 	public void setMaxHealth(float i) {maxHP = i;}
+	public void setMaxWater(float i) {maxThirst = i;}
+	public void setMaxHunger(float i) {maxHunger =i;}
 }
