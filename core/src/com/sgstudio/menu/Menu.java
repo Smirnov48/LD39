@@ -38,7 +38,6 @@ public class Menu implements Screen {
 		height = atlasMenu.get("tiles0_0").getRegionHeight();
 		
 		Gdx.input.setInputProcessor(new InputProcessor(){
-
 			@Override
 			public boolean keyDown(int keycode) { return false; }
 
@@ -51,6 +50,7 @@ public class Menu implements Screen {
 			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 				if(screenX>=Gdx.graphics.getWidth()/2-width/2 && screenX<=Gdx.graphics.getWidth()/2+width/2){
+					
 					//Button - Play
 					if(screenY<=Gdx.graphics.getHeight()/2-height-height/2 && screenY>=Gdx.graphics.getHeight()/2-height*2-height/2)
 						Pressed[0] = true;
@@ -112,7 +112,6 @@ public class Menu implements Screen {
 
 			@Override
 			public boolean scrolled(int amount) { return false; }
-			
 		});
 	}
 	

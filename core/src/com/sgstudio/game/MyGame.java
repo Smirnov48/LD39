@@ -5,9 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.game.powers.Forest;
+import com.sgstudio.game.village.Village;
 import com.badlogic.gdx.math.Rectangle;
 import com.sgstudio.main.Main;
-import com.sgstudio.game.Village;
+import com.sgstudio.game.player.MainHero;
 
 public class MyGame implements Screen {
 	public static SpriteBatch batch;

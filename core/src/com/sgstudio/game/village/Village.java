@@ -1,4 +1,4 @@
-package com.sgstudio.game;
+package com.sgstudio.game.village;
 
 public class Village {
 	private static long startTime;
