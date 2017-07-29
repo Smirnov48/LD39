@@ -10,7 +10,7 @@ public class Village {
 		Village.hunger += hunger;
 	}
 	
-	private float maxHP = 10000f;
+	private float maxHP = 100000f;
 	private static float maxthirst = 100f;
 	private static float maxhunger = 100f;
 
