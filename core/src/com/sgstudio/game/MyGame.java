@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.game.powers.PowerTree;
+import com.badlogic.gdx.math.Rectangle;
 import com.sgstudio.main.Main;
 
 public class MyGame implements Screen {
@@ -14,6 +15,7 @@ public class MyGame implements Screen {
 	private final Main main;
 	private MainHero hero;
 	private PowerTree tree;
+	public Rectangle rec;
 	
 	public MyGame(final Main main) {
 		this.main = main;
@@ -25,10 +27,11 @@ public class MyGame implements Screen {
 		
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+		hero.updatePos(rec);
 		batch.begin();
 		tree.render();
 		hero.render();
+		batch.draw(img, rec.x, rec.y);
 		batch.end();
 	}
 
@@ -42,8 +45,12 @@ public class MyGame implements Screen {
 	@Override
 	public void show() {
 		batch = main.getBatch();
+		img = new Texture("test_plat.jpg");
 		hero = new MainHero(batch);
 		tree = new PowerTree(batch);
+		rec = new Rectangle();
+		rec.x = 90;
+		rec.y = 0;
 	}
 	
 	private void update() {
