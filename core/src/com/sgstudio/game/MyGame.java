@@ -9,8 +9,9 @@ import com.sgstudio.main.Main;
 
 public class MyGame implements Screen {
 	private final Main main;
-	SpriteBatch batch;
+	static SpriteBatch batch;
 	Texture img;
+	MainHero hero;
 	
 	public MyGame(final Main main) {
 		this.main = main;
@@ -21,7 +22,7 @@ public class MyGame implements Screen {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		hero.render();
 		batch.end();
 	}
 	
@@ -29,12 +30,14 @@ public class MyGame implements Screen {
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
+		hero.dispose();
 	}
 
 	@Override
 	public void show() {
 		batch = main.getBatch();
 		img = new Texture("badlogic.jpg");
+		hero = new MainHero(batch);
 	}
 
 	@Override
@@ -58,5 +61,9 @@ public class MyGame implements Screen {
 	public void resume() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public static SpriteBatch getBatch() {
+		return batch;
 	}
 }

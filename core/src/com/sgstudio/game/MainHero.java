@@ -6,22 +6,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class MainHero {
 
 	int posX,posY;
-	static Texture img;
+	Texture img;
 	SpriteBatch batch;
 	
 	
-	public MainHero(){
+	public MainHero(SpriteBatch batch){
 		img = new Texture("hero.jpg");
-		batch = this.batch;
+		this.batch = MyGame.getBatch();
 	}
 	
-	public static void render() {
-		batch.begin;
-		batch.draw(img,0,0);
-		batch.end;
+	public void render() {
+		batch.draw(img,0,0);	
 	}
 	
-	public static void dispose() {
-		
+	public void dispose() {
+		img.dispose();
 	}
 }
