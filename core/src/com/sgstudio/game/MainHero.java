@@ -16,7 +16,7 @@ public class MainHero {
 	}
 	
 	public void render() {
-		batch.draw(img,0,0);	
+		batch.draw(img,100,100);	
 	}
 	
 	public void dispose() {
