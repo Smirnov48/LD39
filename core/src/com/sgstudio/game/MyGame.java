@@ -3,9 +3,8 @@ package com.sgstudio.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.sgstudio.game.powers.BerryBush;
+import com.sgstudio.game.powers.Forest;
 import com.sgstudio.main.Main;
 
 public class MyGame implements Screen {
@@ -13,7 +12,7 @@ public class MyGame implements Screen {
 
 	private final Main main;
 	private MainHero hero;
-	private BerryBush tree;
+	private Forest forest;
 	
 	public MyGame(final Main main) {
 		this.main = main;
@@ -27,7 +26,7 @@ public class MyGame implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
-		tree.render();
+		forest.render();
 		hero.render();
 		batch.end();
 	}
@@ -35,19 +34,19 @@ public class MyGame implements Screen {
 	@Override
 	public void dispose () {
 		batch.dispose();
+		forest.dispose();
 		hero.dispose();
-		tree.dispose();
 	}
 
 	@Override
 	public void show() {
 		batch = main.getBatch();
 		hero = new MainHero(batch);
-		tree = new BerryBush(batch);
+		forest = new Forest(batch);
 	}
 	
 	private void update() {
-		tree.update();		
+		forest.update();		
 	}
 
 	@Override

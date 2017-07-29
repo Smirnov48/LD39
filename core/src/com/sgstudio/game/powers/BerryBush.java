@@ -11,18 +11,18 @@ public class BerryBush {
 
 	private Texture img;
 	private SpriteBatch batch;
-	
+
 	private int food;
 	private int sticks;
 	private int health;
 
 	public BerryBush(SpriteBatch batch) {
-		img = new Texture("hero.jpg");
+		img = new Texture("tree.jpg");
 		this.batch = MyGame.getBatch();
-		
-		x = 150;
-		y = 150;
-		
+
+		x = (int) (10 + (400 * Math.random()));
+		y = (int) (10 + (50 * Math.random()));
+
 		health = (int) (10000 + (5000 * Math.random()));
 		food = 100;
 		sticks = 10;
@@ -33,7 +33,7 @@ public class BerryBush {
 		food = +1;
 		sticks = +1;
 	}
-	
+
 	public void render() {
 		batch.draw(img, x, y);
 	}
