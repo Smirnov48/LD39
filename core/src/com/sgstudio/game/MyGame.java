@@ -8,10 +8,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.main.Main;
 
 public class MyGame implements Screen {
+	public static SpriteBatch batch;
+
 	private final Main main;
-	static SpriteBatch batch;
-	Texture img;
-	MainHero hero;
+	private MainHero hero;
 	private PowerTree tree;
 	
 	public MyGame(final Main main) {
@@ -20,18 +20,20 @@ public class MyGame implements Screen {
 
 	@Override
 	public void render (float delta) {
+		update();
+		
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
 		batch.begin();
 		tree.render();
 		hero.render();
 		batch.end();
 	}
-	
+
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 		hero.dispose();
 		tree.dispose();
 	}
@@ -39,9 +41,12 @@ public class MyGame implements Screen {
 	@Override
 	public void show() {
 		batch = main.getBatch();
-		img = new Texture("badlogic.jpg");
 		hero = new MainHero(batch);
 		tree = new PowerTree(batch);
+	}
+	
+	private void update() {
+		tree.update();		
 	}
 
 	@Override
