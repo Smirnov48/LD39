@@ -88,6 +88,16 @@ public class MyGame implements Screen {
 		
 		batch.end();
 	}
+	
+	private void movement(){
+		if(keyManager.getPressedRight()){
+			if(cam.position.x+Gdx.graphics.getWidth()/2<88*16) cam.translate(5, 0);
+		}
+		if(keyManager.getPressedRight()){
+			if(cam.position.x>0+Gdx.graphics.getWidth()/2) cam.translate(-5, 0);
+		}
+		System.out.println(cam.position.x + "  " + cam.position.y);
+	}
 
 	@Override
 	public void dispose() {

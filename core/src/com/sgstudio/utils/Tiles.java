@@ -16,10 +16,8 @@ public class Tiles {
 	public void createAtlas(String tiles, int lines, int columns){
 		Tiles.texture = new Texture(tiles);
 		textureRegions = new HashMap<String, TextureRegion>();
-		if(Tiles.Lines==0 || Tiles.Columns==0){
-			Tiles.Lines = lines;
-			Tiles.Columns = columns;
-		}
+		Tiles.Lines = lines;
+		Tiles.Columns = columns;
 		createAtlas();
 	}
 	
