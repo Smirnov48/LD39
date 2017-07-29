@@ -20,13 +20,13 @@ public class Brick {
 	 
 	
 	public Rectangle getBounds() {
-	return bounds;
+		return bounds;
 	}
 	
 	 
 	
 	public Vector2 getPosition() {
-	return position;
+		return position;
 	}
 
 }

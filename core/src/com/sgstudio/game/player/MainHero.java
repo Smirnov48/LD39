@@ -22,8 +22,8 @@ public class MainHero {
 	Vector2 position = new Vector2();
 	Vector2 velocity = new Vector2();
 	
-	Rectangle     bounds = new Rectangle();
-	State     state = State.NONE;
+	Rectangle bounds = new Rectangle();
+	State state = State.NONE;
 	
 	public MainHero(SpriteBatch batch){
 		this.position = position;
@@ -65,7 +65,6 @@ public class MainHero {
 	}
 	
 	public void updatePos(Rectangle rec) {
-		
 		if(sprite.getY() < 16) {
 			
 		} else {

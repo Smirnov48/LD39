@@ -6,11 +6,16 @@ public class Village {
 	public void setStartTime(long startTime){ 
 		Village.startTime = startTime; 
 	}
-	final int DEATH = 0;
-	final int FULHP = 10000;
-	int HP = 100000;
-	int hunger = 100;
-	int thirst = 100;
+	private final int DEATH = 0;
+	private final int FULHP = 10000;
+	private static int HP = 100000;
+	private static int hunger = 100;
+	private static int thirst = 100;
+	
+	public void addHunger(int hunger){
+		Village.hunger += hunger;
+	}
+	
 	public void update(){
 		if(time!=(System.currentTimeMillis() - startTime) / 1000){
 			time++;
