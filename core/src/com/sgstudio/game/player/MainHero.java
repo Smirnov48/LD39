@@ -46,10 +46,10 @@ public class MainHero {
 		
 		//box2d
 		this.world = world;
-		createPhysics();
+		//createPhysics();
 		vec = new Vector2();
 		
-		box = b;		
+		/*box = b;		
 		PolygonShape poly = new PolygonShape();		
 		poly.setAsBox(0.4f, 0.4f);
 		playerPhysicsFixture = box.createFixture(poly,0);
@@ -61,7 +61,7 @@ public class MainHero {
 		//трение
 		//setFriction(200F);
 		circle.dispose();		
-		box.setBullet(true);
+		box.setBullet(true);*/
 		
 		
 		//Systems messages 
@@ -70,7 +70,7 @@ public class MainHero {
 		System.out.println("MainHero has been created();");
 	}
 	
-	private void createPhysics() {
+	/*private void createPhysics() {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
 		bodyDef.position.set(sprite.getX(), sprite.getY());
@@ -86,14 +86,14 @@ public class MainHero {
 		
 		body.createFixture(fixtureDef);
 		shape.dispose();
-	}
+	}*/
 
 	public enum State {
 		NONE, WALKING, DEAD
 	}
 	
 	public void render() {
-		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);	
+	//	batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);	
 	}
 	
 	public void dispose() {
@@ -105,7 +105,7 @@ public class MainHero {
 		//body.applyforce
 		
 	}
-	
+	/*
 	//Box2D methods
 	public float getFriction(){
 		return playerSensorFixture.getFriction();
@@ -133,7 +133,7 @@ public class MainHero {
 		Vector2 vel = box.getLinearVelocity();
 		velocity.y = vel.y;
 		box.setLinearVelocity(velocity);
-		if(isJump) {box.applyLinearImpulse(0, 14, box.getPosition().x,  box.getPosition().y);	isJump = false;}
+		if(isJump) {box.applyLinearImpulse(0, 14, box.getPosition().x,  box.getPosition().y, isJump);	isJump = false;}
 	}
 	boolean isJump = false;
 	public void jump(){
@@ -142,7 +142,7 @@ public class MainHero {
 	public void resetVelocity(){
 		getVelocity().x =0;
 		getVelocity().y =0;
-	}
+	}*/
 	
 	//Get Stats Methods
 	public int getWood() {return wood;}
