@@ -3,9 +3,8 @@ package com.sgstudio.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.sgstudio.game.powers.PowerTree;
+import com.sgstudio.game.powers.Forest;
 import com.badlogic.gdx.math.Rectangle;
 import com.sgstudio.main.Main;
 
@@ -14,9 +13,8 @@ public class MyGame implements Screen {
 
 	private final Main main;
 	private MainHero hero;
-	private PowerTree tree;
+	private Forest forest;
 	public Rectangle rec;
-	public Texture img;
 	
 	public MyGame(final Main main) {
 		this.main = main;
@@ -30,32 +28,30 @@ public class MyGame implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		hero.updatePos(rec);
 		batch.begin();
-		tree.render();
+		forest.render();
 		hero.render();
-		batch.draw(img, rec.x, rec.y);
 		batch.end();
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
+		forest.dispose();
 		hero.dispose();
-		tree.dispose();
 	}
 
 	@Override
 	public void show() {
 		batch = main.getBatch();
-		img = new Texture("test_plat.jpg");
 		hero = new MainHero(batch);
-		tree = new PowerTree(batch);
+		forest = new Forest(batch);
 		rec = new Rectangle();
 		rec.x = 90;
 		rec.y = 0;
 	}
 	
 	private void update() {
-		tree.update();		
+		forest.update();		
 	}
 
 	@Override
