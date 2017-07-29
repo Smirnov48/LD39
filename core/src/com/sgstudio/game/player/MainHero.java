@@ -34,6 +34,7 @@ public class MainHero {
 	
 	public MainHero(SpriteBatch batch, World world){		
 		//Graphics
+		img = new Texture("atlas/test.png");
 		img = new Texture("oven1.png");
 		imgs[0] = new Texture("oven1.png");
 		imgs[1] = new Texture("oven2.png");
