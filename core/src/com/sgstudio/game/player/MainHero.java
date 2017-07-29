@@ -122,12 +122,12 @@ public class MainHero {
 		else if (water < maxWater * 0.25) {mood -=2;}
 		else if (water < maxWater * 0.1) {mood -=3;}
 		//Health
-		if (health < 0.01 * maxHealth) {mood -=1;}
+		if (health < 0.01 * maxHealth) {updMood(-1);}
 		
 		//HealthUpper
-		
-		
-		
+		if ((water > maxWater * 0.99) && (hunger < maxHunger * 0.99) && (mood > maxMood * 0.7)) {
+			health +=1;
+		}
 		
 		if (health > maxHealth){health = maxHealth;} 
 		if (water > maxWater){water = maxWater;}
@@ -137,7 +137,6 @@ public class MainHero {
 		
 		if (hunger < 0){hunger = 0;}
 		if (water < 0){water = 0;}
-		if (water == 0){health -= 400;}	
 		if (health < 0){health = 0;}
 	}
 	
