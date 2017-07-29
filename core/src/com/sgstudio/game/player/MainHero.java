@@ -31,7 +31,7 @@ public class MainHero {
 	private int wood;
 	private static int maxWood;
 	
-	public MainHero(SpriteBatch batch, World world,Body b){		
+	public MainHero(SpriteBatch batch, World world){		
 		//Graphics
 		img = new Texture("hero.jpg");
 		this.batch = MyGame.getBatch();

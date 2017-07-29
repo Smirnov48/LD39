@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -13,10 +11,10 @@ import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.graphics.Stats;
+import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
 import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.game.player.MainHero;
-import com.sgstudio.game.powers.Forest;
 import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
 
@@ -26,44 +24,21 @@ public class MyGame implements Screen {
 	private final Main main;
 
 	private MainHero hero;
-	private Forest forest;
 	public Train train;
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camera;
-	private Body ground;
 
 	public Stats stats;
 	private Rails rails;
+	private Background background;
 
 	public MyGame(final Main main) {
 		this.main = main;
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.position.set(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 0);
-
-		world = new World(new Vector2(0, -10), true);
-		debugRenderer = new Box2DDebugRenderer();
-
-		rails = new Rails(world);
-	}
-	
-	private float speed=0;
-	private Sprite bg[] = {new Sprite(new Texture("atlas/bgR.png")), new Sprite(new Texture("atlas/bgG.png")), new Sprite(new Texture("atlas/bgB.png"))};
-	private void bg(){
-		for(int i=0;i<3;i++) bg[i].draw(batch);
-		for(int i=0;i<3;i++) bg[i].setX(bg[i].getX()-speed);
-		
-		if(bg[0].getX()<=-800){
-			bg[0].setX(bg[2].getX()+bg[2].getWidth());
-		}
-		if(bg[1].getX()<=-800){
-			bg[1].setX(bg[0].getX()+bg[0].getWidth());
-		}
-		if(bg[2].getX()<=-800){
-			bg[2].setX(bg[1].getX()+bg[1].getWidth());
-		}
 	}
 
 	@Override
@@ -74,13 +49,13 @@ public class MyGame implements Screen {
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		bg();
-
-
-		forest.render();
+		
+		background.render();
+		train.render();
 		hero.render();
 		stats.render();
 
@@ -88,6 +63,7 @@ public class MyGame implements Screen {
 		debugRenderer.render(world, camera.combined);
 		
 		stats.render();
+		
 		batch.end();
 	}
 	
@@ -103,18 +79,20 @@ public class MyGame implements Screen {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		forest.dispose();
 		hero.dispose();
 	}
 
 	@Override
 	public void show() {
 		Box2D.init();
+		world = new World(new Vector2(0, -10), true);
+		debugRenderer = new Box2DDebugRenderer();
 
 		batch = main.getBatch();
-		hero = new MainHero(batch,world,ground);
-		forest = new Forest(batch);
 		train = new Train(batch);
+		background = new Background(batch, train);
+		rails = new Rails(world);
+		hero = new MainHero(batch, world);
 		stats = new Stats(batch,hero,train);
 		bg[0].setX(0);
 		bg[1].setX(bg[1].getRegionWidth());
