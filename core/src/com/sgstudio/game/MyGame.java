@@ -89,17 +89,6 @@ public class MyGame implements Screen {
 	}
 
 	@Override
-	public void show() {
-		Box2D.init();
-
-		batch = main.getBatch();
-		hero = new MainHero(batch, world);
-		forest = new Forest(batch);
-		village = new Village(batch);
-		stats = new Stats(batch,hero,village);
-	}
-
-	@Override
 	public void render(float delta) {
 		world.step(1 / 60f, 6, 4);
 
