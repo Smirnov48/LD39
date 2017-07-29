@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.game.powers.Forest;
+import com.badlogic.gdx.math.Rectangle;
 import com.sgstudio.main.Main;
 
 public class MyGame implements Screen {
@@ -13,6 +14,7 @@ public class MyGame implements Screen {
 	private final Main main;
 	private MainHero hero;
 	private Forest forest;
+	public Rectangle rec;
 	
 	public MyGame(final Main main) {
 		this.main = main;
@@ -24,7 +26,7 @@ public class MyGame implements Screen {
 		
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+		hero.updatePos(rec);
 		batch.begin();
 		forest.render();
 		hero.render();
@@ -43,6 +45,9 @@ public class MyGame implements Screen {
 		batch = main.getBatch();
 		hero = new MainHero(batch);
 		forest = new Forest(batch);
+		rec = new Rectangle();
+		rec.x = 90;
+		rec.y = 0;
 	}
 	
 	private void update() {

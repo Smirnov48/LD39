@@ -4,9 +4,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.game.MyGame;
+import com.sgstudio.menu.Menu;
+import com.sgstudio.settings.Save;
 
 public class Main extends Game {
+	private Save save;
+	
 	public MyGame game;
+	public Menu menu;
 	
 	private static SpriteBatch batch;
 	private static BitmapFont font;
@@ -15,14 +20,24 @@ public class Main extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
+		save = new Save();
 		game = new MyGame(this);
+		menu = new Menu(this);
 		
-		setScreen(game);
+		setScreen(menu);
 	}
 	
 	@Override
 	public void render(){
 		super.render();
+	}
+	
+	@Override
+	public void resize(int width, int height) {
+		save.preferences("Settings");
+		save.Resolution(width, height);
+		save.flush();
+		System.out.println(save.getInt("Width") + "  " + width);
 	}
 	
 	@Override
