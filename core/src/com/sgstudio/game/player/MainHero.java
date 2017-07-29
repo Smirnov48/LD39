@@ -16,10 +16,10 @@ public class MainHero {
 	SpriteBatch batch;
 	Sprite sprite;
 	
-	private float wood;
-	private static float maxWood;
 	private World world;
 	private Body body;
+	private int wood;
+	private static int maxWood;
 	
 	public MainHero(SpriteBatch batch, World world){		
 		this.world = world;
@@ -28,6 +28,8 @@ public class MainHero {
 		sprite = new Sprite(img);
 		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
 	
+		sprite.setX(100);
+		sprite.setY(Gdx.graphics.getHeight() / 2);
 		maxWood = 100;
 		wood = 0;
 		
@@ -35,6 +37,7 @@ public class MainHero {
 		
 		System.out.println("Main hero has been successfully created!");
 		System.out.println("Wood: " + wood + "/" + maxWood);
+		System.out.println("MainHero has been created();");
 	}
 	
 	private void createPhysics() {
@@ -68,21 +71,23 @@ public class MainHero {
 	}
 	
 	//Get Stats Methods
-	public float getWood() {return wood;}
+	public int getWood() {return wood;}
+	
+	public int getMaxWood() {return maxWood;} 
 	
 	//Update Stats Methods
-	public void updWood(float i) {if(wood + i <= 0) {wood = 0;}
+	public void updWood(int i) {if(wood + i <= 0) {wood = 0;}
 		else if(wood + i > 0) {wood += i;}
 		else if(wood + i > maxWood) { wood = maxWood;}
 		else {wood += i;}
 	}
 	
 	//Set methods
-	public void setHealth(float i) {
+	public void setWood(int i) {
 		if(i < maxWood) {wood = maxWood;}
 		else if (i < 0) {wood = 0;}}
 	
-	public void setMaxWood(float i) {
+	public void setMaxWood(int i) {
 		maxWood = i;
 	}
 
