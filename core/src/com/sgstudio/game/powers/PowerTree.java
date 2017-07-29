@@ -1,7 +1,8 @@
-package com.sgstudio.game;
+package com.sgstudio.game.powers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sgstudio.game.MyGame;
 
 public class PowerTree {
 
