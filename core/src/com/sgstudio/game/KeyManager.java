@@ -1,39 +1,31 @@
 package com.sgstudio.game;
 
-import java.awt.event.KeyEvent;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
 public class KeyManager {
-	static boolean getPressedLeft(int key){
-		return Keys.LEFT == key;
+	public boolean getPressedLeft(){
+		if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)) return true;
+		else return false;
 	}
-	static boolean getPressedRight(int key){
-		return Keys.RIGHT == key;
+	public boolean getPressedRight(){
+		if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)) return true;
+		else return false;
 	}
-	static boolean getPressedUp(int key){
-		return Keys.UP == key;
+	public boolean getPressedUp(){
+		if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)) return true;
+		else return false;
 	}
-	static boolean getPressedDown(int key){
-		return Keys.DOWN == key;
+	public boolean getPressedDown(){
+		if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)) return true;
+		else return false;
 	}
-	static boolean getPressedA(int key){
-		return Keys.A == key;
+	public boolean getPressedEscape(){
+		if(Gdx.input.isKeyPressed(Keys.ESCAPE)) return true;
+		else return false;
 	}
-	static boolean getPressedW(int key){
-		return Keys.W == key;
-	}
-	static boolean getPressedD(int key){
-		return Keys.D == key;
-	}
-	static boolean getPressedS(int key){
-		return Keys.S == key;
-	} 
-	static boolean getPressedEscape(int key){
-		return Keys.ESCAPE == key;
-	}
-	static boolean getPressedI(int key){
-		return Keys.I == key;
+	public boolean getPressedI(){
+		if(Gdx.input.isKeyPressed(Keys.I)) return true;
+		else return false;
 	}
 }
