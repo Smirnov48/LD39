@@ -68,18 +68,18 @@ public class Train {
 	
 	//TimeFireFuel method
 	public void updateOven() {
-			if (time != (System.currentTimeMillis() - startTime) / 1000) {
-				time++;
-				if(getOvenWood() > 0) {
-					speedUp += 0.05;
-					updSpeed(speedUp);
-					updOvenWood(-1);
-					ovenFire = true;
-				} else {
-					ovenFire = false;
-					speedUp = 0;
-					updSpeed(-0.5f);
-				}
+		if (time != (System.currentTimeMillis() - startTime) / 1000) {
+			time++;
+			if(getOvenWood() > 0) {
+				speedUp += 0.05;
+				updSpeed(speedUp);
+				updOvenWood(-1);
+				ovenFire = true;
+			} else {
+				ovenFire = false;
+				speedUp = 0;
+				updSpeed(-0.5f);
+			}
 		}
 	}
 }

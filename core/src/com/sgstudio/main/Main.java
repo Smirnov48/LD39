@@ -37,7 +37,6 @@ public class Main extends Game {
 		save.preferences("Settings");
 		save.Resolution(width, height);
 		save.flush();
-		System.out.println(save.getInt("Width") + "  " + width);
 	}
 	
 	@Override

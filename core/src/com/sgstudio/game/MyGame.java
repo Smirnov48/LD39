@@ -19,7 +19,6 @@ import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.powers.Forest;
 import com.sgstudio.game.train.Train;
-import com.sgstudio.game.village.Village;
 import com.sgstudio.main.Main;
 
 public class MyGame implements Screen {
@@ -71,11 +70,10 @@ public class MyGame implements Screen {
 		createGround();
 	}
 	
-	private float speed=5;
+	private float speed=0;
 	private Sprite bg[] = {new Sprite(new Texture("atlas/bgR.png")), new Sprite(new Texture("atlas/bgG.png")), new Sprite(new Texture("atlas/bgB.png"))};
 	private void bg(){
 		for(int i=0;i<3;i++) bg[i].draw(batch);
-		System.out.println(bg[0].getX() + "  " + bg[1].getX() + "  " + bg[2].getX());
 		for(int i=0;i<3;i++) bg[i].setX(bg[i].getX()-speed);
 		
 		if(bg[0].getX()<=-800){
@@ -105,6 +103,7 @@ public class MyGame implements Screen {
 
 		forest.render();
 		hero.render();
+		stats.render();
 
 		batch.setProjectionMatrix(camera.combined);
 		debugRenderer.render(world, camera.combined);
@@ -135,7 +134,9 @@ public class MyGame implements Screen {
 	}
 
 	private void update() {
+		speed = train.getSpeed();
 		forest.update();
+		train.updateOven();
 	}
 
 	@Override
