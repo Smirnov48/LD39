@@ -4,11 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.sgstudio.game.powers.Forest;
-import com.sgstudio.game.village.Village;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -17,28 +13,28 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.sgstudio.game.player.MainHero;
+import com.sgstudio.game.powers.Forest;
+import com.sgstudio.game.village.Village;
 import com.sgstudio.main.Main;
 
-import com.sgstudio.graphics.Stats;
-
-import com.sgstudio.game.player.MainHero;
+import graphics.Stats;
 
 public class MyGame implements Screen {
 	public static SpriteBatch batch;
-	Texture good;
-	Texture bad;
 	private final Main main;
+
 	private MainHero hero;
 	private Forest forest;
-	public Rectangle rec;
 	public Village village;
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camera;
+	private Body ground;
 
-	Body ground;
-
+	public Stats stats;
+		
 	private void createGround() {
 		if (ground != null)
 			world.destroyBody(ground);
@@ -60,8 +56,6 @@ public class MyGame implements Screen {
 		shape.dispose();
 	}
 
-	public Stats stats;
-	
 	public MyGame(final Main main) {
 		this.main = main;
 
@@ -75,26 +69,23 @@ public class MyGame implements Screen {
 
 	@Override
 	public void render(float delta) {
-		world.step(1 / 60f, 6, 2);
+		world.step(1 / 60f, 6, 4);
 
 		update();
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		batch.setProjectionMatrix(camera.combined);
-		debugRenderer.render(world, camera.combined);
-
-		hero.updatePos(rec);
 		batch.begin();
-		if (village.HP > 50000){
-			batch.draw(good, 50, 100, 50, 50);
-		} else {
-			batch.draw(bad, 50, 100, 64, 64);
-		}
+
+		village.render();
 		forest.render();
 		hero.render();
 		stats.render();
+
+		batch.setProjectionMatrix(camera.combined);
+		debugRenderer.render(world, camera.combined);
+		
 		batch.end();
 	}
 
@@ -112,12 +103,7 @@ public class MyGame implements Screen {
 		batch = main.getBatch();
 		hero = new MainHero(batch);
 		forest = new Forest(batch);
-		rec = new Rectangle();
-		rec.x = 90;
-		rec.y = 0;
-		village = new Village();
-		good = new Texture("pashasimages/good.gif"); 
-		bad = new Texture("pashasimages/bad.png"); 
+		village = new Village(batch);
 		stats = new Stats(batch,hero,village);
 	}
 

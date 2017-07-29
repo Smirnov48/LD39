@@ -12,8 +12,6 @@ public class DesktopLauncher {
 	private static Village vil;
 	
 	public static void main (String[] arg) {
-		vil = new Village();
-		vil.setStartTime(System.currentTimeMillis());
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 //		config.addIcon("icons/logo.png", FileType.Internal);
 		save = new Save();

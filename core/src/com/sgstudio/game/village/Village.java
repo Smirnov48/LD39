@@ -1,11 +1,25 @@
 package com.sgstudio.game.village;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public class Village {
 	private static long startTime;
 	private static float time = 0;
-	public void setStartTime(long startTime){ 
-		Village.startTime = startTime; 
+
+	private Texture good;
+	private Texture bad;
+	private SpriteBatch batch;
+
+	public Village(SpriteBatch batch) {
+		this.batch = batch;
+		
+		good = new Texture("pashasimages/good.gif"); 
+		bad = new Texture("pashasimages/bad.png"); 
+
+		Village.startTime = System.currentTimeMillis(); 
 	}
+	
 	public void addHunger(int hunger){
 		Village.hunger += hunger;
 	}
@@ -93,4 +107,12 @@ public class Village {
 	public void setWater(float i) {thirst = i;}
 	public void setHunger(float i) {hunger = i;}
 	public void setMaxHealth(float i) {maxHP = i;}
+
+	public void render() {
+		if (HP > 50000){
+			batch.draw(good, 50, 100, 50, 50);
+		} else {
+			batch.draw(bad, 50, 100, 64, 64);
+		}
+	}
 }
