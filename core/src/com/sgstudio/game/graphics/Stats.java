@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.sgstudio.game.player.MainHero;
+import com.sgstudio.game.train.Train;
 import com.sgstudio.game.village.Village;
 
 public class Stats {
@@ -16,9 +17,9 @@ public class Stats {
 	BitmapFont largeFont;
 	BitmapFont smallFont;
 	MainHero hero;
-	Village village;
+	Train train;
 	
-	public Stats(SpriteBatch batch,MainHero hero,Village village) {
+	public Stats(SpriteBatch batch,MainHero hero,Train train) {
 		//״נטפעû נאחםמדמ נאחלונא
 		largeFont = new BitmapFont();
 		smallFont = new BitmapFont();
@@ -39,30 +40,31 @@ public class Stats {
 		
 		this.batch = batch;
 		this.hero = hero;
-		this.village = village;
+		this.train = train;
+		
+		
+		System.out.println("All stats has been uploading.");
+		System.out.println("Wood: " + hero.getWood() + "/" + hero.getMaxWood());
+		System.out.println("Fuel: " + train.getOvenWood() + "/" + train.getMaxOvenWood());
 	}
 	
 	public void render() {
+		train.updateOven();
+		
 		//PlayerStats
 		largeFont.draw(batch,"Player:",20,580);
-		smallFont.draw(batch, "Health: ", 20, 530);
-		mediumFont.draw(batch,String.valueOf((int)hero.getHealth()),115,535);
-		smallFont.draw(batch, "Water: ", 20, 505);
-		mediumFont.draw(batch,String.valueOf((int)hero.getWater()),115,510);
-		smallFont.draw(batch, "Hunger: ", 20, 485);
-		mediumFont.draw(batch,String.valueOf((int)hero.getHunger()),115,490);
-		smallFont.draw(batch, "Mood: ", 20, 465);
-		mediumFont.draw(batch,
-				String.valueOf((int)hero.getMood())+ " is " + hero.strMood(hero.getMood()),
-				115,470);
+		smallFont.draw(batch, "Wood: ", 20, 530);
+		mediumFont.draw(batch,String.valueOf((int)hero.getWood()),115,535);
 		
-		//VillageStats
-		largeFont.draw(batch,"Village:",600,580);
-		smallFont.draw(batch, "Health: ", 600, 530);
-		mediumFont.draw(batch,String.valueOf((int)village.getHealth()),730,535);
-		smallFont.draw(batch, "Water: ", 600, 505);
-		mediumFont.draw(batch,String.valueOf((int)village.getWater()),730,510);
-		smallFont.draw(batch, "Hunger: ", 600, 485);
-		mediumFont.draw(batch,String.valueOf((int)village.getHunger()),730,490);
+		//TrainStats
+		largeFont.draw(batch,"Train:",600,580);
+		smallFont.draw(batch, "Fuel: ", 600, 530);
+		mediumFont.draw(batch,String.valueOf((int)train.getOvenWood()),730,535);
+		smallFont.draw(batch, "Speed: ", 600, 500);
+		mediumFont.draw(batch,String.valueOf((int)train.getSpeed()),730,505);
+		if(train.onFire()) {
+			mediumFont.draw(batch,"OnFire!",680,470);
+		}
+		
 	}
 }

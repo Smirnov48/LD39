@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -13,12 +15,11 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.sgstudio.game.player.MainHero;
-import com.sgstudio.game.powers.Forest;
-import com.sgstudio.game.village.Village;
-import com.sgstudio.main.Main;
 import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.player.MainHero;
+import com.sgstudio.game.powers.Forest;
+import com.sgstudio.game.train.Train;
+import com.sgstudio.main.Main;
 
 public class MyGame implements Screen {
 	public static SpriteBatch batch;
@@ -26,7 +27,7 @@ public class MyGame implements Screen {
 
 	private MainHero hero;
 	private Forest forest;
-	public Village village;
+	public Train train;
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
@@ -61,22 +62,29 @@ public class MyGame implements Screen {
 		this.main = main;
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camera.position.set(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 0);
 
 		world = new World(new Vector2(0, -10), true);
 		debugRenderer = new Box2DDebugRenderer();
 
 		createGround();
 	}
-
-	@Override
-	public void show() {
-		Box2D.init();
-
-		batch = main.getBatch();
-		hero = new MainHero(batch, world);
-		forest = new Forest(batch);
-		village = new Village(batch);
-		stats = new Stats(batch,hero,village);
+	
+	private float speed=0;
+	private Sprite bg[] = {new Sprite(new Texture("atlas/bgR.png")), new Sprite(new Texture("atlas/bgG.png")), new Sprite(new Texture("atlas/bgB.png"))};
+	private void bg(){
+		for(int i=0;i<3;i++) bg[i].draw(batch);
+		for(int i=0;i<3;i++) bg[i].setX(bg[i].getX()-speed);
+		
+		if(bg[0].getX()<=-800){
+			bg[0].setX(bg[2].getX()+bg[2].getWidth());
+		}
+		if(bg[1].getX()<=-800){
+			bg[1].setX(bg[0].getX()+bg[0].getWidth());
+		}
+		if(bg[2].getX()<=-800){
+			bg[2].setX(bg[1].getX()+bg[1].getWidth());
+		}
 	}
 
 	@Override
@@ -87,12 +95,15 @@ public class MyGame implements Screen {
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+		bg();
 
-		village.render();
+
 		forest.render();
 		hero.render();
+		stats.render();
 
 		batch.setProjectionMatrix(camera.combined);
 		debugRenderer.render(world, camera.combined);
@@ -108,9 +119,24 @@ public class MyGame implements Screen {
 		hero.dispose();
 	}
 
+	@Override
+	public void show() {
+		Box2D.init();
+
+		batch = main.getBatch();
+		hero = new MainHero(batch,world);
+		forest = new Forest(batch);
+		train = new Train(batch);
+		stats = new Stats(batch,hero,train);
+		bg[0].setX(0);
+		bg[1].setX(bg[1].getRegionWidth());
+		bg[2].setX(bg[2].getRegionWidth()*2);
+	}
+
 	private void update() {
+		speed = train.getSpeed();
 		forest.update();
-		village.update();
+		train.updateOven();
 	}
 
 	@Override
