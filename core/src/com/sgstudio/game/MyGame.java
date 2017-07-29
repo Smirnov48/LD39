@@ -14,7 +14,6 @@ import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
 import com.sgstudio.game.player.MainHero;
-import com.sgstudio.game.powers.Forest;
 import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
 
@@ -24,7 +23,6 @@ public class MyGame implements Screen {
 	private Music One, Two;
 
 	private MainHero hero;
-	private Forest forest;
 	public Train train;
 
 	private World world;
@@ -91,14 +89,12 @@ public class MyGame implements Screen {
 	private void update() {
 		background.update();
 		music();
-		forest.update();
 		train.update();
 	}
 
 	@Override
 	public void dispose() {
 		batch.dispose();
-		forest.dispose();
 		hero.dispose();
 	}
 
@@ -113,7 +109,6 @@ public class MyGame implements Screen {
 		background = new Background(batch, train);
 		rails = new Rails(world);
 		hero = new MainHero(batch, world);
-		forest = new Forest(batch);
 		stats = new Stats(batch,hero,train);
 
 		One = Gdx.audio.newMusic(Gdx.files.internal("audio/music/MainTheme.wav"));
