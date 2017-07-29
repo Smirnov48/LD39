@@ -16,6 +16,7 @@ public class MyGame implements Screen {
 	private MainHero hero;
 	private PowerTree tree;
 	public Rectangle rec;
+	public Texture img;
 	
 	public MyGame(final Main main) {
 		this.main = main;
