@@ -21,9 +21,7 @@ public class DesktopLauncher {
 			config.width = 800;
 			config.height = 600;
 		}
-		new LwjglApplication(new Main(), config);
 		config.title = "Savior";
-		config.width = 800;
-		config.height = 600;
+		new LwjglApplication(new Main(), config);
 	}
 }
