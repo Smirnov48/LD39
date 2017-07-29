@@ -6,10 +6,9 @@ public class Village {
 	public void setStartTime(long startTime){ 
 		Village.startTime = startTime; 
 	}
-	}
-		Village.hunger += hunger;
-	
 	public void addHunger(int hunger){
+		Village.hunger += hunger;
+	}
 	private static int thirst = 100;
 	private static int hunger = 100;
 	private static int HP = 100000;
