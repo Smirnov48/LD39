@@ -3,11 +3,11 @@ package com.sgstudio.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -16,10 +16,15 @@ import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
 import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.game.player.MainHero;
+import com.sgstudio.game.train.Fuel;
 import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
 
 public class MyGame implements Screen {
+	private Fuel obj1;
+	private Fuel obj2;
+	private Fuel obj3;
+	
 	public static SpriteBatch batch;
 	private MusicGame music;
 	private final Main main;
@@ -95,17 +100,23 @@ public class MyGame implements Screen {
 		stats = new Stats(batch,hero,train);
 		music = new MusicGame();
 		
+		obj1 = new Fuel(1);
+		obj3 = new Fuel(2);
+		obj2 = new Fuel(3);
+		
 		Gdx.input.setInputProcessor(new InputProcessor(){
 
 			@Override
 			public boolean keyDown(int keycode) {
-				// TODO Auto-generated method stub
+				if(Gdx.input.isKeyPressed(Keys.Z)) train.updOvenWood(obj1.getFuel());
+				else if(Gdx.input.isKeyPressed(Keys.X)) train.updOvenWood(obj2.getFuel());
+				else if(Gdx.input.isKeyPressed(Keys.C)) train.updOvenWood(obj3.getFuel());
 				return false;
 			}
 
 			@Override
 			public boolean keyUp(int keycode) {
-				// TODO Auto-generated method stub
+				
 				return false;
 			}
 
