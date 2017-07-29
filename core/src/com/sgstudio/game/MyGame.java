@@ -41,11 +41,12 @@ public class MyGame implements Screen {
 
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
+		bodyDef.position.set(0, 0);
 
 		FixtureDef fixtureDef = new FixtureDef();
 
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(camera.viewportWidth, 1);
+		shape.setAsBox(camera.viewportWidth, 100);
 
 		fixtureDef.shape = shape;
 
@@ -68,6 +69,17 @@ public class MyGame implements Screen {
 	}
 
 	@Override
+	public void show() {
+		Box2D.init();
+
+		batch = main.getBatch();
+		hero = new MainHero(batch, world);
+		forest = new Forest(batch);
+		village = new Village(batch);
+		stats = new Stats(batch,hero,village);
+	}
+
+	@Override
 	public void render(float delta) {
 		world.step(1 / 60f, 6, 4);
 
@@ -81,11 +93,11 @@ public class MyGame implements Screen {
 		village.render();
 		forest.render();
 		hero.render();
-		stats.render();
 
-		//batch.setProjectionMatrix(camera.combined);
-		//debugRenderer.render(world, camera.combined);
+		batch.setProjectionMatrix(camera.combined);
+		debugRenderer.render(world, camera.combined);
 		
+		stats.render();
 		batch.end();
 	}
 
@@ -94,17 +106,6 @@ public class MyGame implements Screen {
 		batch.dispose();
 		forest.dispose();
 		hero.dispose();
-	}
-
-	@Override
-	public void show() {
-		Box2D.init();
-
-		batch = main.getBatch();
-		hero = new MainHero(batch);
-		forest = new Forest(batch);
-		village = new Village(batch);
-		stats = new Stats(batch,hero,village);
 	}
 
 	private void update() {

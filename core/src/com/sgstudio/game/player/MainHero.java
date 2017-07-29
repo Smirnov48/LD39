@@ -18,30 +18,49 @@ public class MainHero {
 	
 	private float wood;
 	private static float maxWood;
+	private World world;
+	private Body body;
 	
-	public MainHero(SpriteBatch batch){		
+	public MainHero(SpriteBatch batch, World world){		
+		this.world = world;
 		img = new Texture("hero.jpg");
 		this.batch = MyGame.getBatch();
 		sprite = new Sprite(img);
-		sprite.setX(100);
-		sprite.setY(Gdx.graphics.getHeight() / 2);
-		/*sprite.setPosition(Gdx.graphics.getWidth() / 2 - sprite.getWidth() / 2,
-               Gdx.graphics.getHeight() / 2);*/
-		
-		//�������������� ��� �������� ���������
+		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
+	
 		maxWood = 100;
 		wood = 0;
+		
+		createPhysics();
 		
 		System.out.println("Main hero has been successfully created!");
 		System.out.println("Wood: " + wood + "/" + maxWood);
 	}
 	
+	private void createPhysics() {
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.DynamicBody;
+		bodyDef.position.set(sprite.getX(), sprite.getY());
+	    
+		body = world.createBody(bodyDef);
+     
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(sprite.getWidth()/2, sprite.getHeight()/2);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1f;
+		
+		body.createFixture(fixtureDef);
+		shape.dispose();
+	}
+
 	public enum State {
 		NONE, WALKING, DEAD
 	}
 	
 	public void render() {
-		batch.draw(sprite,sprite.getX(),sprite.getY());	
+		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);	
 	}
 	
 	public void dispose() {
@@ -65,5 +84,30 @@ public class MainHero {
 	
 	public void setMaxWood(float i) {
 		maxWood = i;
+	}
+
+	public int getHealth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getWater() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getHunger() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getMood() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public String strMood(int mood) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
