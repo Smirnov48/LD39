@@ -125,7 +125,7 @@ public class MainHero {
 		if (health < 0.01 * maxHealth) {mood -=1;}
 		
 		//HealthUpper
-		if ()
+		
 		
 		
 		
