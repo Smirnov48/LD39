@@ -70,10 +70,8 @@ public class MyGame implements Screen {
 
 	
 	private void update() {
-		speed = train.getSpeed()/1.5f;
 		music.update();
-		forest.update();
-		train.updateOven();
+		train.update();
 	}
 
 	@Override
@@ -94,9 +92,6 @@ public class MyGame implements Screen {
 		rails = new Rails(world);
 		hero = new MainHero(batch, world);
 		stats = new Stats(batch,hero,train);
-		bg[0].setX(0);
-		bg[1].setX(bg[1].getRegionWidth());
-		bg[2].setX(bg[2].getRegionWidth()*2);
 		music = new MusicGame();
 		
 	}
