@@ -31,7 +31,7 @@ public class MainHero {
 	
 	public MainHero(SpriteBatch batch, World world){		
 		//Graphics
-		img = new Texture("oven_3.png");
+		img = new Texture("atlas/test.png");
 		this.batch = MyGame.getBatch();
 		sprite = new Sprite(img);
 		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);

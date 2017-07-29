@@ -6,13 +6,15 @@ public class Fuel {
 	private static final int StrikesStool = 3;
 	private static final int StrikesTable = 5;
 	private static final int StrikesPassenger = 4;
+	private static final int StrikesСupboard = 8;
 	
 	private static int view=0;
 	/*
 	 * 0 - Null
-	 * 1 - Stool
+	 * 1 - Сhair
 	 * 2 - Table
 	 * 3 - Passenger
+	 * 4 - Сupboard
 	 */
 	
 	private int strikesF=0;
@@ -35,6 +37,9 @@ public class Fuel {
 			else System.out.println("Obj broken!");
 		} else if(view==3){
 			if(!broken) System.out.println(strikesF + "/" + StrikesPassenger);
+			else System.out.println("Obj broken!");
+		} else if(view==4){
+			if(!broken) System.out.println(strikesF + "/" + StrikesСupboard);
 			else System.out.println("Obj broken!");
 		}
 		if(!broken) if(getBroken()){
@@ -65,6 +70,12 @@ public class Fuel {
 				strikesF++;
 				return false;
 			}
+		} else if(view==4){
+			if(strikesF==StrikesСupboard) return true;
+			else{
+				strikesF++;
+				return false;
+			}
 		}
 		return false;
 	}
@@ -78,6 +89,8 @@ public class Fuel {
 			return rand.randInt(5, 7);
 		} else if(view==3){
 			return rand.randInt(8, 10);
+		} else if(view==4){
+			return rand.randInt(11, 13);
 		}
 		return 0;
 	}
