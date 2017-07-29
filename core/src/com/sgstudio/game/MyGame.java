@@ -125,12 +125,10 @@ public class MyGame implements Screen {
 		Box2D.init();
 
 		batch = main.getBatch();
-		hero = new MainHero(batch);
+		hero = new MainHero(batch,world);
 		forest = new Forest(batch);
 		train = new Train(batch);
 		stats = new Stats(batch,hero,train);
-		village = new Village(batch);
-		stats = new Stats(batch,hero,village);
 		bg[0].setX(0);
 		bg[1].setX(bg[1].getRegionWidth());
 		bg[2].setX(bg[2].getRegionWidth()*2);
