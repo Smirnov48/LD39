@@ -100,6 +100,35 @@ public class MainHero {
 	public void update(){
 		time++;
 		
+		//UpperMood Check
+		if ((water >= maxWater * 0.95) && 
+				(hunger >= 0.95 * maxHunger) && 
+				(health >= maxHealth * 0.99)) {
+			mood += 0.05;
+		} else {
+			if(hunger >= 0.95 * maxHunger) {mood+=0.002;}
+			else if ((hunger >= 0.8 *maxHunger) && (hunger < 0.95 * maxHunger)) {mood+=0.001;}
+			if (health >= 0.99 * maxHealth) {mood+=0.001;}
+			if (water >= maxWater * 0.95) {mood += 0.001;}
+		}
+		
+		//DownerMood
+		//Hunger
+		if (hunger < maxHunger * 0.4) {mood-=1;}
+		else if (hunger < maxHunger * 0.15) {mood-=2;}
+		else if (hunger < maxHunger * 0.05) {mood-=3;health-=5;}
+		//Water
+		if (water < maxWater * 0.5) {mood -= 1;}
+		else if (water < maxWater * 0.25) {mood -=2;}
+		else if (water < maxWater * 0.1) {mood -=3;}
+		//Health
+		if (health < 0.01 * maxHealth) {mood -=1;}
+		
+		//HealthUpper
+		if ()
+		
+		
+		
 		if (health > maxHealth){health = maxHealth;} 
 		if (water > maxWater){water = maxWater;}
 			else {water -= 0.4f;}
@@ -107,24 +136,9 @@ public class MainHero {
 			else {hunger -= 0.400000001f;}
 		
 		if (hunger < 0){hunger = 0;}
-		if (hunger == 0){
-			health -= 300;
-		}
-		
-		
 		if (water < 0){water = 0;}
-		if (water == 0){
-			health -= 400;
-		}
-		
+		if (water == 0){health -= 400;}	
 		if (health < 0){health = 0;}
-		/*if (thirst > 0){
-		System.out.println(hunger);
-		System.out.println(thirst);
-		} else {
-			System.out.println(hunger);
-			System.out.println(HP);
-		}*/
 	}
 	
 	//Get Stats Methods
