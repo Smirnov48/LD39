@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.game.powers.Forest;
 import com.badlogic.gdx.math.Rectangle;
 import com.sgstudio.main.Main;
+import com.sgstudio.game.Village;
 
 public class MyGame implements Screen {
 	public static SpriteBatch batch;
@@ -15,6 +16,7 @@ public class MyGame implements Screen {
 	private MainHero hero;
 	private Forest forest;
 	public Rectangle rec;
+	public Village village;
 	
 	public MyGame(final Main main) {
 		this.main = main;
@@ -48,10 +50,12 @@ public class MyGame implements Screen {
 		rec = new Rectangle();
 		rec.x = 90;
 		rec.y = 0;
+		village = new Village();
 	}
 	
 	private void update() {
-		forest.update();		
+		forest.update();
+		village.update();
 	}
 
 	@Override
