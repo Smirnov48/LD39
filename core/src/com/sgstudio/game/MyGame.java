@@ -12,6 +12,7 @@ public class MyGame implements Screen {
 	static SpriteBatch batch;
 	Texture img;
 	MainHero hero;
+	private PowerTree tree;
 	
 	public MyGame(final Main main) {
 		this.main = main;
@@ -22,6 +23,7 @@ public class MyGame implements Screen {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+		tree.render();
 		hero.render();
 		batch.end();
 	}
@@ -31,6 +33,7 @@ public class MyGame implements Screen {
 		batch.dispose();
 		img.dispose();
 		hero.dispose();
+		tree.dispose();
 	}
 
 	@Override
@@ -38,6 +41,7 @@ public class MyGame implements Screen {
 		batch = main.getBatch();
 		img = new Texture("badlogic.jpg");
 		hero = new MainHero(batch);
+		tree = new PowerTree(batch);
 	}
 
 	@Override
