@@ -16,8 +16,8 @@ public class MainHero {
 	SpriteBatch batch;
 	Sprite sprite;
 	
-	private float wood;
-	private static float maxWood;
+	private int wood;
+	private static int maxWood;
 	
 	public MainHero(SpriteBatch batch){		
 		img = new Texture("hero.jpg");
@@ -25,15 +25,10 @@ public class MainHero {
 		sprite = new Sprite(img);
 		sprite.setX(100);
 		sprite.setY(Gdx.graphics.getHeight() / 2);
-		/*sprite.setPosition(Gdx.graphics.getWidth() / 2 - sprite.getWidth() / 2,
-               Gdx.graphics.getHeight() / 2);*/
-		
-		//�������������� ��� �������� ���������
 		maxWood = 100;
 		wood = 0;
 		
-		System.out.println("Main hero has been successfully created!");
-		System.out.println("Wood: " + wood + "/" + maxWood);
+		System.out.println("MainHero has been created();");
 	}
 	
 	public enum State {
@@ -49,21 +44,23 @@ public class MainHero {
 	}
 	
 	//Get Stats Methods
-	public float getWood() {return wood;}
+	public int getWood() {return wood;}
+	
+	public int getMaxWood() {return maxWood;} 
 	
 	//Update Stats Methods
-	public void updWood(float i) {if(wood + i <= 0) {wood = 0;}
+	public void updWood(int i) {if(wood + i <= 0) {wood = 0;}
 		else if(wood + i > 0) {wood += i;}
 		else if(wood + i > maxWood) { wood = maxWood;}
 		else {wood += i;}
 	}
 	
 	//Set methods
-	public void setHealth(float i) {
+	public void setWood(int i) {
 		if(i < maxWood) {wood = maxWood;}
 		else if (i < 0) {wood = 0;}}
 	
-	public void setMaxWood(float i) {
+	public void setMaxWood(int i) {
 		maxWood = i;
 	}
 }

@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.powers.Forest;
+import com.sgstudio.game.train.Train;
 import com.sgstudio.game.village.Village;
 import com.sgstudio.main.Main;
 import com.sgstudio.game.graphics.Stats;
@@ -26,7 +27,7 @@ public class MyGame implements Screen {
 
 	private MainHero hero;
 	private Forest forest;
-	public Village village;
+	public Train train;
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
@@ -78,7 +79,7 @@ public class MyGame implements Screen {
 
 		batch.begin();
 
-		village.render();
+
 		forest.render();
 		hero.render();
 		stats.render();
@@ -103,13 +104,12 @@ public class MyGame implements Screen {
 		batch = main.getBatch();
 		hero = new MainHero(batch);
 		forest = new Forest(batch);
-		village = new Village(batch);
-		stats = new Stats(batch,hero,village);
+		train = new Train(batch);
+		stats = new Stats(batch,hero,train);
 	}
 
 	private void update() {
 		forest.update();
-		village.update();
 	}
 
 	@Override
