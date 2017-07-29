@@ -11,7 +11,7 @@ public class Village {
 	}
 	private static int thirst = 100;
 	private static int hunger = 100;
-	private static int HP = 100000;
+	public static int HP = 100000;
 	private final int FULHP = 10000;
 	private final int DEATH = 0;
 	public void update(){
@@ -36,8 +36,8 @@ public class Village {
 				HP -= 400;
 			}
 			
-			if (HP < 0){
-				HP = 0;
+			if (HP < DEATH){
+				HP = DEATH;
 			}
 			/*if (thirst > 0){
 			System.out.println(hunger);
