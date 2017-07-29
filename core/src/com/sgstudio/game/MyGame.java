@@ -83,8 +83,8 @@ public class MyGame implements Screen {
 		hero.render();
 		stats.render();
 
-		batch.setProjectionMatrix(camera.combined);
-		debugRenderer.render(world, camera.combined);
+		//batch.setProjectionMatrix(camera.combined);
+		//debugRenderer.render(world, camera.combined);
 		
 		batch.end();
 	}
