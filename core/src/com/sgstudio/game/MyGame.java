@@ -2,7 +2,6 @@ package com.sgstudio.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,14 +9,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.ground.Rails;
+import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.powers.Forest;
 import com.sgstudio.game.train.Train;
@@ -25,8 +22,8 @@ import com.sgstudio.main.Main;
 
 public class MyGame implements Screen {
 	public static SpriteBatch batch;
+	private MusicGame music;
 	private final Main main;
-	private Music One, Two;
 
 	private MainHero hero;
 	private Forest forest;
@@ -94,29 +91,11 @@ public class MyGame implements Screen {
 		batch.end();
 	}
 	
-	private void music(){
-		if(One.isPlaying()){
-			float oneTime = One.getPosition();
-			if(oneTime<=4) One.setVolume(One.getVolume()+2.5f);
-			else if(oneTime<=21) One.setVolume(One.getVolume()-2.5f);
-			else if(oneTime<=24){
-				One.stop();
-				Two.play();
-			}
-		} else if(Two.isPlaying()){
-			float twoTime = Two.getPosition();
-			if(twoTime<=4) Two.setVolume(One.getVolume()+2.5f);
-			else if(twoTime<=26) Two.setVolume(One.getVolume()-2.5f);
-			else if(twoTime<=30){
-				One.play();
-				Two.stop();
-			}
-		}
-	}
+
 	
 	private void update() {
-		music();
 		speed = train.getSpeed()/1.5f;
+		music.update();
 		forest.update();
 		train.updateOven();
 	}
@@ -140,12 +119,8 @@ public class MyGame implements Screen {
 		bg[0].setX(0);
 		bg[1].setX(bg[1].getRegionWidth());
 		bg[2].setX(bg[2].getRegionWidth()*2);
-		One = Gdx.audio.newMusic(Gdx.files.internal("audio/music/MainTheme.wav"));
-		One.play();
-		One.setVolume(0);
-		Two = Gdx.audio.newMusic(Gdx.files.internal("audio/music/BlueCoach.wav"));
-		Two.stop();
-		Two.setVolume(0);
+		music = new MusicGame();
+		
 	}
 
 	@Override

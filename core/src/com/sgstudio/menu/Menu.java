@@ -137,7 +137,6 @@ public class Menu implements Screen {
 					else Moved[4]=false;
 				} else Moved[4]=false;
 				
-				System.out.println(Moved[4] + "  " + Pressed[4]);
 				return false;
 			}
 
