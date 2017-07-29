@@ -28,4 +28,8 @@ public class KeyManager {
 		if(Gdx.input.isKeyPressed(Keys.I)) return true;
 		else return false;
 	}
+	public boolean getPressedSpace(){
+		if(Gdx.input.isKeyPressed(Keys.SPACE)) return true;
+		else return false;
+	}
 }

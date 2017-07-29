@@ -58,7 +58,7 @@ public class MainHero {
 		circle.setRadius(0.4f);
 		circle.setPosition(new Vector2(0, -0.05f));
 		playerSensorFixture = box.createFixture(circle, 0);
-		//трение
+		//пїЅпїЅпїЅпїЅпїЅпїЅ
 		//setFriction(200F);
 		circle.dispose();		
 		box.setBullet(true);*/
@@ -101,7 +101,7 @@ public class MainHero {
 	}
 	
 	public void update() {
-		//Взаимодействуем с KeyManager
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ KeyManager
 		//body.applyforce
 		
 	}
