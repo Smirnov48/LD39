@@ -5,7 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.sgstudio.game.powers.PowerTree;
+import com.sgstudio.game.powers.BerryBush;
 import com.sgstudio.main.Main;
 
 public class MyGame implements Screen {
@@ -13,7 +13,7 @@ public class MyGame implements Screen {
 
 	private final Main main;
 	private MainHero hero;
-	private PowerTree tree;
+	private BerryBush tree;
 	
 	public MyGame(final Main main) {
 		this.main = main;
@@ -43,7 +43,7 @@ public class MyGame implements Screen {
 	public void show() {
 		batch = main.getBatch();
 		hero = new MainHero(batch);
-		tree = new PowerTree(batch);
+		tree = new BerryBush(batch);
 	}
 	
 	private void update() {

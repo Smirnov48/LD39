@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.game.MyGame;
 
-public class PowerTree {
+public class BerryBush {
 
 	private int x;
 	private int y;
@@ -16,7 +16,7 @@ public class PowerTree {
 	private int sticks;
 	private int health;
 
-	public PowerTree(SpriteBatch batch) {
+	public BerryBush(SpriteBatch batch) {
 		img = new Texture("hero.jpg");
 		this.batch = MyGame.getBatch();
 		
