@@ -1,4 +1,4 @@
-package com.sgstudio.game;
+package com.sgstudio.game.models;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
