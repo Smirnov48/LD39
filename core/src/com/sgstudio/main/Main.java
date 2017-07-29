@@ -14,17 +14,15 @@ public class Main extends Game {
 	public Menu menu;
 	
 	private static SpriteBatch batch;
-	private static BitmapFont font;
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		font = new BitmapFont();
 		save = new Save();
 		game = new MyGame(this);
 		menu = new Menu(this);
 		
-		setScreen(game);
+		setScreen(menu);
 	}
 	
 	@Override
@@ -45,5 +43,4 @@ public class Main extends Game {
 	}
 	
 	public SpriteBatch getBatch(){ return batch; }
-	public BitmapFont getFont(){ return font; }
 }

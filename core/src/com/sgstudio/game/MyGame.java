@@ -111,6 +111,12 @@ public class MyGame implements Screen {
 		stats.render();
 		batch.end();
 	}
+	
+	private void update() {
+		speed = train.getSpeed()/1.5f;
+		forest.update();
+		train.updateOven();
+	}
 
 	@Override
 	public void dispose() {
@@ -131,12 +137,6 @@ public class MyGame implements Screen {
 		bg[0].setX(0);
 		bg[1].setX(bg[1].getRegionWidth());
 		bg[2].setX(bg[2].getRegionWidth()*2);
-	}
-
-	private void update() {
-		speed = train.getSpeed();
-		forest.update();
-		train.updateOven();
 	}
 
 	@Override

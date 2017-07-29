@@ -20,14 +20,14 @@ public class Stats {
 	Train train;
 	
 	public Stats(SpriteBatch batch,MainHero hero,Train train) {
-		//Шрифты разного размера
+		//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		largeFont = new BitmapFont();
 		smallFont = new BitmapFont();
 		mediumFont = new BitmapFont();
-		//Генератор
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
-				Gdx.files.internal("pixel.ttf"));
-		//Параметр
+				Gdx.files.internal("font/pixel.ttf"));
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		FreeTypeFontParameter param = new FreeTypeFontParameter();
 		param.size = 40;
 		param.borderColor = Color.BLACK;
