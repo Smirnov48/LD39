@@ -54,8 +54,9 @@ public class MyGame implements Screen {
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+		
 		background.render();
-		forest.render();
+		train.render();
 		hero.render();
 		stats.render();
 
@@ -63,6 +64,7 @@ public class MyGame implements Screen {
 		debugRenderer.render(world, camera.combined);
 		
 		stats.render();
+		
 		batch.end();
 	}
 	
@@ -90,7 +92,7 @@ public class MyGame implements Screen {
 		background.update();
 		music();
 		forest.update();
-		train.updateOven();
+		train.update();
 	}
 
 	@Override

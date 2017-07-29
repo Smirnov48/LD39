@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.train.Train;
-import com.sgstudio.game.village.Village;
 
 public class Stats {
 	
@@ -49,8 +48,6 @@ public class Stats {
 	}
 	
 	public void render() {
-		train.updateOven();
-		
 		//PlayerStats
 		largeFont.draw(batch,"Player:",20,580);
 		smallFont.draw(batch, "Wood: ", 20, 530);
