@@ -110,7 +110,7 @@ public class MyGame implements Screen {
 		Box2D.init();
 
 		batch = main.getBatch();
-		hero = new MainHero(batch,world);
+		hero = new MainHero(batch,world,ground);
 		forest = new Forest(batch);
 		train = new Train(batch);
 		stats = new Stats(batch,hero,train);
