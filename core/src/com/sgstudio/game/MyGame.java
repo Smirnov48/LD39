@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.graphics.Stats;
+import com.sgstudio.game.ground.Rails;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.powers.Forest;
 import com.sgstudio.game.train.Train;
@@ -35,28 +36,7 @@ public class MyGame implements Screen {
 	private Body ground;
 
 	public Stats stats;
-		
-	private void createGround() {
-		if (ground != null)
-			world.destroyBody(ground);
-
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyDef.BodyType.StaticBody;
-		bodyDef.position.set(0, 0);
-
-		FixtureDef fixtureDef = new FixtureDef();
-
-		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(camera.viewportWidth, 100);
-
-		fixtureDef.shape = shape;
-
-		ground = world.createBody(bodyDef);
-		ground.createFixture(fixtureDef);
-		ground.setTransform(0, 0, 0);
-
-		shape.dispose();
-	}
+	private Rails rails;
 
 	public MyGame(final Main main) {
 		this.main = main;
@@ -67,7 +47,7 @@ public class MyGame implements Screen {
 		world = new World(new Vector2(0, -10), true);
 		debugRenderer = new Box2DDebugRenderer();
 
-		createGround();
+		rails = new Rails(world);
 	}
 	
 	private float speed=0;
