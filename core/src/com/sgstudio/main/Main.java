@@ -1,7 +1,6 @@
 package com.sgstudio.main;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.game.MyGame;
 import com.sgstudio.menu.Menu;

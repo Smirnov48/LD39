@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -46,7 +45,7 @@ public class Menu implements Screen {
 		width = atlasMenu.get("tiles0_0").getRegionWidth();
 		height = atlasMenu.get("tiles0_0").getRegionHeight();
 		
-		sound = Gdx.audio.newMusic(Gdx.files.internal("audio/sounds/MainTheme.wav"));
+		sound = Gdx.audio.newMusic(Gdx.files.internal("audio/music/MainTheme.wav"));
 		sound.setLooping(true);
 		sound.setVolume(0.2f);
 		
