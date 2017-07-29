@@ -3,13 +3,11 @@ package com.sgstudio.game.desktop;
 //import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.sgstudio.game.village.Village;
 import com.sgstudio.main.Main;
 import com.sgstudio.settings.Save;
 
 public class DesktopLauncher {
 	private static Save save;
-	private static Village vil;
 	
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
