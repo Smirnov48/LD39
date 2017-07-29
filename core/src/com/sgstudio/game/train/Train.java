@@ -28,7 +28,7 @@ public class Train {
 		System.out.println("Train has been created.");
 		ovenFire = true;
 		Train.startTime = System.currentTimeMillis();
-		speed = 20;
+		speed = 10;
 		speedUp = 0;
 	}
 	
@@ -41,9 +41,10 @@ public class Train {
 	public float getSpeedUp() {return speedUp;}	
 	
 	//Update Stats Methods
-	public void updOvenWood(int i) {if(ovenWood + i <= 0) {ovenWood = 0;}
-		else if(ovenWood + i > 0) {ovenWood += i;}
+	public void updOvenWood(int i) {
+		if(ovenWood + i <= 0) {ovenWood = 0;}
 		else if(ovenWood + i > maxOvenWood) { ovenWood = maxOvenWood;}
+		else if(ovenWood + i > 0) {ovenWood += i;}
 		else {ovenWood += i;}
 	}
 	
