@@ -1,5 +1,7 @@
 package com.sgstudio.game.player;
 
+import java.util.concurrent.TimeUnit;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -30,10 +32,10 @@ public class MainHero {
 	private float mood;
 	
 	//MaxStatsValues
-	private float maxHealth;
-	private float maxWater;
-	private float maxHunger;
-	private float maxMood;
+	private static float maxHealth;
+	private static float maxWater;
+	private static float maxHunger;
+	private static float maxMood;
 	
 	public static final float SPEED = 2f;
 	public static final float SIZE = 0.7f;
@@ -77,6 +79,7 @@ public class MainHero {
 	
 	public void render() {
 		batch.draw(sprite,sprite.getX(),sprite.getY());	
+		update();
 	}
 	
 	public Rectangle getBounds() {
@@ -135,6 +138,9 @@ public class MainHero {
 	public void setHunger(float i) {hunger = i;}
 	public void setMood(float i) {mood = i;}
 	public void setMaxHealth(float i) {maxHealth = i;}
+	public void setMaxWater(float i) {maxWater = i;}
+	public void setMaxMood(float i) {maxMood = i;}
+	public void setMaxHunger(float i) {maxHunger =i;}
 	
 	//Mood String Method
 	public String strMood(float mood) {

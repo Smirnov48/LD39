@@ -9,36 +9,41 @@ public class Village {
 	public void addHunger(int hunger){
 		Village.hunger += hunger;
 	}
-	private static int thirst = 100;
-	private static int hunger = 100;
-	private static int HP = 100000;
-	private final int FULHP = 10000;
+	
+	private float maxHP = 10000f;
+	private static float maxthirst = 100f;
+	private static float maxhunger = 100f;
+
+	private static float thirst = maxthirst;
+	private static float hunger = maxhunger;
+	public float HP = maxHP;
+	
 	private final int DEATH = 0;
+	
 	public void update(){
 		if(time!=(System.currentTimeMillis() - startTime) / 1000){
 			time++;
+			
+			if (HP > maxHP){HP = maxHP;}
+			if (thirst > maxthirst){thirst = maxthirst;}
+			if (hunger > maxhunger){hunger = maxhunger;}
+			
 			hunger -= 0.333333333333333333333333333333f;
 			thirst -= 0.416666666666666666666666666666f;
 			
 			
-			if (hunger < 0){
-				hunger = 0;
-			}
+			if (hunger < 0){hunger = 0;}
 			if (hunger == 0){
 				HP -= 300;
 			}
 			
 			
-			if (thirst < 0){
-				thirst = 0;
-			}
+			if (thirst < 0){thirst = 0;}
 			if (thirst == 0){
 				HP -= 400;
 			}
 			
-			if (HP < 0){
-				HP = 0;
-			}
+			if (HP < DEATH){HP = DEATH;}
 			/*if (thirst > 0){
 			System.out.println(hunger);
 			System.out.println(thirst);
@@ -48,4 +53,7 @@ public class Village {
 			}*/
 		}
 	}
+	public float getHp() {return HP;}
+	public float getThirst() {return thirst;}
+	public float getHunger() {return hunger;}
 }
