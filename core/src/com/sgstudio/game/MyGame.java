@@ -61,7 +61,7 @@ public class MyGame implements Screen {
 	public MyGame(final Main main) {
 		this.main = main;
 
-		camera = new OrthographicCamera(Gdx.graphics.getWidth()*6, Gdx.graphics.getHeight()*6);
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.position.set(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 0);
 
 		world = new World(new Vector2(0, -10), true);
