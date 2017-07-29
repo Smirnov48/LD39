@@ -26,7 +26,17 @@ public class Fuel {
 	}
 	
 	public int getFuel(){
-		System.out.println(strikesF);
+		if(view==0){
+		} else if(view==1){
+			if(!broken) System.out.println(strikesF + "/" + StrikesStool);
+			else System.out.println("Obj broken!");
+		} else if(view==2){
+			if(!broken) System.out.println(strikesF + "/" + StrikesTable);
+			else System.out.println("Obj broken!");
+		} else if(view==3){
+			if(!broken) System.out.println(strikesF + "/" + StrikesPassenger);
+			else System.out.println("Obj broken!");
+		}
 		if(!broken) if(getBroken()){
 			broken=true;
 			return fuelCounting();
