@@ -56,4 +56,41 @@ public class Village {
 	public float getHp() {return HP;}
 	public float getThirst() {return thirst;}
 	public float getHunger() {return hunger;}
+	
+	
+	public void updHunger(float i) {
+		if(hunger + i <= 0) {
+			hunger = 0;
+		} else if(hunger + i > 0) {
+			hunger += i;
+		} else if(hunger + i > maxhunger) { 
+			hunger = maxhunger;
+		} else {hunger += i;}
+	}
+	
+	public void updThirst(float i) {
+		if(thirst + i <= 0) {
+			thirst = 0;
+		} else if(thirst + i > 0) {
+			thirst += i;
+		} else if(thirst + i > maxthirst) { 
+			thirst = maxthirst;
+		} else {thirst += i;}
+	}
+	
+	public void updHp(float i) {
+		if(HP + i <= 0) {
+			HP = 0;
+		} else if(HP + i > 0) {
+			HP += i;
+		} else if(HP + i > maxHP) { 
+			HP = maxHP;
+		} else {HP += i;}
+	}
+	
+	
+	public void setHealth(float i) {HP = i;}
+	public void setWater(float i) {thirst = i;}
+	public void setHunger(float i) {hunger = i;}
+	public void setMaxHealth(float i) {maxHP = i;}
 }
