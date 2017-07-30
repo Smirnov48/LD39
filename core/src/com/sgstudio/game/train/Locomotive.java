@@ -34,11 +34,8 @@ public class Locomotive {
 	private static Sprite sprite;
 	private static Body body;
 	private static MainHero hero;
-	
-	private Main main;
 
 	public Locomotive(Main main,SpriteBatch batch, World world) {
-		this.main = main;
 		this.batch = batch;
 		this.world = world;
 
@@ -142,7 +139,7 @@ public class Locomotive {
 		if (distance + i <= 0) {
 			distance = 0;
 		} else if (distance + i >= allDistance) {
-			distance = allDistance;
+			distance = allDistance + 10;
 		} else {
 			distance += i;
 		}
@@ -171,7 +168,6 @@ public class Locomotive {
 	
 	public void update() {
 		updateOven();
-		updateStand();
 	}
 
 	private void updateOven() {
@@ -181,20 +177,15 @@ public class Locomotive {
 				speedUp += 0.01;
 				updSpeed(speedUp);
 				updDistance((int) (speed));
-				System.out.println(distance);
 				updOvenWood(-1);
 				ovenFire = true;
 			} else {
+			updDistance((int) (speed));
 			ovenFire = false;
 			speedUp = 0;
-			updSpeed(-0.8f);
+			updSpeed(-2f);
 			}
-		}
-	}
-	
-	private void updateStand() {
-		if(getDistance() >= getWay()) {
-			main.setScreen(main.victory);
+			System.out.println(distance);
 		}
 	}
 

@@ -14,7 +14,7 @@ import com.sgstudio.utils.Box2DHelper;
 public class MainHero {
 	private Texture img;
 	private SpriteBatch batch;
-	private Sprite sprite;
+	public static Sprite sprite;
 
 	private World world;
 	private Body body;
@@ -23,6 +23,8 @@ public class MainHero {
 	private static int maxWood;
 	private KeyManager keys;
 	private Locomotive train;
+	
+	private float x;
 
 	public MainHero(SpriteBatch batch, World world, Locomotive train) {
 		this.train = train;
@@ -38,6 +40,7 @@ public class MainHero {
 		createPhysics();
 
 		keys = new KeyManager();
+		x = train.getX();
 	}
 
 	private void createPhysics() {
@@ -52,7 +55,6 @@ public class MainHero {
 
 	public void render() {
 		update();
-
 		Vector2 pos = Box2DHelper.getPosition(body);
 		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y - sprite.getHeight() / 2);
 	}
@@ -64,6 +66,7 @@ public class MainHero {
 	public void update() {
 		if (keys.getPressedLeft()) {
 			body.applyForceToCenter(-1.0f, 0, true);
+			
 		}
 		if (keys.getPressedRight()) {
 			body.applyForceToCenter(1.0f, 0, true);
@@ -74,6 +77,7 @@ public class MainHero {
 		if (keys.getPressedE()) {
 			putWood();
 		}
+		
 	}
 
 	public void putWood() {
@@ -93,8 +97,6 @@ public class MainHero {
 	public void updWood(int i) {
 		if (wood + i <= 0) {
 			wood = 0;
-		} else if (wood + i > 0) {
-			wood += i;
 		} else if (wood + i > maxWood) {
 			wood = maxWood;
 		} else {
@@ -109,7 +111,7 @@ public class MainHero {
 		} else if (i <= 0) {
 			wood = 0;
 		} else
-			wood += i;
+			wood = i;
 	}
 
 	public void setMaxWood(int i) {
@@ -118,5 +120,9 @@ public class MainHero {
 
 	public Vector2 getPosition() {
 		return Box2DHelper.getPosition(body);
+	}
+	
+	public void checkDeath() {
+		
 	}
 }

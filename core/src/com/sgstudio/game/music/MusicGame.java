@@ -17,7 +17,7 @@ public class MusicGame {
 	}
 	
 	public void update(){
-		if(isMuted()) {}else {
+		if(!isMuted()){
 			music();
 		}
 	}
@@ -44,10 +44,8 @@ public class MusicGame {
 	}
 	
 	public void stopMusic() {
-		for(int i = 0; i < 201; i++) {
-		One.setVolume(One.getVolume()-.005f);
-		Two.setVolume(Two.getVolume()-.005f);
-		}
+		One.setVolume(0);
+		Two.setVolume(0);
 	}
 	
 	public static void musicStade() {

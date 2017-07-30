@@ -55,6 +55,8 @@ public class MyGame implements Screen {
 	private MiniMap map;
 	public int allDistance = 40000;
 	private OrthographicCamera staticCamera;
+	
+	private Checker checker;
 
 	public MyGame(final Main main) {
 		this.main = main;
@@ -103,6 +105,7 @@ public class MyGame implements Screen {
 	}
 
 	private void update() {
+		checker.update();
 		background.update();
 		music.update();
 		train.update();
@@ -144,6 +147,8 @@ public class MyGame implements Screen {
 		obj2 = new Fuel(3);
 		
 		coach = new Coach(batch, world);
+		
+		checker = new Checker(main,train,demon,hero);
 
 		Gdx.input.setInputProcessor(new InputProcessor() {
 

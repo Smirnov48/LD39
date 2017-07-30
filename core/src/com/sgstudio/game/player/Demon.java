@@ -11,11 +11,12 @@ public class Demon {
 	private Locomotive train;
 	private SpriteBatch batch;
 	private int way;
-	private float disToTrain;
+	private static float disToTrain;
 	private static long startTime;
 	private static float time = 0;
 	private Main main;
 	private Texture dark;
+	private float x;
 	
 	public Demon(Main main,SpriteBatch batch,Locomotive train) {
 		this.main = main;
@@ -27,10 +28,11 @@ public class Demon {
 		way = train.getWay();
 		disToTrain = 1000 + train.getDistance();
 		dark = new Texture("atlas/monstr.png");
+		x = -6500+disToTrain-dark.getWidth();
 	}
 	
 	public void render() {
-		batch.draw(dark, -6500+disToTrain-dark.getWidth(), 0);
+		batch.draw(dark,x, 0);
 	}
 	
 	public void update() {
@@ -48,6 +50,14 @@ public class Demon {
 				main.setScreen(main.defeat);
 			}
 		}
+	}
+	
+	public float getDemonX() {
+		return x;
+	}
+	
+	public float getDisToTrain() {
+		return disToTrain;
 	}
 
 	
