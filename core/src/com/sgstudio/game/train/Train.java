@@ -23,7 +23,7 @@ public class Train {
 	private float speed;//Train Speed
 	private float speedUp;//Train SpeedUp
 	private int distance = 0;//Distance during game
-	private final int allDistance = 40000; //Full distance
+	private final int allDistance = 4000; //Full distance
 	
 	//Time values
 	private static long startTime;
@@ -52,7 +52,7 @@ public class Train {
 		Train.startTime = System.currentTimeMillis();
 		
 		//Speed
-		speed = 15;
+		speed = 50;
 		speedUp = 0;
 		
 		//Graphics
