@@ -104,6 +104,7 @@ public class Menu implements Screen {
 			@Override
 			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 				if(Moved[0] && Pressed[0]) main.setScreen(main.game);
+				if(Moved[2] && Pressed[2]) main.setScreen(main.aboutsgstudio);
 				if(Moved[3] && Pressed[3]) Gdx.app.exit();
 				if(Moved[4] && Pressed[4]){
 					if(Play) {
@@ -183,8 +184,8 @@ public class Menu implements Screen {
 		else batch.draw(atlasSound.get("tiles0_1"), 15, 15);
 	}
 	
-	float r=0,g=0,b=0;
-	boolean upR=true, upG=true, upB=true;
+	static float r=0,g=0,b=0;
+	static boolean upR=true, upG=true, upB=true;
 	
 	public float getR() {return r;}
 	public float getG() {return g;}
