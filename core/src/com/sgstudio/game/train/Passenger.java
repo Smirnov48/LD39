@@ -13,7 +13,9 @@ public class Passenger {
 	public Passenger(SpriteBatch batch) {
 		this.batch = batch;
 		tex = new Texture("people.png");
-		sprite = new Sprite(tex, 0, 300, 155, 47);
+		sprite = new Sprite(tex, 0, 47, 155, 300);
+		sprite.setPosition(10, 10);
+		sprite.setBounds(10, 35, 32, 64);
 	}
 	
 	public void render() {
@@ -23,5 +25,4 @@ public class Passenger {
 	public void dispose() {
 		tex.dispose();
 	}
-
 }
