@@ -96,7 +96,6 @@ public class MyGame implements Screen {
 		demon.render();
 		pas.render();
 		batch.draw(tex, -800, -600);
-		
 		batch.end();
 
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
