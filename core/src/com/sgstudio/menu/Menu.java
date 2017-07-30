@@ -9,6 +9,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Tiles;
 
@@ -25,6 +26,7 @@ public class Menu implements Screen {
 	private SpriteBatch batch;
 	
 	private static Music sound;
+	private static MusicGame music;
 
 	public Menu(final Main main) {
 		this.main = main;
@@ -97,9 +99,13 @@ public class Menu implements Screen {
 				if(Moved[0] && Pressed[0]) main.setScreen(main.game);
 				if(Moved[3] && Pressed[3]) Gdx.app.exit();
 				if(Moved[4] && Pressed[4]){
-					if(Play) sound.pause();
+					if(Play) {
+						sound.pause();
+						music.musicStade();
+					}
 					else sound.play();
 					Play=!Play;
+					
 				}
 				for(int i=0;i<4;i++) Pressed[i]=false;
 				return false;

@@ -89,11 +89,11 @@ public class MyGame implements Screen {
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		pas.render();
 		hero.render();
 		train.render();
 		coach.render();
 		demon.render();
+		pas.render();
 		batch.draw(tex, -800, -600);
 		
 		batch.end();
@@ -236,6 +236,7 @@ public class MyGame implements Screen {
 	@Override
 	public void hide() {
 		music.stopMusic();
+		camera.position.set(300, 400, 0);
 	}
 
 	@Override
