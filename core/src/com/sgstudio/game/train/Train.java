@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.MyGame;
+import com.sgstudio.game.player.MainHero;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Train {
@@ -29,6 +30,7 @@ public class Train {
 	private World world;
 	private Sprite sprite;
 	private Body body;
+	private MainHero hero;
 
 	public Train(SpriteBatch batch, World world) {
 		this.batch = batch;
@@ -55,6 +57,7 @@ public class Train {
 		body.getPosition().y = sprite.getY() + sprite.getHeight()- 10;
 	}
 
+	//getters
 	public int getTrainWood() {
 		return wood;
 	}
@@ -67,16 +70,17 @@ public class Train {
 		return ovenWood;
 	}
 
-	public boolean onFire() {
-		return ovenFire;
-	}
-
 	public float getSpeed() {
 		return speed;
 	}
 
 	public float getSpeedUp() {
 		return speedUp;
+	}
+	
+	//Boolean for ovenWood is not 0.
+	public boolean onFire() {
+		return ovenFire;
 	}
 
 	public void updOvenWood(int i) {

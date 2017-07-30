@@ -22,7 +22,7 @@ public class DesktopLauncher {
 			config.width = 800;
 			config.height = 600;
 		}
-		config.title = "Savior";
+		config.title = "Stocker";
 		new LwjglApplication(new Main(), config);
 	}
 }
