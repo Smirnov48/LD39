@@ -74,8 +74,11 @@ public class Train {
 		size = new Vector2(sprite.getWidth() / 2 - 30, 5);
 		pos = new Vector2(0, 316);
 		Box2DHelper.addShapeBox(body, size, pos);
-		size = new Vector2(sprite.getWidth() / 2 - 100, 50);
-		pos = new Vector2(0, 316);
+		size = new Vector2(sprite.getWidth() / 2 - 40, 50);
+		pos = new Vector2(0, 256);
+		Box2DHelper.addShapeBox(body, size, pos);
+		size = new Vector2(10, 10);
+		pos = new Vector2(0, 256);
 		Box2DHelper.addShapeBox(body, size, pos);
 		Box2DHelper.setTransform(body, 590, -165, 0);
 	}
@@ -201,7 +204,7 @@ public class Train {
 		p.draw(batch);
 			
 		Vector2 pos = Box2DHelper.getPosition(body);
-		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y  - sprite.getHeight() / 2);
+		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y  - sprite.getHeight() / 2 + 285);
 	}
 
 	public float getY() {
