@@ -211,7 +211,6 @@ public class MyGame implements Screen {
 
 	@Override
 	public void hide() {
-		this.dispose();
 	}
 
 	@Override

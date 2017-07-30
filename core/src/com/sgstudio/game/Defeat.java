@@ -31,7 +31,7 @@ public class Defeat implements Screen{
 
 	@Override
 	public void show() {
-		batch = new SpriteBatch();
+		batch = main.getBatch();
 		bg = new Sprite(new Texture("atlas/bg.png"));
 		button1 = new Texture("pashasimages/button1.psd");
 		button2 = new Texture("pashasimages/button2.psd");
