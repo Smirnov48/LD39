@@ -179,6 +179,20 @@ public class Menu implements Screen {
 	
 	float r=0,g=0,b=0;
 	boolean upR=true, upG=true, upB=true;
+	
+	public float getR() {return r;}
+	public float getG() {return g;}
+	public float getB() {return b;}
+	public boolean getupR() {return upR;}
+	public boolean getupG() {return upG;}
+	public boolean getupB() {return upB;}
+	
+	public void setR(float r) {this.r = r;}
+	public void setG(float g) {this.g = g;}
+	public void setB(float b) {this.b = b;}
+	public void setupR(boolean upR) {this.upR = upR;}
+	public void setupG(boolean upG) {this.upG = upG;}
+	public void setupB(boolean upB) {this.upB = upB;}
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(r, g, b, 1);

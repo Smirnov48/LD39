@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.main.Main;
+import com.sgstudio.menu.Menu;
 
 public class AboutSGstudio implements Screen{
 	private Main main;
@@ -24,6 +25,7 @@ public class AboutSGstudio implements Screen{
 	private static boolean Moved = false;
 	private static boolean Pressed = false;
 	private static boolean Play = true;
+	Menu menu;
 	
 	public AboutSGstudio(Main main) {
 		this.main = main;
@@ -37,10 +39,11 @@ public class AboutSGstudio implements Screen{
 		back3 = new Texture("pashasimages/back3.psd");
 		text = new Texture("pashasimages/text.psd");
 		title = new Texture("pashasimages/title.psd");
-		posofx = 50;
-		posofy = 50;
+		posofx = Gdx.graphics.getWidth() / 2 - back1.getWidth() / 2;
+		posofy = Gdx.graphics.getHeight() - 550;
 		posoftextx = 50;
 		posoftexty = 100;
+		menu = new Menu(main);
 		Gdx.input.setInputProcessor(new InputProcessor(){
 
 			@Override
@@ -137,17 +140,45 @@ public class AboutSGstudio implements Screen{
 					back3.getHeight());
 		}
 		
+		switchColor();
+		
 		if(Gdx.input.isButtonPressed(0)){
 			  
-			if (((Gdx.input.getX() <= back1.getWidth() + Gdx.graphics.getWidth() / 2 - (Gdx.graphics.getWidth() / 2 - posofx))&&
+			if (((Gdx.input.getX() <= back1.getWidth() + posofx)&&
 					(Gdx.input.getX() >= posofx)) &&
 					
-					((Gdx.input.getY() <= back1.getHeight() + Gdx.graphics.getHeight() / 2 - ( Gdx.graphics.getHeight() / 2 -posofy)))&&
+					((Gdx.input.getY() <= back1.getHeight() + posofy))&&
 					(Gdx.input.getY() >= posofy)){
 				main.setScreen(main.menu);
 			}
 		}
 		batch.end();
+	}
+	
+	private void switchColor(){
+		if(menu.getupR()){
+			menu.setR(menu.getR()+0.025f);
+			if(menu.getR()>=1) menu.setupR(!menu.getupR());
+		}else{
+			menu.setR(menu.getR()-0.005f);
+			if(menu.getR()<=0) menu.setupR(!menu.getupR());
+		}
+		
+		if(menu.getupG()){
+			menu.setG(menu.getG()+0.015f);
+			if(menu.getG()>=1) menu.setupG(!menu.getupG());
+		}else{
+			menu.setG(menu.getG()-0.015f);
+			if(menu.getG()<=0) menu.setupG(!menu.getupG());
+		}
+		
+		if(menu.getupB()){
+			menu.setB(menu.getB()+0.005f);
+			if(menu.getB() >= 1) menu.setupB(!menu.getupB());
+		}else{
+			menu.setB(menu.getB()-0.025f);
+			if(menu.getB()<=0) menu.setupB(!menu.getupB());
+		}
 	}
 
 	@Override
