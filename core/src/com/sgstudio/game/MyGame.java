@@ -107,7 +107,7 @@ public class MyGame implements Screen {
 
 		batch = main.getBatch();
 		train = new Train(batch, world);
-		demon = new Demon(batch, train);
+		demon = new Demon(main, batch, train);
 		background = new Background(batch, train);
 		rails = new Rails(world,batch,train);
 		hero = new MainHero(batch, world, train);

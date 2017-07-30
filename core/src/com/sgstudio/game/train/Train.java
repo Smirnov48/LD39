@@ -34,7 +34,6 @@ public class Train {
 	private Body body;
 	private MainHero hero;
 
-
 	public Train(SpriteBatch batch, World world) {
 		this.batch = batch;
 		this.world = world;
@@ -45,16 +44,20 @@ public class Train {
 		wood = 1000;
 		ovenFire = true;
 
-		//
+		//SetStartTime
 		Train.startTime = System.currentTimeMillis();
+		
+		//Speed
 		speed = 10;
 		speedUp = 0;
-
+		
+		//Graphics
 		Texture img = new Texture("train1.png");
 		sprite = new Sprite(img);
 		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
+		
+		//Physics
 		createPhysics();
-
 		p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
 	}
 
@@ -63,6 +66,7 @@ public class Train {
 		body.setTransform(new Vector2(590, 165), 0);
 	}
 
+	//Getters
 	public int getTrainWood() {
 		return wood;
 	}
@@ -151,20 +155,9 @@ public class Train {
 	
 	public void update() {
 		updateOven();
-		updateSpeed();
 	}
 
 	private void updateOven() {
-		if (time != (System.currentTimeMillis() - startTime) / 1000) {
-			time++;
-			if (getOvenWood() > 0) {
-				updOvenWood(-1);
-				ovenFire = true;
-			} else {ovenFire = false;}
-		}
-	}
-	
-	public void updateSpeed() {
 		if (time != (System.currentTimeMillis() - startTime) / 1000) {
 			time++;
 			if (getOvenWood() > 0) {
@@ -172,9 +165,12 @@ public class Train {
 				updSpeed(speedUp);
 				updDistance((int) (speed));
 				System.out.println(distance);
+				updOvenWood(-1);
+				ovenFire = true;
 			} else {
-				speedUp = 0;
-				updSpeed(-0.8f);
+			ovenFire = false;
+			speedUp = 0;
+			updSpeed(-0.8f);
 			}
 		}
 	}

@@ -13,7 +13,7 @@ public class Main extends Game {
 	
 	public MyGame game;
 	public Menu menu;
-	private Defeat defeat;
+	public Defeat defeat;
 	private Victory victory;
 	
 	private static SpriteBatch batch;
