@@ -15,11 +15,11 @@ public class Rails {
 	Texture imgRails;
 	SpriteBatch batch;
 	int railsX;
-	final int railsY = 100;
+	final int railsY = 95;
 	private Train train;
 	private float speed = 0;
 	
-	private Sprite bgRails[] = {new Sprite(new Texture("rails.png")), new Sprite(new Texture("rails.png")), new Sprite(new Texture("rails.png"))};
+	private Sprite bgRails[] = {new Sprite(new Texture("rails1.png")), new Sprite(new Texture("rails1.png")), new Sprite(new Texture("rails1.png"))};
 	
 	public Rails(World world,SpriteBatch batch,Train train) {
 		this.train = train;
@@ -45,12 +45,13 @@ public class Rails {
 		bgRails[0].setX(0);
 		bgRails[1].setX(bgRails[1].getRegionWidth());
 		bgRails[2].setX(bgRails[2].getRegionWidth()*2);
-		for(int i = 0; i < 3; i++)bgRails[i].setY(99);
+		for(int i = 0; i < 3; i++)bgRails[i].setY(railsY);
 	}
 	
 	public void render() {
-		for(int i=0;i<3;i++) bgRails[i].draw(batch);
+		for(int i = 0;i < 3; i++) bgRails[i].draw(batch);
 		for(int i=0;i<3;i++) bgRails[i].setX(bgRails[i].getX()-speed);
+		update();
 		
 		if(bgRails[0].getX()<=-800){
 			bgRails[0].setX(bgRails[2].getX()+bgRails[2].getWidth());
@@ -65,7 +66,7 @@ public class Rails {
 	}
 	
 	public void update() {
-		speed = train.getSpeed()/1.7f;		
+		speed = train.getSpeed()/1.3f;		
 	}
 	
 	public void dispose() {
