@@ -2,6 +2,7 @@ package com.sgstudio.main;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sgstudio.game.AboutSGstudio;
 import com.sgstudio.game.Defeat;
 import com.sgstudio.game.MyGame;
 import com.sgstudio.game.Victory;
@@ -15,6 +16,7 @@ public class Main extends Game {
 	public Menu menu;
 	public Defeat defeat;
 	public Victory victory;
+	public AboutSGstudio aboutsgstudio;
 	
 	private static SpriteBatch batch;
 
@@ -26,6 +28,7 @@ public class Main extends Game {
 		menu = new Menu(this);
 		defeat = new Defeat(this);
 		victory = new Victory(this);
+		aboutsgstudio = new AboutSGstudio(this);
 		
 		setScreen(menu);
 	}
