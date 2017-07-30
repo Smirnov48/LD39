@@ -52,7 +52,7 @@ public class Train {
 		Train.startTime = System.currentTimeMillis();
 		
 		//Speed
-		speed = 20;
+		speed = 23;
 		speedUp = 0;
 		
 		//Graphics
