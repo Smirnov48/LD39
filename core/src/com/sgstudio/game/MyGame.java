@@ -22,8 +22,9 @@ import com.sgstudio.game.player.Demon;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.train.Coach;
 import com.sgstudio.game.train.Fuel;
-import com.sgstudio.game.train.Passenger;
 import com.sgstudio.game.train.Locomotive;
+import com.sgstudio.game.train.Passenger;
+import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 
@@ -41,13 +42,12 @@ public class MyGame implements Screen {
 	private Demon demon;
 
 	private MainHero hero;
-	public Locomotive train;
+	public Train train;
 	public Passenger pas;
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camera;
-	
 
 	public Stats stats;
 	private Rails rails;
@@ -90,9 +90,9 @@ public class MyGame implements Screen {
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		hero.render();
 		train.render();
 		coach.render();
+		hero.render();
 		demon.render();
 		pas.render();
 		batch.draw(tex, -800, -600);
@@ -129,14 +129,16 @@ public class MyGame implements Screen {
 		debugRenderer = new Box2DDebugRenderer();
 
 		batch = main.getBatch();
-		train = new Locomotive(main, batch, world);
-		demon = new Demon(main, batch, train);
+		train = new Train(main, batch, world);
+		Locomotive locomotive = train.getLocomotive();
+				
+		demon = new Demon(main, batch, locomotive);
 		pas = new Passenger(batch);
-		background = new Background(batch, train);
-		rails = new Rails(world, batch, train);
-		hero = new MainHero(batch, world, train);
-		stats = new Stats(batch, hero, train);
-		map = new MiniMap(batch, train);
+		background = new Background(batch, locomotive);
+		rails = new Rails(world, batch, locomotive);
+		hero = new MainHero(batch, world, locomotive);
+		stats = new Stats(batch, hero, locomotive);
+		map = new MiniMap(batch, locomotive);
 		music = new MusicGame();
 		tex = new Texture("coor.png");
 
@@ -146,7 +148,7 @@ public class MyGame implements Screen {
 		
 		coach = new Coach(batch, world);
 		
-		checker = new Checker(main,train,demon,hero);
+		checker = new Checker(main, locomotive, demon, hero);
 
 		Gdx.input.setInputProcessor(new InputProcessor() {
 

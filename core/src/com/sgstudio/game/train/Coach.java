@@ -15,7 +15,6 @@ public class Coach {
 	private Texture img;
 	private Sprite sprite;
 
-	private Locomotive train;
 	private World world;
 	private Body body;
 
@@ -23,7 +22,6 @@ public class Coach {
 		this.batch = batch;
 		this.world = world;
 
-		train = new Locomotive();
 		img = new Texture(Gdx.files.internal("atlas/coach.png"));
 		sprite = new Sprite(img);
 
@@ -38,7 +36,7 @@ public class Coach {
 		size = new Vector2(sprite.getWidth() / 2 - 30, 5);
 		pos = new Vector2(0, 316);
 		Box2DHelper.addShapeBox(body, size, pos);
-		Box2DHelper.setTransform(body, (int) (train.getX() + 132), -170, 0);
+		Box2DHelper.setTransform(body, 132, -170, 0);
 	}
 
 	public void render() {

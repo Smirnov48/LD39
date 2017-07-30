@@ -62,8 +62,6 @@ public class Locomotive {
 		p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
 	}
 
-	public Locomotive() { }
-
 	private void createPhysics() {
 		Vector2 size = new Vector2(sprite.getWidth() / 2, 12);
 		Vector2 pos = new Vector2(0, 200);
