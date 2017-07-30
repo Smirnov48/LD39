@@ -1,15 +1,21 @@
 package com.sgstudio.game.graphics;
 
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.train.Train;
+import com.sgstudio.utils.Tiles;
 
 public class Stats {
+	private Tiles tiles;
+	private Map<String, TextureRegion> atlasWood;
 	
 	SpriteBatch batch;
 	BitmapFont mediumFont;
@@ -19,6 +25,9 @@ public class Stats {
 	Train train;
 	
 	public Stats(SpriteBatch batch,MainHero hero,Train train) {
+		tiles = new Tiles();
+		tiles.createAtlas("atlas/wood.png", 2, 1);
+		atlasWood = tiles.getTextureRegion();
 		//������ ������� �������
 		largeFont = new BitmapFont();
 		smallFont = new BitmapFont();
@@ -49,9 +58,10 @@ public class Stats {
 	
 	public void render() {
 		//PlayerStats
-		largeFont.draw(batch,"Player:",20,580);
-		smallFont.draw(batch, "Wood: ", 20, 530);
-		mediumFont.draw(batch,String.valueOf((int)hero.getWood()),115,535);
+//		largeFont.draw(batch,"Player:",20,580);
+		batch.draw(atlasWood.get("tiles0_1"), 10, Gdx.graphics.getHeight()-42);
+//		smallFont.draw(batch, "Wood: ", 20, 530);
+		mediumFont.draw(batch,String.valueOf((int)hero.getWood()),55,Gdx.graphics.getHeight()-20);
 		
 		//TrainStats
 		largeFont.draw(batch,"Train:",600,580);
