@@ -1,6 +1,16 @@
 package com.sgstudio.game.train;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+import com.sgstudio.game.MyGame;
+import com.sgstudio.utils.Box2DHelper;
 
 public class Train {
 
@@ -15,18 +25,31 @@ public class Train {
 	private static float time = 0;
 	
 	private SpriteBatch batch;
+	private World world;
+	private Sprite sprite;
+	private Body body;
 
-	public Train(SpriteBatch batch) {
+	public Train(SpriteBatch batch, World world) {
 		this.batch = batch;
+		this.world = world;
 		
 		ovenWood = 100;
 		maxOvenWood = 300;
 		wood = 1000;
-		System.out.println("Train has been created.");
 		ovenFire = true;
+		
 		Train.startTime = System.currentTimeMillis();
 		speed = 10;
 		speedUp = 0;
+		
+		Texture img = new Texture("train.png");
+		sprite = new Sprite(img);
+		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
+		createPhysics();
+	}
+
+	private void createPhysics() {
+		body = Box2DHelper.makeBoxAroundSprite(world, sprite);	
 	}
 
 	public int getTrainWood() {
@@ -114,6 +137,6 @@ public class Train {
 	}
 
 	public void render() {
-		//		
+		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
 	}
 }
