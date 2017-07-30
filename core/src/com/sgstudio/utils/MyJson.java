@@ -22,7 +22,7 @@ public class MyJson {
 		file = routePath+File.separator+".."+File.separator+"json"+File.separator+"settings.json";
 	}
 	
-	public void setPlayingMusic(boolean playing){ settings.setPlayingMusic(playing); }
+	public void setPlayingMusic(boolean playing){ settings.setPlayingMusic(2); }
 	
 	public void setResolution(int width, int height){
 		settings.setWidth(width);
@@ -34,8 +34,8 @@ public class MyJson {
 		try
 		{
 			FileWriter writer = new FileWriter(file, false);
-			System.out.println("--JSON-WRITE-BEGIN--\n"+json.prettyPrint(settings)+"\n--JSON---END---");
-            writer.write(json.prettyPrint(settings));
+			System.out.println("--JSON-WRITE-BEGIN--\n"+json.toJson(settings)+"\n--JSON---END---");
+            writer.write(json.toJson(settings));
             writer.flush();
         }
         catch(IOException ex){
@@ -81,5 +81,5 @@ public class MyJson {
 	}
 	
 	public int getHeight(){ return settings.getHeight(); }
-	public boolean getPlayingMusic(){ return settings.getPlayingMusic(); }
+	public boolean getPlayingMusic(){ return settings.getPlayingMusic() == 1; }
 }
