@@ -92,9 +92,12 @@ public class MainHero {
 		
 		i++;
 		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
-		batch.draw(img1, body.getPosition().x - sprite.getWidth() / 2 + 10, body.getPosition().y - sprite.getHeight() / 2);
-		batch.draw(img2, body.getPosition().x - sprite.getWidth() / 2 - 60, body.getPosition().y - sprite.getHeight() / 2);
-		batch.draw(imgs[i % 4],body.getPosition().x - sprite.getWidth() / 2 + 40, body.getPosition().y - sprite.getHeight() / 2);
+		//batch.draw(img1, body.getPosition().x - sprite.getWidth() / 2 + 10, body.getPosition().y - sprite.getHeight() / 2);
+		//batch.draw(img2, body.getPosition().x - sprite.getWidth() / 2 - 60, body.getPosition().y - sprite.getHeight() / 2);
+		//batch.draw(imgs[i % 4],body.getPosition().x - sprite.getWidth() / 2 + 40, body.getPosition().y - sprite.getHeight() / 2);
+		if(keys.getPressedLeft()) {
+			body.applyForceToCenter(-10f,0, true);
+		}
 	}
 	
 	public void dispose() {
