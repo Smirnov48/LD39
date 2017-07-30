@@ -37,6 +37,7 @@ public class Menu implements Screen {
 	@Override
 	public void show() {
 		tiles = new Tiles();
+		music = new MusicGame();
 		tiles.createAtlas("atlas/menu.png", 3, 4);
 		atlasMenu = tiles.getTextureRegion();
 		
@@ -150,7 +151,7 @@ public class Menu implements Screen {
 			public boolean scrolled(int amount) { return false; }
 		});
 		
-		if(Play) sound.play();
+		if((Play)&& (!music.isMuted())) sound.play();
 	}
 	
 	
