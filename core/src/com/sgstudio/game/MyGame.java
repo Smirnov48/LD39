@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -21,12 +22,13 @@ import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.train.Fuel;
 import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
+import com.sgstudio.utils.Box2DHelper;
 
 public class MyGame implements Screen {
 	private Fuel obj1;
 	private Fuel obj2;
 	private Fuel obj3;
-	
+
 	public static SpriteBatch batch;
 	private MusicGame music;
 	private final Main main;
@@ -42,7 +44,7 @@ public class MyGame implements Screen {
 	public Stats stats;
 	private Rails rails;
 	private Background background;
-	
+
 	private MiniMap map;
 	public int allDistance = 40000;
 
@@ -50,7 +52,7 @@ public class MyGame implements Screen {
 		this.main = main;
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camera.position.set(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 0);
+		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 	}
 
 	@Override
@@ -64,6 +66,8 @@ public class MyGame implements Screen {
 		
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
+		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
+
 		batch.begin();
 		
 		background.render();
@@ -73,15 +77,12 @@ public class MyGame implements Screen {
 		hero.render();
 		stats.render();
 		map.render();
-		
 
 		batch.setProjectionMatrix(camera.combined);
-		debugRenderer.render(world, camera.combined);
+		debugRenderer.render(world, debugMatrix);
 		batch.end();
 	}
-	
 
-	
 	private void update() {
 		background.update();
 		music.update();
@@ -97,8 +98,9 @@ public class MyGame implements Screen {
 		rails.dispose();
 		map.dispose();
 	}
-	
-	private int i=0;
+
+	private int i = 0;
+
 	@Override
 	public void show() {
 		Box2D.init();
@@ -109,55 +111,62 @@ public class MyGame implements Screen {
 		train = new Train(batch, world);
 		demon = new Demon(batch, train);
 		background = new Background(batch, train);
-		rails = new Rails(world,batch,train);
+		rails = new Rails(world, batch, train);
 		hero = new MainHero(batch, world, train);
-		stats = new Stats(batch,hero,train);
-		map = new MiniMap(batch,train);
+		stats = new Stats(batch, hero, train);
+		map = new MiniMap(batch, train);
 		music = new MusicGame();
-		
+
 		obj1 = new Fuel(1);
 		obj3 = new Fuel(2);
 		obj2 = new Fuel(3);
-		
-		Gdx.input.setInputProcessor(new InputProcessor(){
+
+		Gdx.input.setInputProcessor(new InputProcessor() {
 
 			@Override
 			public boolean keyDown(int keycode) {
-				
-				if(Gdx.input.isKeyPressed(Keys.Z)){
+
+				if (Gdx.input.isKeyPressed(Keys.Z)) {
 					int Fuel = obj1.getFuel();
-					if(hero.getWood()+Fuel>hero.getMaxWood()) i+=hero.getWood()+Fuel-hero.getMaxWood();
-					if(hero.getWood()+Fuel<hero.getMaxWood()) hero.updWood(Fuel);
-				}
-				else if(Gdx.input.isKeyPressed(Keys.X)){
+					if (hero.getWood() + Fuel > hero.getMaxWood())
+						i += hero.getWood() + Fuel - hero.getMaxWood();
+					if (hero.getWood() + Fuel < hero.getMaxWood())
+						hero.updWood(Fuel);
+				} else if (Gdx.input.isKeyPressed(Keys.X)) {
 					int Fuel = obj2.getFuel();
-					if(hero.getWood()+Fuel>hero.getMaxWood()) i+=hero.getWood()+Fuel-hero.getMaxWood();
-					if(hero.getWood()+Fuel<hero.getMaxWood()) hero.updWood(Fuel);
-				}
-				else if(Gdx.input.isKeyPressed(Keys.C)){
+					if (hero.getWood() + Fuel > hero.getMaxWood())
+						i += hero.getWood() + Fuel - hero.getMaxWood();
+					if (hero.getWood() + Fuel < hero.getMaxWood())
+						hero.updWood(Fuel);
+				} else if (Gdx.input.isKeyPressed(Keys.C)) {
 					int Fuel = obj3.getFuel();
-					if(hero.getWood()+Fuel>hero.getMaxWood()) i+=hero.getWood()+Fuel-hero.getMaxWood();
-					if(hero.getWood()+Fuel<hero.getMaxWood()) hero.updWood(Fuel);
-				} else if(Gdx.input.isKeyPressed(Keys.V)){
+					if (hero.getWood() + Fuel > hero.getMaxWood())
+						i += hero.getWood() + Fuel - hero.getMaxWood();
+					if (hero.getWood() + Fuel < hero.getMaxWood())
+						hero.updWood(Fuel);
+				} else if (Gdx.input.isKeyPressed(Keys.V)) {
 					int I = 0;
-					if(hero.getWood()+i<hero.getMaxWood()){
-						I=hero.getWood()+i-hero.getMaxWood();
+					if (hero.getWood() + i < hero.getMaxWood()) {
+						I = hero.getWood() + i - hero.getMaxWood();
 					}
-					if(hero.getWood()<hero.getMaxWood() && i>0){
+					if (hero.getWood() < hero.getMaxWood() && i > 0) {
 						int y = hero.getMaxWood() - hero.getWood();
-						i-=y;
+						i -= y;
 						hero.updWood(y);
 					}
-					if(I>0) i=I;
-					if(i>0) System.out.println("You can not take "+i+" woods! Button 'V' - Pick them up");
+					if (I > 0)
+						i = I;
+					if (i > 0)
+						System.out.println("You can not take " + i + " woods! Button 'V' - Pick them up");
 				}
-				if(i>0) System.out.println("You can not take "+i+" woods! Button 'V' - Pick them up");
+				if (i > 0)
+					System.out.println("You can not take " + i + " woods! Button 'V' - Pick them up");
 				return false;
 			}
 
 			@Override
 			public boolean keyUp(int keycode) {
-				
+
 				return false;
 			}
 
@@ -196,7 +205,7 @@ public class MyGame implements Screen {
 				// TODO Auto-generated method stub
 				return false;
 			}
-			
+
 		});
 	}
 

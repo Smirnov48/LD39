@@ -1,6 +1,5 @@
 package com.sgstudio.game.player;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,7 +30,6 @@ public class MainHero {
 
 		img = new Texture("atlas/test.png");
 		sprite = new Sprite(img);
-		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
 		
 		maxWood = 10;
 		wood = 10;

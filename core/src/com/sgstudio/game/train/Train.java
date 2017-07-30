@@ -53,7 +53,7 @@ public class Train {
 
 	private void createPhysics() {
 		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
-		body.setTransform(new Vector2(590, 165), 0);
+		Box2DHelper.setTransform(body, 590, 165, 0);
 	}
 
 	public int getTrainWood() {
@@ -79,12 +79,12 @@ public class Train {
 	public int getDistance() {
 		return distance;
 	}
-	
+
 	public int getWay() {
 		return allDistance;
 	}
-	
-	//Boolean for ovenWood is not 0.
+
+	// Boolean for ovenWood is not 0.
 	public boolean onFire() {
 		return ovenFire;
 	}
@@ -168,7 +168,16 @@ public class Train {
 		p.setPosition(250, 250);
 		p.update(Gdx.graphics.getDeltaTime());
 		p.draw(batch);
+			
+		Vector2 pos = Box2DHelper.getPosition(body);
+		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y  - sprite.getHeight() / 2);
+	}
 
-		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
+	public float getY() {
+		return body.getPosition().y;
+	}
+
+	public float getX() {
+		return body.getPosition().x;
 	}
 }

@@ -28,7 +28,6 @@ public class Rails {
 		
 		Body ground = Box2DHelper.makeBox(world, new Vector2(Gdx.graphics.getWidth(), 68));
 		ground.setType(BodyDef.BodyType.StaticBody);
-		ground.setTransform(0, 0, 0);
 		
 		this.batch = batch;
 		bgRails[0].setX(0);

@@ -9,59 +9,69 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Box2DHelper {
-	
+
+	final static public float PIXELS_TO_METERS = 100f;
+
 	public static Body makeBoxAroundSprite(World world, Sprite sprite) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
-		bodyDef.position.set(sprite.getX(), sprite.getY());
-	    
+		bodyDef.position.set(sprite.getX() / PIXELS_TO_METERS, sprite.getY() / PIXELS_TO_METERS);
+
 		Body body = world.createBody(bodyDef);
-     
+
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(sprite.getWidth()/2, sprite.getHeight()/2);
-		
+		shape.setAsBox(sprite.getWidth() / 2 / PIXELS_TO_METERS, sprite.getHeight() / 2 / PIXELS_TO_METERS);
+
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1f;
-		
+
 		body.createFixture(fixtureDef);
 		shape.dispose();
-		
+
 		return body;
 	}
-	
+
 	public static Body makeBox(World world, Vector2 size) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
-	    
+
 		Body body = world.createBody(bodyDef);
-     
+
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(size.x, size.y);
-		
+		shape.setAsBox(size.x / PIXELS_TO_METERS, size.y / PIXELS_TO_METERS);
+
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1f;
-		
+
 		body.createFixture(fixtureDef);
 		shape.dispose();
-		
+
 		return body;
 	}
-	
+
 	public static Body makeCustomShape(World world, PolygonShape shape) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
-	    
+
 		Body body = world.createBody(bodyDef);
- 		
+
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1f;
-		
+
 		body.createFixture(fixtureDef);
 		shape.dispose();
-		
+
 		return body;
+	}
+
+	public static void setTransform(Body body, int x, int y, int angle) {
+		body.setTransform(new Vector2(x / PIXELS_TO_METERS, y / PIXELS_TO_METERS), angle);
+	}
+
+	public static Vector2 getPosition(Body body) {
+		return new Vector2(body.getPosition().x * PIXELS_TO_METERS, body.getPosition().y * PIXELS_TO_METERS);
 	}
 }
