@@ -34,7 +34,6 @@ public class Train {
 	public Train(SpriteBatch batch, World world) {
 		this.batch = batch;
 		this.world = world;
-		this.hero = hero;
 		
 		ovenWood = 100;
 		maxOvenWood = 300;
