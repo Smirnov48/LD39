@@ -86,7 +86,8 @@ public class MyGame implements Screen {
 		batch.dispose();
 		hero.dispose();
 	}
-
+	
+	private int i=0;
 	@Override
 	public void show() {
 		Box2D.init();
@@ -109,28 +110,33 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean keyDown(int keycode) {
-				int i=0;
+				
 				if(Gdx.input.isKeyPressed(Keys.Z)){
 					int Fuel = obj1.getFuel();
-					if(hero.getWood()+Fuel<hero.getMaxWood()) i+=hero.getWood()+Fuel-hero.getMaxWood();
-					hero.setWood(obj1.getFuel());
+					if(hero.getWood()+Fuel>hero.getMaxWood()) i+=hero.getWood()+Fuel-hero.getMaxWood();
+					if(hero.getWood()+Fuel<hero.getMaxWood()) hero.updWood(Fuel);
 				}
 				else if(Gdx.input.isKeyPressed(Keys.X)){
 					int Fuel = obj2.getFuel();
-					if(hero.getWood()+Fuel<hero.getMaxWood()) i+=hero.getWood()+Fuel-hero.getMaxWood();
-					hero.setWood(obj2.getFuel());
+					if(hero.getWood()+Fuel>hero.getMaxWood()) i+=hero.getWood()+Fuel-hero.getMaxWood();
+					if(hero.getWood()+Fuel<hero.getMaxWood()) hero.updWood(Fuel);
 				}
 				else if(Gdx.input.isKeyPressed(Keys.C)){
 					int Fuel = obj3.getFuel();
-					if(hero.getWood()+Fuel<hero.getMaxWood()) i+=hero.getWood()+Fuel-hero.getMaxWood();
-					hero.setWood(obj3.getFuel());
+					if(hero.getWood()+Fuel>hero.getMaxWood()) i+=hero.getWood()+Fuel-hero.getMaxWood();
+					if(hero.getWood()+Fuel<hero.getMaxWood()) hero.updWood(Fuel);
 				} else if(Gdx.input.isKeyPressed(Keys.V)){
 					int I = 0;
 					if(hero.getWood()+i<hero.getMaxWood()){
 						I=hero.getWood()+i-hero.getMaxWood();
 					}
-					hero.setWood(i);
+					if(hero.getWood()<hero.getMaxWood() && i>0){
+						int y = hero.getMaxWood() - hero.getWood();
+						i-=y;
+						hero.updWood(y);
+					}
 					if(I>0) i=I;
+					if(i>0) System.out.println("You can not take "+i+" woods! Button 'V' - Pick them up");
 				}
 				if(i>0) System.out.println("You can not take "+i+" woods! Button 'V' - Pick them up");
 				return false;
