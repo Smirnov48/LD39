@@ -8,10 +8,10 @@ public class MusicGame {
 	
 	public MusicGame(){
 		One = Gdx.audio.newMusic(Gdx.files.internal("audio/music/ATrainyFromRomashkovo.wav"));
-		One.stop();
+		One.play();
 		One.setVolume(0);
 		Two = Gdx.audio.newMusic(Gdx.files.internal("audio/music/BlueCoach.wav"));
-		Two.play();
+		Two.stop();
 		Two.setVolume(0);
 	}
 	
