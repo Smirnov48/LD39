@@ -32,4 +32,8 @@ public class KeyManager {
 		if(Gdx.input.isKeyPressed(Keys.SPACE)) return true;
 		else return false;
 	}
+	public boolean getPressedE() {
+		if(Gdx.input.isKeyPressed(Keys.E)) return true;
+		else return false;
+	}
 }

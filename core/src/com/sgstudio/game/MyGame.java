@@ -97,7 +97,7 @@ public class MyGame implements Screen {
 		train = new Train(batch, world);
 		background = new Background(batch, train);
 		rails = new Rails(world);
-		hero = new MainHero(batch, world);
+		hero = new MainHero(batch, world, train);
 		stats = new Stats(batch,hero,train);
 		music = new MusicGame();
 		

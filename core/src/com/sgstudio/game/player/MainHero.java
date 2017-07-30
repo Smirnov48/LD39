@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.sgstudio.game.MyGame;
+import com.sgstudio.game.train.Train;
 import com.sgstudio.game.KeyManager;
 
 public class MainHero {
@@ -33,8 +34,10 @@ public class MainHero {
 	private int wood;
 	private static int maxWood;
 	private KeyManager keys;
+	private Train train;
 	
-	public MainHero(SpriteBatch batch, World world){		
+	public MainHero(SpriteBatch batch, World world,Train train){		
+		this.train = train;
 		//Graphics
 		img = new Texture("atlas/test.png");
 		img1 = new Texture("table1.png");
@@ -51,7 +54,7 @@ public class MainHero {
 		
 		//Stats
 		maxWood = 10;
-		wood = 0;
+		wood = 10;
 		
 		//box2d
 		this.world = world;
@@ -89,15 +92,10 @@ public class MainHero {
 	
 	public void render() {
 		update();
-		
-		i++;
 		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
 		//batch.draw(img1, body.getPosition().x - sprite.getWidth() / 2 + 10, body.getPosition().y - sprite.getHeight() / 2);
 		//batch.draw(img2, body.getPosition().x - sprite.getWidth() / 2 - 60, body.getPosition().y - sprite.getHeight() / 2);
 		//batch.draw(imgs[i % 4],body.getPosition().x - sprite.getWidth() / 2 + 40, body.getPosition().y - sprite.getHeight() / 2);
-		if(keys.getPressedLeft()) {
-			body.applyForceToCenter(-10f,0, true);
-		}
 	}
 	
 	public void dispose() {
@@ -113,11 +111,21 @@ public class MainHero {
 	
 	public void controller() {
 		if(keys.getPressedLeft()) {
-			body.applyForceToCenter(-10f,0, false);
+			body.applyForceToCenter(-10000f,0, false);
 		}
 		if(keys.getPressedRight()) {
-			body.applyForceToCenter(10f,0, false);
+			body.applyForceToCenter(10000f,0, false);
 		}
+		//Перемещение досок из персонажа в печку
+		if(keys.getPressedE()) {
+			putWood();
+		}
+	}
+	
+	//Putting wood from hero to oven
+	public void putWood() {
+		train.updOvenWood(getWood());
+		setWood(0);
 	}
 	/*
 	//Box2D methods
@@ -172,7 +180,7 @@ public class MainHero {
 	//Set methods
 	public void setWood(int i) {
 		if(i >= maxWood) {wood = maxWood;}
-		else if (i < 0) {wood = 0;}
+		else if (i <= 0) {wood = 0;}
 		else wood +=i;
 	}
 	public void setMaxWood(int i) {
