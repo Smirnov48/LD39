@@ -51,4 +51,5 @@ public class Main extends Game {
 	}
 	
 	public SpriteBatch getBatch(){ return batch; }
+
 }

@@ -44,7 +44,7 @@ public class AboutSGstudio implements Screen{
 		posofy = 50;
 		posoftextx = 50;
 		posoftexty = 100;
-		kost = -450;
+		kost = -434;
 		menu = new Menu(main);
 		Gdx.input.setInputProcessor(new InputProcessor(){
 
@@ -78,8 +78,8 @@ public class AboutSGstudio implements Screen{
 				} else {
 					Play = !Play;
 				}
-				Pressed = false;
-				return false;
+			Pressed = false;
+			return false;
 			}
 
 			@Override

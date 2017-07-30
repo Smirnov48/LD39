@@ -98,6 +98,7 @@ public class Menu implements Screen {
 			@Override
 			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 				if(Moved[0] && Pressed[0]) main.setScreen(main.game);
+				if(Moved[2] && Pressed[2]) main.setScreen(main.aboutsgstudio);
 				if(Moved[3] && Pressed[3]) Gdx.app.exit();
 				if(Moved[4] && Pressed[4]){
 					if(Play) {
