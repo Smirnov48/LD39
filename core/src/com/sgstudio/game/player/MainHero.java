@@ -57,6 +57,7 @@ public class MainHero {
 		update();
 		Vector2 pos = Box2DHelper.getPosition(body);
 		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y - sprite.getHeight() / 2);
+		x = pos.x;
 	}
 
 	public void dispose() {
@@ -77,7 +78,6 @@ public class MainHero {
 		if (keys.getPressedE()) {
 			putWood();
 		}
-		
 	}
 
 	public void putWood() {
@@ -91,6 +91,10 @@ public class MainHero {
 
 	public int getMaxWood() {
 		return maxWood;
+	}
+	
+	public float getHeroX() {
+		return x;
 	}
 
 	// Update Stats Methods

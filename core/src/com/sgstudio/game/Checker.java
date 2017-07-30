@@ -11,14 +11,12 @@ public class Checker {
 	private Locomotive train;
 	private Demon demon;
 	private MainHero hero;
-	private Sprite sprite;
 
 	public Checker(Main main,Locomotive train,Demon demon,MainHero hero) {
 		this.main = main;
 		this.train = train;
 		this.demon = demon;
 		this.hero = hero;
-		this.sprite = hero.sprite;
 	}
 	
 	public void update() {
@@ -35,12 +33,11 @@ public class Checker {
 	
 	public void checkDefeat() {
 		//Demon on first van
-		if (demon.getDisToTrain() < 0) {
+		if (demon.getDisToTrain() + demon.getDemonWidth() < 0) {
 			main.setScreen(main.defeat);
 		}
 		//Player near the Demon
-		//System.out.println(sprite.getX() + "  " + demon.getDemonX());
-		if(sprite.getX() + 15 < demon.getDemonX()) {
+		if(hero.getHeroX() + demon.getDemonWidth() < demon.getDemonX()) {
 			main.setScreen(main.defeat);
 		}
 	}

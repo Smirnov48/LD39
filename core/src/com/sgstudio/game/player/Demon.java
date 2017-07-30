@@ -23,7 +23,7 @@ public class Demon {
 		Demon.startTime = System.currentTimeMillis();
 		this.batch = batch;
 		this.train = train;
-		speed = 20;
+		speed = 35;
 		//speedUp = 0.05f;
 		way = train.getWay();
 		disToTrain = 1000 + train.getDistance();
@@ -54,6 +54,10 @@ public class Demon {
 	
 	public float getDemonX() {
 		return x;
+	}
+	
+	public float getDemonWidth() {
+		return dark.getWidth();
 	}
 	
 	public float getDisToTrain() {
