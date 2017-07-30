@@ -64,7 +64,9 @@ public class MyGame implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		camera.position.set(hero.getPosition().x, hero.getPosition().y, 0);
 		camera.update();
+		
 		batch.setProjectionMatrix(camera.combined);
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
 

@@ -115,4 +115,8 @@ public class MainHero {
 	public void setMaxWood(int i) {
 		maxWood = i;
 	}
+
+	public Vector2 getPosition() {
+		return Box2DHelper.getPosition(body);
+	}
 }
