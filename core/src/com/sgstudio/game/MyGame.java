@@ -16,6 +16,7 @@ import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
 import com.sgstudio.game.music.MusicGame;
+import com.sgstudio.game.player.Demon;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.train.Fuel;
 import com.sgstudio.game.train.Train;
@@ -29,6 +30,7 @@ public class MyGame implements Screen {
 	public static SpriteBatch batch;
 	private MusicGame music;
 	private final Main main;
+	private Demon demon;
 
 	private MainHero hero;
 	public Train train;
@@ -42,6 +44,7 @@ public class MyGame implements Screen {
 	private Background background;
 	
 	private MiniMap map;
+	public int allDistance = 40000;
 
 	public MyGame(final Main main) {
 		this.main = main;
@@ -64,6 +67,7 @@ public class MyGame implements Screen {
 		batch.begin();
 		
 		background.render();
+		demon.render();
 		rails.render();
 		train.render();
 		hero.render();
@@ -82,6 +86,7 @@ public class MyGame implements Screen {
 		background.update();
 		music.update();
 		train.update();
+		demon.update();
 		rails.update();
 	}
 
@@ -102,6 +107,7 @@ public class MyGame implements Screen {
 
 		batch = main.getBatch();
 		train = new Train(batch, world);
+		demon = new Demon(batch, train);
 		background = new Background(batch, train);
 		rails = new Rails(world,batch,train);
 		hero = new MainHero(batch, world, train);

@@ -4,12 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.train.Train;
+import com.sgstudio.utils.Box2DHelper;
 
 public class Rails {
 	Texture imgRails;
@@ -23,24 +25,11 @@ public class Rails {
 	
 	public Rails(World world,SpriteBatch batch,Train train) {
 		this.train = train;
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyDef.BodyType.StaticBody;
-		bodyDef.position.set(0, 0);
-
-		FixtureDef fixtureDef = new FixtureDef();
-
-		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(Gdx.graphics.getWidth(), 50);
-
-		fixtureDef.shape = shape;
-
-		Body ground = world.createBody(bodyDef);
-		ground.createFixture(fixtureDef);
-		ground.setTransform(0, 0, 0);
-
-		shape.dispose();
 		
-		//Graphics
+		Body ground = Box2DHelper.makeBox(world, new Vector2(Gdx.graphics.getWidth(), 68));
+		ground.setType(BodyDef.BodyType.StaticBody);
+		ground.setTransform(0, 0, 0);
+		
 		this.batch = batch;
 		bgRails[0].setX(0);
 		bgRails[1].setX(bgRails[1].getRegionWidth());

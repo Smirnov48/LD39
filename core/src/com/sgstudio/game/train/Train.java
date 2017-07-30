@@ -2,60 +2,65 @@ package com.sgstudio.game.train;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.sgstudio.game.MyGame;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Train {
+	ParticleEffect p = new ParticleEffect();
 
-	private int ovenWood;
-	private int wood;
-	private static int maxOvenWood;
-	private boolean ovenFire;
+	private int ovenWood;//Wood in Oven	
+	private int wood;    //Wood in Hero
+	private static int maxOvenWood; //MaxWood of Oven
+	private boolean ovenFire; // isOvenFire
 
-	private float speed;
-	private float speedUp;
+	private float speed;//Train Speed
+	private float speedUp;//Train SpeedUp
+	private int distance = 0;//Distance during game
+	private final int allDistance = 40000; //Full distance
+	
+	//Time values
 	private static long startTime;
 	private static float time = 0;
-	
+
 	private SpriteBatch batch;
 	private World world;
 	private Sprite sprite;
 	private Body body;
 	private MainHero hero;
-	private int distance = 0;
-	private final int allDistance = 40000;
+
 
 	public Train(SpriteBatch batch, World world) {
 		this.batch = batch;
 		this.world = world;
-		
+
+		//Wood and Oven stats
 		ovenWood = 100;
 		maxOvenWood = 300;
 		wood = 1000;
 		ovenFire = true;
-		
+
+		//
 		Train.startTime = System.currentTimeMillis();
 		speed = 10;
 		speedUp = 0;
-		
+
 		Texture img = new Texture("train1.png");
 		sprite = new Sprite(img);
 		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
 		createPhysics();
+
+		p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
 	}
 
 	private void createPhysics() {
 		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
-		body.setTransform(new Vector2(500,100), 0);
+		body.setTransform(new Vector2(590, 165), 0);
 	}
 
 	public int getTrainWood() {
@@ -77,9 +82,13 @@ public class Train {
 	public float getSpeedUp() {
 		return speedUp;
 	}
-	
+
 	public int getDistance() {
 		return distance;
+	}
+	
+	public int getWay() {
+		return allDistance;
 	}
 	
 	//Boolean for ovenWood is not 0.
@@ -87,7 +96,7 @@ public class Train {
 		return ovenFire;
 	}
 
-	//Update and Change methods
+	// Update and Change methods
 	public void updOvenWood(int i) {
 		if (ovenWood + i <= 0) {
 			ovenWood = 0;
@@ -107,10 +116,10 @@ public class Train {
 			speed += i;
 		}
 	}
-	
+
 	public void updDistance(int i) {
-		if(distance + i <= 0) {
-			//Win!!
+		if (distance + i <= 0) {
+			// Win!!
 			distance = 0;
 		} else if (distance + i >= allDistance) {
 			System.out.println("Error!");
@@ -127,7 +136,7 @@ public class Train {
 		}
 	}
 
-	//Setters
+	// Setters
 	public void setTrainWood(int i) {
 		if (i < maxOvenWood) {
 			wood = maxOvenWood;
@@ -139,30 +148,42 @@ public class Train {
 	public void setMaxOvenWood(int i) {
 		maxOvenWood = i;
 	}
+	
+	public void update() {
+		updateOven();
+		updateSpeed();
+	}
 
 	private void updateOven() {
 		if (time != (System.currentTimeMillis() - startTime) / 1000) {
 			time++;
 			if (getOvenWood() > 0) {
-				speedUp += 0.01;
-				updSpeed(speedUp);
-				updDistance((int)(speed));
-				System.out.println(distance);
 				updOvenWood(-1);
 				ovenFire = true;
+			} else {ovenFire = false;}
+		}
+	}
+	
+	public void updateSpeed() {
+		if (time != (System.currentTimeMillis() - startTime) / 1000) {
+			time++;
+			if (getOvenWood() > 0) {
+				speedUp += 0.01;
+				updSpeed(speedUp);
+				updDistance((int) (speed));
+				System.out.println(distance);
 			} else {
-				ovenFire = false;
 				speedUp = 0;
 				updSpeed(-0.8f);
 			}
 		}
 	}
 
-	public void update() {
-		updateOven();		
-	}
-
 	public void render() {
+		p.setPosition(250, 250);
+		p.update(Gdx.graphics.getDeltaTime());
+		p.draw(batch);
+
 		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
 	}
 }
