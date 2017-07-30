@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 
 public class MusicGame {
 	private Music One, Two;
+	public static boolean stade = true;
 	
 	public MusicGame(){
 		One = Gdx.audio.newMusic(Gdx.files.internal("audio/music/ATrainyFromRomashkovo.wav"));
@@ -16,7 +17,9 @@ public class MusicGame {
 	}
 	
 	public void update(){
-		music();
+		if(isMuted()) {}else {
+			music();
+		}
 	}
 	
 	private void music(){
@@ -41,7 +44,22 @@ public class MusicGame {
 	}
 	
 	public void stopMusic() {
-		Two.setVolume(0);
-		One.setVolume(0);
+		for(int i = 0; i < 201; i++) {
+		One.setVolume(One.getVolume()-.005f);
+		Two.setVolume(Two.getVolume()-.005f);
+		}
+	}
+	
+	public static void musicStade() {
+		if(stade) {
+			stade = false;
+		} else {
+			stade = true;
+		}
+	}
+
+	public boolean isMuted() {
+		if(!stade) {return true;}
+		else {return false;}
 	}
 }
