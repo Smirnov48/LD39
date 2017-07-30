@@ -42,7 +42,7 @@ public class MainHero {
 
 	private void createPhysics() {
 		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
-		Box2DHelper.setTransform(body, 590, 255, 0);
+		Box2DHelper.setTransform(body, 290, 55, 0);
 		body.setFixedRotation(true);
 	}
 

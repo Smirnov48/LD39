@@ -68,8 +68,16 @@ public class Train {
 	public Train() { }
 
 	private void createPhysics() {
-		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
-		Box2DHelper.setTransform(body, 590, 165, 0);
+		Vector2 size = new Vector2(sprite.getWidth() / 2, 12);
+		Vector2 pos = new Vector2(0, 200);
+		body = Box2DHelper.makeBox(world, size, pos);
+		size = new Vector2(sprite.getWidth() / 2 - 30, 5);
+		pos = new Vector2(0, 316);
+		Box2DHelper.addShapeBox(body, size, pos);
+		size = new Vector2(sprite.getWidth() / 2 - 100, 50);
+		pos = new Vector2(0, 316);
+		Box2DHelper.addShapeBox(body, size, pos);
+		Box2DHelper.setTransform(body, 590, -165, 0);
 	}
 
 	//Getters

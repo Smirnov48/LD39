@@ -38,7 +38,7 @@ public class Coach {
 		size = new Vector2(sprite.getWidth() / 2 - 30, 5);
 		pos = new Vector2(0, 316);
 		Box2DHelper.addShapeBox(body, size, pos);
-		Box2DHelper.setTransform(body, (int) (train.getX() + 132), 18, 0);
+		Box2DHelper.setTransform(body, (int) (train.getX() + 132), -170, 0);
 	}
 
 	public void render() {
