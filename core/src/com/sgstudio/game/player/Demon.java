@@ -11,11 +11,14 @@ public class Demon {
 	private SpriteBatch batch;
 	private int way;
 	private float disToTrain;
+	private static long startTime;
+	private static float time = 0;
 	
 	public Demon(SpriteBatch batch,Train train) {
+		Demon.startTime = System.currentTimeMillis();
 		this.batch = batch;
 		this.train = train;
-		speed = 30;
+		speed = 100;
 		speedUp = 0.03f;
 		way = train.getWay();
 		disToTrain = way - train.getDistance();
@@ -30,11 +33,15 @@ public class Demon {
 	}
 	
 	public void kinematic() {
-		speed+=speedUp;
-		disToTrain += speed;
-		disToTrain -= train.getSpeed();
-		System.out.println("Demon in " + disToTrain + " meters.");
+		if (time != (System.currentTimeMillis() - startTime) / 1000) {
+			time++;
+			speed+=speedUp;
+			disToTrain -= speed;
+			disToTrain += train.getSpeed();
+			System.out.println("Demon in " + disToTrain + " meters.");
+		}
 	}
+
 	
 	public void dispose() {
 		
