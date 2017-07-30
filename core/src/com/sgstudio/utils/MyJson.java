@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.Json;
 import com.sgstudio.settings.Settings;
 
 public class MyJson {
-	private Settings settings;
-	private Json json;
+	private static Settings settings;
+	private static Json json;
 	
 	private String file;
 	
@@ -22,7 +22,7 @@ public class MyJson {
 		file = routePath+File.separator+".."+File.separator+"json"+File.separator+"settings.json";
 	}
 	
-	public void setPlayingMusic(boolean playing){ settings.setPlayingMusic(playing); }
+	public void setPlayingMusic(boolean playing){ settings.setPlayingMusic(2); }
 	
 	public void setResolution(int width, int height){
 		settings.setWidth(width);
@@ -34,8 +34,8 @@ public class MyJson {
 		try
 		{
 			FileWriter writer = new FileWriter(file, false);
-			System.out.println("--JSON-WRITE-BEGIN--\n"+json.prettyPrint(settings)+"\n--JSON---END---");
-            writer.write(json.prettyPrint(settings));
+			System.out.println("--JSON-WRITE-BEGIN--\n"+json.toJson(settings)+"\n--JSON---END---");
+            writer.write(json.toJson(settings));
             writer.flush();
         }
         catch(IOException ex){
@@ -58,7 +58,7 @@ public class MyJson {
 				File f = new File(file);
 				f.getParentFile().mkdirs(); 
 				f.createNewFile();
-				this.read();
+				this.writeToFile();
 			}
         }
         catch(IOException ex){
@@ -81,5 +81,5 @@ public class MyJson {
 	}
 	
 	public int getHeight(){ return settings.getHeight(); }
-	public boolean getPlayingMusic(){ return settings.getPlayingMusic(); }
+	public boolean getPlayingMusic(){ return settings.getPlayingMusic() == 1; }
 }

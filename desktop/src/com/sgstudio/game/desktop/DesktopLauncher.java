@@ -15,6 +15,7 @@ public class DesktopLauncher {
 		json.read();
 		config.width = json.getWidth();
 		config.height = json.getHeight();
+		config.resizable = false;
 		config.title = "Stocker";
 		new LwjglApplication(new Main(), config);
 	}
