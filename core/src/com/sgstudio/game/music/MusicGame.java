@@ -39,4 +39,9 @@ public class MusicGame {
 			One.play();
 		}
 	}
+	
+	public void stopMusic() {
+		Two.setVolume(0);
+		One.setVolume(0);
+	}
 }

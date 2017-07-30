@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -19,15 +20,20 @@ import com.sgstudio.game.ground.Rails;
 import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.game.player.Demon;
 import com.sgstudio.game.player.MainHero;
+import com.sgstudio.game.train.Coach;
 import com.sgstudio.game.train.Fuel;
+import com.sgstudio.game.train.Passenger;
 import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 
 public class MyGame implements Screen {
+	private Coach coach;
 	private Fuel obj1;
 	private Fuel obj2;
 	private Fuel obj3;
+	
+	private Texture tex;
 
 	public static SpriteBatch batch;
 	private MusicGame music;
@@ -36,6 +42,7 @@ public class MyGame implements Screen {
 
 	private MainHero hero;
 	public Train train;
+	public Passenger pas;
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
@@ -47,9 +54,13 @@ public class MyGame implements Screen {
 
 	private MiniMap map;
 	public int allDistance = 40000;
+	private OrthographicCamera staticCamera;
 
 	public MyGame(final Main main) {
 		this.main = main;
+
+		staticCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		staticCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
@@ -60,27 +71,35 @@ public class MyGame implements Screen {
 		world.step(1 / 60f, 6, 4);
 
 		update();
+		
+		staticCamera.update();
+		camera.position.set(hero.getPosition().x, camera.position.y, 0);
+		camera.update();
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		camera.update();
-		batch.setProjectionMatrix(camera.combined);
-		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
 
+		batch.setProjectionMatrix(staticCamera.combined);
 		batch.begin();
-		
 		background.render();
-		demon.render();
 		rails.render();
-		train.render();
-		hero.render();
 		stats.render();
 		map.render();
-
-		batch.setProjectionMatrix(camera.combined);
-		debugRenderer.render(world, debugMatrix);
 		batch.end();
+		
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();
+		pas.render();
+		hero.render();
+		train.render();
+		coach.render();
+		demon.render();
+		batch.draw(tex, -800, -600);
+		
+		batch.end();
+
+		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
+		debugRenderer.render(world, debugMatrix);
 	}
 
 	private void update() {
@@ -97,6 +116,7 @@ public class MyGame implements Screen {
 		hero.dispose();
 		rails.dispose();
 		map.dispose();
+		pas.dispose();
 	}
 
 	private int i = 0;
@@ -110,16 +130,20 @@ public class MyGame implements Screen {
 		batch = main.getBatch();
 		train = new Train(main, batch, world);
 		demon = new Demon(main, batch, train);
+		pas = new Passenger(batch);
 		background = new Background(batch, train);
 		rails = new Rails(world, batch, train);
 		hero = new MainHero(batch, world, train);
 		stats = new Stats(batch, hero, train);
 		map = new MiniMap(batch, train);
 		music = new MusicGame();
+		tex = new Texture("coor.png");
 
 		obj1 = new Fuel(1);
 		obj3 = new Fuel(2);
 		obj2 = new Fuel(3);
+		
+		coach = new Coach(batch);
 
 		Gdx.input.setInputProcessor(new InputProcessor() {
 
@@ -211,6 +235,7 @@ public class MyGame implements Screen {
 
 	@Override
 	public void hide() {
+		music.stopMusic();
 	}
 
 	@Override

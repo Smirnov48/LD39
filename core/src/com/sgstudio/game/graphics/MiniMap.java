@@ -19,8 +19,12 @@ public class MiniMap {
 	}
 	
 	public void render() {
-		batch.draw(imgRails, 150, 0, 500, 8);
-		batch.draw(imgTrain, (float) (150 + 0.1 * train.getDistance()),4,24,24);
+		batch.draw(imgRails, 150, 570, 500, 8);
+		if(train.getDistance() < train.getWay()) {
+			batch.draw(imgTrain, (float) (150 + (float)(0.125 * train.getDistance())),575,24,24);
+		} else {
+			batch.draw(imgTrain, 650 ,575,24,24);
+		}
 	}
 	
 	public void dispose() {

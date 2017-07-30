@@ -64,11 +64,11 @@ public class Stats {
 		mediumFont.draw(batch,String.valueOf((int)hero.getWood()),55,Gdx.graphics.getHeight()-20);
 		
 		//TrainStats
-		largeFont.draw(batch,"Train:",600,580);
-		smallFont.draw(batch, "Fuel: ", 600, 530);
-		mediumFont.draw(batch,String.valueOf((int)train.getOvenWood()),730,535);
-		smallFont.draw(batch, "Speed: ", 600, 500);
-		mediumFont.draw(batch,String.valueOf((int)train.getSpeed()),730,505);
+		largeFont.draw(batch,"Train:",670,580);
+		smallFont.draw(batch, "Fuel: ", 680, 530);
+		mediumFont.draw(batch,String.valueOf((int)train.getOvenWood()),760,535);
+		smallFont.draw(batch, "Speed: ", 680, 500);
+		mediumFont.draw(batch,String.valueOf((int)train.getSpeed()),760,505);
 		if(train.onFire()) {
 			mediumFont.draw(batch,"OnFire!",680,470);
 		}
