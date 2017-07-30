@@ -47,19 +47,17 @@ public class Train {
 		speed = 10;
 		speedUp = 0;
 		
-		Texture img = new Texture("train.png");
+		Texture img = new Texture("train1.png");
 		sprite = new Sprite(img);
 		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
 		createPhysics();
 	}
 
 	private void createPhysics() {
-		body = Box2DHelper.makeBox(world, new Vector2(sprite.getWidth(), 10));
-		body.getPosition().x = sprite.getX();
-		body.getPosition().y = sprite.getY() + sprite.getHeight()- 10;
+		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
+		body.setTransform(new Vector2(500,100), 0);
 	}
 
-	//getters
 	public int getTrainWood() {
 		return wood;
 	}
