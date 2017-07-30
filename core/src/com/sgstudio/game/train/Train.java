@@ -30,6 +30,8 @@ public class Train {
 	private Sprite sprite;
 	private Body body;
 	private MainHero hero;
+	private int distance = 0;
+	private final int allDistance = 10000;
 
 	public Train(SpriteBatch batch, World world) {
 		this.batch = batch;
@@ -75,11 +77,16 @@ public class Train {
 		return speedUp;
 	}
 	
+	public int getDistance() {
+		return distance;
+	}
+	
 	//Boolean for ovenWood is not 0.
 	public boolean onFire() {
 		return ovenFire;
 	}
 
+	//Update and Change methods
 	public void updOvenWood(int i) {
 		if (ovenWood + i <= 0) {
 			ovenWood = 0;
@@ -99,6 +106,17 @@ public class Train {
 			speed += i;
 		}
 	}
+	
+	public void updDistance(int i) {
+		if(distance + i <= 0) {
+			//Win!!
+			distance = 0;
+		} else if (distance + i >= allDistance) {
+			System.out.println("Error!");
+		} else {
+			distance += i;
+		}
+	}
 
 	public void changeOven() {
 		if (ovenFire) {
@@ -108,6 +126,7 @@ public class Train {
 		}
 	}
 
+	//Setters
 	public void setTrainWood(int i) {
 		if (i < maxOvenWood) {
 			wood = maxOvenWood;
@@ -126,6 +145,7 @@ public class Train {
 			if (getOvenWood() > 0) {
 				speedUp += 0.01;
 				updSpeed(speedUp);
+				updDistance((int)(speed * time));
 				updOvenWood(-1);
 				ovenFire = true;
 			} else {
