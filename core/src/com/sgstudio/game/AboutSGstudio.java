@@ -44,7 +44,7 @@ public class AboutSGstudio implements Screen{
 		posofy = 50;
 		posoftextx = 50;
 		posoftexty = 100;
-		kost = -434;
+		kost = -450;
 		menu = new Menu(main);
 		Gdx.input.setInputProcessor(new InputProcessor(){
 
@@ -78,8 +78,8 @@ public class AboutSGstudio implements Screen{
 				} else {
 					Play = !Play;
 				}
-			Pressed = false;
-			return false;
+				Pressed = false;
+				return false;
 			}
 
 			@Override
@@ -107,6 +107,7 @@ public class AboutSGstudio implements Screen{
 
 	@Override
 	public void render(float delta) {
+		Gdx.gl.glClearColor(menu.getR(), menu.getG(), menu.getB(), 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		
@@ -158,26 +159,26 @@ public class AboutSGstudio implements Screen{
 	
 	private void switchColor(){
 		if(menu.getupR()){
-			menu.setR(menu.getR()+0.025f);
+			menu.setR(menu.getR()+0.0025f);
 			if(menu.getR()>=1) menu.setupR(!menu.getupR());
 		}else{
-			menu.setR(menu.getR()-0.005f);
+			menu.setR(menu.getR()-0.0005f);
 			if(menu.getR()<=0) menu.setupR(!menu.getupR());
 		}
 		
 		if(menu.getupG()){
-			menu.setG(menu.getG()+0.015f);
+			menu.setG(menu.getG()+0.0015f);
 			if(menu.getG()>=1) menu.setupG(!menu.getupG());
 		}else{
-			menu.setG(menu.getG()-0.015f);
+			menu.setG(menu.getG()-0.0015f);
 			if(menu.getG()<=0) menu.setupG(!menu.getupG());
 		}
 		
 		if(menu.getupB()){
-			menu.setB(menu.getB()+0.005f);
+			menu.setB(menu.getB()+0.0005f);
 			if(menu.getB() >= 1) menu.setupB(!menu.getupB());
 		}else{
-			menu.setB(menu.getB()-0.025f);
+			menu.setB(menu.getB()-0.0025f);
 			if(menu.getB()<=0) menu.setupB(!menu.getupB());
 		}
 	}

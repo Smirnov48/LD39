@@ -178,8 +178,8 @@ public class Menu implements Screen {
 		else batch.draw(atlasSound.get("tiles0_1"), 15, 15);
 	}
 	
-	float r=0,g=0,b=0;
-	boolean upR=true, upG=true, upB=true;
+	static float r=0,g=0,b=0;
+	static boolean upR=true, upG=true, upB=true;
 	
 	public float getR() {return r;}
 	public float getG() {return g;}
