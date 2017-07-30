@@ -1,6 +1,7 @@
 package com.sgstudio.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -32,52 +33,67 @@ public class Defeat implements Screen{
 		button2 = new Texture("pashasimages/button2.psd");
 		button3 = new Texture("pashasimages/button3.psd");
 		lose = new Texture("pashasimages/lose.psd");
+		Gdx.input.setInputProcessor(new InputProcessor(){
+
+			@Override
+			public boolean keyDown(int keycode) { return false; }
+
+			@Override
+			public boolean keyUp(int keycode) { return false; }
+
+			@Override
+			public boolean keyTyped(char character) { return false; }
+
+			@Override
+			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+				if(screenX >= button1.getWidth() + Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2 && 
+						screenX <= Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2){			
+					if((screenY <=  button1.getHeight() + Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2) && 
+							(screenY >= Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2)){
+							Pressed = true;
+						} else { 
+							Pressed = false;
+						}
+					}
+				return false;
+			}
+
+			@Override
+			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+				if(Moved && Pressed){
+					main.setScreen(main.menu);
+				} else {
+					Play = !Play;
+				}
+				Pressed = false;
+				return false;
+			}
+
+			@Override
+			public boolean touchDragged(int screenX, int screenY, int pointer) { return false; }
+
+			@Override
+			public boolean mouseMoved(int screenX, int screenY) {
+				if(screenX >= button1.getWidth() + Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2 && 
+						screenX <= Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2){		
+					if((screenY <=  button1.getHeight() + Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2) && 
+							(screenY >= Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2)){
+						Moved = true;
+					} else {
+						Moved = false;
+					}
+				}
+				return false;
+			}
+
+			@Override
+			public boolean scrolled(int amount) { return false; }
+			
+		});
 	}
 	
 	float r=0,g=0,b=0;
 	boolean upR=true, upG=true, upB=true;
-	
-	public boolean keyDown(int keycode) { return false; }
-	public boolean keyUp(int keycode) { return false; }
-	public boolean keyTyped(char character) { return false; }
-	public boolean touchDragged(int screenX, int screenY, int pointer) { return false; }
-	public boolean scrolled(int amount) { return false; }
-	
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if(screenX >= button1.getWidth() + Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2 && 
-				screenX <= Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2){			
-			if((screenY<=  button1.getHeight() + Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2) && 
-					(screenY >= Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2)){
-					Pressed = true;
-				} else { 
-					Pressed = false;
-				}
-			}
-		return false;
-	}
-	
-	public boolean mouseMoved(int screenX, int screenY) {
-		if(screenX <= button1.getWidth() + Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2 && 
-				screenX >= Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2){		
-			if((screenY >=  button1.getHeight() + Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2) && 
-					(screenY <= Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2)){
-				Moved = true;
-			} else {
-				Moved = false;
-			}
-		}
-		return false;
-	}
-	
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if(Moved && Pressed){
-			main.setScreen(main.menu);
-		}else {
-			Play=!Play;
-		}
-		Pressed = false;
-		return false;
-	}
 	
 	@Override
 	public void render(float delta) {
@@ -90,7 +106,6 @@ public class Defeat implements Screen{
 				Gdx.graphics.getHeight() / 2 + 150 - lose.getHeight() / 2, 
 				lose.getWidth(), 
 				lose.getHeight() );
-		
 		
 		if(!Moved){
 			batch.draw(button1,
