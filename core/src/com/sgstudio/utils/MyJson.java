@@ -48,11 +48,18 @@ public class MyJson {
 		String j = "";
 		try
         {
-			FileReader reader = new FileReader(file);
-            int c;
-            while((c=reader.read())!=-1){
-                 j+=(char)c;
-            } 
+			try{
+				FileReader reader = new FileReader(file);
+				int c;
+	            while((c=reader.read())!=-1){
+	                 j+=(char)c;
+	            }
+			} catch(java.io.FileNotFoundException e){
+				File f = new File(file);
+				f.getParentFile().mkdirs(); 
+				f.createNewFile();
+				this.read();
+			}
         }
         catch(IOException ex){
         	ex.printStackTrace();
@@ -62,7 +69,15 @@ public class MyJson {
 		settings = json.fromJson(Settings.class, j);
 	}
 	
-	public int getWidth(){ return settings.getWidth(); }
+	public int getWidth(){
+		try{
+			return settings.getWidth(); 
+		} catch(java.lang.NullPointerException e){
+			this.setResolution(800, 600);
+		}
+		return 0;
+	}
+	
 	public int getHeight(){ return settings.getHeight(); }
 	public boolean getPlayingMusic(){ return settings.getPlayingMusic(); }
 }
