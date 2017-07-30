@@ -21,12 +21,12 @@ public class MusicGame {
 	
 	private void music(){
 		if(One.isPlaying()){
-			if(One.getPosition()<.6f) One.setVolume(One.getVolume()+.01f);
-			else if(One.getPosition()>=22f) One.setVolume(One.getVolume()-.01f);
+			if(One.getPosition()<.6f) One.setVolume(One.getVolume()+.005f);
+			else if(One.getPosition()>=22f) One.setVolume(One.getVolume()-.005f);
 //			System.out.println("[One] Position: " + One.getPosition() + "  Time:" + One.getVolume());
 		} else if(Two.isPlaying()){
-			if(Two.getPosition()<.6f) Two.setVolume(Two.getVolume()+.01f);
-			else if(Two.getPosition()>=29f) Two.setVolume(Two.getVolume()-.01f);
+			if(Two.getPosition()<.6f) Two.setVolume(Two.getVolume()+.005f);
+			else if(Two.getPosition()>=29f) Two.setVolume(Two.getVolume()-.005f);
 //			System.out.println("[Two] Position: " + Two.getPosition() + "  Time:" + Two.getVolume());
 		}
 		

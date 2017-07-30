@@ -3,7 +3,7 @@ package com.sgstudio.game.train;
 import com.sgstudio.utils.Random;
 
 public class Fuel {
-	private static final int StrikesStool = 3;
+	private static final int StrikesСhair = 3;
 	private static final int StrikesTable = 5;
 	private static final int StrikesPassenger = 4;
 	private static final int StrikesСupboard = 8;
@@ -28,19 +28,25 @@ public class Fuel {
 	}
 	
 	public int getFuel(){
-		if(view==0){
-		} else if(view==1){
-			if(!broken) System.out.println(strikesF + "/" + StrikesStool);
-			else System.out.println("Obj broken!");
-		} else if(view==2){
-			if(!broken) System.out.println(strikesF + "/" + StrikesTable);
-			else System.out.println("Obj broken!");
-		} else if(view==3){
-			if(!broken) System.out.println(strikesF + "/" + StrikesPassenger);
-			else System.out.println("Obj broken!");
-		} else if(view==4){
-			if(!broken) System.out.println(strikesF + "/" + StrikesСupboard);
-			else System.out.println("Obj broken!");
+//		System.out.println(StrikesСhair + " " + StrikesTable + " " + StrikesPassenger + " " + StrikesСupboard);
+		switch(view){
+			case (1):
+				System.out.println(StrikesСhair);
+				if(!broken) System.out.println(strikesF + "/" + StrikesСhair);
+				else System.out.println("Obj broken!");
+				break;
+			case (2):
+				if(!broken) System.out.println(strikesF + "/" + StrikesTable);
+				else System.out.println("Obj broken!");
+				break;
+			case (3):
+				if(!broken) System.out.println(strikesF + "/" + StrikesPassenger);
+				else System.out.println("Obj broken!");
+				break;
+			case (4):
+				if(!broken) System.out.println(strikesF + "/" + StrikesСupboard);
+				else System.out.println("Obj broken!");
+				break;
 		}
 		if(!broken) if(getBroken()){
 			broken=true;
@@ -50,32 +56,31 @@ public class Fuel {
 	}
 	
 	private boolean getBroken(){
-		if(view==0){
-			
-		} else if(view==1){
-			if(strikesF==StrikesStool) return true;
-			else{
-				strikesF++;
-				return false;
-			}
-		} else if(view==2){
-			if(strikesF==StrikesTable) return true;
-			else{
-				strikesF++;
-				return false;
-			}
-		} else if(view==3){
-			if(strikesF==StrikesPassenger) return true;
-			else{
-				strikesF++;
-				return false;
-			}
-		} else if(view==4){
-			if(strikesF==StrikesСupboard) return true;
-			else{
-				strikesF++;
-				return false;
-			}
+		switch(view){
+			case (1):
+				if(strikesF==StrikesСhair) return true;
+				else{
+					strikesF++;
+					return false;
+				}
+			case (2):
+				if(strikesF==StrikesTable) return true;
+				else{
+					strikesF++;
+					return false;
+				}
+			case (3):
+				if(strikesF==StrikesPassenger) return true;
+				else{
+					strikesF++;
+					return false;
+				}
+			case (4):
+				if(strikesF==StrikesСupboard) return true;
+				else{
+					strikesF++;
+					return false;
+				}
 		}
 		return false;
 	}
