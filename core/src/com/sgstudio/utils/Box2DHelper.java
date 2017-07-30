@@ -49,4 +49,19 @@ public class Box2DHelper {
 		return body;
 	}
 	
+	public static Body makeCustomShape(World world, PolygonShape shape) {
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.DynamicBody;
+	    
+		Body body = world.createBody(bodyDef);
+ 		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1f;
+		
+		body.createFixture(fixtureDef);
+		shape.dispose();
+		
+		return body;
+	}
 }

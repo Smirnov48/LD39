@@ -54,12 +54,12 @@ public class Train {
 	}
 
 	private void createPhysics() {
-		body = Box2DHelper.makeBox(world, new Vector2(sprite.getWidth(), 10));
-		body.getPosition().x = sprite.getX();
-		body.getPosition().y = sprite.getY() + sprite.getHeight()- 10;
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(10, 10);
+		body = Box2DHelper.makeCustomShape(world, shape);
+		body.setTransform(new Vector2(500,100), 0);
 	}
 
-	//getters
 	public int getTrainWood() {
 		return wood;
 	}
