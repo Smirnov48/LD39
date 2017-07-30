@@ -17,7 +17,7 @@ public class Coach {
 	
 	public Coach(SpriteBatch batch){
 		train = new Train();
-		coach = new Texture(Gdx.files.internal("atlas/Сoach.png"));
+		coach = new Texture(Gdx.files.internal("atlas/coach.png"));
 		
 		Coach.batch = batch;
 	}
