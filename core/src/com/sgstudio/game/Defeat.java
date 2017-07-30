@@ -57,10 +57,10 @@ public class Defeat implements Screen{
 	}
 	
 	public boolean mouseMoved(int screenX, int screenY) {
-		if(screenX >= button1.getWidth() + Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2 && 
-				screenX <= Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2){		
-			if((screenY<=  button1.getHeight() + Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2) && 
-					(screenY >= Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2)){
+		if(screenX <= button1.getWidth() + Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2 && 
+				screenX >= Gdx.graphics.getWidth() / 2 - button1.getWidth() / 2){		
+			if((screenY >=  button1.getHeight() + Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2) && 
+					(screenY <= Gdx.graphics.getHeight() / 2 - button1.getHeight() / 2)){
 				Moved = true;
 			} else {
 				Moved = false;
