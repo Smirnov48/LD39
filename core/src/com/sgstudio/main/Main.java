@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.game.Defeat;
 import com.sgstudio.game.MyGame;
+import com.sgstudio.game.Victory;
 import com.sgstudio.menu.Menu;
 import com.sgstudio.settings.Save;
 
@@ -12,7 +13,8 @@ public class Main extends Game {
 	
 	public MyGame game;
 	public Menu menu;
-	private Defeat defeat;
+	public Defeat defeat;
+	private Victory victory;
 	
 	private static SpriteBatch batch;
 
@@ -23,6 +25,7 @@ public class Main extends Game {
 		game = new MyGame(this);
 		menu = new Menu(this);
 		defeat = new Defeat(this);
+		victory = new Victory(this);
 		
 		setScreen(menu);
 	}

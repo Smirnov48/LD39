@@ -29,6 +29,7 @@ public class Background {
 	private Sprite bg6[] = {new Sprite(), new Sprite(),new Sprite()};;
 	private SpriteBatch batch;
 	private Train train;
+	int x = 0;
 	
 	public Background(SpriteBatch batch, Train train){
 		this.batch = batch;
@@ -57,31 +58,31 @@ public class Background {
 			bg6[i] = new Sprite(atlasBg6.get("tiles0_"+i));
 		}
 		
-		bg1[0].setX(0);
+		bg1[0].setX(x);
 		bg1[1].setX(bg1[1].getRegionWidth());
 		bg1[2].setX(bg1[2].getRegionWidth()*2);
 
-		bg2[0].setX(0);
+		bg2[0].setX(x);
 		bg2[1].setX(bg2[1].getRegionWidth());
 		bg2[2].setX(bg2[2].getRegionWidth()*2);
 		
-		bg3[0].setX(0);
+		bg3[0].setX(x);
 		bg3[1].setX(bg3[1].getRegionWidth());
 		bg3[2].setX(bg3[2].getRegionWidth()*2);
 		
-		bg4[0].setX(0);
+		bg4[0].setX(x);
 		bg4[1].setX(bg4[1].getRegionWidth());
 		bg4[2].setX(bg4[2].getRegionWidth()*2);
 		
-		bg5[0].setX(0);
+		bg5[0].setX(x);
 		bg5[1].setX(bg5[1].getRegionWidth());
 		bg5[2].setX(bg5[2].getRegionWidth()*2);
 		
-		bg6[0].setX(0);
+		bg6[0].setX(x);
 		bg6[1].setX(bg6[1].getRegionWidth());
 		bg6[2].setX(bg6[2].getRegionWidth()*2);
 	}
-	
+
 	private void pos(){
 		if(bg1[0].getX()<=-800) bg1[0].setX(bg1[2].getX()+bg1[2].getWidth());
 		if(bg1[1].getX()<=-800) bg1[1].setX(bg1[0].getX()+bg1[0].getWidth());
