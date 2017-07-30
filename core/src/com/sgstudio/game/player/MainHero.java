@@ -15,6 +15,7 @@ public class MainHero {
 	//Graphic
 	Texture img;
 	Texture img1;
+	Texture img2;
 	Texture[] imgs = new Texture[4];
 	SpriteBatch batch;
 	Sprite sprite;
@@ -37,6 +38,7 @@ public class MainHero {
 		//Graphics
 		img = new Texture("atlas/test.png");
 		img1 = new Texture("table1.png");
+		img2 = new Texture("wardrobe1.png");
 		imgs[0] = new Texture("oven1.png");
 		imgs[1] = new Texture("oven2.png");
 		imgs[2] = new Texture("oven3.png");
@@ -91,6 +93,7 @@ public class MainHero {
 		i++;
 		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
 		batch.draw(img1, body.getPosition().x - sprite.getWidth() / 2 + 10, body.getPosition().y - sprite.getHeight() / 2);
+		batch.draw(img2, body.getPosition().x - sprite.getWidth() / 2 - 60, body.getPosition().y - sprite.getHeight() / 2);
 		batch.draw(imgs[i % 4],body.getPosition().x - sprite.getWidth() / 2 + 40, body.getPosition().y - sprite.getHeight() / 2);
 	}
 	
