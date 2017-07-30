@@ -81,8 +81,12 @@ public class Train {
 	public int getDistance() {
 		return distance;
 	}
-
-	// Boolean for ovenWood is not 0.
+	
+	public int getWay() {
+		return allDistance;
+	}
+	
+	//Boolean for ovenWood is not 0.
 	public boolean onFire() {
 		return ovenFire;
 	}
