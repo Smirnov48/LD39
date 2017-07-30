@@ -22,6 +22,7 @@ public class AboutSGstudio implements Screen{
 	int posofy;
 	int posoftextx;
 	int posoftexty;
+	int kost;
 	private static boolean Moved = false;
 	private static boolean Pressed = false;
 	private static boolean Play = true;
@@ -39,10 +40,11 @@ public class AboutSGstudio implements Screen{
 		back3 = new Texture("pashasimages/back3.psd");
 		text = new Texture("pashasimages/text.psd");
 		title = new Texture("pashasimages/title.psd");
-		posofx = Gdx.graphics.getWidth() / 2 - back1.getWidth() / 2;
-		posofy = Gdx.graphics.getHeight() - 550;
+		posofx = 50;
+		posofy = 50;
 		posoftextx = 50;
 		posoftexty = 100;
+		kost = -450;
 		menu = new Menu(main);
 		Gdx.input.setInputProcessor(new InputProcessor(){
 
@@ -60,8 +62,8 @@ public class AboutSGstudio implements Screen{
 				if(((Gdx.input.getX() <= back1.getWidth() + posofx)&&
 					(Gdx.input.getX() >= posofx)) &&
 					
-					((Gdx.input.getY() <= back1.getHeight() + posofy))&&
-					(Gdx.input.getY() >= posofy)){
+					((Gdx.input.getY() <= back1.getHeight() + posofy - kost))&&
+					(Gdx.input.getY() >= posofy - kost)){
 					Pressed = true;
 				} else { 
 					Pressed = false;
@@ -88,8 +90,8 @@ public class AboutSGstudio implements Screen{
 				if(((Gdx.input.getX() <= back1.getWidth() + posofx)&&
 						(Gdx.input.getX() >= posofx)) &&
 						
-						((Gdx.input.getY() <= back1.getHeight() + posofy))&&
-						(Gdx.input.getY() >= posofy)){
+						((Gdx.input.getY() <= back1.getHeight() + posofy - kost))&&
+						(Gdx.input.getY() >= posofy - kost)){
 					Moved = true;
 				} else {
 					Moved = false;
@@ -143,12 +145,11 @@ public class AboutSGstudio implements Screen{
 		switchColor();
 		
 		if(Gdx.input.isButtonPressed(0)){
-			  
 			if (((Gdx.input.getX() <= back1.getWidth() + posofx)&&
 					(Gdx.input.getX() >= posofx)) &&
 					
-					((Gdx.input.getY() <= back1.getHeight() + posofy))&&
-					(Gdx.input.getY() >= posofy)){
+					((Gdx.input.getY() <= back1.getHeight() + posofy - kost))&&
+					(Gdx.input.getY() >= posofy - kost)){
 				main.setScreen(main.menu);
 			}
 		}
