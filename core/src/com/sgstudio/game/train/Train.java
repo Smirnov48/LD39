@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.player.MainHero;
+import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Train {
@@ -33,8 +34,11 @@ public class Train {
 	private Sprite sprite;
 	private Body body;
 	private MainHero hero;
+	
+	private Main main;
 
-	public Train(SpriteBatch batch, World world) {
+	public Train(Main main,SpriteBatch batch, World world) {
+		this.main = main;
 		this.batch = batch;
 		this.world = world;
 
@@ -48,7 +52,7 @@ public class Train {
 		Train.startTime = System.currentTimeMillis();
 		
 		//Speed
-		speed = 10;
+		speed = 15;
 		speedUp = 0;
 		
 		//Graphics
@@ -123,10 +127,9 @@ public class Train {
 
 	public void updDistance(int i) {
 		if (distance + i <= 0) {
-			// Win!!
 			distance = 0;
 		} else if (distance + i >= allDistance) {
-			System.out.println("Error!");
+			distance = allDistance;
 		} else {
 			distance += i;
 		}
@@ -155,6 +158,7 @@ public class Train {
 	
 	public void update() {
 		updateOven();
+		updateStand();
 	}
 
 	private void updateOven() {
@@ -172,6 +176,12 @@ public class Train {
 			speedUp = 0;
 			updSpeed(-0.8f);
 			}
+		}
+	}
+	
+	private void updateStand() {
+		if(getDistance() >= getWay()) {
+			main.setScreen(main.victory);
 		}
 	}
 

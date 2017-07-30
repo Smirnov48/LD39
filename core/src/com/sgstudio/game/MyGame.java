@@ -108,7 +108,7 @@ public class MyGame implements Screen {
 		debugRenderer = new Box2DDebugRenderer();
 
 		batch = main.getBatch();
-		train = new Train(batch, world);
+		train = new Train(main, batch, world);
 		demon = new Demon(main, batch, train);
 		background = new Background(batch, train);
 		rails = new Rails(world, batch, train);
