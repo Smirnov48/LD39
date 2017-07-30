@@ -20,7 +20,7 @@ public class Rails {
 	Texture imgRails;
 	SpriteBatch batch;
 	int railsX;
-	final int railsY = 30;
+	final int railsY = 10;
 	private Train train;
 	private float speed = 0;
 	
@@ -35,7 +35,7 @@ public class Rails {
 		for(int i=0;i<3;i++) front[i] = new Sprite(atlasFront.get("tiles0_"+i));
 		this.train = train;
 		
-		Body ground = Box2DHelper.makeBox(world, new Vector2(Gdx.graphics.getWidth(), 68));
+		Body ground = Box2DHelper.makeBox(world, new Vector2(Gdx.graphics.getWidth(), railsY + 6));
 		ground.setType(BodyDef.BodyType.StaticBody);
 		
 		this.batch = batch;

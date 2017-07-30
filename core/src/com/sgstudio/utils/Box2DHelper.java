@@ -25,6 +25,8 @@ public class Box2DHelper {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1f;
+		fixtureDef.friction = 0.90f;
+		fixtureDef.restitution = 0.1f;
 
 		body.createFixture(fixtureDef);
 		shape.dispose();
