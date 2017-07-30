@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.Json;
 import com.sgstudio.settings.Settings;
 
 public class MyJson {
-	private Settings settings;
-	private Json json;
+	private static Settings settings;
+	private static Json json;
 	
 	private String file;
 	
@@ -58,7 +58,7 @@ public class MyJson {
 				File f = new File(file);
 				f.getParentFile().mkdirs(); 
 				f.createNewFile();
-				this.read();
+				this.writeToFile();
 			}
         }
         catch(IOException ex){
