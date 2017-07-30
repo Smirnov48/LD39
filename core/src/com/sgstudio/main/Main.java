@@ -24,7 +24,7 @@ public class Main extends Game {
 		menu = new Menu(this);
 		defeat = new Defeat(this);
 		
-		setScreen(game);
+		setScreen(menu);
 	}
 	
 	@Override
