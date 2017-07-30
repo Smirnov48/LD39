@@ -61,15 +61,14 @@ public class MyGame implements Screen {
 		batch.begin();
 		
 		background.render();
+		rails.render();
 		train.render();
 		hero.render();
 		stats.render();
+		
 
 		batch.setProjectionMatrix(camera.combined);
 		debugRenderer.render(world, camera.combined);
-		
-		stats.render();
-		
 		batch.end();
 	}
 	
@@ -85,6 +84,7 @@ public class MyGame implements Screen {
 	public void dispose() {
 		batch.dispose();
 		hero.dispose();
+		rails.dispose();
 	}
 	
 	private int i=0;
@@ -97,7 +97,7 @@ public class MyGame implements Screen {
 		batch = main.getBatch();
 		train = new Train(batch, world);
 		background = new Background(batch, train);
-		rails = new Rails(world);
+		rails = new Rails(world,batch,train);
 		hero = new MainHero(batch, world, train);
 		stats = new Stats(batch,hero,train);
 		music = new MusicGame();

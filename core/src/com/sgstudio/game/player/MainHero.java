@@ -94,7 +94,7 @@ public class MainHero {
 		update();
 		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
 		//batch.draw(img1, body.getPosition().x - sprite.getWidth() / 2 + 10, body.getPosition().y - sprite.getHeight() / 2);
-		batch.draw(img2,0, 100);
+		//batch.draw(img2,0, 100);
 		//batch.draw(imgs[i % 4],body.getPosition().x - sprite.getWidth() / 2 + 40, body.getPosition().y - sprite.getHeight() / 2);
 	}
 	
