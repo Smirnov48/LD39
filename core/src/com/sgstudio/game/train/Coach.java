@@ -15,7 +15,7 @@ public class Coach {
 	private Texture img;
 	private Sprite sprite;
 
-	private Train train;
+	private Locomotive train;
 	private World world;
 	private Body body;
 
@@ -23,7 +23,7 @@ public class Coach {
 		this.batch = batch;
 		this.world = world;
 
-		train = new Train();
+		train = new Locomotive();
 		img = new Texture(Gdx.files.internal("atlas/coach.png"));
 		sprite = new Sprite(img);
 

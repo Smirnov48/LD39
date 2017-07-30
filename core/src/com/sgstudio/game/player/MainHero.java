@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.KeyManager;
 import com.sgstudio.game.MyGame;
-import com.sgstudio.game.train.Train;
+import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.utils.Box2DHelper;
 
 public class MainHero {
@@ -22,9 +22,9 @@ public class MainHero {
 	private int wood;
 	private static int maxWood;
 	private KeyManager keys;
-	private Train train;
+	private Locomotive train;
 
-	public MainHero(SpriteBatch batch, World world, Train train) {
+	public MainHero(SpriteBatch batch, World world, Locomotive train) {
 		this.train = train;
 		this.batch = MyGame.getBatch();
 		this.world = world;
@@ -69,7 +69,7 @@ public class MainHero {
 			body.applyForceToCenter(1.0f, 0, true);
 		}
 		if (keys.getPressedUp()) {
-			body.applyForceToCenter(0, 2.0f, true);
+			body.applyForceToCenter(0, 1.5f, true);
 		}
 		if (keys.getPressedE()) {
 			putWood();

@@ -12,7 +12,7 @@ import com.sgstudio.game.player.MainHero;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 
-public class Train {
+public class Locomotive {
 	ParticleEffect p = new ParticleEffect();
 
 	private int ovenWood;//Wood in Oven	
@@ -37,7 +37,7 @@ public class Train {
 	
 	private Main main;
 
-	public Train(Main main,SpriteBatch batch, World world) {
+	public Locomotive(Main main,SpriteBatch batch, World world) {
 		this.main = main;
 		this.batch = batch;
 		this.world = world;
@@ -49,7 +49,7 @@ public class Train {
 		ovenFire = true;
 
 		//SetStartTime
-		Train.startTime = System.currentTimeMillis();
+		Locomotive.startTime = System.currentTimeMillis();
 		
 		//Speed
 		speed = 23;
@@ -65,7 +65,7 @@ public class Train {
 		p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
 	}
 
-	public Train() { }
+	public Locomotive() { }
 
 	private void createPhysics() {
 		Vector2 size = new Vector2(sprite.getWidth() / 2, 12);
@@ -74,8 +74,11 @@ public class Train {
 		size = new Vector2(sprite.getWidth() / 2 - 30, 5);
 		pos = new Vector2(0, 316);
 		Box2DHelper.addShapeBox(body, size, pos);
-		size = new Vector2(sprite.getWidth() / 2 - 100, 50);
-		pos = new Vector2(0, 316);
+		size = new Vector2(sprite.getWidth() / 2 - 40, 50);
+		pos = new Vector2(0, 256);
+		Box2DHelper.addShapeBox(body, size, pos);
+		size = new Vector2(15, 10);
+		pos = new Vector2(-180, 236);
 		Box2DHelper.addShapeBox(body, size, pos);
 		Box2DHelper.setTransform(body, 590, -165, 0);
 	}
@@ -201,7 +204,7 @@ public class Train {
 		p.draw(batch);
 			
 		Vector2 pos = Box2DHelper.getPosition(body);
-		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y  - sprite.getHeight() / 2);
+		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y  - sprite.getHeight() / 2 + 285);
 	}
 
 	public float getY() {
