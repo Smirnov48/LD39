@@ -73,8 +73,8 @@ public class MyGame implements Screen {
 		background.render();
 		demon.render();
 		rails.render();
-		train.render();
 		hero.render();
+		train.render();
 		stats.render();
 		map.render();
 

@@ -45,11 +45,15 @@ public class Rails {
 		for(int i = 0; i < 3; i++)bgRails[i].setY(railsY);
 	}
 	
+	private float d=0;
 	public void render() {
 		for(int i = 0;i < 3; i++) bgRails[i].draw(batch);
 		for(int i=0;i<3;i++) bgRails[i].setX(bgRails[i].getX()-speed);
-		for(int i=0;i<3;i++) front[i].setX(bgRails[i].getX()-speed*1.5f);
-		for(int i=0;i<3;i++) front[i].draw(batch);
+		for(int i=0;i<3;i++) front[i].setX(bgRails[i].getX()-speed*2.5f);
+		if(d>=4){
+			for(int i=0;i<3;i++) front[i].draw(batch);
+			d=0;
+		}
 		
 		if(bgRails[0].getX()<=-800){
 			bgRails[0].setX(bgRails[2].getX()+bgRails[2].getWidth());
@@ -58,6 +62,7 @@ public class Rails {
 			bgRails[1].setX(bgRails[0].getX()+bgRails[0].getWidth());
 		}
 		if(bgRails[2].getX()<=-800){
+			d++;
 			bgRails[2].setX(bgRails[1].getX()+bgRails[1].getWidth());
 		}
 	}
