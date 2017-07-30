@@ -211,6 +211,7 @@ public class MyGame implements Screen {
 
 	@Override
 	public void hide() {
+		music.stopMusic();
 	}
 
 	@Override
