@@ -30,7 +30,7 @@ public class Rails {
 		FixtureDef fixtureDef = new FixtureDef();
 
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(Gdx.graphics.getWidth(), 50);
+		shape.setAsBox(Gdx.graphics.getWidth(), 68);
 
 		fixtureDef.shape = shape;
 

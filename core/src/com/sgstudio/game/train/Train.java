@@ -7,11 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.sgstudio.game.MyGame;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.utils.Box2DHelper;
 
@@ -27,7 +23,7 @@ public class Train {
 	private float speedUp;
 	private static long startTime;
 	private static float time = 0;
-	
+
 	private SpriteBatch batch;
 	private World world;
 	private Sprite sprite;
@@ -39,27 +35,27 @@ public class Train {
 	public Train(SpriteBatch batch, World world) {
 		this.batch = batch;
 		this.world = world;
-		
+
 		ovenWood = 100;
 		maxOvenWood = 300;
 		wood = 1000;
 		ovenFire = true;
-		
+
 		Train.startTime = System.currentTimeMillis();
 		speed = 10;
 		speedUp = 0;
-		
+
 		Texture img = new Texture("train1.png");
 		sprite = new Sprite(img);
 		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
 		createPhysics();
-		
+
 		p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
 	}
 
 	private void createPhysics() {
 		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
-		body.setTransform(new Vector2(500,100), 0);
+		body.setTransform(new Vector2(590, 165), 0);
 	}
 
 	public int getTrainWood() {
@@ -81,17 +77,17 @@ public class Train {
 	public float getSpeedUp() {
 		return speedUp;
 	}
-	
+
 	public int getDistance() {
 		return distance;
 	}
-	
-	//Boolean for ovenWood is not 0.
+
+	// Boolean for ovenWood is not 0.
 	public boolean onFire() {
 		return ovenFire;
 	}
 
-	//Update and Change methods
+	// Update and Change methods
 	public void updOvenWood(int i) {
 		if (ovenWood + i <= 0) {
 			ovenWood = 0;
@@ -111,10 +107,10 @@ public class Train {
 			speed += i;
 		}
 	}
-	
+
 	public void updDistance(int i) {
-		if(distance + i <= 0) {
-			//Win!!
+		if (distance + i <= 0) {
+			// Win!!
 			distance = 0;
 		} else if (distance + i >= allDistance) {
 			System.out.println("Error!");
@@ -131,7 +127,7 @@ public class Train {
 		}
 	}
 
-	//Setters
+	// Setters
 	public void setTrainWood(int i) {
 		if (i < maxOvenWood) {
 			wood = maxOvenWood;
@@ -150,7 +146,7 @@ public class Train {
 			if (getOvenWood() > 0) {
 				speedUp += 0.01;
 				updSpeed(speedUp);
-				updDistance((int)(speed));
+				updDistance((int) (speed));
 				System.out.println(distance);
 				updOvenWood(-1);
 				ovenFire = true;
@@ -163,14 +159,14 @@ public class Train {
 	}
 
 	public void update() {
-		updateOven();		
+		updateOven();
 	}
 
 	public void render() {
 		p.setPosition(250, 250);
 		p.update(Gdx.graphics.getDeltaTime());
 		p.draw(batch);
-		
+
 		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
 	}
 }
