@@ -2,13 +2,13 @@ package com.sgstudio.game.player;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.sgstudio.game.train.Train;
+import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.main.Main;
 
 public class Demon {
 
 	private float speed;
-	private Train train;
+	private Locomotive train;
 	private SpriteBatch batch;
 	private int way;
 	private float disToTrain;
@@ -17,7 +17,7 @@ public class Demon {
 	private Main main;
 	private Texture dark;
 	
-	public Demon(Main main,SpriteBatch batch,Train train) {
+	public Demon(Main main,SpriteBatch batch,Locomotive train) {
 		this.main = main;
 		Demon.startTime = System.currentTimeMillis();
 		this.batch = batch;

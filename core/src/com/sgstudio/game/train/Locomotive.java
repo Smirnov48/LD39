@@ -12,7 +12,7 @@ import com.sgstudio.game.player.MainHero;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 
-public class Train {
+public class Locomotive {
 	ParticleEffect p = new ParticleEffect();
 
 	private int ovenWood;//Wood in Oven	
@@ -37,7 +37,7 @@ public class Train {
 	
 	private Main main;
 
-	public Train(Main main,SpriteBatch batch, World world) {
+	public Locomotive(Main main,SpriteBatch batch, World world) {
 		this.main = main;
 		this.batch = batch;
 		this.world = world;
@@ -49,7 +49,7 @@ public class Train {
 		ovenFire = true;
 
 		//SetStartTime
-		Train.startTime = System.currentTimeMillis();
+		Locomotive.startTime = System.currentTimeMillis();
 		
 		//Speed
 		speed = 23;
@@ -65,7 +65,7 @@ public class Train {
 		p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
 	}
 
-	public Train() { }
+	public Locomotive() { }
 
 	private void createPhysics() {
 		Vector2 size = new Vector2(sprite.getWidth() / 2, 12);

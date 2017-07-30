@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.sgstudio.game.train.Train;
+import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.utils.Tiles;
 
 public class Background {
@@ -28,10 +28,10 @@ public class Background {
 	private Sprite bg5[] = {new Sprite(), new Sprite(),new Sprite()};;
 	private Sprite bg6[] = {new Sprite(), new Sprite(),new Sprite()};;
 	private SpriteBatch batch;
-	private Train train;
+	private Locomotive train;
 	int x = 0;
 	
-	public Background(SpriteBatch batch, Train train){
+	public Background(SpriteBatch batch, Locomotive train){
 		this.batch = batch;
 		this.train = train;
 		

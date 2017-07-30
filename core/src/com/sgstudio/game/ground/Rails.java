@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
-import com.sgstudio.game.train.Train;
+import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.utils.Box2DHelper;
 import com.sgstudio.utils.Tiles;
 
@@ -21,14 +21,14 @@ public class Rails {
 	SpriteBatch batch;
 	int railsX;
 	final int railsY = 10;
-	private Train train;
+	private Locomotive train;
 	private float speed = 0;
 	
 	private Sprite bgRails[] = {new Sprite(new Texture("rails1.png")), new Sprite(new Texture("rails1.png")), new Sprite(new Texture("rails1.png"))};
 	private Sprite front[] = {new Sprite(), new Sprite(),new Sprite()};
 	private Map<String, TextureRegion> atlasFront;
 	
-	public Rails(World world,SpriteBatch batch,Train train) {
+	public Rails(World world,SpriteBatch batch,Locomotive train) {
 		tiles = new Tiles();
 		tiles.createAtlas("atlas/front.png", 3, 1);
 		atlasFront = tiles.getTextureRegion();

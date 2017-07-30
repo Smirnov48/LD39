@@ -2,15 +2,15 @@ package com.sgstudio.game.graphics;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.sgstudio.game.train.Train;
+import com.sgstudio.game.train.Locomotive;
 
 public class MiniMap {
-	private Train train;
+	private Locomotive train;
 	private SpriteBatch batch;
 	private Texture imgRails;
 	private Texture imgTrain;
 
-	public MiniMap(SpriteBatch batch,Train train){
+	public MiniMap(SpriteBatch batch,Locomotive train){
 		this.batch = batch;
 		this.train = train;
 		

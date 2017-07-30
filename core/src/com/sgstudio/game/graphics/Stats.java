@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.sgstudio.game.player.MainHero;
-import com.sgstudio.game.train.Train;
+import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.utils.Tiles;
 
 public class Stats {
@@ -22,9 +22,9 @@ public class Stats {
 	BitmapFont largeFont;
 	BitmapFont smallFont;
 	MainHero hero;
-	Train train;
+	Locomotive train;
 	
-	public Stats(SpriteBatch batch,MainHero hero,Train train) {
+	public Stats(SpriteBatch batch,MainHero hero,Locomotive train) {
 		tiles = new Tiles();
 		tiles.createAtlas("atlas/wood.png", 2, 1);
 		atlasWood = tiles.getTextureRegion();
