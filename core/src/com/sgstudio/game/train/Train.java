@@ -21,6 +21,7 @@ public class Train {
 	}
 
 	public void update() {
+		locomotive.update();
 	}
 	
 	public void render() {
