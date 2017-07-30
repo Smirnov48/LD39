@@ -66,32 +66,30 @@ public class MyGame implements Screen {
 		world.step(1 / 60f, 6, 4);
 
 		update();
-
-		camera.position.set(hero.getPosition().x, hero.getPosition().y, 0);
+		
+		staticCamera.update();
+		camera.position.set(hero.getPosition().x, camera.position.y, 0);
 		camera.update();
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+
 		batch.setProjectionMatrix(staticCamera.combined);
 		batch.begin();
 		background.render();
 		rails.render();
 		stats.render();
+		stats.render();
+		map.render();
 		batch.end();
 		
 		batch.setProjectionMatrix(camera.combined);
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
 		batch.begin();
-		
-		background.render();
-		rails.render();
 		hero.render();
 		train.render();
 		coach.render();
 		demon.render();
-		stats.render();
-		map.render();
 		debugRenderer.render(world, debugMatrix);
 		batch.end();
 	}
