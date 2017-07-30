@@ -2,6 +2,7 @@ package com.sgstudio.game.train;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -15,6 +16,7 @@ import com.sgstudio.game.player.MainHero;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Train {
+	ParticleEffect p = new ParticleEffect();
 
 	private int ovenWood;
 	private int wood;
@@ -51,6 +53,8 @@ public class Train {
 		sprite = new Sprite(img);
 		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
 		createPhysics();
+		
+		p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
 	}
 
 	private void createPhysics() {
@@ -163,6 +167,10 @@ public class Train {
 	}
 
 	public void render() {
+		p.setPosition(250, 250);
+		p.update(Gdx.graphics.getDeltaTime());
+		p.draw(batch);
+		
 		batch.draw(sprite, body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
 	}
 }
