@@ -25,12 +25,12 @@ public class Demon {
 		speed = 20;
 		//speedUp = 0.05f;
 		way = train.getWay();
-		disToTrain = 100 + train.getDistance();
+		disToTrain = 1000 + train.getDistance();
 		dark = new Texture("atlas/monstr.png");
 	}
 	
 	public void render() {
-		batch.draw(dark, disToTrain-dark.getWidth(), 0);
+		batch.draw(dark, -6500+disToTrain-dark.getWidth(), 0);
 	}
 	
 	public void update() {

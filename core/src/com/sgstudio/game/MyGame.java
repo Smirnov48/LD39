@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -31,6 +32,8 @@ public class MyGame implements Screen {
 	private Fuel obj1;
 	private Fuel obj2;
 	private Fuel obj3;
+	
+	private Texture tex;
 
 	public static SpriteBatch batch;
 	private MusicGame music;
@@ -91,6 +94,8 @@ public class MyGame implements Screen {
 		train.render();
 		coach.render();
 		demon.render();
+		batch.draw(tex, -800, -600);
+		
 		batch.end();
 
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
@@ -132,6 +137,7 @@ public class MyGame implements Screen {
 		stats = new Stats(batch, hero, train);
 		map = new MiniMap(batch, train);
 		music = new MusicGame();
+		tex = new Texture("coor.png");
 
 		obj1 = new Fuel(1);
 		obj3 = new Fuel(2);
