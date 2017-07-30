@@ -16,6 +16,7 @@ public class Train {
 	}
 	
 	public void render() {
+		locomotive.render();
 	}
 
 	public Locomotive getLocomotive() {
