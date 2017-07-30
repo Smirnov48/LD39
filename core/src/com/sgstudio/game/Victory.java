@@ -2,30 +2,27 @@ package com.sgstudio.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sgstudio.main.Main;
-import com.sgstudio.game.MyGame;
-import com.sgstudio.menu.Menu;
-import com.sgstudio.game.ground.Background;
 
-public class Defeat implements Screen{
+public class Victory implements Screen {
+	
 	private Main main;
 	SpriteBatch batch;
 	Sprite bg;
 	Texture button1;
 	Texture button2;
 	Texture button3;
-	Texture lose;
+	Texture win;
 	private static boolean Moved = false;
 	private static boolean Pressed = false;
 	private static boolean Play = true;
 	
-	public Defeat(Main main) {
+	public Victory(Main main) {
 		this.main = main;
 	}
 
@@ -36,7 +33,7 @@ public class Defeat implements Screen{
 		button1 = new Texture("pashasimages/button1.psd");
 		button2 = new Texture("pashasimages/button2.psd");
 		button3 = new Texture("pashasimages/button3.psd");
-		lose = new Texture("pashasimages/lose.psd");
+		win = new Texture("pashasimages/win.psd");
 		Gdx.input.setInputProcessor(new InputProcessor(){
 
 			@Override
@@ -103,11 +100,11 @@ public class Defeat implements Screen{
 		
 		batch.draw(bg, 0, 0);
 		
-		batch.draw(lose, 
-				Gdx.graphics.getWidth() / 2 - lose.getWidth() / 2, 
-				Gdx.graphics.getHeight() / 2 + 150 - lose.getHeight() / 2, 
-				lose.getWidth(), 
-				lose.getHeight() );
+		batch.draw(win, 
+				Gdx.graphics.getWidth() / 2 - win.getWidth() / 2, 
+				Gdx.graphics.getHeight() / 2 + 150 - win.getHeight() / 2, 
+				win.getWidth(), 
+				win.getHeight() );
 		
 		if(!Moved){
 			batch.draw(button1,
