@@ -22,18 +22,18 @@ public class Train {
 
 	private float speed;//Train Speed
 	private float speedUp;//Train SpeedUp
-	private int distance = 0;//Distance during game
+	private static int distance = 0;//Distance during game
 	private final int allDistance = 4000; //Full distance
 	
 	//Time values
 	private static long startTime;
 	private static float time = 0;
 
-	private SpriteBatch batch;
-	private World world;
-	private Sprite sprite;
-	private Body body;
-	private MainHero hero;
+	private static SpriteBatch batch;
+	private static World world;
+	private static Sprite sprite;
+	private static Body body;
+	private static MainHero hero;
 	
 	private Main main;
 
@@ -64,6 +64,8 @@ public class Train {
 		createPhysics();
 		p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
 	}
+
+	public Train() { }
 
 	private void createPhysics() {
 		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
@@ -200,5 +202,9 @@ public class Train {
 
 	public float getX() {
 		return body.getPosition().x;
+	}
+	
+	public Sprite getSprite() {
+		return sprite;
 	}
 }

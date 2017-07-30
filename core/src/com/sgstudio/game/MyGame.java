@@ -19,12 +19,14 @@ import com.sgstudio.game.ground.Rails;
 import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.game.player.Demon;
 import com.sgstudio.game.player.MainHero;
+import com.sgstudio.game.train.Coach;
 import com.sgstudio.game.train.Fuel;
 import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 
 public class MyGame implements Screen {
+	private Coach coach;
 	private Fuel obj1;
 	private Fuel obj2;
 	private Fuel obj3;
@@ -73,10 +75,11 @@ public class MyGame implements Screen {
 		batch.begin();
 		
 		background.render();
-		demon.render();
 		rails.render();
 		hero.render();
 		train.render();
+		coach.render();
+		demon.render();
 		stats.render();
 		map.render();
 
@@ -122,6 +125,8 @@ public class MyGame implements Screen {
 		obj1 = new Fuel(1);
 		obj3 = new Fuel(2);
 		obj2 = new Fuel(3);
+		
+		coach = new Coach(batch);
 
 		Gdx.input.setInputProcessor(new InputProcessor() {
 
