@@ -81,21 +81,20 @@ public class MyGame implements Screen {
 		background.render();
 		rails.render();
 		stats.render();
-		stats.render();
 		map.render();
 		batch.end();
 		
 		batch.setProjectionMatrix(camera.combined);
-		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
 		batch.begin();
 		pas.render();
-		demon.render();
 		hero.render();
 		train.render();
 		coach.render();
 		demon.render();
-		debugRenderer.render(world, debugMatrix);
 		batch.end();
+
+		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
+		debugRenderer.render(world, debugMatrix);
 	}
 
 	private void update() {
