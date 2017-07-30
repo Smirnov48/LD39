@@ -21,7 +21,7 @@ public class MiniMap {
 	public void render() {
 		batch.draw(imgRails, 150, 570, 500, 8);
 		if(train.getDistance() < train.getWay()) {
-			batch.draw(imgTrain, (float) (150 + 0.125f * train.getDistance()),575,24,24);
+			batch.draw(imgTrain, (float) (150 + imgTrain.getWidth() / train.getWay() * train.getDistance()),575,24,24);
 		} else {
 			batch.draw(imgTrain, 650 ,575,24,24);
 		}

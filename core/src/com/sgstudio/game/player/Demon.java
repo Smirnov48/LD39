@@ -22,7 +22,8 @@ public class Demon {
 		Demon.startTime = System.currentTimeMillis();
 		this.batch = batch;
 		this.train = train;
-		speed = 16;
+		speed = 20;
+		//speedUp = 0.05f;
 		way = train.getWay();
 		disToTrain = 100 + train.getDistance();
 		dark = new Texture("atlas/monstr.png");
