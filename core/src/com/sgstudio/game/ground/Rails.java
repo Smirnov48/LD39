@@ -15,7 +15,7 @@ public class Rails {
 	Texture imgRails;
 	SpriteBatch batch;
 	int railsX;
-	final int railsY = 95;
+	final int railsY = 60;
 	private Train train;
 	private float speed = 0;
 	
