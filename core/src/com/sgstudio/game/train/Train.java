@@ -54,9 +54,7 @@ public class Train {
 	}
 
 	private void createPhysics() {
-		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(10, 10);
-		body = Box2DHelper.makeCustomShape(world, shape);
+		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
 		body.setTransform(new Vector2(500,100), 0);
 	}
 
