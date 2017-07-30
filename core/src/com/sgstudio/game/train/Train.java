@@ -45,14 +45,14 @@ public class Train {
 		//Wood and Oven stats
 		ovenWood = 100;
 		maxOvenWood = 300;
-		wood = 1000;
+		wood = 100;
 		ovenFire = true;
 
 		//SetStartTime
 		Train.startTime = System.currentTimeMillis();
 		
 		//Speed
-		speed = 50;
+		speed = 20;
 		speedUp = 0;
 		
 		//Graphics
