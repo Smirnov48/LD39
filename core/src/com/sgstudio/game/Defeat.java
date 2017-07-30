@@ -38,9 +38,9 @@ public class Defeat implements Screen{
 		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 		camera.update();
 		bg = new Sprite(new Texture("atlas/bg.png"));
-		button1 = new Texture("pashasimages/button1.psd");
-		button2 = new Texture("pashasimages/button2.psd");
-		button3 = new Texture("pashasimages/button3.psd");
+		button1 = new Texture("pashasimages/button1.png");
+		button2 = new Texture("pashasimages/button2.png");
+		button3 = new Texture("pashasimages/button3.png");
 		lose = new Texture("pashasimages/lose.psd");
 		Gdx.input.setInputProcessor(new InputProcessor(){
 

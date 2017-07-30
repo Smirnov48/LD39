@@ -35,9 +35,9 @@ public class AboutSGstudio implements Screen{
 	@Override
 	public void show() {
 		batch = main.getBatch();
-		back1 = new Texture("pashasimages/back1.psd");
-		back2 = new Texture("pashasimages/back2.psd");
-		back3 = new Texture("pashasimages/back3.psd");
+		back1 = new Texture("pashasimages/back1.png");
+		back2 = new Texture("pashasimages/back2.png");
+		back3 = new Texture("pashasimages/back3.png");
 		text = new Texture("pashasimages/text.psd");
 		title = new Texture("pashasimages/title.psd");
 		posofx = 50;
