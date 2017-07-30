@@ -86,16 +86,15 @@ public class Fuel {
 	}
 	
 	private int fuelCounting(){
-		if(view==0){
-			return rand.randInt(0, 0);
-		} else if(view==1){
-			return rand.randInt(2, 4);
-		} else if(view==2){
-			return rand.randInt(5, 7);
-		} else if(view==3){
-			return rand.randInt(8, 10);
-		} else if(view==4){
-			return rand.randInt(11, 13);
+		switch(view){
+			case(1):
+				return rand.randInt(2, 4);
+			case(2):
+				return rand.randInt(5, 7);
+			case(3):
+				return rand.randInt(8, 10);
+			case(4):
+				return rand.randInt(11, 13);
 		}
 		return 0;
 	}
