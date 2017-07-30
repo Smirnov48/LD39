@@ -173,14 +173,13 @@ public class Locomotive {
 	private void updateOven() {
 		if (time != (System.currentTimeMillis() - startTime) / 1000) {
 			time++;
+			updDistance((int) (speed));
 			if (getOvenWood() > 0) {
 				speedUp += 0.01;
 				updSpeed(speedUp);
-				updDistance((int) (speed));
 				updOvenWood(-1);
 				ovenFire = true;
 			} else {
-			updDistance((int) (speed));
 			ovenFire = false;
 			speedUp = 0;
 			updSpeed(-2f);

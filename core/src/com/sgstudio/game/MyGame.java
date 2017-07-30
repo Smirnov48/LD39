@@ -47,6 +47,7 @@ public class MyGame implements Screen {
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camera;
+	
 
 	public Stats stats;
 	private Rails rails;
@@ -63,17 +64,15 @@ public class MyGame implements Screen {
 
 		staticCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		staticCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); 
 		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 	}
 
 	@Override
 	public void render(float delta) {
 		world.step(1 / 60f, 6, 4);
-
 		update();
-		
 		staticCamera.update();
 		camera.position.set(hero.getPosition().x, camera.position.y, 0);
 		camera.update();
@@ -241,7 +240,6 @@ public class MyGame implements Screen {
 	@Override
 	public void hide() {
 		music.stopMusic();
-		camera.position.set(300, 400, 0);
 	}
 
 	@Override

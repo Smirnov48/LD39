@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,6 +25,7 @@ public class Defeat implements Screen{
 	private static boolean Moved = false;
 	private static boolean Pressed = false;
 	private static boolean Play = true;
+	private OrthographicCamera camera;
 	
 	public Defeat(Main main) {
 		this.main = main;
@@ -32,6 +34,9 @@ public class Defeat implements Screen{
 	@Override
 	public void show() {
 		batch = main.getBatch();
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); 
+		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+		camera.update();
 		bg = new Sprite(new Texture("atlas/bg.png"));
 		button1 = new Texture("pashasimages/button1.psd");
 		button2 = new Texture("pashasimages/button2.psd");
@@ -99,8 +104,8 @@ public class Defeat implements Screen{
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();		
 		batch.draw(bg, 0, 0);
 		
 		batch.draw(lose, 

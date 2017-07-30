@@ -30,6 +30,7 @@ public class Main extends Game {
 		victory = new Victory(this);
 		aboutsgstudio = new AboutSGstudio(this);
 		
+		
 		setScreen(menu);
 	}
 	
