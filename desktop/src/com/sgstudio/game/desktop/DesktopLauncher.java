@@ -13,8 +13,8 @@ public class DesktopLauncher {
 //		config.addIcon("icons/logo.png", FileType.Internal);
 		json = new MyJson();
 		json.read();
-		config.width = 600;
-		config.height = 800;
+		config.width = json.getWidth();
+		config.height = json.getHeight();
 		config.title = "Stocker";
 		new LwjglApplication(new Main(), config);
 	}
