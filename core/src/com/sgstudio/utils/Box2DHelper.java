@@ -34,14 +34,21 @@ public class Box2DHelper {
 		return body;
 	}
 
-	public static Body makeBox(World world, Vector2 size) {
+	public static Body makeBox(World world, Vector2 size, Vector2 pos) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
 
 		Body body = world.createBody(bodyDef);
 
+		
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(size.x / PIXELS_TO_METERS, size.y / PIXELS_TO_METERS);
+		if (pos == null) { 
+			shape.setAsBox(size.x / PIXELS_TO_METERS, size.y / PIXELS_TO_METERS);
+		} else { 
+			pos.x = pos.x / PIXELS_TO_METERS;
+			pos.y = pos.y /PIXELS_TO_METERS;			
+			shape.setAsBox(size.x / PIXELS_TO_METERS, size.y / PIXELS_TO_METERS, pos, 0);
+		}
 
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
@@ -51,6 +58,24 @@ public class Box2DHelper {
 		shape.dispose();
 
 		return body;
+	}
+	
+	public static void addShapeBox(Body body, Vector2 size, Vector2 pos) {
+		PolygonShape shape = new PolygonShape();
+		pos.x = pos.x / PIXELS_TO_METERS;
+		pos.y = pos.y /PIXELS_TO_METERS;			
+		shape.setAsBox(size.x / PIXELS_TO_METERS, size.y / PIXELS_TO_METERS, pos, 0);
+
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1f;
+
+		body.createFixture(fixtureDef);
+		shape.dispose();
+	}
+	
+	public static Body makeBox(World world, Vector2 size) {
+		return makeBox(world, size, null);
 	}
 
 	public static Body makeCustomShape(World world, PolygonShape shape) {
