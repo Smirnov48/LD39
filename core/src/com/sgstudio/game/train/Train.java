@@ -47,7 +47,7 @@ public class Train {
 		speed = 10;
 		speedUp = 0;
 		
-		Texture img = new Texture("train.png");
+		Texture img = new Texture("train1.png");
 		sprite = new Sprite(img);
 		sprite.setPosition(Gdx.graphics.getWidth() / 4, Gdx.graphics.getHeight() / 4);
 		createPhysics();
