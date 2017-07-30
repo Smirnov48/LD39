@@ -69,7 +69,7 @@ public class MainHero {
 			body.applyForceToCenter(1.0f, 0, true);
 		}
 		if (keys.getPressedUp()) {
-			body.applyForceToCenter(0, 1.0f, true);
+			body.applyForceToCenter(0, 1.5f, true);
 		}
 		if (keys.getPressedE()) {
 			putWood();

@@ -77,8 +77,8 @@ public class Train {
 		size = new Vector2(sprite.getWidth() / 2 - 40, 50);
 		pos = new Vector2(0, 256);
 		Box2DHelper.addShapeBox(body, size, pos);
-		size = new Vector2(10, 10);
-		pos = new Vector2(0, 256);
+		size = new Vector2(15, 10);
+		pos = new Vector2(-180, 236);
 		Box2DHelper.addShapeBox(body, size, pos);
 		Box2DHelper.setTransform(body, 590, -165, 0);
 	}
