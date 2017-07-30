@@ -20,7 +20,7 @@ public class Rails {
 	Texture imgRails;
 	SpriteBatch batch;
 	int railsX;
-	final int railsY = 0;
+	final int railsY = 30;
 	private Train train;
 	private float speed = 0;
 	
@@ -48,7 +48,7 @@ public class Rails {
 	public void render() {
 		for(int i = 0;i < 3; i++) bgRails[i].draw(batch);
 		for(int i=0;i<3;i++) bgRails[i].setX(bgRails[i].getX()-speed);
-		for(int i=0;i<3;i++) front[i].setX(bgRails[i].getX()-speed);
+		for(int i=0;i<3;i++) front[i].setX(bgRails[i].getX()-speed*1.5f);
 		for(int i=0;i<3;i++) front[i].draw(batch);
 		
 		if(bgRails[0].getX()<=-800){
