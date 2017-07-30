@@ -51,7 +51,6 @@ public class Rails {
 	public void render() {
 		for(int i = 0;i < 3; i++) bgRails[i].draw(batch);
 		for(int i=0;i<3;i++) bgRails[i].setX(bgRails[i].getX()-speed);
-		update();
 		
 		if(bgRails[0].getX()<=-800){
 			bgRails[0].setX(bgRails[2].getX()+bgRails[2].getWidth());

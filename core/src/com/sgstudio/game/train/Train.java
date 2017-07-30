@@ -32,7 +32,7 @@ public class Train {
 	private Body body;
 	private MainHero hero;
 	private int distance = 0;
-	private final int allDistance = 10000;
+	private final int allDistance = 40000;
 
 	public Train(SpriteBatch batch, World world) {
 		this.batch = batch;
@@ -148,7 +148,8 @@ public class Train {
 			if (getOvenWood() > 0) {
 				speedUp += 0.01;
 				updSpeed(speedUp);
-				updDistance((int)(speed * time));
+				updDistance((int)(speed));
+				System.out.println(distance);
 				updOvenWood(-1);
 				ovenFire = true;
 			} else {
