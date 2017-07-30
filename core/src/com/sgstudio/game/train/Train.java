@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -31,7 +32,7 @@ public class Train {
 	private Body body;
 	private MainHero hero;
 	private int distance = 0;
-	private final int allDistance = 10000;
+	private final int allDistance = 40000;
 
 	public Train(SpriteBatch batch, World world) {
 		this.batch = batch;
@@ -53,7 +54,9 @@ public class Train {
 	}
 
 	private void createPhysics() {
-		body = Box2DHelper.makeBoxAroundSprite(world, sprite);	
+		body = Box2DHelper.makeBox(world, new Vector2(sprite.getWidth(), 10));
+		body.getPosition().x = sprite.getX();
+		body.getPosition().y = sprite.getY() + sprite.getHeight()- 10;
 	}
 
 	//getters
@@ -145,7 +148,8 @@ public class Train {
 			if (getOvenWood() > 0) {
 				speedUp += 0.01;
 				updSpeed(speedUp);
-				updDistance((int)(speed * time));
+				updDistance((int)(speed));
+				System.out.println(distance);
 				updOvenWood(-1);
 				ovenFire = true;
 			} else {

@@ -82,6 +82,7 @@ public class MyGame implements Screen {
 		background.update();
 		music.update();
 		train.update();
+		rails.update();
 	}
 
 	@Override
