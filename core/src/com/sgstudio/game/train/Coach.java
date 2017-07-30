@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.utils.Box2DHelper;
 
@@ -17,10 +18,12 @@ public class Coach {
 
 	private World world;
 	private Body body;
+	private int number;
 
-	public Coach(SpriteBatch batch, World world) {
+	public Coach(SpriteBatch batch, World world, int number) {
 		this.batch = batch;
 		this.world = world;
+		this.number = number;
 
 		img = new Texture(Gdx.files.internal("atlas/coach.png"));
 		sprite = new Sprite(img);
@@ -30,18 +33,18 @@ public class Coach {
 
 	private void createPhysics() {
 		Vector2 size = new Vector2(sprite.getWidth() / 2, 12);
-		Vector2 pos = new Vector2(0, 200);
+		Vector2 pos = new Vector2(number * -500, 200);
 		body = Box2DHelper.makeBox(world, size, pos);
 
 		size = new Vector2(sprite.getWidth() / 2 - 30, 5);
-		pos = new Vector2(0, 316);
+		pos = new Vector2(number * -500, 316);
 		Box2DHelper.addShapeBox(body, size, pos);
 		Box2DHelper.setTransform(body, 132, -170, 0);
 	}
 
 	public void render() {
 		Vector2 pos = Box2DHelper.getPosition(body);
-		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y + sprite.getHeight() + 10);
+		batch.draw(sprite, number * -500 + pos.x - sprite.getWidth() / 2, pos.y + sprite.getHeight() + 10);
 	}
 
 }

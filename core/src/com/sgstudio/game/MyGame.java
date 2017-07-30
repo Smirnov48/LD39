@@ -29,7 +29,6 @@ import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 
 public class MyGame implements Screen {
-	private Coach coach;
 	private Fuel obj1;
 	private Fuel obj2;
 	private Fuel obj3;
@@ -91,7 +90,6 @@ public class MyGame implements Screen {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		train.render();
-		coach.render();
 		hero.render();
 		demon.render();
 		pas.render();
@@ -145,8 +143,6 @@ public class MyGame implements Screen {
 		obj1 = new Fuel(1);
 		obj3 = new Fuel(2);
 		obj2 = new Fuel(3);
-		
-		coach = new Coach(batch, world);
 		
 		checker = new Checker(main, locomotive, demon, hero);
 
