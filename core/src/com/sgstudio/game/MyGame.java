@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.sgstudio.game.graphics.MiniMap;
 import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
@@ -39,6 +40,8 @@ public class MyGame implements Screen {
 	public Stats stats;
 	private Rails rails;
 	private Background background;
+	
+	private MiniMap map;
 
 	public MyGame(final Main main) {
 		this.main = main;
@@ -65,6 +68,7 @@ public class MyGame implements Screen {
 		train.render();
 		hero.render();
 		stats.render();
+		map.render();
 		
 
 		batch.setProjectionMatrix(camera.combined);
@@ -85,6 +89,7 @@ public class MyGame implements Screen {
 		batch.dispose();
 		hero.dispose();
 		rails.dispose();
+		map.dispose();
 	}
 	
 	private int i=0;
@@ -100,6 +105,7 @@ public class MyGame implements Screen {
 		rails = new Rails(world,batch,train);
 		hero = new MainHero(batch, world, train);
 		stats = new Stats(batch,hero,train);
+		map = new MiniMap(batch,train);
 		music = new MusicGame();
 		
 		obj1 = new Fuel(1);
