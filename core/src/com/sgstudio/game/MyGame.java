@@ -137,7 +137,7 @@ public class MyGame implements Screen {
 		obj3 = new Fuel(2);
 		obj2 = new Fuel(3);
 		
-		coach = new Coach(batch);
+		coach = new Coach(batch, world);
 
 		Gdx.input.setInputProcessor(new InputProcessor() {
 
