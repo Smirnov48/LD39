@@ -50,7 +50,7 @@ public class MainHero {
 		sprite.setY(Gdx.graphics.getHeight() / 2);
 		
 		//Stats
-		maxWood = 100;
+		maxWood = 10;
 		wood = 0;
 		
 		//box2d
@@ -171,8 +171,10 @@ public class MainHero {
 	
 	//Set methods
 	public void setWood(int i) {
-		if(i < maxWood) {wood = maxWood;}
-		else if (i < 0) {wood = 0;}}
+		if(i >= maxWood) {wood = maxWood;}
+		else if (i < 0) {wood = 0;}
+		else wood +=i;
+	}
 	public void setMaxWood(int i) {
 		maxWood = i;
 	}

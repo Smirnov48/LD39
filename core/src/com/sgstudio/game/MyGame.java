@@ -109,9 +109,9 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean keyDown(int keycode) {
-				if(Gdx.input.isKeyPressed(Keys.Z)) train.updOvenWood(obj1.getFuel());
-				else if(Gdx.input.isKeyPressed(Keys.X)) train.updOvenWood(obj2.getFuel());
-				else if(Gdx.input.isKeyPressed(Keys.C)) train.updOvenWood(obj3.getFuel());
+				if(Gdx.input.isKeyPressed(Keys.Z)) hero.setWood(obj1.getFuel());
+				else if(Gdx.input.isKeyPressed(Keys.X)) hero.setWood(obj2.getFuel());
+				else if(Gdx.input.isKeyPressed(Keys.C)) hero.setWood(obj3.getFuel());
 				return false;
 			}
 
