@@ -8,7 +8,7 @@ public class Fuel {
 	private static final int StrikesPassenger = 4;
 	private static final int StrikesСupboard = 8;
 	
-	private static int view=0;
+	private int view=0;
 	/*
 	 * 0 - Null
 	 * 1 - Сhair
@@ -24,7 +24,7 @@ public class Fuel {
 	
 	public Fuel(int view){
 		rand = new Random();
-		Fuel.view = view;
+		this.view = view;
 	}
 	
 	public int getFuel(){
