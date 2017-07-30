@@ -21,6 +21,7 @@ import com.sgstudio.game.player.Demon;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.train.Coach;
 import com.sgstudio.game.train.Fuel;
+import com.sgstudio.game.train.Passenger;
 import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
@@ -38,6 +39,7 @@ public class MyGame implements Screen {
 
 	private MainHero hero;
 	public Train train;
+	public Passenger pas;
 
 	private World world;
 	private Box2DDebugRenderer debugRenderer;
@@ -86,6 +88,8 @@ public class MyGame implements Screen {
 		batch.setProjectionMatrix(camera.combined);
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
 		batch.begin();
+		pas.render();
+		demon.render();
 		hero.render();
 		train.render();
 		coach.render();
@@ -108,6 +112,7 @@ public class MyGame implements Screen {
 		hero.dispose();
 		rails.dispose();
 		map.dispose();
+		pas.dispose();
 	}
 
 	private int i = 0;
@@ -121,6 +126,7 @@ public class MyGame implements Screen {
 		batch = main.getBatch();
 		train = new Train(main, batch, world);
 		demon = new Demon(main, batch, train);
+		pas = new Passenger(batch);
 		background = new Background(batch, train);
 		rails = new Rails(world, batch, train);
 		hero = new MainHero(batch, world, train);
