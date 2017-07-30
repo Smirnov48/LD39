@@ -47,9 +47,13 @@ public class MyGame implements Screen {
 
 	private MiniMap map;
 	public int allDistance = 40000;
+	private OrthographicCamera staticCamera;
 
 	public MyGame(final Main main) {
 		this.main = main;
+
+		staticCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		staticCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
@@ -61,26 +65,26 @@ public class MyGame implements Screen {
 
 		update();
 
+		camera.position.set(hero.getPosition().x, hero.getPosition().y, 0);
+		camera.update();
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		camera.position.set(hero.getPosition().x, hero.getPosition().y, 0);
-		camera.update();
+		batch.setProjectionMatrix(staticCamera.combined);
+		batch.begin();
+		background.render();
+		rails.render();
+		stats.render();
+		batch.end();
 		
 		batch.setProjectionMatrix(camera.combined);
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
-
 		batch.begin();
-		
-		background.render();
 		demon.render();
-		rails.render();
 		hero.render();
 		train.render();
-		stats.render();
 		map.render();
-
-		batch.setProjectionMatrix(camera.combined);
 		debugRenderer.render(world, debugMatrix);
 		batch.end();
 	}
