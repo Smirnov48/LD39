@@ -52,6 +52,14 @@ public class MusicGame {
 		stade = false;
 	}
 	
+	public void stop() {
+		if(One.isPlaying()){
+			One.stop();
+		} else if(Two.isPlaying()){
+			One.stop();
+		}
+	}
+	
 	public void musicStade() {
 		if(stade) {
 			stade = false;
@@ -59,6 +67,8 @@ public class MusicGame {
 			stade = true;
 		}
 	}
+	
+	public void setMuted(boolean muted){ stade = muted; }
 
 	public boolean isMuted() {
 		if(!stade) {return true;}
