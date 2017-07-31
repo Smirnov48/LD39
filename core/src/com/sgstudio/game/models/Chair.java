@@ -27,6 +27,11 @@ public class Chair {
 		fuel = new Fuel(view);
 	}
 	
+	private boolean notDel=true;
+	public void delTexture(){
+		notDel=!notDel;
+	}
+	
 	public void createModel(int x, int y){
 		createPhysics(x, y);
 	}
@@ -41,7 +46,7 @@ public class Chair {
 	private float x;
 	public void render(){
 		Vector2 pos = Box2DHelper.getPosition(body);
-		batch.draw(texture, pos.x - texture.getWidth() / 2,  pos.y - texture.getHeight() / 2 );
+		if(notDel) batch.draw(texture, pos.x - texture.getWidth() / 2,  pos.y - texture.getHeight() / 2 );
 		x = pos.x;
 	}
 
