@@ -68,11 +68,14 @@ public class Tutorial implements Screen {
 
 	private Checker checker;
 	private int isTut = 2;
+	private float disToMonsterFromCamera;
 
 	public KeyManager man;
 	Texture stop;
 	private float x;
 	private boolean cutSceneFlag = true;
+	private boolean cutSceneFlag2 = true;
+	private boolean scene = true;
 
 	public Tutorial(Main main) {
 		this.main = main;
@@ -216,23 +219,26 @@ public class Tutorial implements Screen {
 				staticCamera.update();
 				camera.position.set(x + 1400, camera.position.y, 0);
 				camera.update();
-				if (cutSceneFlag) {
-					if (x < demon.getDemonX() - 1400) {
-						cutSceneFlag = false;
-					}
-					if (x > -4900) {
-						x -= 12;
-					} else if (x >= -5409) {
-						x -= 8;
-					} else if (x > demon.getDemonX()- 1400) {
-						x-=40;
-					}
-				} else {
-					if (x < 0) {
-						x+=30;
+				if (scene) {
+					/* To Potato */
+					if ((camera.position.x > -8400) && (cutSceneFlag) && (cutSceneFlag2)) {
+						x -= 40;
+						System.out.println("ToPotato");
+						if (camera.position.x < -8350) {
+							actTime = System.currentTimeMillis();
+							cutSceneFlag = false;
+						}
+					} else if ((!cutSceneFlag) && (System.currentTimeMillis() - actTime < 2100)
+							&& (cutSceneFlag2)) { /* Stopping 2 seconds */
+						System.out.println("Wait");
+						if (System.currentTimeMillis() - actTime > 2000) {
+							cutSceneFlag2 = false;
+						}
+					} else if ((!cutSceneFlag) && (!cutSceneFlag2) && (camera.position.x < 300)) {
+						x += 40;
+						System.out.println("ToHero");
 					}
 				}
-
 				Gdx.gl.glClearColor(0, 0, 0, 1);
 				Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -269,9 +275,8 @@ public class Tutorial implements Screen {
 	}
 
 	public void cutScene() {
-		if ((camera.position.x > -4000) && cutSceneFlag) {
-			camera.position.x -= 1;
-		}
+		disToMonsterFromCamera = -8340 + camera.position.x;
+
 	}
 
 	@Override
