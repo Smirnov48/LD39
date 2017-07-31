@@ -20,7 +20,9 @@ import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.utils.Box2DHelper;
 import com.sgstudio.utils.Tiles;
 
-public class MainHero {
+public class MainHero {	
+	private Map<String, TextureRegion> atlasChar;
+	
 	/*Music*/
 	private Sound putToOven;
 	
@@ -55,6 +57,7 @@ public class MainHero {
 	private static long actTime = 0;
 
 	public MainHero(SpriteBatch batch, World world, Locomotive train) {
+		
 		/*Wood Hero Pull*/
 		maxWood = 10;
 		wood = 0;
@@ -67,6 +70,9 @@ public class MainHero {
 		/*Graphics*/
 		this.batch = MyGame.getBatch();
 		tiles = new Tiles();
+		tiles.createAtlas("Char.png", 3, 1);
+		atlasChar = tiles.getTextureRegion();
+		sprite = new Sprite(atlasChar.get("tiles0_2"));
 		animator = new Animator(this);
 		
 		/*Box2D*/
