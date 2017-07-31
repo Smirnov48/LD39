@@ -13,126 +13,148 @@ import com.sgstudio.game.models.Destroable;
 import com.sgstudio.game.models.Table;
 
 public class MyContactListener implements ContactListener {
-	
+
 	private boolean contact = false;
-	private int view=0;
+	private int view = 0;
 	private String contactF = "";
-	
+
 	private long startTime;
 	private float time = 0;
-	private int i=0;
-	
+	private int i = 0;
+
 	private Body bodyToDestroy;
 	private World world;
-	
+
 	private Chair objC;
 	private Table objT;
 
-	private String get="";
-	
-	public MyContactListener(World world){
+	private String get = "";
+
+	public MyContactListener(World world) {
 		startTime = System.currentTimeMillis();
 		this.world = world;
 	}
 
 	@Override
 	public void beginContact(Contact contact) {
-		
+
 	}
 
 	@Override
 	public void endContact(Contact contact) {
-		
+
 	}
-	
-	public void deliteObj(){
-		try{
-			if(objC.isBroken() || objT.isBroken()){
-				if(bodyToDestroy != null) {
+
+	public void deliteObj() {
+		try {
+			if (objC.isBroken() || objT.isBroken()) {
+				if (bodyToDestroy != null) {
 					Destroable des = (Destroable) (bodyToDestroy.getUserData());
 					des.delTexture();
 				}
-				Gdx.app.postRunnable(new Runnable(){
+				Gdx.app.postRunnable(new Runnable() {
 					@Override
 					public void run() {
-						try{
-							if(bodyToDestroy != null && objC.isBroken() && get.equals("Chair")){
+						try {
+							if (bodyToDestroy != null && objC.isBroken() && get.equals("Chair")) {
 								world.destroyBody(bodyToDestroy);
 								objC.delTexture();
-							}
-							else if(bodyToDestroy != null && objT.isBroken() && get.equals("Table")){
+							} else if (bodyToDestroy != null && objT.isBroken() && get.equals("Table")) {
 								world.destroyBody(bodyToDestroy);
 								objT.delTexture();
 							}
-							bodyToDestroy=null;
+							bodyToDestroy = null;
+						} catch (java.lang.NullPointerException e) {
+							Gdx.app.log("Error: ", e.getMessage());
 						}
-						catch (java.lang.NullPointerException e) {Gdx.app.log("Error: ", e.getMessage());}
 					}
 				});
 			}
-		} catch(java.lang.NullPointerException e){}
+		} catch (java.lang.NullPointerException e) {
+		}
 	}
-	
+
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		WorldManifold manifold = contact.getWorldManifold();
-		
-		for(int j=0;j<manifold.getNumberOfContactPoints();j++){
-			if(contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player") &&
-					contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData() instanceof Chair){
+
+		for (int j = 0; j < manifold.getNumberOfContactPoints(); j++) {
+			if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player")
+					&& contact.getFixtureA().getUserData() != null
+					&& contact.getFixtureA().getUserData() instanceof Chair) {
 				objC = (Chair) contact.getFixtureA().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to break chair";
-				i=0;
-				view=1;
+				i = 0;
+				view = 1;
 				contact.setEnabled(false);
 				bodyToDestroy = contact.getFixtureA().getBody();
-				get="Chair";
-			} else if(contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player") &&
-					contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData() instanceof Table){
+				get = "Chair";
+			} else if (contact.getFixtureB().getUserData() != null
+					&& contact.getFixtureB().getUserData().equals("Player")
+					&& contact.getFixtureA().getUserData() != null
+					&& contact.getFixtureA().getUserData() instanceof Table) {
 				objT = (Table) contact.getFixtureA().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to break table";
-				i=0;
-				view=2;
+				i = 0;
+				view = 2;
 				contact.setEnabled(false);
 				bodyToDestroy = contact.getFixtureA().getBody();
-				get="Table";
-			} else if(contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Player") &&
-					contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Firebox")){
+				get = "Table";
+			} else if (contact.getFixtureA().getUserData() != null
+					&& contact.getFixtureA().getUserData().equals("Player")
+					&& contact.getFixtureB().getUserData() != null
+					&& contact.getFixtureB().getUserData().equals("Firebox")) {
 				contact.setEnabled(false);
-			} else if(contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Locomotive") &&
-					contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player")){
+			} else if (contact.getFixtureA().getUserData() != null
+					&& contact.getFixtureA().getUserData().equals("Locomotive")
+					&& contact.getFixtureB().getUserData() != null
+					&& contact.getFixtureB().getUserData().equals("Player")) {
 				this.contact = true;
 				this.contactF = "Press 'E' to put the wood";
-				i=0;
-			} else if(contact.getFixtureB().getUserData() != null && !contact.getFixtureB().getUserData().equals("Player") &&
-					contact.getFixtureA().getUserData() != null && !(contact.getFixtureA().getUserData() instanceof Chair)) {
+				i = 0;
+			} else if (contact.getFixtureB().getUserData() != null
+					&& !contact.getFixtureB().getUserData().equals("Player")
+					&& contact.getFixtureA().getUserData() != null
+					&& !(contact.getFixtureA().getUserData() instanceof Chair)) {
 				if (time != (System.currentTimeMillis() - startTime) / 250) {
 					time++;
 					i++;
 				}
 			}
-			
-			if(i==1){
+
+			if (i == 1) {
 				this.contact = false;
 				this.contactF = "";
-				view=0;
+				view = 0;
 			}
 		}
 	}
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
-		
+
 	}
-	
-	public boolean getContact(){ return contact; }
-	public String getContactF(){ return contactF; }
-	public int getView(){ return view; }
-	public int getFuel(){ 
-		if(get.equals("Chair")) return objC.getFuel(); 
-		else if(get.equalsIgnoreCase("Table")) return objT.getFuel();
-		else return 0;
+
+	public boolean getContact() {
+		return contact;
+	}
+
+	public String getContactF() {
+		return contactF;
+	}
+
+	public int getView() {
+		return view;
+	}
+
+	public int getFuel() {
+		if (get.equals("Chair"))
+			return objC.getFuel();
+		else if (get.equalsIgnoreCase("Table"))
+			return objT.getFuel();
+		else
+			return 0;
 	}
 }
