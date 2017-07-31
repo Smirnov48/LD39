@@ -2,9 +2,14 @@ package com.sgstudio.game.player;
 
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -34,6 +39,17 @@ public class MainHero {
 	private float x;
 	private float y;
 	private float dx;
+	
+	int lastWood;
+	
+	//Time values
+	private static long startTime;
+	private static float time = 0;
+	private static long actTime = 0;
+	
+	BitmapFont smallFont = new BitmapFont();
+	
+	boolean updating = false;
 
 	
 	public MainHero(SpriteBatch batch, World world, Locomotive train) {
@@ -54,6 +70,15 @@ public class MainHero {
 		keys = new KeyManager();
 		x = train.getX();
 		animator = new Animator(this);
+		
+		smallFont = new BitmapFont();
+		FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
+				Gdx.files.internal("font/pixel.ttf"));
+		FreeTypeFontParameter param = new FreeTypeFontParameter();
+		param.size = 40;
+		param.borderColor = Color.BLACK;
+		param.borderWidth = 1;
+		smallFont = gen.generateFont(param);
 	}
 
 	private void createPhysics() {
@@ -74,12 +99,21 @@ public class MainHero {
 		dx = x - pos.x;
 		x = pos.x;
 		y = pos.y;
+		if(updating) {
+			if (System.currentTimeMillis() - actTime < 1000) {	
+				smallFont.draw(batch, "+" + (wood-lastWood) , pos.x + dx, 200);
+			} else {
+				updating = false;
+			}
+		}
 	}
 	
 	public void dispose() {
+		
 	}
 	
 	private boolean jump = false;
+
 	public void update(boolean contact, String contactF) {
 		if(body.getPosition().y<=0.7) jump = true;
 		else if(body.getPosition().y>=0.85) jump = false;
@@ -131,12 +165,18 @@ public class MainHero {
 
 	// Update Stats Methods
 	public void updWood(int i) {
+		if (i!=0) {
+		
+		lastWood = wood;
 		if (wood + i <= 0) {
 			wood = 0;
 		} else if (wood + i > maxWood) {
 			wood = maxWood;
 		} else {
 			wood += i;
+		}
+		updating = true;
+		actTime = System.currentTimeMillis();
 		}
 	}
 
