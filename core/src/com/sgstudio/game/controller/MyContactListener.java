@@ -11,6 +11,7 @@ import com.sgstudio.game.models.Chair;
 import com.sgstudio.game.models.Table;
 import com.sgstudio.game.models.Wardrobe;
 import com.sgstudio.game.train.Coach;
+import com.sgstudio.game.train.Locomotive;
 
 public class MyContactListener implements ContactListener {
 
@@ -69,6 +70,9 @@ public class MyContactListener implements ContactListener {
 				bodyToDestroy = contact.getFixtureA().getBody();
 			} else  if (contact.getFixtureB().getUserData().equals("Monstr") && contact.getFixtureA().getUserData() instanceof Coach) {
 				Coach coach = (Coach) contact.getFixtureA().getUserData();
+				coach.destroy();
+			} else  if (contact.getFixtureB().getUserData().equals("Monstr") && contact.getFixtureA().getUserData() instanceof Locomotive) {
+				Locomotive coach = (Locomotive) contact.getFixtureA().getUserData();
 				coach.destroy();
 			} else  if (contact.getFixtureB().getUserData().equals("Monstr") && contact.getFixtureA().getUserData() instanceof Chair) {
 				Chair coach = (Chair) contact.getFixtureA().getUserData();

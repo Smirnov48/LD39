@@ -34,16 +34,16 @@ public class Checker {
 	
 	public void checkDefeat() {
 		//Demon on first van
-		if (demon.getDisToTrain() + demon.getDemonWidth() < 0) {
+//		if (demon.getDisToTrain() + demon.getDemonWidth() < 0) {
 //			newgame.show();
-			main.setScreen(main.defeat);
-		}
+//			main.setScreen(main.defeat);
+//		}
 		
 		//Player near the Demon
-		if(hero.getHeroX() + 100 < demon.getDemonX()) {
-			main.setScreen(main.defeat);
+//		if(hero.getHeroX() + 100 < demon.getDemonX()) {
+//			main.setScreen(main.defeat);
 //			newgame.show();
-		}
+		//}
 	}
 
 	public void reset() {
