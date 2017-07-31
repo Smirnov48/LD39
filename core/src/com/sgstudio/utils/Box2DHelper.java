@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -110,5 +111,28 @@ public class Box2DHelper {
 
 	public static Vector2 getPosition(Body body) {
 		return new Vector2(body.getPosition().x * PIXELS_TO_METERS, body.getPosition().y * PIXELS_TO_METERS);
+	}
+
+	public static Body makeCircleAroundSprite(World world, Sprite sprite) {
+		BodyDef bodyDef = new BodyDef();
+		
+		bodyDef.type = BodyDef.BodyType.DynamicBody;
+		bodyDef.position.set(sprite.getX() / PIXELS_TO_METERS, sprite.getY() / PIXELS_TO_METERS);
+
+		Body body = world.createBody(bodyDef);
+
+		CircleShape shape = new CircleShape();
+		shape.setRadius(sprite.getWidth() / 2 / PIXELS_TO_METERS);
+
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1f;
+		fixtureDef.friction = 0.90f;
+		fixtureDef.restitution = 0.1f;
+
+		body.createFixture(fixtureDef);
+		shape.dispose();
+		
+		return body;
 	}
 }
