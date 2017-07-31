@@ -23,7 +23,7 @@ public class Passenger {
 	public Passenger(SpriteBatch batch) {
 		this.batch = batch;
 		for(int i = 0; i < 11; i++) {
-			x = -30 + -400 * i;
+			x = 150 + -450 * i;
 			sprite[i].setBounds(x, 35, 32, 64);
 		}
 	}
