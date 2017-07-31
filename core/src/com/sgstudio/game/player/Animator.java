@@ -35,7 +35,7 @@ public class Animator {
 	                walkFrames[index++] = tmp[i][j];
 	            }
 	        }
-	        walkAnimation = new Animation(0.025f, walkFrames);
+	        walkAnimation = new Animation(0.25f, walkFrames);
 	        spriteBatch = MyGame.getBatch();; 
 	        stateTime = 0f;
 	        //stanwalkSheet =  new TextureRegion[FRAME_COLS * FRAME_ROWS];
