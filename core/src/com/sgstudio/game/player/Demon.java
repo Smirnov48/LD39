@@ -59,8 +59,7 @@ public class Demon {
 
 	public void update() {
 		kinematic();
-		System.out.println(disToTrain);
-		Box2DHelper.setTransform(body, (int) -disToTrain - 500, (int) sprite.getWidth() / 2 + 15, body.getAngle());
+		Box2DHelper.setTransform(body, (int) -disToTrain - 5000, (int) sprite.getWidth() / 2 + 15, body.getAngle());
 	}
 
 	public void kinematic() {
