@@ -19,11 +19,11 @@ import com.sgstudio.main.Main;
 import com.sgstudio.utils.Tiles;
 
 public class Menu implements Screen {
-	private static Map<String, TextureRegion> atlasMenu;
+	private Map<String, TextureRegion> atlasMenu;
 	private static Map<String, TextureRegion> atlasSound;
-	private static boolean Moved[] = {false, false, false, false, false};
-	private static boolean Pressed[] = {false, false, false, false, false};
-	private static boolean Play = true;
+	private boolean Moved[] = {false, false, false, false, false};
+	private boolean Pressed[] = {false, false, false, false, false};
+	private boolean Play = true;
 	
 	private final Main main;
 	private Tiles tiles;

@@ -12,21 +12,21 @@ import com.sgstudio.menu.Menu;
 
 public class AboutSGstudio implements Screen{
 	private Main main;
-	SpriteBatch batch;
-	Texture back1;
-	Texture back2;
-	Texture back3;
-	Texture text;
-	Texture title;
-	int posofx;
-	int posofy;
-	int posoftextx;
-	int posoftexty;
-	int kost;
+	private SpriteBatch batch;
+	private Texture back1;
+	private Texture back2;
+	private Texture back3;
+	private Texture text;
+	private Texture title;
+	private int posofx;
+	private int posofy;
+	private int posoftextx;
+	private int posoftexty;
+	private int kost;
 	private static boolean Moved = false;
 	private static boolean Pressed = false;
 	private static boolean Play = true;
-	Menu menu;
+	private Menu menu;
 	
 	public AboutSGstudio(Main main) {
 		this.main = main;

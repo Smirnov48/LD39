@@ -41,7 +41,7 @@ public class Tutorial implements Screen {
 	private Sound carbon;
 	private Sound putToOven;
 	/* Time values for actions */
-	private static long actTime = 0;
+	private long actTime = 0;
 
 	private boolean Play = true, Moved = false, Pressed = false;
 
