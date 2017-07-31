@@ -21,6 +21,7 @@ public class Stats {
 	BitmapFont mediumFont;
 	BitmapFont largeFont;
 	BitmapFont smallFont;
+	BitmapFont miniFont;
 	MainHero hero;
 	Locomotive train;
 	
@@ -32,6 +33,7 @@ public class Stats {
 		largeFont = new BitmapFont();
 		smallFont = new BitmapFont();
 		mediumFont = new BitmapFont();
+		miniFont = new BitmapFont();
 		//���������
 		FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
 				Gdx.files.internal("font/pixel.ttf"));
@@ -45,6 +47,8 @@ public class Stats {
 		smallFont = gen.generateFont(param);
 		param.size = 28;
 		mediumFont = gen.generateFont(param);
+		param.size = 15;
+		miniFont = gen.generateFont(param);
 		
 		this.batch = batch;
 		this.hero = hero;
@@ -59,6 +63,7 @@ public class Stats {
 	public void render(boolean contact, String contactF) {
 		//PlayerStats
 //		largeFont.draw(batch,"Player:",20,580);
+		miniFont.draw(batch, "FPS: "+Gdx.graphics.getFramesPerSecond(), 1, Gdx.graphics.getHeight()-3);
 		batch.draw(atlasWood.get("tiles0_1"), 10, Gdx.graphics.getHeight()-42);
 //		smallFont.draw(batch, "Wood: ", 20, 530);
 		mediumFont.draw(batch,hero.getWood() + "/" + hero.getMaxWood(),55,Gdx.graphics.getHeight()-20);
