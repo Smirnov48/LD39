@@ -35,7 +35,7 @@ public class Rails {
 		for(int i=0;i<3;i++) front[i] = new Sprite(atlasFront.get("tiles0_"+i));
 		this.train = train;
 		
-		Body ground = Box2DHelper.makeBox(world, new Vector2(Gdx.graphics.getWidth() * 10, railsY + 6));
+		Body ground = Box2DHelper.makeBox(world, new Vector2(Gdx.graphics.getWidth() * 10, railsY + 6), "Rails");
 		ground.setType(BodyDef.BodyType.StaticBody);
 		
 		this.batch = batch;

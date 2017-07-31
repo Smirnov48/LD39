@@ -7,16 +7,19 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.sgstudio.game.controller.MyContactListener;
 import com.sgstudio.game.graphics.MiniMap;
 import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
+import com.sgstudio.game.models.Chair;
 import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.game.player.Demon;
 import com.sgstudio.game.player.MainHero;
@@ -28,6 +31,8 @@ import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 
 public class MyGame implements Screen {
+	private Chair chair;
+	
 	private Fuel obj1;
 	private Fuel obj2;
 	private Fuel obj3;
@@ -92,6 +97,8 @@ public class MyGame implements Screen {
 		hero.render();
 		demon.render();
 		pas.render();
+		chair.render();
+		
 		batch.draw(tex, -800, -600);
 		batch.end();
 
@@ -123,6 +130,7 @@ public class MyGame implements Screen {
 	public void show() {
 		Box2D.init();
 		world = new World(new Vector2(0, -10), true);
+		world.setContactListener(new MyContactListener());
 		debugRenderer = new Box2DDebugRenderer();
 
 		batch = main.getBatch();
@@ -142,6 +150,9 @@ public class MyGame implements Screen {
 		obj1 = new Fuel(1);
 		obj3 = new Fuel(2);
 		obj2 = new Fuel(3);
+		
+		chair = new Chair(batch, new Sprite(new Texture("atlas/test.png")), world);
+		chair.createModel(50, 50);
 		
 		checker = new Checker(main, locomotive, demon, hero);
 

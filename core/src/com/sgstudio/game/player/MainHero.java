@@ -1,20 +1,26 @@
 package com.sgstudio.game.player;
 
+import java.util.Map;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.sgstudio.game.KeyManager;
 import com.sgstudio.game.MyGame;
+import com.sgstudio.game.controller.KeyManager;
 import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.utils.Box2DHelper;
+import com.sgstudio.utils.Tiles;
 
 public class MainHero {
-	private Texture img;
+	private Map<String, TextureRegion> atlasChar;
+	
 	private SpriteBatch batch;
 	public static Sprite sprite;
+	private Tiles tiles;
 
 	private World world;
 	private Body body;
@@ -30,9 +36,11 @@ public class MainHero {
 		this.train = train;
 		this.batch = MyGame.getBatch();
 		this.world = world;
-
-		img = new Texture("atlas/test.png");
-		sprite = new Sprite(img);
+		tiles = new Tiles();
+		tiles.createAtlas("Char.png", 3, 1);
+		atlasChar = tiles.getTextureRegion();
+		
+		sprite = new Sprite(atlasChar.get("tiles0_2"));
 
 		maxWood = 10;
 		wood = 10;
@@ -44,8 +52,8 @@ public class MainHero {
 	}
 
 	private void createPhysics() {
-		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
-		Box2DHelper.setTransform(body, 290, 55, 0);
+		body = Box2DHelper.makeBoxAroundSprite(world, sprite, "Player");
+		Box2DHelper.setTransform(body, 290, 60, 0);
 		body.setFixedRotation(true);
 	}
 
@@ -61,7 +69,6 @@ public class MainHero {
 	}
 
 	public void dispose() {
-		img.dispose();
 	}
 
 	public void update() {
