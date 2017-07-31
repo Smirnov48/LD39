@@ -175,7 +175,9 @@ public class MyGame implements Screen {
 		putToOven.stop();
 		bang = Gdx.audio.newSound(Gdx.files.internal("audio/sound/Bang.wav"));
 		bang.stop();
-
+		
+		music.setMuted(true);
+		
 		Gdx.input.setInputProcessor(new InputProcessor() {
 
 			@Override

@@ -49,7 +49,6 @@ public class MusicGame {
 		} else if(Two.isPlaying()){
 			if(Two.getPosition()>=29f) Two.setVolume(Two.getVolume()-.005f);
 		}
-		stade = false;
 	}
 	
 	public void stop() {
