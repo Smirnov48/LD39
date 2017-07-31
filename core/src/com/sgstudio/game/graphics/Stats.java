@@ -67,7 +67,11 @@ public class Stats {
 		batch.draw(atlasWood.get("tiles0_1"), 10, Gdx.graphics.getHeight()-42);
 //		smallFont.draw(batch, "Wood: ", 20, 530);
 		mediumFont.draw(batch,hero.getWood() + "/" + hero.getMaxWood(),55,Gdx.graphics.getHeight()-20);
-		if(contact) smallFont.draw(batch, contactF, 250, 400);
+		if(contactF.equals("Press 'E' to put the wood")){
+			if(contact && hero.getWood()!=0) smallFont.draw(batch, contactF, 250, 400);
+		} else {
+			if(contact) smallFont.draw(batch, contactF, 250, 400);
+		}
 		//TrainStats
 		largeFont.draw(batch,"Train:",670,580);
 		smallFont.draw(batch, "Fuel: ", 680, 530);

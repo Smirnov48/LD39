@@ -3,6 +3,8 @@ package com.sgstudio.game.player;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -22,6 +24,7 @@ import com.sgstudio.utils.Tiles;
 public class MainHero {
 	private Map<String, TextureRegion> atlasChar;
 	
+	private Sound putToOven;
 	@SuppressWarnings("unused")
 	private SpriteBatch batch;
 	public static Sprite sprite;
@@ -79,6 +82,9 @@ public class MainHero {
 		param.borderColor = Color.BLACK;
 		param.borderWidth = 1;
 		smallFont = gen.generateFont(param);
+		
+		putToOven = Gdx.audio.newSound(Gdx.files.internal("audio/sound/putToOven.wav"));
+		putToOven.stop();
 	}
 
 	private void createPhysics() {
@@ -134,7 +140,12 @@ public class MainHero {
 			if(jump) body.applyForceToCenter(0, 5f, true);
 		}
 		if (keys.getPressedE()) {
-			if(contact && contactF.equals("Press 'E' to put the wood")) putWood();
+			if(contact && contactF.equals("Press 'E' to put the wood")){
+				if(wood!=0){
+					putToOven.play();
+					putWood();
+				}
+			}
 		}
 	}
 
