@@ -37,7 +37,7 @@ public class Animator {
 	                walkFrames[index++] = tmp[i][j];
 	            }
 	        }
-	        walkAnimation = new Animation(0.025f, walkFrames);
+	        walkAnimation = new Animation(0.075f, walkFrames);
 	        spriteBatch = MyGame.getBatch();
 	        stateTime = 0f;
 	        stop = new Texture("charstat.png");
@@ -50,17 +50,19 @@ public class Animator {
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
 	        spriteBatch.draw(currentFrame, mainHero.getHeroX() - currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2,
 	        		currentFrame.getRegionWidth(), currentFrame.getRegionHeight()); 
+	        if(mainHero.getHeroDX() > 0){
+				spriteBatch.draw(stop, mainHero.getHeroX() - stop.getWidth()/2, mainHero.getHeroY() - stop.getHeight()/2,
+		        		stop.getWidth(), stop.getHeight()); 
+			} 
 		} else if(mainHero.getHeroX() < mainHero.getHeroX() - mainHero.getHeroDX()){
 		    stateTime += Gdx.graphics.getDeltaTime(); 
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
 	        spriteBatch.draw(currentFrame, mainHero.getHeroX() + currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2,
 	        		-currentFrame.getRegionWidth(), currentFrame.getRegionHeight()); 
-		} else if(mainHero.getHeroDX() < 0){
-			spriteBatch.draw(stop, mainHero.getHeroX() + stop.getWidth()/2, mainHero.getHeroY() - stop.getHeight()/2,
-					-stop.getWidth(), stop.getHeight()); 
-		} else if(mainHero.getHeroDX() > 0){
-			spriteBatch.draw(stop, mainHero.getHeroX() + stop.getWidth()/2, mainHero.getHeroY() - stop.getHeight()/2,
-	        		stop.getWidth(), stop.getHeight()); 
+	        if(mainHero.getHeroDX() == 0){
+				spriteBatch.draw(stop, mainHero.getHeroX() + stop.getWidth()/2, mainHero.getHeroY() - stop.getHeight()/2,
+						-stop.getWidth(), stop.getHeight());
+			}
 		} else {
 			spriteBatch.draw(stop, mainHero.getHeroX() - stop.getWidth()/2, mainHero.getHeroY() - stop.getHeight()/2,
 	        		stop.getWidth(), stop.getHeight()); 
