@@ -35,6 +35,7 @@ public class Locomotive {
 	private static Body body;
 	@SuppressWarnings("unused")
 	private static MainHero hero;
+	private boolean first = true;
 
 	@SuppressWarnings("static-access")
 	public Locomotive(Main main,SpriteBatch batch, World world) {
@@ -167,6 +168,10 @@ public class Locomotive {
 	}
 	
 	public void update() {
+		if(first) {
+			Locomotive.startTime = System.currentTimeMillis();
+			first = false;
+		}
 		updateOven();
 	}
 
@@ -188,9 +193,6 @@ public class Locomotive {
 	}
 
 	public void render() {
-		p.setPosition(250, 250);
-		p.update(Gdx.graphics.getDeltaTime());
-		p.draw(batch);
 			
 		Vector2 pos = Box2DHelper.getPosition(body);
 		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y  - sprite.getHeight() / 2 + 285);

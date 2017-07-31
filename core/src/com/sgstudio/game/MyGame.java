@@ -89,7 +89,6 @@ public class MyGame implements Screen {
 			
 			background.update();
 			music.update();
-			train.update();
 			rails.update();
 
 			Gdx.gl.glClearColor(0, 0, 0, 1);
