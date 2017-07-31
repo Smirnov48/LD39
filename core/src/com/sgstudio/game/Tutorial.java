@@ -41,6 +41,7 @@ public class Tutorial implements Screen {
 	private MyContactListener listener;
 
 	private Texture tex;
+	private Texture title1;
 
 	public static SpriteBatch batch;
 
@@ -90,6 +91,7 @@ public class Tutorial implements Screen {
 	@Override
 	public void show() {
 		tut = new Texture("tutorial.png");
+		title1 = new Texture("title1.png");
 		Box2D.init();
 		batch = new SpriteBatch();
 
@@ -215,7 +217,9 @@ public class Tutorial implements Screen {
 		} else if ((isTut == 1)) {
 			if (!man.getPressedEnter() || (System.currentTimeMillis() - actTime < 1000)) {
 				world.step(1 / 60f, 6, 4);
-				update();
+				background.update();
+				music.update();
+				rails.update();
 				staticCamera.update();
 				camera.position.set(x + 1400, camera.position.y, 0);
 				camera.update();
@@ -224,7 +228,7 @@ public class Tutorial implements Screen {
 					if ((camera.position.x > -8400) && (cutSceneFlag) && (cutSceneFlag2)) {
 						x -= 40;
 						System.out.println("ToPotato");
-						if (camera.position.x < -8350) {
+						if (camera.position.x < -5900) {
 							actTime = System.currentTimeMillis();
 							cutSceneFlag = false;
 						}
@@ -246,6 +250,7 @@ public class Tutorial implements Screen {
 				batch.begin();
 				background.render();
 				rails.render();
+				batch.draw(title1, 0,0);
 				batch.end();
 
 				batch.setProjectionMatrix(camera.combined);
