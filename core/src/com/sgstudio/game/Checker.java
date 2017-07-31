@@ -26,7 +26,6 @@ public class Checker {
 	
 	public void checkVic() {
 		//Train got saveStation
-		System.out.println(train.getDistance() + " >=" + train.getWay());
 		if(train.getDistance() >= train.getWay()) {
 			main.setScreen(main.victory);
 		}
