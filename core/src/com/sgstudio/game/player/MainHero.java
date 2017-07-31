@@ -13,11 +13,11 @@ import com.sgstudio.game.controller.KeyManager;
 import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.utils.Box2DHelper;
 import com.sgstudio.utils.Tiles;
-import com.sgstudio.game.player.Animator;
 
 public class MainHero {
 	private Map<String, TextureRegion> atlasChar;
 	
+	@SuppressWarnings("unused")
 	private SpriteBatch batch;
 	public static Sprite sprite;
 	private Tiles tiles;
@@ -85,12 +85,11 @@ public class MainHero {
 		else if(body.getPosition().y>=0.85) jump = false;
 		if (keys.getPressedLeft()) {
 			body.applyForceToCenter(-1.0f, 0, true);
-			System.out.println(body.getPosition().y);
 		}
 		if (keys.getPressedRight()) {
 			body.applyForceToCenter(1.0f, 0, true);
 		}
-		if (keys.getPressedUp()) {
+		if (keys.getPressedSpace()) {
 			if(jump) body.applyForceToCenter(0, 5f, true);
 		}
 		if (keys.getPressedE()) {
