@@ -1,29 +1,37 @@
 package com.sgstudio.game.models;
 
+import java.util.Map;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Сhair {
+	private Map<String, TextureRegion> atlasWood;
+	
 	private SpriteBatch batch;
 	private Sprite texture;
 	
 	private World world;
 	private Body body;
 	
-	public Сhair(SpriteBatch batch, Sprite texture){
+	public Сhair(SpriteBatch batch, Sprite texture, World world){
 		this.batch = batch;
+		this.world = world;
 		this.texture = texture;
-		
-		createPhysics();
 	}
 	
-	private void createPhysics() {
+	public void createModel(int x, int y){
+		createPhysics(x, y);
+	}
+	
+	private void createPhysics(int x, int y) {
 		body = Box2DHelper.makeBoxAroundSprite(world, texture);
-		Box2DHelper.setTransform(body, 290, 55, 0);
+		Box2DHelper.setTransform(body, x, y, 0);
 		body.setFixedRotation(true);
 	}
 	

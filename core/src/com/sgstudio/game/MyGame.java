@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -17,10 +18,10 @@ import com.sgstudio.game.graphics.MiniMap;
 import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
+import com.sgstudio.game.models.Сhair;
 import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.game.player.Demon;
 import com.sgstudio.game.player.MainHero;
-import com.sgstudio.game.train.Coach;
 import com.sgstudio.game.train.Fuel;
 import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.game.train.Passenger;
@@ -29,6 +30,8 @@ import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 
 public class MyGame implements Screen {
+	private Сhair chair;
+	
 	private Fuel obj1;
 	private Fuel obj2;
 	private Fuel obj3;
@@ -93,6 +96,8 @@ public class MyGame implements Screen {
 		hero.render();
 		demon.render();
 		pas.render();
+		chair.render();
+		
 		batch.draw(tex, -800, -600);
 		batch.end();
 
@@ -143,6 +148,9 @@ public class MyGame implements Screen {
 		obj1 = new Fuel(1);
 		obj3 = new Fuel(2);
 		obj2 = new Fuel(3);
+		
+		chair = new Сhair(batch, new Sprite(new Texture("atlas/test.png")), world);
+		chair.createModel(50, 50);
 		
 		checker = new Checker(main, locomotive, demon, hero);
 
