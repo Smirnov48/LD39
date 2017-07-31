@@ -4,7 +4,6 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -22,11 +21,10 @@ import com.sgstudio.utils.Box2DHelper;
 import com.sgstudio.utils.Tiles;
 
 public class MainHero {
-	private Map<String, TextureRegion> atlasChar;
+	/*Music*/
+	private Sound putToOven;
 	
 	/*Graphics*/
-	private Sound putToOven;
-	@SuppressWarnings("unused")
 	private SpriteBatch batch;
 	public static Sprite sprite;
 	private Tiles tiles;
@@ -51,6 +49,7 @@ public class MainHero {
 	private float x;
 	private float y;
 	private float dx;
+	private boolean jump = false;
 	
 	/*Time values for actions*/
 	private static long actTime = 0;
@@ -68,15 +67,12 @@ public class MainHero {
 		/*Graphics*/
 		this.batch = MyGame.getBatch();
 		tiles = new Tiles();
-		tiles.createAtlas("Char.png", 3, 1);
-		atlasChar = tiles.getTextureRegion();
-		sprite = new Sprite(atlasChar.get("tiles0_2"));
 		animator = new Animator(this);
 		
 		/*Box2D*/
 		createPhysics();
 		
-		//Kinematic
+		/*Kinematic*/
 		x = train.getX();
 		
 		/*Font for Text and params*/
@@ -89,6 +85,7 @@ public class MainHero {
 		param.borderWidth = 1;
 		smallFont = gen.generateFont(param);
 		
+		/*Music*/
 		putToOven = Gdx.audio.newSound(Gdx.files.internal("audio/sound/putToOven.wav"));
 		putToOven.stop();
 	}
@@ -102,10 +99,14 @@ public class MainHero {
 	public void render(boolean contact, String contactF) {
 		update(contact,contactF);
 		Vector2 pos = Box2DHelper.getPosition(body);
-		animator.render();
+		animator.render();//animation
+		
+		/*Kinematic update*/
 		dx = x - pos.x;
 		x = pos.x;
 		y = pos.y;
+		
+		/*Checking is Hero's wood updates*/
 		if(updatingWood) {
 			if (System.currentTimeMillis() - actTime < 1000) {	
 				smallFont.draw(batch, "+" + (wood-lastWood) , pos.x + dx, 200);
@@ -119,12 +120,37 @@ public class MainHero {
 		
 	}
 	
-	private boolean jump = false;
+	/*Getters*/
+	public int getWood() {
+		return wood;
+	}
 
+	public int getMaxWood() {
+		return maxWood;
+	}
+	
+	public float getHeroX() {
+		return x;
+	}
+	
+	public float getHeroY() {
+		return y;
+	}
+	
+	public float getHeroDX() {
+		return dx;
+	}
+	
+	public Vector2 getPosition() {
+		return Box2DHelper.getPosition(body);
+	}
+	
+	//Update method for Hero
 	public void update(boolean contact, String contactF) {
 		if(body.getPosition().y<=0.7) jump = true;
 		else if(body.getPosition().y>=0.85) jump = false;
 		
+		/*Checking KeyDowns*/
 		if (keys.getPressedLeft()) {
 			body.applyForceToCenter(-.9f, 0, true);
 			if (body.getLinearVelocity().x < -5) {
@@ -150,31 +176,6 @@ public class MainHero {
 		}
 	}
 
-	public void putWood() {
-		train.updOvenWood(getWood());
-		setWood(0);
-	}
-
-	public int getWood() {
-		return wood;
-	}
-
-	public int getMaxWood() {
-		return maxWood;
-	}
-	
-	public float getHeroX() {
-		return x;
-	}
-	
-	public float getHeroY() {
-		return y;
-	}
-	
-	public float getHeroDX() {
-		return dx;
-	}
-
 	// Update Stats Methods
 	public void updWood(int i) {
 		if (i!=0) {
@@ -191,6 +192,12 @@ public class MainHero {
 		actTime = System.currentTimeMillis();
 		}
 	}
+	
+	//Put to the oven Method
+	public void putWood() {
+		train.updOvenWood(getWood());
+		setWood(0);
+	}
 
 	// Set methods
 	public void setWood(int i) {
@@ -204,13 +211,5 @@ public class MainHero {
 
 	public void setMaxWood(int i) {
 		maxWood = i;
-	}
-
-	public Vector2 getPosition() {
-		return Box2DHelper.getPosition(body);
-	}
-	
-	public void checkDeath() {
-		
 	}
 }
