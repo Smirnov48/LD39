@@ -92,10 +92,10 @@ public class MyGame implements Screen {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		train.render();
-		hero.render();
-		demon.render();
 		pas.render();
 		chair.render();
+		hero.render(listener.getContact(), listener.getContactF());
+		demon.render();
 		
 		batch.draw(tex, -800, -600);
 		batch.end();
@@ -157,7 +157,7 @@ public class MyGame implements Screen {
 			public boolean keyDown(int keycode) {
 
 				if (Gdx.input.isKeyPressed(Keys.F)) {
-					int Fuel = listener.getBodyFuel().getFuel();
+					int Fuel = listener.getFuel();
 					if (hero.getWood() + Fuel > hero.getMaxWood())
 						i += hero.getWood() + Fuel - hero.getMaxWood();
 					if (hero.getWood() + Fuel < hero.getMaxWood())

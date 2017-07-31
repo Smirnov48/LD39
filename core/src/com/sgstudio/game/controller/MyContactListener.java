@@ -60,6 +60,11 @@ public class MyContactListener implements ContactListener {
 				view=1;
 				contact.setEnabled(false);
 				fuelBody = contact.getFixtureB().getBody();
+			} else if(contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Locomotive") &&
+					contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player")){
+				this.contact = true;
+				this.contactF = "Press 'E' to put the wood";
+				i=0;
 			} else if(contact.getFixtureA().getUserData() != null && !contact.getFixtureA().getUserData().equals("Player") &&
 					contact.getFixtureB().getUserData() != null && !contact.getFixtureB().getUserData().equals("Chair")) {
 				if (time != (System.currentTimeMillis() - startTime) / 250) {
