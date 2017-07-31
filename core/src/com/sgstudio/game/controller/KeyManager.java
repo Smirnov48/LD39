@@ -1,4 +1,4 @@
-package com.sgstudio.game;
+package com.sgstudio.game.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;

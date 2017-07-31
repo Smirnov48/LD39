@@ -1,18 +1,13 @@
 package com.sgstudio.game.models;
 
-import java.util.Map;
-
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Сhair {
-	private Map<String, TextureRegion> atlasWood;
-	
 	private SpriteBatch batch;
 	private Sprite texture;
 	
@@ -30,7 +25,7 @@ public class Сhair {
 	}
 	
 	private void createPhysics(int x, int y) {
-		body = Box2DHelper.makeBoxAroundSprite(world, texture);
+		body = Box2DHelper.makeBox(world, new Vector2(texture.getWidth(), texture.getHeight()), new Vector2(x, y), "Chair");
 		Box2DHelper.setTransform(body, x, y, 0);
 		body.setFixedRotation(true);
 	}

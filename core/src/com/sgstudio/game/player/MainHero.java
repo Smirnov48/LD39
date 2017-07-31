@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.sgstudio.game.KeyManager;
 import com.sgstudio.game.MyGame;
+import com.sgstudio.game.controller.KeyManager;
 import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.utils.Box2DHelper;
 import com.sgstudio.utils.Tiles;
@@ -52,7 +52,7 @@ public class MainHero {
 	}
 
 	private void createPhysics() {
-		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
+		body = Box2DHelper.makeBoxAroundSprite(world, sprite, "Player");
 		Box2DHelper.setTransform(body, 290, 60, 0);
 		body.setFixedRotation(true);
 	}

@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.sgstudio.game.controller.MyContactListener;
 import com.sgstudio.game.graphics.MiniMap;
 import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.ground.Background;
@@ -129,6 +130,7 @@ public class MyGame implements Screen {
 	public void show() {
 		Box2D.init();
 		world = new World(new Vector2(0, -10), true);
+		world.setContactListener(new MyContactListener());
 		debugRenderer = new Box2DDebugRenderer();
 
 		batch = main.getBatch();
