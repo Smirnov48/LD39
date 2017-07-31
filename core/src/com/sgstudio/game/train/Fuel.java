@@ -27,6 +27,8 @@ public class Fuel {
 		this.view = view;
 	}
 	
+	public boolean isBroken(){ return broken; }
+	
 	public int getFuel(){
 //		System.out.println(StrikesСhair + " " + StrikesTable + " " + StrikesPassenger + " " + StrikesСupboard);
 		switch(view){

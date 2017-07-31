@@ -56,13 +56,13 @@ public class Stats {
 		System.out.println("Fuel: " + train.getOvenWood() + "/" + train.getMaxOvenWood());
 	}
 	
-	public void render() {
+	public void render(boolean contact, String contactF) {
 		//PlayerStats
 //		largeFont.draw(batch,"Player:",20,580);
 		batch.draw(atlasWood.get("tiles0_1"), 10, Gdx.graphics.getHeight()-42);
 //		smallFont.draw(batch, "Wood: ", 20, 530);
 		mediumFont.draw(batch,String.valueOf((int)hero.getWood()),55,Gdx.graphics.getHeight()-20);
-		
+		if(contact) smallFont.draw(batch, contactF, 250, 400);
 		//TrainStats
 		largeFont.draw(batch,"Train:",670,580);
 		smallFont.draw(batch, "Fuel: ", 680, 530);
