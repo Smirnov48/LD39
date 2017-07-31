@@ -9,6 +9,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
@@ -34,6 +35,11 @@ import com.sgstudio.utils.Box2DHelper;
 //import com.sgstudio.utils.Particle;
 
 public class MyGame implements Screen {
+	private final int FRAME_COLS = 4, FRAME_ROWS = 1;
+	private Animation<TextureRegion> walkAnimation;
+	private Texture walkSheet;
+	float stateTime;
+	
 	private Sound carbon;
 	private Sound putToOven;
 	private Sound bang;
@@ -82,9 +88,12 @@ public class MyGame implements Screen {
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); 
 		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 	}
-
+	
+	TextureRegion currentFrame=null;
 	@Override
 	public void render(float delta) {
+		stateTime += Gdx.graphics.getDeltaTime();
+		currentFrame = walkAnimation.getKeyFrame(stateTime, true);
 		isTut = 1;
 		world.step(1 / 60f, 6, 4);
 		update();
@@ -141,7 +150,6 @@ public class MyGame implements Screen {
 	private Map<String, TextureRegion> atlasSound;
 	@Override
 	public void show() {
-		
 		Box2D.init();
 		batch = main.getBatch();
 		
@@ -178,6 +186,18 @@ public class MyGame implements Screen {
 		
 		music.setMuted(true);
 		
+		walkSheet = new Texture(Gdx.files.internal("atlas/charHit.png"));
+		TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);
+		TextureRegion[] walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
+		int index = 0;
+		for (int i = 0; i < FRAME_ROWS; i++) {
+			for (int j = 0; j < FRAME_COLS; j++) {
+				walkFrames[index++] = tmp[i][j];
+			}
+		}
+		walkAnimation = new Animation<TextureRegion>(0.005f, walkFrames);
+		stateTime = 0f;
+		
 		Gdx.input.setInputProcessor(new InputProcessor() {
 
 			@Override
@@ -192,7 +212,12 @@ public class MyGame implements Screen {
 						i += swapValue;
 					if (hero.getWood() + Fuel < hero.getMaxWood())
 						hero.updWood(Fuel);
-					if(Fuel==0) bang.play();
+					if(Fuel==0) {
+						batch.begin();
+						batch.draw(currentFrame, 0, 100);
+						batch.end();
+						bang.play();
+					}
 					if(Fuel!=0) carbon.play();
 				} else if (Gdx.input.isKeyPressed(Keys.V)) {
 					System.out.println("In Pull " + i + " woods.");
