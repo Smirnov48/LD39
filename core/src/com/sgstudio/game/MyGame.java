@@ -26,6 +26,7 @@ import com.sgstudio.game.train.Passenger;
 import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
+//import com.sgstudio.utils.Particle;
 
 public class MyGame implements Screen {
 	private MyContactListener listener;
@@ -48,12 +49,17 @@ public class MyGame implements Screen {
 	public Stats stats;
 	private Rails rails;
 	private Background background;
+	
+	//private Particle particle;
 
 	private MiniMap map;
 	public int allDistance = 40000;
 	private OrthographicCamera staticCamera;
 	
 	private Checker checker;
+	Fuel obj1;
+	Fuel obj2;
+	Fuel obj3;
 
 	public MyGame(final Main main) {
 		this.main = main;
@@ -115,6 +121,7 @@ public class MyGame implements Screen {
 		rails.dispose();
 		map.dispose();
 		pas.dispose();
+		//particle.dispose();
 	}
 
 	private int i = 0;
@@ -127,7 +134,9 @@ public class MyGame implements Screen {
 		listener = new MyContactListener(world);
 		world.setContactListener(listener);
 		debugRenderer = new Box2DDebugRenderer();
-		
+
+		batch = main.getBatch();
+		//particle = new Particle(batch);
 		train = new Train(main, batch, world);
 		Locomotive locomotive = train.getLocomotive();
 				
@@ -139,6 +148,9 @@ public class MyGame implements Screen {
 		stats = new Stats(batch, hero, locomotive);
 		map = new MiniMap(batch, locomotive);
 		music = new MusicGame();
+		obj1 = new Fuel(1);
+		obj3 = new Fuel(2);
+		obj2 = new Fuel(3);
 		tex = new Texture("coor.png");
 		
 		checker = new Checker(main, locomotive, demon, hero);

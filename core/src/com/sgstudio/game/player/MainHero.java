@@ -2,6 +2,11 @@ package com.sgstudio.game.player;
 
 import java.util.Map;
 
+<<<<<<< HEAD
+=======
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+>>>>>>> master
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,6 +18,7 @@ import com.sgstudio.game.controller.KeyManager;
 import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.utils.Box2DHelper;
 import com.sgstudio.utils.Tiles;
+import com.sgstudio.game.player.Animator;
 
 public class MainHero {
 	private Map<String, TextureRegion> atlasChar;
@@ -28,9 +34,13 @@ public class MainHero {
 	private static int maxWood;
 	private KeyManager keys;
 	private Locomotive train;
+	public Animator animator;
 	
 	private float x;
+	private float y;
+	private float dx;
 
+	
 	public MainHero(SpriteBatch batch, World world, Locomotive train) {
 		this.train = train;
 		this.batch = MyGame.getBatch();
@@ -48,6 +58,7 @@ public class MainHero {
 
 		keys = new KeyManager();
 		x = train.getX();
+		animator = new Animator(this);
 	}
 
 	private void createPhysics() {
@@ -63,17 +74,19 @@ public class MainHero {
 	public void render(boolean contact, String contactF) {
 		update(contact,contactF);
 		Vector2 pos = Box2DHelper.getPosition(body);
-		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y - sprite.getHeight() / 2);
+		animator.render();
+		//batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y - sprite.getHeight() / 2);
 		x = pos.x;
+		y = pos.y;
+		dx = x - pos.x;
 	}
-
+	
 	public void dispose() {
 	}
 
 	public void update(boolean contact, String contactF) {
 		if (keys.getPressedLeft()) {
 			body.applyForceToCenter(-1.0f, 0, true);
-			
 		}
 		if (keys.getPressedRight()) {
 			body.applyForceToCenter(1.0f, 0, true);
@@ -101,6 +114,14 @@ public class MainHero {
 	
 	public float getHeroX() {
 		return x;
+	}
+	
+	public float getHeroY() {
+		return y;
+	}
+	
+	public float getHeroDX() {
+		return dx;
 	}
 
 	// Update Stats Methods
