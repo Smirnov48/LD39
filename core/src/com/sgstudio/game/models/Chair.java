@@ -30,7 +30,7 @@ public class Chair {
 	}
 	
 	private void createPhysics(int x, int y) {
-		body = Box2DHelper.makeBox(world, new Vector2(texture.getWidth(), texture.getHeight()), new Vector2(x, y), "Chair");
+		body = Box2DHelper.makeBox(world, new Vector2(texture.getWidth(), texture.getHeight()), new Vector2(0, 0), "Chair");
 		Box2DHelper.setTransform(body, x, y, 0);
 		body.setFixedRotation(true);
 	}
@@ -38,7 +38,7 @@ public class Chair {
 	private float x;
 	public void render(){
 		Vector2 pos = Box2DHelper.getPosition(body);
-		batch.draw(texture, pos.x - texture.getWidth() / 2, pos.y - texture.getHeight() / 2);
+		batch.draw(texture, pos.x - texture.getWidth() / 2,  pos.y - texture.getHeight() / 2 );
 		x = pos.x;
 	}
 

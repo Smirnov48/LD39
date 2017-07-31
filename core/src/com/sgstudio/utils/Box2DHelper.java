@@ -12,7 +12,11 @@ public class Box2DHelper {
 
 	final static public float PIXELS_TO_METERS = 100f;
 
-	public static Body makeBoxAroundSprite(World world, Sprite sprite, String UserData) {
+	public static Body makeBoxAroundSprite(World world, Sprite sprite) {
+		return makeBoxAroundSprite(world, sprite, null);
+	}
+	
+	public static Body makeBoxAroundSprite(World world, Sprite sprite, String userData) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
 		bodyDef.position.set(sprite.getX() / PIXELS_TO_METERS, sprite.getY() / PIXELS_TO_METERS);
@@ -31,7 +35,9 @@ public class Box2DHelper {
 		body.createFixture(fixtureDef);
 		shape.dispose();
 		
-		body.getFixtureList().get(0).setUserData(UserData);
+		if (userData != null) {
+			body.getFixtureList().get(0).setUserData(userData);
+		}
 		
 		return body;
 	}

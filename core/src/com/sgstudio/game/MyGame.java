@@ -152,7 +152,7 @@ public class MyGame implements Screen {
 		obj2 = new Fuel(3);
 		
 		chair = new Chair(batch, new Sprite(new Texture("atlas/test.png")), world);
-		chair.createModel(50, 50);
+		chair.createModel(100, 50);
 		
 		checker = new Checker(main, locomotive, demon, hero);
 
