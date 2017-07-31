@@ -59,7 +59,7 @@ public class MainHero {
 	public MainHero(SpriteBatch batch, World world, Locomotive train) {
 		
 		/*Wood Hero Pull*/
-		maxWood = 20;
+		maxWood = 2;
 		wood = 0;
 		
 		/*Supposed classes*/

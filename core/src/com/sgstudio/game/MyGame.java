@@ -21,7 +21,6 @@ import com.sgstudio.game.controller.KeyManager;
 import com.sgstudio.game.controller.MyContactListener;
 import com.sgstudio.game.graphics.MiniMap;
 import com.sgstudio.game.graphics.Stats;
-import com.sgstudio.game.graphics.Tutorial;
 import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
 import com.sgstudio.game.music.MusicGame;
@@ -70,7 +69,6 @@ public class MyGame implements Screen {
 	private OrthographicCamera staticCamera;
 	
 	private Checker checker;
-	private Tutorial tut;
 	private int isTut = 2;
 	
 	public KeyManager man;
@@ -87,27 +85,6 @@ public class MyGame implements Screen {
 
 	@Override
 	public void render(float delta) {
-		if(!man.getPressedEnter() && isTut == 2) {
-			world.step(1 / 60f, 6, 4);
-			staticCamera.update();
-			camera.position.set(hero.getPosition().x, camera.position.y, 0);
-			camera.update();
-			
-			background.update();
-			music.update();
-			rails.update();
-
-			Gdx.gl.glClearColor(0, 0, 0, 1);
-			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-			batch.setProjectionMatrix(staticCamera.combined);
-			batch.begin();
-			background.render();
-			rails.render();
-			train.render();
-			tut.render();
-			batch.end();
-		} else {
 			isTut = 1;
 			world.step(1 / 60f, 6, 4);
 			update();
@@ -138,7 +115,7 @@ public class MyGame implements Screen {
 	
 			Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
 			debugRenderer.render(world, debugMatrix);
-		}
+		
 	}
 
 	private void update() {
@@ -158,7 +135,6 @@ public class MyGame implements Screen {
 		map.dispose();
 		pas.dispose();
 		//particle.dispose();
-		tut.dispose();
 	}
 
 	private int i = 0;
@@ -169,9 +145,7 @@ public class MyGame implements Screen {
 		
 		Box2D.init();
 		batch = main.getBatch();
-		tut = new Tutorial(batch);
 		
-		//SetStartTime
 		world = new World(new Vector2(0, -10), true);
 		listener = new MyContactListener(world);
 		world.setContactListener(listener);

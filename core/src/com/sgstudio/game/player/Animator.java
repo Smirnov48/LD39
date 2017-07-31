@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.sgstudio.game.MyGame;
+import com.sgstudio.game.Tutorial;
 import com.sgstudio.game.controller.KeyManager;
+import com.sgstudio.main.*;
 
 public class Animator {
 	final int FRAME_COLS = 8; 
