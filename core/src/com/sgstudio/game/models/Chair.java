@@ -1,19 +1,18 @@
 package com.sgstudio.game.models;
 
+import java.util.Map;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.utils.Box2DHelper;
 
-<<<<<<< HEAD:core/src/com/sgstudio/game/models/Сhair.java
-public class Сhair {
-=======
 public class Chair {
 	private Map<String, TextureRegion> atlasWood;
 	
->>>>>>> master:core/src/com/sgstudio/game/models/Chair.java
 	private SpriteBatch batch;
 	private Sprite texture;
 	
