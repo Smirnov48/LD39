@@ -117,7 +117,7 @@ public class MyContactListener implements ContactListener {
 			if(i==1){
 				this.contact = false;
 				this.contactF = "";
-				this.get="";
+//				this.get="";
 				view=0;
 			}
 		}

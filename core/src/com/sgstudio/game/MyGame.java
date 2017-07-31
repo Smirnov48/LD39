@@ -1,5 +1,7 @@
 package com.sgstudio.game;
 
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
@@ -8,6 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
@@ -27,10 +30,13 @@ import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.game.train.Passenger;
 import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
+import com.sgstudio.menu.Menu;
 import com.sgstudio.utils.Box2DHelper;
 //import com.sgstudio.utils.Particle;
 
 public class MyGame implements Screen {
+	private boolean Play = true, Moved = false, Pressed = false;
+	
 	private MyContactListener listener;
 	
 	private Texture tex;
@@ -157,7 +163,8 @@ public class MyGame implements Screen {
 	}
 
 	private int i = 0;
-
+	
+	private Map<String, TextureRegion> atlasSound;
 	@Override
 	public void show() {
 		
@@ -188,34 +195,40 @@ public class MyGame implements Screen {
 		tex = new Texture("coor.png");
 		
 		checker = new Checker(main, locomotive, demon, hero);
+		
+		atlasSound = Menu.getAtlasSound();
 
 		Gdx.input.setInputProcessor(new InputProcessor() {
 
 			@Override
 			public boolean keyDown(int keycode) {
+				int swapValue = 0;
 				if (Gdx.input.isKeyPressed(Keys.F) && listener.getContactF().indexOf("F")==7) {
 					int Fuel = listener.getFuel();
+					System.out.println("� ���� " + i + " ������.");
 					if (hero.getWood() + Fuel > hero.getMaxWood())
-						i += hero.getWood() + Fuel - hero.getMaxWood();
+						swapValue = hero.getMaxWood() + Fuel - hero.getWood();
+						hero.updWood(Fuel);
+						i += swapValue;
 					if (hero.getWood() + Fuel < hero.getMaxWood())
 						hero.updWood(Fuel);
 				} else if (Gdx.input.isKeyPressed(Keys.V)) {
-					int I = 0;
-					if (hero.getWood() + i < hero.getMaxWood()) {
-						I = hero.getWood() + i - hero.getMaxWood();
+					//���� V ������
+					 //����������� ��������� i
+					// i ��������� ��� ��������� ������� �� �����������
+					System.out.println("� ���� " + i + " ������.");
+					if (hero.getWood() + i < hero.getMaxWood() && i > 0) {
+						hero.updWood(i);
+						System.out.println("�������� ������ " + i + " ������.");
+						i-=i % 11;
+						System.out.println("�������� � ���� " + i + " ������. ");
 					}
-					if (hero.getWood() < hero.getMaxWood() && i > 0) {
-						int y = hero.getMaxWood() - hero.getWood();
-						i -= y;
-						hero.updWood(y);
-					}
-					if (I > 0)
-						i = I;
-					if (i > 0)
-						System.out.println("You can not take " + i + " woods! Button 'V' - Pick them up");
+					if (hero.getWood() + i > hero.getMaxWood() && i > 0) {
+						swapValue = i - (hero.getMaxWood() - hero.getWood());
+						hero.updWood(i);
+						i = swapValue;
+					}	
 				}
-				if (i > 0)
-					System.out.println("You can not take " + i + " woods! Button 'V' - Pick them up");
 				return false;
 			}
 
@@ -233,13 +246,24 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-				// TODO Auto-generated method stub
+				if(screenX>=15 && screenX<=15+atlasSound.get("tiles0_0").getRegionWidth()){
+					if(screenY<=Gdx.graphics.getHeight()-15 && screenY>=Gdx.graphics.getHeight()-15-atlasSound.get("tiles0_0").getRegionHeight())
+						Pressed=true;
+					else Pressed=false;
+				} else Pressed=false;
 				return false;
 			}
-
+			
 			@Override
 			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-				// TODO Auto-generated method stub
+				if(Moved && Pressed){
+					if(Play) {
+						music.stopMusic();
+					}
+					else music.musicStade();
+					Play=!Play;
+					
+				}
 				return false;
 			}
 
@@ -251,7 +275,11 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean mouseMoved(int screenX, int screenY) {
-				// TODO Auto-generated method stub
+				if(screenX>=15 && screenX<=15+atlasSound.get("tiles0_0").getRegionWidth()){
+					if(screenY<=Gdx.graphics.getHeight()-15 && screenY>=Gdx.graphics.getHeight()-15-atlasSound.get("tiles0_0").getRegionHeight())
+						Moved=true;
+					else Moved=false;
+				} else Moved=false;
 				return false;
 			}
 
