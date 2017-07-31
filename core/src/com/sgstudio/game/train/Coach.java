@@ -37,22 +37,57 @@ public class Coach {
 	}
 	
 	private Chair chair[] = new Chair[1];
+	private Chair chair1[] = new Chair[1];
+	private Chair chair2[] = new Chair[1];
+	private Chair chair3[] = new Chair[1];
+	private Chair chair4[] = new Chair[1];
+	private Chair chair5[] = new Chair[1];
 	private Sprite chairT;
 	private void createChair(){
 		chairT = new Sprite(new Texture("atlas/test.png"));
 		for(int i=0;i<1;i++){
-			chair[i] = new Chair(batch, chairT, world);
+			chair[i] = new Chair(batch, chairT, world, "normal");
 			chair[i].createModel(number*-500-10, 60);
+		}
+		for(int q=0;q<1;q++){
+			chair1[q] = new Chair(batch, chairT, world, "");
+			chair1[q].createModel(number*-500+40, 60);
+		}
+		for(int w=0;w<1;w++){
+			chair2[w] = new Chair(batch, chairT, world, "normal");
+			chair2[w].createModel(number*-500+265-10, 60);
+		}
+		for(int e=0;e<1;e++){
+			chair3[e] = new Chair(batch, chairT, world, "");
+			chair3[e].createModel(number*-500+265+35, 60);
+		}
+		for(int r=0;r<1;r++){
+			chair4[r] = new Chair(batch, chairT, world, "normal");
+			chair4[r].createModel(number*-500+145-10, 60);
+		}
+		for(int t=0;t<1;t++){
+			chair5[t] = new Chair(batch, chairT, world, "");
+			chair5[t].createModel(number*-500+145+35, 60);
 		}
 	}
 	
 	private Table table[] = new Table[1];
+	private Table table1[] = new Table[1];
+	private Table table2[] = new Table[1];
 	private Sprite tableT;
 	private void createTable(){
 		tableT = new Sprite(new Texture("table1.png"));
 		for(int i=0;i<1;i++){
 			table[i] = new Table(batch, tableT, world);
 			table[i].createModel(number*-500+15, 60);
+		}
+		for(int j=0;j<1;j++){
+			table1[j] = new Table(batch, tableT, world);
+			table1[j].createModel(number*-500+265, 60);
+		}
+		for(int k=0;k<1;k++){
+			table2[k] = new Table(batch, tableT, world);
+			table2[k].createModel(number*-500+145, 60);
 		}
 	}
 	
@@ -81,7 +116,14 @@ public class Coach {
 		Vector2 pos = Box2DHelper.getPosition(body);
 		batch.draw(sprite, number * -500 + pos.x - sprite.getWidth() / 2, pos.y + sprite.getHeight() + 10);
 		for(int i=0;i<1;i++) chair[i].render();
+		for(int q=0;q<1;q++) chair1[q].render();
+		for(int w=0;w<1;w++) chair2[w].render();
+		for(int e=0;e<1;e++) chair3[e].render();
+		for(int r=0;r<1;r++) chair4[r].render();
+		for(int t=0;t<1;t++) chair5[t].render();
 		for(int i=0;i<1;i++) table[i].render();
+		for(int j=0;j<1;j++) table1[j].render();
+		for(int k=0;k<1;k++) table2[k].render();
 //		for(int i=0;i<number;i++) wardrobe[i].render();
 	}
 
