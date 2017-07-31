@@ -16,6 +16,7 @@ import com.sgstudio.utils.Box2DHelper;
 public class Locomotive {
 	ParticleEffect p = new ParticleEffect();
 
+	/*Wood*/
 	private int ovenWood;//Wood in Oven	
 	private int wood;    //Wood in Hero
 	private static int maxOvenWood; //MaxWood of Oven
