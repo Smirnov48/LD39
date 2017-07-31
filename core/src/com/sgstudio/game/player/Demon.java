@@ -35,7 +35,7 @@ public class Demon {
 		startTime = System.currentTimeMillis();
 		this.batch = batch;
 		this.train = train;
-		speed = 20;
+		speed = 25;
 		// speedUp = 0.05f;
 		way = train.getWay();
 		disToTrain = 1000 + train.getDistance();
@@ -66,11 +66,11 @@ public class Demon {
 	public void kinematic() {
 		if (time != (System.currentTimeMillis() - startTime) / 1000) {
 			time++;
-			/*
+			
 			speed += speed / 100 * 1;
 			disToTrain -= speed;
 			disToTrain += train.getSpeed();
-			*/
+			System.out.println(disToTrain);
 		}
 	}
 

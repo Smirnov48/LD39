@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.Json;
 import com.sgstudio.settings.Settings;
 
 public class MyJson {
-	private static Settings settings;
-	private static Json json;
+	private Settings settings;
+	private Json json;
 	
 	private String file;
 	

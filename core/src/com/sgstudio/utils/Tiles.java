@@ -7,18 +7,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Tiles {
-	private static Texture texture = null;
-	private static int Lines = 0;
-	private static int Columns = 0;
+	private Texture texture = null;
+	private int Lines = 0;
+	private int Columns = 0;
 	
 	private static Map<String, TextureRegion> textureRegions = null;
 	
 	public void createAtlas(String tiles, int lines, int columns){
-		Tiles.texture = new Texture(tiles);
+		texture = new Texture(tiles);
 		textureRegions = null;
 		textureRegions = new HashMap<String, TextureRegion>();
-		Tiles.Lines = lines;
-		Tiles.Columns = columns;
+		Lines = lines;
+		Columns = columns;
 		createAtlas();
 	}
 	

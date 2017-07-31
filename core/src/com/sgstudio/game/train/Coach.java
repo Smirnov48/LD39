@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.models.Chair;
 import com.sgstudio.game.models.Table;
+import com.sgstudio.game.models.Wardrobe;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Coach {
@@ -30,6 +31,7 @@ public class Coach {
 		
 		createChair();
 		createTable();
+//		createWardrobe();
 		
 		createPhysics();
 	}
@@ -53,6 +55,16 @@ public class Coach {
 			table[i].createModel(number*-500+15, 60);
 		}
 	}
+	
+	private Wardrobe wardrobe[] = new Wardrobe[10];
+	private Sprite wardrobeT;
+	private void createWardrobe(){
+		wardrobeT = new Sprite(new Texture("wardrobe2.png"));
+		for(int i=0;i<number;i++){
+			wardrobe[i] = new Wardrobe(batch, wardrobeT, world);
+			wardrobe[i].createModel(number*-500+45, 60);
+		}
+	}
 
 	private void createPhysics() {
 		Vector2 size = new Vector2(sprite.getWidth() / 2, 12);
@@ -70,6 +82,7 @@ public class Coach {
 		batch.draw(sprite, number * -500 + pos.x - sprite.getWidth() / 2, pos.y + sprite.getHeight() + 10);
 		for(int i=0;i<number;i++) chair[i].render();
 		for(int i=0;i<number;i++) table[i].render();
+//		for(int i=0;i<number;i++) wardrobe[i].render();
 	}
 
 }

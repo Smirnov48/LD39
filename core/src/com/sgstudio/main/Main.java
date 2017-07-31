@@ -20,7 +20,7 @@ public class Main extends Game {
 	public AboutSGstudio aboutsgstudio;
 	public Tutorial tutorial;
 	
-	private static SpriteBatch batch;
+	private SpriteBatch batch;
 
 	@Override
 	public void create() {

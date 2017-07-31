@@ -25,6 +25,8 @@ public class MainHero {
 	
 	/*Music*/
 	private Sound putToOven;
+	private Sound jumpSound;
+	private boolean jumpSoundB;
 	
 	/*Graphics*/
 	private SpriteBatch batch;
@@ -59,7 +61,7 @@ public class MainHero {
 	public MainHero(SpriteBatch batch, World world, Locomotive train) {
 		
 		/*Wood Hero Pull*/
-		maxWood = 2;
+		maxWood = 20;
 		wood = 0;
 		
 		/*Supposed classes*/
@@ -94,6 +96,11 @@ public class MainHero {
 		/*Music*/
 		putToOven = Gdx.audio.newSound(Gdx.files.internal("audio/sound/putToOven.wav"));
 		putToOven.stop();
+		
+		jumpSound = Gdx.audio.newSound(Gdx.files.internal("audio/sound/Jump.wav"));
+		jumpSound.setLooping(0, false);
+		jumpSound.stop();
+		jumpSoundB = true;
 	}
 
 	private void createPhysics() {
@@ -159,8 +166,13 @@ public class MainHero {
 	
 	//Update method for Hero
 	public void update(boolean contact, String contactF) {
-		if(body.getPosition().y<=0.7) jump = true;
-		else if(body.getPosition().y>=0.85) jump = false;
+		if(body.getPosition().y<=0.7){
+			jump = true;
+		}
+		else if(body.getPosition().y>=0.85){
+			jump = false;
+			jumpSoundB = false;
+		} else if(body.getPosition().y>=0.7001)jumpSoundB = true;
 		
 		/*Checking KeyDowns*/
 		if (keys.getPressedLeft()) {
@@ -176,7 +188,11 @@ public class MainHero {
 			}
 		}
 		if (keys.getPressedSpace()) {
-			if(jump) body.applyForceToCenter(0, 5f, true);
+			if(jump){
+				body.applyForceToCenter(0, 5f, true);
+				if(jumpSoundB) jumpSound.play();
+				jumpSoundB = false;
+			}
 		}
 		if (keys.getPressedE()) {
 			if(contact && contactF.equals("Press 'E' to put the wood")){

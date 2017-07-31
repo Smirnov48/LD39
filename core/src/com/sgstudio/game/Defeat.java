@@ -16,15 +16,15 @@ import com.sgstudio.game.ground.Background;
 
 public class Defeat implements Screen{
 	private Main main;
-	SpriteBatch batch;
-	Sprite bg;
-	Texture button1;
-	Texture button2;
-	Texture button3;
-	Texture lose;
-	private static boolean Moved = false;
-	private static boolean Pressed = false;
-	private static boolean Play = true;
+	private SpriteBatch batch;
+	private Sprite bg;
+	private Texture button1;
+	private Texture button2;
+	private Texture button3;
+	private Texture lose;
+	private boolean Moved = false;
+	private boolean Pressed = false;
+	private boolean Play = true;
 	private OrthographicCamera camera;
 	
 	public Defeat(Main main) {

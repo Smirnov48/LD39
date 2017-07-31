@@ -19,9 +19,9 @@ public class Victory implements Screen {
 	Texture button2;
 	Texture button3;
 	Texture win;
-	private static boolean Moved = false;
-	private static boolean Pressed = false;
-	private static boolean Play = true;
+	private boolean Moved = false;
+	private boolean Pressed = false;
+	private boolean Play = true;
 	private OrthographicCamera camera;
 	
 	public Victory(Main main) {
