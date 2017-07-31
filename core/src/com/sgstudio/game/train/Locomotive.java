@@ -19,25 +19,25 @@ public class Locomotive {
 	/*Wood*/
 	private int ovenWood;//Oven	
 	private int wood;    //Hero
-	private static int maxOvenWood; //Max Oven
+	private int maxOvenWood; //Max Oven
 	private boolean ovenFire; // Oven Stade
 
 	/*Kinematic*/
 	private float speed;
 	private float speedUp;
-	private static int distance = 0;//Passed Distance
+	private int distance = 0;//Passed Distance
 	private final int allDistance = 4000; //Full distance
 	
 	//Time values
-	private static long startTime;
-	private static float time = 0;
+	private long startTime;
+	private float time = 0;
 
-	private static SpriteBatch batch;
-	private static World world;
-	private static Sprite sprite;
-	private static Body body;
+	private SpriteBatch batch;
+	private World world;
+	private Sprite sprite;
+	private Body body;
 	@SuppressWarnings("unused")
-	private static MainHero hero;
+	private MainHero hero;
 	private boolean first = true;
 
 	@SuppressWarnings("static-access")
@@ -52,7 +52,7 @@ public class Locomotive {
 		ovenFire = true;
 
 		//SetStartTime
-		Locomotive.startTime = System.currentTimeMillis();
+		startTime = System.currentTimeMillis();
 		
 		//Speed
 		speed = 13;
@@ -174,7 +174,7 @@ public class Locomotive {
 	
 	public void update() {
 		if(first) {
-			Locomotive.startTime = System.currentTimeMillis();
+			startTime = System.currentTimeMillis();
 			first = false;
 		}
 		updateOven();

@@ -39,7 +39,7 @@ public class MainHero {
 
 	/*Hero's wood*/
 	private int wood;
-	private static int maxWood;
+	private int maxWood;
 	private int lastWood; //time value
 	boolean updatingWood = false;
 	
@@ -54,7 +54,7 @@ public class MainHero {
 	private boolean jump = false;
 	
 	/*Time values for actions*/
-	private static long actTime = 0;
+	private long actTime = 0;
 
 	public MainHero(SpriteBatch batch, World world, Locomotive train) {
 		
