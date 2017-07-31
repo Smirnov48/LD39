@@ -166,7 +166,7 @@ public class MyContactListener implements ContactListener {
 			return ((Chair)object).getFuel();
 		}
 		if (object instanceof Table) { 
-			return ((Chair)object).getFuel();
+			return ((Table)object).getFuel();
 		}
 		
 		return 0;
