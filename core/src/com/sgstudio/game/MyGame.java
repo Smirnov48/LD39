@@ -189,7 +189,7 @@ public class MyGame implements Screen {
 		bang.stop();
 		
 		music.setMuted(true);
-		music.setMusicOne();
+		music.setMusicThree();
 		
 		walkSheet = new Texture(Gdx.files.internal("atlas/charHit.png"));
 		TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);
