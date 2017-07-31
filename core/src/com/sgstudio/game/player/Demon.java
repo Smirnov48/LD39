@@ -61,8 +61,7 @@ public class Demon {
 	
 	public void update() {
 		kinematic();
-		body.setLinearVelocity(0.8f, 0);
-		//Box2DHelper.setTransform(body, (int) -(8500 * disToTrain/1000), (int) sprite.getWidth() / 2 + 15, body.getAngle());
+		body.setLinearVelocity(0.45f, 0);
 	}
 
 	public void kinematic() {
