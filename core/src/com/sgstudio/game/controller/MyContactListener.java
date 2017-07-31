@@ -41,36 +41,7 @@ public class MyContactListener implements ContactListener {
 	public void endContact(Contact contact) {
 
 	}
-/*
-	public void deliteObj() {
-		try {
-			if (objC.isBroken() || objT.isBroken()) {
-				if (bodyToDestroy != null) {
-					Destroable des = (Destroable) (bodyToDestroy.getUserData());
-					des.delTexture();
-				}
-				Gdx.app.postRunnable(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							if (bodyToDestroy != null && objC.isBroken() && get.equals("Chair")) {
-								world.destroyBody(bodyToDestroy);
-								objC.delTexture();
-							} else if (bodyToDestroy != null && objT.isBroken() && get.equals("Table")) {
-								world.destroyBody(bodyToDestroy);
-								objT.delTexture();
-							}
-							bodyToDestroy = null;
-						} catch (java.lang.NullPointerException e) {
-							Gdx.app.log("Error: ", e.getMessage());
-						}
-					}
-				});
-			}
-		} catch (java.lang.NullPointerException e) {
-		}
-	}
-*/
+
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		WorldManifold manifold = contact.getWorldManifold();
@@ -79,7 +50,6 @@ public class MyContactListener implements ContactListener {
 			if (contact.getFixtureB().getUserData() == null || contact.getFixtureA().getUserData() == null) {
 				continue;
 			}
-
 			
 			if (contact.getFixtureB().getUserData().equals("Player")
 					&& contact.getFixtureA().getUserData() instanceof Chair) {

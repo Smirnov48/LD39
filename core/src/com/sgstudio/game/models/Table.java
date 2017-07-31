@@ -1,5 +1,6 @@
 package com.sgstudio.game.models;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -58,6 +59,23 @@ public class Table implements Destroable {
 		return Box2DHelper.getPosition(body);
 	}
 	
-	public int getFuel(){ return fuel.getFuel(2); }
+	public int getFuel() {
+		int value = fuel.getFuel(2);
+		if (fuel.isBroken()) {
+			notDel = false;
+			
+			Gdx.app.postRunnable(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						world.destroyBody(body);
+					} catch (java.lang.NullPointerException e) {
+						Gdx.app.log("Error: ", e.getMessage());
+					}
+				}
+			});
+		}
+		return value;		
+	}
 	public boolean isBroken(){ return fuel.isBroken(); }
 }
