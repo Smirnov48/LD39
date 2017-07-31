@@ -21,7 +21,6 @@ public class Animator {
     private TextureRegion[] walkFrames; 
     private SpriteBatch spriteBatch; 
     private TextureRegion currentFrame;
-    private KeyManager km;
 	 
 	float stateTime;
 	private MainHero mainHero;
@@ -42,11 +41,10 @@ public class Animator {
 	        spriteBatch = MyGame.getBatch();
 	        stateTime = 0f;
 	        stop = new Texture("charstat.png");
-	        km = new KeyManager();
 	}
 	
     public void render() {
-		if (mainHero.getHeroX() > mainHero.getHeroX() - mainHero.getHeroDX()) {
+		if (mainHero.getHeroX() > mainHero.getHeroX() - mainHero.getHeroDX()){
 	        stateTime += Gdx.graphics.getDeltaTime();	        
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);	        
 	        spriteBatch.draw(currentFrame, mainHero.getHeroX() - currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2,
@@ -54,7 +52,7 @@ public class Animator {
 	    	if (mainHero.getHeroDX() >= 0.0f && mainHero.getHeroDX() < 0.2f) {
 	    		isLookLeft = false;
 	    	}
-		} else if(mainHero.getHeroX() < mainHero.getHeroX() - mainHero.getHeroDX()){
+		} else if(mainHero.getHeroX() < mainHero.getHeroX() - mainHero.getHeroDX()) {
 		    stateTime += Gdx.graphics.getDeltaTime(); 
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
 	        spriteBatch.draw(currentFrame, mainHero.getHeroX() + currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2,

@@ -17,8 +17,7 @@ public class Passenger {
 			new Sprite(tex, 0, 47, 155, 300),new Sprite(tex, 175, 47, 155, 300),
 			new Sprite(tex, 350, 47, 155, 300),new Sprite(tex, 0, 47, 155, 300),
 			new Sprite(tex, 175, 47, 155, 300),new Sprite(tex, 350, 47, 155, 300),
-			new Sprite(tex, 0, 47, 155, 300),new Sprite(tex, 175, 47, 155, 300)};
-	
+			new Sprite(tex, 0, 47, 155, 300),new Sprite(tex, 175, 47, 155, 300)};	
 	
 	public Passenger(SpriteBatch batch) {
 		this.batch = batch;
