@@ -98,7 +98,6 @@ public class MyGame implements Screen {
 		demon.render();
 		pas.render();
 		chair.render();
-		
 		batch.draw(tex, -800, -600);
 		batch.end();
 
