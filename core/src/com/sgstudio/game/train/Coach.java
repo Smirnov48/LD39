@@ -36,21 +36,21 @@ public class Coach {
 		createPhysics();
 	}
 	
-	private Chair chair[] = new Chair[10];
+	private Chair chair[] = new Chair[1];
 	private Sprite chairT;
 	private void createChair(){
 		chairT = new Sprite(new Texture("atlas/test.png"));
-		for(int i=0;i<number;i++){
+		for(int i=0;i<1;i++){
 			chair[i] = new Chair(batch, chairT, world);
 			chair[i].createModel(number*-500-10, 60);
 		}
 	}
 	
-	private Table table[] = new Table[10];
+	private Table table[] = new Table[1];
 	private Sprite tableT;
 	private void createTable(){
 		tableT = new Sprite(new Texture("table1.png"));
-		for(int i=0;i<number;i++){
+		for(int i=0;i<1;i++){
 			table[i] = new Table(batch, tableT, world);
 			table[i].createModel(number*-500+15, 60);
 		}
@@ -80,8 +80,8 @@ public class Coach {
 	public void render() {
 		Vector2 pos = Box2DHelper.getPosition(body);
 		batch.draw(sprite, number * -500 + pos.x - sprite.getWidth() / 2, pos.y + sprite.getHeight() + 10);
-		for(int i=0;i<number;i++) chair[i].render();
-		for(int i=0;i<number;i++) table[i].render();
+		for(int i=0;i<1;i++) chair[i].render();
+		for(int i=0;i<1;i++) table[i].render();
 //		for(int i=0;i<number;i++) wardrobe[i].render();
 	}
 
