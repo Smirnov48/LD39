@@ -35,7 +35,7 @@ public class Demon {
 		Demon.startTime = System.currentTimeMillis();
 		this.batch = batch;
 		this.train = train;
-		speed = 35;
+		speed = 20;
 		// speedUp = 0.05f;
 		way = train.getWay();
 		disToTrain = 1000 + train.getDistance();

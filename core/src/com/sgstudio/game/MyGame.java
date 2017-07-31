@@ -193,29 +193,33 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean keyDown(int keycode) {
+				int swapValue = 0;
 				if (Gdx.input.isKeyPressed(Keys.F) && listener.getContactF().indexOf("F")==7) {
 					int Fuel = listener.getFuel();
+					System.out.println("В пуле " + i + " дерева.");
 					if (hero.getWood() + Fuel > hero.getMaxWood())
-						i += hero.getWood() + Fuel - hero.getMaxWood();
+						swapValue = hero.getMaxWood() + Fuel - hero.getWood();
+						hero.updWood(Fuel);
+						i += swapValue;
 					if (hero.getWood() + Fuel < hero.getMaxWood())
 						hero.updWood(Fuel);
 				} else if (Gdx.input.isKeyPressed(Keys.V)) {
-					int I = 0;
-					if (hero.getWood() + i < hero.getMaxWood()) {
-						I = hero.getWood() + i - hero.getMaxWood();
+					//Если V нажата
+					 //Копирование маленькой i
+					// i сохраняет все деревяшки которые не поместились
+					System.out.println("В пуле " + i + " дерева.");
+					if (hero.getWood() + i < hero.getMaxWood() && i > 0) {
+						hero.updWood(i);
+						System.out.println("Добавили игроку " + i + " дерева.");
+						i-=i % 11;
+						System.out.println("Осталось в пуле " + i + " дерева. ");
 					}
-					if (hero.getWood() < hero.getMaxWood() && i > 0) {
-						int y = hero.getMaxWood() - hero.getWood();
-						i -= y;
-						hero.updWood(y);
-					}
-					if (I > 0)
-						i = I;
-					if (i > 0)
-						System.out.println("You can not take " + i + " woods! Button 'V' - Pick them up");
+					if (hero.getWood() + i > hero.getMaxWood() && i > 0) {
+						swapValue = i - (hero.getMaxWood() - hero.getWood());
+						hero.updWood(i);
+						i = swapValue;
+					}	
 				}
-				if (i > 0)
-					System.out.println("You can not take " + i + " woods! Button 'V' - Pick them up");
 				return false;
 			}
 

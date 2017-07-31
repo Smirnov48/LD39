@@ -52,7 +52,7 @@ public class Locomotive {
 		Locomotive.startTime = System.currentTimeMillis();
 		
 		//Speed
-		speed = 23;
+		speed = 13;
 		speedUp = 0;
 		
 		//Graphics
