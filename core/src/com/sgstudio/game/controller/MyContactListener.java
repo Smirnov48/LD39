@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.WorldManifold;
 import com.sgstudio.game.models.Chair;
 import com.sgstudio.game.models.Table;
 import com.sgstudio.game.models.Wardrobe;
+import com.sgstudio.game.models.Wood;
 import com.sgstudio.game.train.Coach;
 import com.sgstudio.game.train.Locomotive;
 
@@ -64,6 +65,14 @@ public class MyContactListener implements ContactListener {
 				object = contact.getFixtureA().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to break table";
+				i = 0;
+				view = 2;
+				contact.setEnabled(false);
+				bodyToDestroy = contact.getFixtureA().getBody();
+			} else if (contact.getFixtureB().getUserData().equals("Player") && contact.getFixtureA().getUserData() instanceof Wood) {
+				object = contact.getFixtureA().getUserData();
+				this.contact = true;
+				this.contactF = "Press 'F' to raise the wood";
 				i = 0;
 				view = 2;
 				contact.setEnabled(false);
