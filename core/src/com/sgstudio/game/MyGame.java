@@ -235,13 +235,11 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean keyUp(int keycode) {
-
 				return false;
 			}
 
 			@Override
 			public boolean keyTyped(char character) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
@@ -270,7 +268,6 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean touchDragged(int screenX, int screenY, int pointer) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
@@ -286,7 +283,6 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean scrolled(int amount) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
@@ -300,19 +296,16 @@ public class MyGame implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 
 	}
 

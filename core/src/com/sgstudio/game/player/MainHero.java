@@ -4,7 +4,6 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -26,7 +25,6 @@ public class MainHero {
 	
 	/*Graphics*/
 	private Sound putToOven;
-	@SuppressWarnings("unused")
 	private SpriteBatch batch;
 	public static Sprite sprite;
 	private Tiles tiles;
