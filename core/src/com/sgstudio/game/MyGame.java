@@ -57,9 +57,6 @@ public class MyGame implements Screen {
 	private OrthographicCamera staticCamera;
 	
 	private Checker checker;
-	Fuel obj1;
-	Fuel obj2;
-	Fuel obj3;
 
 	public MyGame(final Main main) {
 		this.main = main;
@@ -148,9 +145,6 @@ public class MyGame implements Screen {
 		stats = new Stats(batch, hero, locomotive);
 		map = new MiniMap(batch, locomotive);
 		music = new MusicGame();
-		obj1 = new Fuel(1);
-		obj3 = new Fuel(2);
-		obj2 = new Fuel(3);
 		tex = new Texture("coor.png");
 		
 		checker = new Checker(main, locomotive, demon, hero);
