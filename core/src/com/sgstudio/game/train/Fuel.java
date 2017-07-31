@@ -30,7 +30,6 @@ public class Fuel {
 	public boolean isBroken(){ return broken; }
 	
 	public int getFuel(int view){
-//		System.out.println(StrikesСhair + " " + StrikesTable + " " + StrikesPassenger + " " + StrikesСupboard);
 		switch(view){
 			case (1):
 				System.out.println(StrikesСhair);

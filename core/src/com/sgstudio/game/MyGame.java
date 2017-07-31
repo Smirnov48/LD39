@@ -7,7 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -19,20 +18,17 @@ import com.sgstudio.game.graphics.MiniMap;
 import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
-import com.sgstudio.game.models.Chair;
 import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.game.player.Demon;
 import com.sgstudio.game.player.MainHero;
-import com.sgstudio.game.train.Fuel;
 import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.game.train.Passenger;
 import com.sgstudio.game.train.Train;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
+//import com.sgstudio.utils.Particle;
 
 public class MyGame implements Screen {
-	private Chair chair;
-	
 	private MyContactListener listener;
 	
 	private Texture tex;
@@ -53,12 +49,17 @@ public class MyGame implements Screen {
 	public Stats stats;
 	private Rails rails;
 	private Background background;
+	
+	//private Particle particle;
 
 	private MiniMap map;
 	public int allDistance = 40000;
 	private OrthographicCamera staticCamera;
 	
 	private Checker checker;
+	Fuel obj1;
+	Fuel obj2;
+	Fuel obj3;
 
 	public MyGame(final Main main) {
 		this.main = main;
@@ -93,7 +94,6 @@ public class MyGame implements Screen {
 		batch.begin();
 		train.render();
 		pas.render();
-		chair.render();
 		hero.render(listener.getContact(), listener.getContactF());
 		demon.render();
 		
@@ -111,6 +111,7 @@ public class MyGame implements Screen {
 		train.update();
 		demon.update();
 		rails.update();
+		listener.deliteObj();
 	}
 
 	@Override
@@ -120,6 +121,7 @@ public class MyGame implements Screen {
 		rails.dispose();
 		map.dispose();
 		pas.dispose();
+		//particle.dispose();
 	}
 
 	private int i = 0;
@@ -132,7 +134,9 @@ public class MyGame implements Screen {
 		listener = new MyContactListener(world);
 		world.setContactListener(listener);
 		debugRenderer = new Box2DDebugRenderer();
-		
+
+		batch = main.getBatch();
+		//particle = new Particle(batch);
 		train = new Train(main, batch, world);
 		Locomotive locomotive = train.getLocomotive();
 				
@@ -144,13 +148,10 @@ public class MyGame implements Screen {
 		stats = new Stats(batch, hero, locomotive);
 		map = new MiniMap(batch, locomotive);
 		music = new MusicGame();
+		obj1 = new Fuel(1);
+		obj3 = new Fuel(2);
+		obj2 = new Fuel(3);
 		tex = new Texture("coor.png");
-		
-		chair = new Chair(batch, new Sprite(new Texture("atlas/test.png")), world);
-		chair.createModel(60, 60);
-	
-		chair = new Chair(batch, new Sprite(new Texture("atlas/test.png")), world);
-		chair.createModel(180, 60);
 		
 		checker = new Checker(main, locomotive, demon, hero);
 

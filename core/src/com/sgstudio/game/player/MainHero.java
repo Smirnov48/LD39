@@ -2,8 +2,11 @@ package com.sgstudio.game.player;
 
 import java.util.Map;
 
+<<<<<<< HEAD
+=======
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+>>>>>>> master
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
