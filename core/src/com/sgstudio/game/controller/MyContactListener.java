@@ -48,13 +48,13 @@ public class MyContactListener implements ContactListener {
 					@Override
 					public void run() {
 						try{
-							if(destroy != null && objC.isBroken()){
+							if(destroy != null && objC.isBroken() && get.equals("Chair")){
 								world.destroyBody(destroy);
 								objC.delTexture();
 							}
-							if(destroy != null && objT.isBroken()){
+							else if(destroy != null && objT.isBroken() && get.equals("Table")){
 								world.destroyBody(destroy);
-								objC.delTexture();
+								objT.delTexture();
 							}
 							destroy=null;
 						}

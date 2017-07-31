@@ -13,9 +13,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.sgstudio.game.controller.KeyManager;
 import com.sgstudio.game.controller.MyContactListener;
 import com.sgstudio.game.graphics.MiniMap;
 import com.sgstudio.game.graphics.Stats;
+import com.sgstudio.game.graphics.Tutorial;
 import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
 import com.sgstudio.game.music.MusicGame;
@@ -34,6 +36,11 @@ public class MyGame implements Screen {
 	private Texture tex;
 
 	public static SpriteBatch batch;
+
+	//Time values
+	private static long startTime;
+	private static float time = 0;
+	
 	private MusicGame music;
 	private final Main main;
 	private Demon demon;
@@ -57,6 +64,10 @@ public class MyGame implements Screen {
 	private OrthographicCamera staticCamera;
 	
 	private Checker checker;
+	private Tutorial tut;
+	private int isTut = 2;
+	
+	public KeyManager man;
 
 	public MyGame(final Main main) {
 		this.main = main;
@@ -70,6 +81,28 @@ public class MyGame implements Screen {
 
 	@Override
 	public void render(float delta) {
+		if(!man.getPressedEnter() && isTut == 2) {
+			world.step(1 / 60f, 6, 4);
+			staticCamera.update();
+			camera.position.set(hero.getPosition().x, camera.position.y, 0);
+			camera.update();
+			
+			background.update();
+			music.update();
+			rails.update();
+
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+			batch.setProjectionMatrix(staticCamera.combined);
+			batch.begin();
+			background.render();
+			rails.render();
+			train.render();
+			tut.render();
+			batch.end();
+		} else {
+		isTut = 1;
 		world.step(1 / 60f, 6, 4);
 		update();
 		staticCamera.update();
@@ -99,6 +132,7 @@ public class MyGame implements Screen {
 
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
 		debugRenderer.render(world, debugMatrix);
+		}
 	}
 
 	private void update() {
@@ -119,14 +153,19 @@ public class MyGame implements Screen {
 		map.dispose();
 		pas.dispose();
 		//particle.dispose();
+		tut.dispose();
 	}
 
 	private int i = 0;
 
 	@Override
 	public void show() {
+		
 		Box2D.init();
 		batch = main.getBatch();
+		tut = new Tutorial(batch);
+		//SetStartTime
+		MyGame.startTime = System.currentTimeMillis();
 		world = new World(new Vector2(0, -10), true);
 		listener = new MyContactListener(world);
 		world.setContactListener(listener);
@@ -139,6 +178,7 @@ public class MyGame implements Screen {
 				
 		demon = new Demon(main, batch, locomotive, world);
 		pas = new Passenger(batch);
+		man = new KeyManager();
 		background = new Background(batch, locomotive);
 		rails = new Rails(world, batch, locomotive);
 		hero = new MainHero(batch, world, locomotive);

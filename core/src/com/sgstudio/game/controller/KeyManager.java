@@ -36,4 +36,8 @@ public class KeyManager {
 		if(Gdx.input.isKeyPressed(Keys.E)) return true;
 		else return false;
 	}
+	public boolean getPressedEnter() {
+		if(Gdx.input.isKeyPressed(Keys.ENTER)) return true;
+		else return false;
+	}
 }
