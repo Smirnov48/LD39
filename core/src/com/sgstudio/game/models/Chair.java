@@ -9,7 +9,7 @@ import com.sgstudio.game.train.Fuel;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Chair {
-	private static Fuel fuel;
+	private Fuel fuel;
 	
 	private SpriteBatch batch;
 	private Sprite texture;
@@ -32,7 +32,7 @@ public class Chair {
 	}
 	
 	private void createPhysics(int x, int y) {
-		body = Box2DHelper.makeBoxAroundSpriteStatic(world, texture, "Chair");
+		body = Box2DHelper.makeBoxAroundSpriteStatic(world, texture, this);
 		Box2DHelper.setTransform(body, x, y, 0);
 		body.setFixedRotation(true);
 	}
@@ -52,6 +52,6 @@ public class Chair {
 		return Box2DHelper.getPosition(body);
 	}
 	
-	public static int getFuel(){ return fuel.getFuel(1); }
+	public int getFuel(){ return fuel.getFuel(1); }
 	public boolean isBroken(){ return fuel.isBroken(); }
 }

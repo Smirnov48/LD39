@@ -43,7 +43,7 @@ public class MainHero {
 		sprite = new Sprite(atlasChar.get("tiles0_2"));
 
 		maxWood = 10;
-		wood = 10;
+		wood = 0;
 
 		createPhysics();
 

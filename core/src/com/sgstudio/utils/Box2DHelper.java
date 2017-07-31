@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.sgstudio.game.models.Chair;
 
 public class Box2DHelper {
 
@@ -41,7 +42,7 @@ public class Box2DHelper {
 		return body;
 	}
 	
-	public static Body makeBoxAroundSpriteStatic(World world, Sprite sprite, String userData) {
+	public static Body makeBoxAroundSpriteStatic(World world, Sprite sprite, Object userData) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.StaticBody;
 		bodyDef.position.set(sprite.getX() / PIXELS_TO_METERS, sprite.getY() / PIXELS_TO_METERS);

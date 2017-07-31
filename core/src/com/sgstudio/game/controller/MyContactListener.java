@@ -23,6 +23,7 @@ public class MyContactListener implements ContactListener {
 	private Body Destroy;
 	
 	private World world;
+	private Chair obj;
 	
 	public MyContactListener(World world){
 		startTime = System.currentTimeMillis();
@@ -54,20 +55,20 @@ public class MyContactListener implements ContactListener {
 //		System.out.println(contact.getFixtureA().getUserData() + "  " + contact.getFixtureB().getUserData());
 		for(int j=0;j<manifold.getNumberOfContactPoints();j++){
 			if(contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Player") &&
-					contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Chair")){
+					contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData() instanceof Chair){
+				obj = (Chair) contact.getFixtureB().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to break chair";
 				i=0;
 				view=1;
 				contact.setEnabled(false);
-				fuelBody = contact.getFixtureB().getBody();
 			} else if(contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Locomotive") &&
 					contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player")){
 				this.contact = true;
 				this.contactF = "Press 'E' to put the wood";
 				i=0;
 			} else if(contact.getFixtureA().getUserData() != null && !contact.getFixtureA().getUserData().equals("Player") &&
-					contact.getFixtureB().getUserData() != null && !contact.getFixtureB().getUserData().equals("Chair")) {
+					contact.getFixtureB().getUserData() != null && !(contact.getFixtureB().getUserData() instanceof Chair)) {
 				if (time != (System.currentTimeMillis() - startTime) / 250) {
 					time++;
 					i++;
@@ -91,5 +92,8 @@ public class MyContactListener implements ContactListener {
 	public String getContactF(){ return contactF; }
 	public int getView(){ return view; }
 	public Body getBodyFuel(){ return fuelBody; }
-	public int getFuel(){ return Chair.getFuel();}
+	public int getFuel(){ 
+		System.out.println(obj);
+		return obj.getFuel();
+	}
 }

@@ -68,7 +68,7 @@ public class Demon {
 			speed += speed / 100 * 1;
 			disToTrain -= speed;
 			disToTrain += train.getSpeed();
-			System.out.println("Demon in " + disToTrain + " meters.");
+			//System.out.println("Demon in " + disToTrain + " meters.");
 			if (disToTrain < 0) {
 				main.setScreen(main.defeat);
 			}
