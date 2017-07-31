@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,6 +34,8 @@ public class Menu implements Screen {
 	
 	private static Music sound;
 	private static MusicGame music;
+	
+	private OrthographicCamera camera;
 
 	public Menu(final Main main) {
 		this.main = main;
@@ -42,6 +45,9 @@ public class Menu implements Screen {
 	
 	@Override
 	public void show() {
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); 
+		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+		
 		tiles = new Tiles();
 		music = new MusicGame();
 		tiles.createAtlas("atlas/menu.png", 3, 4);
@@ -199,6 +205,8 @@ public class Menu implements Screen {
 	public void setupB(boolean upB) {this.upB = upB;}
 	@Override
 	public void render(float delta) {
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 		Gdx.gl.glClearColor(r, g, b, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
