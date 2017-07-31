@@ -17,14 +17,15 @@ public class Locomotive {
 	ParticleEffect p = new ParticleEffect();
 
 	/*Wood*/
-	private int ovenWood;//Wood in Oven	
-	private int wood;    //Wood in Hero
-	private static int maxOvenWood; //MaxWood of Oven
-	private boolean ovenFire; // isOvenFire
+	private int ovenWood;//Oven	
+	private int wood;    //Hero
+	private static int maxOvenWood; //Max Oven
+	private boolean ovenFire; // Oven Stade
 
-	private float speed;//Train Speed
-	private float speedUp;//Train SpeedUp
-	private static int distance = 0;//Distance during game
+	/*Kinematic*/
+	private float speed;
+	private float speedUp;
+	private static int distance = 0;//Passed Distance
 	private final int allDistance = 4000; //Full distance
 	
 	//Time values
@@ -67,6 +68,7 @@ public class Locomotive {
 		//p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
 	}
 
+	/*Box2D*/
 	private void createPhysics() {
 		Vector2 size = new Vector2(sprite.getWidth() / 2, 13);
 		Vector2 pos = new Vector2(0, 200);
@@ -117,7 +119,7 @@ public class Locomotive {
 		return ovenFire;
 	}
 
-	// Update and Change methods
+	/* Update and Change methods*/
 	public void updOvenWood(int i) {
 		if (ovenWood + i <= 0) {
 			ovenWood = 0;
@@ -148,6 +150,7 @@ public class Locomotive {
 		}
 	}
 
+	/**/
 	public void changeOven() {
 		if (ovenFire) {
 			ovenFire = false;
