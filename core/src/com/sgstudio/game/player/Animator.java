@@ -15,7 +15,6 @@ public class Animator {
 	 
 	Animation walkAnimation; 
 	Texture walkSheet; 
-	Texture stanwalkSheet; 
 	TextureRegion[] walkFrames; 
 	SpriteBatch spriteBatch; 
 	TextureRegion currentFrame; 
@@ -35,21 +34,28 @@ public class Animator {
 	                walkFrames[index++] = tmp[i][j];
 	            }
 	        }
-	        walkAnimation = new Animation(0.25f, walkFrames);
-	        spriteBatch = MyGame.getBatch();; 
+	        walkAnimation = new Animation(0.025f, walkFrames);
+	        spriteBatch = MyGame.getBatch();
 	        stateTime = 0f;
-	        //stanwalkSheet =  new TextureRegion[FRAME_COLS * FRAME_ROWS];
 	}
 	
     public void render() {
-		if (mainHero.getHeroX() != mainHero.getHeroX() - mainHero.getHeroDX()){
+		if (mainHero.getHeroX() > mainHero.getHeroX() - mainHero.getHeroDX()){
 	        stateTime += Gdx.graphics.getDeltaTime(); 
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
-	        spriteBatch.draw(currentFrame, mainHero.getHeroX() - currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2); 
-		} else {
+	        spriteBatch.draw(currentFrame, mainHero.getHeroX() - currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2,
+	        		currentFrame.getRegionWidth(), currentFrame.getRegionHeight()); 
+		} else if(mainHero.getHeroX() < mainHero.getHeroX() - mainHero.getHeroDX()){
 		    stateTime += Gdx.graphics.getDeltaTime(); 
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
-	        spriteBatch.draw(currentFrame, mainHero.getHeroX() - currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2); 
+	        spriteBatch.draw(currentFrame, mainHero.getHeroX() + currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2,
+	        		-currentFrame.getRegionWidth(), currentFrame.getRegionHeight()); 
+		} else if(mainHero.getHeroDX() > 0){
+			
+		} else if(mainHero.getHeroDX() < 0){
+			
+		} else {
+			
 		}
     }
 }

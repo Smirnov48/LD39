@@ -71,9 +71,9 @@ public class MainHero {
 		Vector2 pos = Box2DHelper.getPosition(body);
 		animator.render();
 		//batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y - sprite.getHeight() / 2);
+		dx = x - pos.x;
 		x = pos.x;
 		y = pos.y;
-		dx = x - pos.x;
 	}
 	
 	public void dispose() {
