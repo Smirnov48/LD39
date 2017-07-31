@@ -21,6 +21,7 @@ import com.sgstudio.game.ground.Rails;
 import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.game.player.Demon;
 import com.sgstudio.game.player.MainHero;
+import com.sgstudio.game.train.Fuel;
 import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.game.train.Passenger;
 import com.sgstudio.game.train.Train;

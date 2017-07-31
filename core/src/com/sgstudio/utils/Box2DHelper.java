@@ -128,8 +128,8 @@ public class Box2DHelper {
 		return body;
 	}
 
-	public static void setTransform(Body body, int x, int y, int angle) {
-		body.setTransform(new Vector2(x / PIXELS_TO_METERS, y / PIXELS_TO_METERS), angle);
+	public static void setTransform(Body body, int x, int y, float f) {
+		body.setTransform(new Vector2(x / PIXELS_TO_METERS, y / PIXELS_TO_METERS), f);
 	}
 
 	public static Vector2 getPosition(Body body) {

@@ -32,7 +32,7 @@ public class Coach {
 		createPhysics();
 	}
 	
-	private Chair chair[];
+	private Chair chair[] = new Chair[10];
 	private Sprite chairT;
 	private void createChair(){
 		chairT = new Sprite(new Texture("atlas/test.png"));
