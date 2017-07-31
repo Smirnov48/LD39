@@ -44,11 +44,15 @@ public class MusicGame {
 	}
 	
 	public void stopMusic() {
-		One.setVolume(0);
-		Two.setVolume(0);
+		if(One.isPlaying()){
+			if(One.getPosition()>=27f) One.setVolume(One.getVolume()-.005f);
+		} else if(Two.isPlaying()){
+			if(Two.getPosition()>=29f) Two.setVolume(Two.getVolume()-.005f);
+		}
+		stade = false;
 	}
 	
-	public static void musicStade() {
+	public void musicStade() {
 		if(stade) {
 			stade = false;
 		} else {

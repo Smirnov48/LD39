@@ -147,6 +147,8 @@ public class Menu implements Screen {
 		if((Play)&& (!music.isMuted())) sound.play();
 	}
 	
+	public static Map<String, TextureRegion> getAtlasSound(){ return atlasSound; }
+	
 	
 	private void renderMenu(){
 		

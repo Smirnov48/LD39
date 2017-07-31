@@ -9,9 +9,11 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.WorldManifold;
 import com.sgstudio.game.models.Chair;
+import com.sgstudio.game.models.Destroable;
 import com.sgstudio.game.models.Table;
 
 public class MyContactListener implements ContactListener {
+	
 	private boolean contact = false;
 	private int view=0;
 	private String contactF = "";
@@ -20,11 +22,13 @@ public class MyContactListener implements ContactListener {
 	private float time = 0;
 	private int i=0;
 	
-	private Body destroy;
-	
+	private Body bodyToDestroy;
 	private World world;
+	
 	private Chair objC;
 	private Table objT;
+
+	private String get="";
 	
 	public MyContactListener(World world){
 		startTime = System.currentTimeMillis();
@@ -44,19 +48,23 @@ public class MyContactListener implements ContactListener {
 	public void deliteObj(){
 		try{
 			if(objC.isBroken() || objT.isBroken()){
+				if(bodyToDestroy != null) {
+					Destroable des = (Destroable) (bodyToDestroy.getUserData());
+					des.delTexture();
+				}
 				Gdx.app.postRunnable(new Runnable(){
 					@Override
 					public void run() {
 						try{
-							if(destroy != null && objC.isBroken() && get.equals("Chair")){
-								world.destroyBody(destroy);
+							if(bodyToDestroy != null && objC.isBroken() && get.equals("Chair")){
+								world.destroyBody(bodyToDestroy);
 								objC.delTexture();
 							}
-							else if(destroy != null && objT.isBroken() && get.equals("Table")){
-								world.destroyBody(destroy);
+							else if(bodyToDestroy != null && objT.isBroken() && get.equals("Table")){
+								world.destroyBody(bodyToDestroy);
 								objT.delTexture();
 							}
-							destroy=null;
+							bodyToDestroy=null;
 						}
 						catch (java.lang.NullPointerException e) {Gdx.app.log("Error: ", e.getMessage());}
 					}
@@ -65,11 +73,10 @@ public class MyContactListener implements ContactListener {
 		} catch(java.lang.NullPointerException e){}
 	}
 	
-	private String get="";
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		WorldManifold manifold = contact.getWorldManifold();
-//		System.out.println(contact.getFixtureA().getUserData() + "  " + contact.getFixtureB().getUserData());
+		
 		for(int j=0;j<manifold.getNumberOfContactPoints();j++){
 			if(contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player") &&
 					contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData() instanceof Chair){
@@ -79,7 +86,7 @@ public class MyContactListener implements ContactListener {
 				i=0;
 				view=1;
 				contact.setEnabled(false);
-				destroy = contact.getFixtureA().getBody();
+				bodyToDestroy = contact.getFixtureA().getBody();
 				get="Chair";
 			} else if(contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player") &&
 					contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData() instanceof Table){
@@ -89,7 +96,7 @@ public class MyContactListener implements ContactListener {
 				i=0;
 				view=2;
 				contact.setEnabled(false);
-				destroy = contact.getFixtureA().getBody();
+				bodyToDestroy = contact.getFixtureA().getBody();
 				get="Table";
 			} else if(contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Player") &&
 					contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Firebox")){
@@ -110,7 +117,7 @@ public class MyContactListener implements ContactListener {
 			if(i==1){
 				this.contact = false;
 				this.contactF = "";
-				this.get="";
+//				this.get="";
 				view=0;
 			}
 		}

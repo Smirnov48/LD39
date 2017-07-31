@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.train.Fuel;
 import com.sgstudio.utils.Box2DHelper;
 
-public class Table {
+public class Table implements Destroable {
 	private Fuel fuel;
 	
 	private SpriteBatch batch;

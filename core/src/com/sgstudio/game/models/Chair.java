@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.train.Fuel;
 import com.sgstudio.utils.Box2DHelper;
 
-public class Chair {
+public class Chair implements Destroable {
 	private Fuel fuel;
 	
 	private SpriteBatch batch;
@@ -29,7 +29,7 @@ public class Chair {
 	
 	private boolean notDel=true;
 	public void delTexture(){
-		notDel=!notDel;
+		notDel = !notDel;
 	}
 	
 	public void createModel(int x, int y){
@@ -46,7 +46,7 @@ public class Chair {
 	private float x;
 	public void render(){
 		Vector2 pos = Box2DHelper.getPosition(body);
-		if(notDel) batch.draw(texture, pos.x - texture.getWidth() / 2,  pos.y - texture.getHeight() / 2 );
+		if (notDel) batch.draw(texture, pos.x - texture.getWidth() / 2,  pos.y - texture.getHeight() / 2 );
 		x = pos.x;
 	}
 
