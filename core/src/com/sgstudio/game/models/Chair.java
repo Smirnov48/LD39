@@ -19,23 +19,13 @@ public class Chair implements Destroable {
 	private Body body;
 
 	private int view = 1;
-	
-	public Chair(SpriteBatch batch, Sprite texture, World world,String view) {
+
+	public Chair(SpriteBatch batch, Sprite texture, World world) {
 		this.batch = batch;
 		this.world = world;
-		if(view.equals("normal")) normalChair(texture);
-		else unChair(texture);
-		
-		fuel = new Fuel(this.view);
-	}
+		this.texture = texture;
 
-	public void normalChair(Sprite texture) {
-		this.texture = texture;
-	}
-	
-	public void unChair(Sprite texture) {
-		texture.setRegionWidth(-texture.getRegionWidth());
-		this.texture = texture;
+		fuel = new Fuel(view);
 	}
 
 	private boolean notDel = true;
