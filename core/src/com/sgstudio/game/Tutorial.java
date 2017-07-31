@@ -95,14 +95,13 @@ public class Tutorial implements Screen {
 	public void show() {
 		tut = new Texture("tutorial.png");
 		Box2D.init();
-		batch = main.getBatch();
+		batch = new SpriteBatch();
 
 		world = new World(new Vector2(0, -10), true);
 		listener = new MyContactListener(world);
 		world.setContactListener(listener);
 		debugRenderer = new Box2DDebugRenderer();
 
-		batch = main.getBatch();
 		// particle = new Particle(batch);
 		train = new Train(main, batch, world);
 		Locomotive locomotive = train.getLocomotive();
