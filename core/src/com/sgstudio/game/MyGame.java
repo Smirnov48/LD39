@@ -164,6 +164,7 @@ public class MyGame implements Screen {
 		Box2D.init();
 		batch = main.getBatch();
 		tut = new Tutorial(batch);
+		
 		//SetStartTime
 		MyGame.startTime = System.currentTimeMillis();
 		world = new World(new Vector2(0, -10), true);
@@ -175,7 +176,6 @@ public class MyGame implements Screen {
 		//particle = new Particle(batch);
 		train = new Train(main, batch, world);
 		Locomotive locomotive = train.getLocomotive();
-				
 		demon = new Demon(main, batch, locomotive, world);
 		pas = new Passenger(batch);
 		man = new KeyManager();
