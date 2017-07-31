@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.main.Main;
@@ -69,6 +70,7 @@ public class Locomotive {
 		Vector2 size = new Vector2(sprite.getWidth() / 2, 12);
 		Vector2 pos = new Vector2(0, 200);
 		body = Box2DHelper.makeBox(world, size, pos, "Locomotive");
+		body.setType(BodyDef.BodyType.StaticBody);
 		size = new Vector2(sprite.getWidth() / 2 - 30, 5);
 		pos = new Vector2(0, 316);
 		Box2DHelper.addShapeBox(body, size, pos);

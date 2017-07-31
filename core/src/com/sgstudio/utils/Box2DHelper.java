@@ -102,7 +102,7 @@ public class Box2DHelper {
 
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 1f;
+		fixtureDef.density = 10f;
 
 		body.createFixture(fixtureDef);
 		shape.dispose();

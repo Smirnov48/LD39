@@ -13,14 +13,15 @@ import com.sgstudio.game.controller.KeyManager;
 public class Animator {
 	final int FRAME_COLS = 8; 
 	final int FRAME_ROWS = 1;
-	 
-	Animation walkAnimation; 
-	Texture walkSheet; 
-	Texture stop;
-	TextureRegion[] walkFrames; 
-	SpriteBatch spriteBatch; 
-	TextureRegion currentFrame;
-	KeyManager km;
+	
+    private boolean isLookLeft = false; 
+    private Animation walkAnimation; 
+    private Texture walkSheet; 
+    private Texture stop;
+    private TextureRegion[] walkFrames; 
+    private SpriteBatch spriteBatch; 
+    private TextureRegion currentFrame;
+    private KeyManager km;
 	 
 	float stateTime;
 	private MainHero mainHero;
@@ -44,7 +45,6 @@ public class Animator {
 	        km = new KeyManager();
 	}
 	
-    boolean isLookLeft = false; 
     public void render() {
 		if (mainHero.getHeroX() > mainHero.getHeroX() - mainHero.getHeroDX()) {
 	        stateTime += Gdx.graphics.getDeltaTime();	        
