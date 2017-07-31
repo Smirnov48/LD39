@@ -15,7 +15,6 @@ public class Animator {
 	 
 	Animation walkAnimation; 
 	Texture walkSheet; 
-	Texture stanwalkSheet; 
 	TextureRegion[] walkFrames; 
 	SpriteBatch spriteBatch; 
 	TextureRegion currentFrame; 
@@ -36,20 +35,25 @@ public class Animator {
 	            }
 	        }
 	        walkAnimation = new Animation(0.025f, walkFrames);
-	        spriteBatch = MyGame.getBatch();; 
+	        spriteBatch = MyGame.getBatch();
 	        stateTime = 0f;
-	        //stanwalkSheet =  new TextureRegion[FRAME_COLS * FRAME_ROWS];
 	}
 	
     public void render() {
-		if (mainHero.getHeroX() != mainHero.getHeroX() - mainHero.getHeroDX()){
+		if (mainHero.getHeroX() < mainHero.getHeroX() - mainHero.getHeroDX()){
 	        stateTime += Gdx.graphics.getDeltaTime(); 
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
 	        spriteBatch.draw(currentFrame, mainHero.getHeroX() - currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2); 
-		} else {
+		} else if(mainHero.getHeroX() > mainHero.getHeroX() - mainHero.getHeroDX()){
 		    stateTime += Gdx.graphics.getDeltaTime(); 
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
 	        spriteBatch.draw(currentFrame, mainHero.getHeroX() - currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2); 
+		} else if(mainHero.getHeroDX() > 0){
+			
+		} else if(mainHero.getHeroDX() < 0){
+			
+		} else {
+			
 		}
     }
 }
