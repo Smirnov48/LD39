@@ -218,4 +218,9 @@ public class MainHero {
 	public void setMaxWood(int i) {
 		maxWood = i;
 	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
 }

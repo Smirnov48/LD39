@@ -43,4 +43,10 @@ public class Checker {
 		}
 	}
 
+	public void reset() {
+		train.reset();
+		demon.reset();
+		hero.reset();
+	}
+
 }

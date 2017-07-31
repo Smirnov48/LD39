@@ -214,4 +214,9 @@ public class Locomotive {
 	public Sprite getSprite() {
 		return sprite;
 	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
 }

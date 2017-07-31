@@ -89,4 +89,9 @@ public class Demon {
 	public void dispose() {
 
 	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
 }

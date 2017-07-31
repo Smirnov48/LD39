@@ -205,6 +205,8 @@ public class Tutorial implements Screen {
 				System.out.println("Game!!");
 			}
 		} else if ((isTut == 3)) {
+			checker.reset();
+			music.stopMusic();
 			main.setScreen(main.game);
 		}
 	}
