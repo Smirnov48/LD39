@@ -59,7 +59,7 @@ public class Demon {
 
 	public void update() {
 		kinematic();
-		body.getPosition().x = x / 100;
+		Box2DHelper.setTransform(body, (int) -disToTrain - 5000, (int) sprite.getWidth() / 2 + 15, body.getAngle());
 	}
 
 	public void kinematic() {
@@ -68,7 +68,6 @@ public class Demon {
 			speed += speed / 100 * 1;
 			disToTrain -= speed;
 			disToTrain += train.getSpeed();
-			//System.out.println("Demon in " + disToTrain + " meters.");
 			if (disToTrain < 0) {
 				main.setScreen(main.defeat);
 			}
