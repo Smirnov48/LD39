@@ -66,9 +66,11 @@ public class Demon {
 	public void kinematic() {
 		if (time != (System.currentTimeMillis() - startTime) / 1000) {
 			time++;
+			/*
 			speed += speed / 100 * 1;
 			disToTrain -= speed;
 			disToTrain += train.getSpeed();
+			*/
 		}
 	}
 

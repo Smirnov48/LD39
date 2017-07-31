@@ -102,36 +102,36 @@ public class MyGame implements Screen {
 			tut.render();
 			batch.end();
 		} else {
-		isTut = 1;
-		world.step(1 / 60f, 6, 4);
-		update();
-		staticCamera.update();
-		camera.position.set(hero.getPosition().x, camera.position.y, 0);
-		camera.update();
-
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		batch.setProjectionMatrix(staticCamera.combined);
-		batch.begin();
-		background.render();
-		rails.render();
-		stats.render(listener.getContact(), listener.getContactF());
-		map.render();
-		batch.end();
-		
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		train.render();
-		pas.render();
-		hero.render(listener.getContact(), listener.getContactF());
-		demon.render();
-		
-		batch.draw(tex, -800, -600);
-		batch.end();
-
-		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
-		debugRenderer.render(world, debugMatrix);
+			isTut = 1;
+			world.step(1 / 60f, 6, 4);
+			update();
+			staticCamera.update();
+			camera.position.set(hero.getPosition().x, camera.position.y, 0);
+			camera.update();
+	
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	
+			batch.setProjectionMatrix(staticCamera.combined);
+			batch.begin();
+			background.render();
+			rails.render();
+			stats.render(listener.getContact(), listener.getContactF());
+			map.render();
+			batch.end();
+			
+			batch.setProjectionMatrix(camera.combined);
+			batch.begin();
+			train.render();
+			pas.render();
+			hero.render(listener.getContact(), listener.getContactF());
+			demon.render();
+			
+			batch.draw(tex, -800, -600);
+			batch.end();
+	
+			Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
+			debugRenderer.render(world, debugMatrix);
 		}
 	}
 
