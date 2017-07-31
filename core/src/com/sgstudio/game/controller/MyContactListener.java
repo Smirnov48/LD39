@@ -81,11 +81,12 @@ public class MyContactListener implements ContactListener {
 				continue;
 			}
 
-			object = contact.getFixtureA().getUserData();
 			
 			if (contact.getFixtureB().getUserData().equals("Player")
 					&& contact.getFixtureA().getUserData() instanceof Chair) {
 			
+				object = contact.getFixtureA().getUserData();
+
 				this.contact = true;
 				this.contactF = "Press 'F' to break chair";
 				
@@ -98,6 +99,8 @@ public class MyContactListener implements ContactListener {
 			} else if (contact.getFixtureB().getUserData().equals("Player")
 					&& contact.getFixtureA().getUserData() instanceof Table) {
 				
+				object = contact.getFixtureA().getUserData();
+
 				this.contact = true;
 				this.contactF = "Press 'F' to break table";
 				
