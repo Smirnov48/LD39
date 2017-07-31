@@ -112,6 +112,7 @@ public class Tutorial implements Screen {
 		stats = new Stats(batch, hero, locomotive);
 		map = new MiniMap(batch, locomotive);
 		music = new MusicGame();
+		music.setMusicThree();
 
 		checker = new Checker(main, locomotive, demon, hero);
 		atlasSound = Menu.getAtlasSound();
