@@ -24,11 +24,8 @@ public class MyContactListener implements ContactListener {
 
 	private Body bodyToDestroy;
 	private World world;
-
-	private Chair objC;
-	private Table objT;
-
-	private String get = "";
+	
+	private Object object;
 
 	public MyContactListener(World world) {
 		startTime = System.currentTimeMillis();
@@ -44,7 +41,7 @@ public class MyContactListener implements ContactListener {
 	public void endContact(Contact contact) {
 
 	}
-
+/*
 	public void deliteObj() {
 		try {
 			if (objC.isBroken() || objT.isBroken()) {
@@ -73,7 +70,7 @@ public class MyContactListener implements ContactListener {
 		} catch (java.lang.NullPointerException e) {
 		}
 	}
-
+*/
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		WorldManifold manifold = contact.getWorldManifold();
@@ -83,29 +80,31 @@ public class MyContactListener implements ContactListener {
 				continue;
 			}
 
+			object = contact.getFixtureA().getUserData();
+			
 			if (contact.getFixtureB().getUserData().equals("Player")
 					&& contact.getFixtureA().getUserData() instanceof Chair) {
-				
-				objC = (Chair) contact.getFixtureA().getUserData();
+			
 				this.contact = true;
 				this.contactF = "Press 'F' to break chair";
+				
 				i = 0;
 				view = 1;
 				contact.setEnabled(false);
+				
 				bodyToDestroy = contact.getFixtureA().getBody();
-				get = "Chair";
 
 			} else if (contact.getFixtureB().getUserData().equals("Player")
 					&& contact.getFixtureA().getUserData() instanceof Table) {
 				
-				objT = (Table) contact.getFixtureA().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to break table";
+				
 				i = 0;
 				view = 2;
 				contact.setEnabled(false);
+				
 				bodyToDestroy = contact.getFixtureA().getBody();
-				get = "Table";
 				
 			} else if (contact.getFixtureA().getUserData().equals("Player")
 					&& contact.getFixtureB().getUserData().equals("Firebox")) {
@@ -155,11 +154,17 @@ public class MyContactListener implements ContactListener {
 	}
 
 	public int getFuel() {
-		if (get.equals("Chair"))
-			return objC.getFuel();
-		else if (get.equalsIgnoreCase("Table"))
-			return objT.getFuel();
-		else
+		if (object == null) {
 			return 0;
+		}
+		
+		if (object instanceof Chair) { 
+			return ((Chair)object).getFuel();
+		}
+		if (object instanceof Table) { 
+			return ((Chair)object).getFuel();
+		}
+		
+		return 0;
 	}
 }
