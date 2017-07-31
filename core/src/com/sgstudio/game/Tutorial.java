@@ -5,12 +5,9 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
@@ -38,12 +35,8 @@ public class Tutorial implements Screen {
 
 	Texture tut;
 	private Map<String, TextureRegion> atlasSound;
-	private Sound carbon;
-	private Sound putToOven;
 	/* Time values for actions */
 	private long actTime = 0;
-
-	private boolean Play = true, Moved = false, Pressed = false;
 
 	private MyContactListener listener;
 
@@ -75,11 +68,14 @@ public class Tutorial implements Screen {
 
 	private Checker checker;
 	private int isTut = 2;
+	private float disToMonsterFromCamera;
 
 	public KeyManager man;
 	Texture stop;
 	private float x;
 	private boolean cutSceneFlag = true;
+	private boolean cutSceneFlag2 = true;
+	private boolean scene = true;
 
 	public Tutorial(Main main) {
 		this.main = main;
@@ -118,6 +114,58 @@ public class Tutorial implements Screen {
 		checker = new Checker(main, locomotive, demon, hero);
 		atlasSound = Menu.getAtlasSound();
 		stop = new Texture("charstat.png");
+		
+		Gdx.input.setInputProcessor(new InputProcessor(){
+
+			@Override
+			public boolean keyDown(int keycode) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean keyUp(int keycode) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean keyTyped(char character) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean touchDragged(int screenX, int screenY, int pointer) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean mouseMoved(int screenX, int screenY) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean scrolled(int amount) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+		});
 	}
 
 	private void update() {
@@ -171,23 +219,26 @@ public class Tutorial implements Screen {
 				staticCamera.update();
 				camera.position.set(x + 1400, camera.position.y, 0);
 				camera.update();
-				if (cutSceneFlag) {
-					if (x < demon.getDemonX() - 1400) {
-						cutSceneFlag = false;
-					}
-					if (x > -4900) {
-						x -= 12;
-					} else if (x >= -5409) {
-						x -= 8;
-					} else if (x > demon.getDemonX()- 1400) {
-						x-=40;
-					}
-				} else {
-					if (x < 0) {
-						x+=30;
+				if (scene) {
+					/* To Potato */
+					if ((camera.position.x > -8400) && (cutSceneFlag) && (cutSceneFlag2)) {
+						x -= 40;
+						System.out.println("ToPotato");
+						if (camera.position.x < -8350) {
+							actTime = System.currentTimeMillis();
+							cutSceneFlag = false;
+						}
+					} else if ((!cutSceneFlag) && (System.currentTimeMillis() - actTime < 2100)
+							&& (cutSceneFlag2)) { /* Stopping 2 seconds */
+						System.out.println("Wait");
+						if (System.currentTimeMillis() - actTime > 2000) {
+							cutSceneFlag2 = false;
+						}
+					} else if ((!cutSceneFlag) && (!cutSceneFlag2) && (camera.position.x < 300)) {
+						x += 40;
+						System.out.println("ToHero");
 					}
 				}
-
 				Gdx.gl.glClearColor(0, 0, 0, 1);
 				Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -218,15 +269,14 @@ public class Tutorial implements Screen {
 			}
 		} else if ((isTut == 3)) {
 			checker.reset();
-			music.stopMusic();
+			music.stop();
 			main.setScreen(main.game);
 		}
 	}
 
 	public void cutScene() {
-		if ((camera.position.x > -4000) && cutSceneFlag) {
-			camera.position.x -= 1;
-		}
+		disToMonsterFromCamera = -8340 + camera.position.x;
+
 	}
 
 	@Override
