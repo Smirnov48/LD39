@@ -187,15 +187,19 @@ public class Menu implements Screen {
 		else batch.draw(atlasSound.get("tiles0_1"), 15, 15);
 	}
 	
-	float r=0,g=0,b=0;
-	boolean upR=true, upG=true, upB=true;
+	static float r=0;
+	static float g=0;
+	static float b=0;
+	static boolean upR=true;
+	static boolean upG=true;
+	static boolean upB=true;
 	
-	public float getR() {return r;}
-	public float getG() {return g;}
-	public float getB() {return b;}
-	public boolean getupR() {return upR;}
-	public boolean getupG() {return upG;}
-	public boolean getupB() {return upB;}
+	public static float getR() {return r;}
+	public static float getG() {return g;}
+	public static float getB() {return b;}
+	public static boolean getupR() {return upR;}
+	public static boolean getupG() {return upG;}
+	public static boolean getupB() {return upB;}
 	
 	public void setR(float r) {this.r = r;}
 	public void setG(float g) {this.g = g;}
