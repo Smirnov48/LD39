@@ -18,9 +18,9 @@ public class Demon {
 	private Locomotive train;
 	private SpriteBatch batch;
 	private int way;
-	private static float disToTrain;
-	private static long startTime;
-	private static float time = 0;
+	private float disToTrain;
+	private long startTime;
+	private float time = 0;
 	private Main main;
 	private Texture patato;
 	private float x;
@@ -32,7 +32,7 @@ public class Demon {
 		this.main = main;
 		this.world = world;
 
-		Demon.startTime = System.currentTimeMillis();
+		startTime = System.currentTimeMillis();
 		this.batch = batch;
 		this.train = train;
 		speed = 20;
@@ -88,5 +88,10 @@ public class Demon {
 
 	public void dispose() {
 
+	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		
 	}
 }

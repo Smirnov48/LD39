@@ -39,7 +39,7 @@ public class MainHero {
 
 	/*Hero's wood*/
 	private int wood;
-	private static int maxWood;
+	private int maxWood;
 	private int lastWood; //time value
 	boolean updatingWood = false;
 	
@@ -54,12 +54,12 @@ public class MainHero {
 	private boolean jump = false;
 	
 	/*Time values for actions*/
-	private static long actTime = 0;
+	private long actTime = 0;
 
 	public MainHero(SpriteBatch batch, World world, Locomotive train) {
 		
 		/*Wood Hero Pull*/
-		maxWood = 20;
+		maxWood = 2;
 		wood = 0;
 		
 		/*Supposed classes*/
@@ -223,5 +223,10 @@ public class MainHero {
 
 	public void setMaxWood(int i) {
 		maxWood = i;
+	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		
 	}
 }
