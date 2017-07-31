@@ -1,7 +1,6 @@
 package com.sgstudio.game.controller;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -25,11 +24,8 @@ public class MyContactListener implements ContactListener {
 
 	private Body bodyToDestroy;
 	private World world;
-
-	private Chair objC;
-	private Table objT;
-
-	private String get = "";
+	
+	private Object object;
 
 	public MyContactListener(World world) {
 		startTime = System.currentTimeMillis();
@@ -46,35 +42,6 @@ public class MyContactListener implements ContactListener {
 
 	}
 
-	public void deliteObj() {
-		try {
-			if (objC.isBroken() || objT.isBroken()) {
-				if (bodyToDestroy != null) {
-					Destroable des = (Destroable) (bodyToDestroy.getUserData());
-					des.delTexture();
-				}
-				Gdx.app.postRunnable(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							if (bodyToDestroy != null && objC.isBroken() && get.equals("Chair")) {
-								world.destroyBody(bodyToDestroy);
-								objC.delTexture();
-							} else if (bodyToDestroy != null && objT.isBroken() && get.equals("Table")) {
-								world.destroyBody(bodyToDestroy);
-								objT.delTexture();
-							}
-							bodyToDestroy = null;
-						} catch (java.lang.NullPointerException e) {
-							Gdx.app.log("Error: ", e.getMessage());
-						}
-					}
-				});
-			}
-		} catch (java.lang.NullPointerException e) {
-		}
-	}
-
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		WorldManifold manifold = contact.getWorldManifold();
@@ -83,30 +50,34 @@ public class MyContactListener implements ContactListener {
 			if (contact.getFixtureB().getUserData() == null || contact.getFixtureA().getUserData() == null) {
 				continue;
 			}
-
+			
 			if (contact.getFixtureB().getUserData().equals("Player")
 					&& contact.getFixtureA().getUserData() instanceof Chair) {
-				
-				objC = (Chair) contact.getFixtureA().getUserData();
+			
+				object = contact.getFixtureA().getUserData();
+
 				this.contact = true;
 				this.contactF = "Press 'F' to break chair";
+				
 				i = 0;
 				view = 1;
 				contact.setEnabled(false);
+				
 				bodyToDestroy = contact.getFixtureA().getBody();
-				get = "Chair";
 
 			} else if (contact.getFixtureB().getUserData().equals("Player")
 					&& contact.getFixtureA().getUserData() instanceof Table) {
 				
-				objT = (Table) contact.getFixtureA().getUserData();
+				object = contact.getFixtureA().getUserData();
+
 				this.contact = true;
 				this.contactF = "Press 'F' to break table";
+				
 				i = 0;
 				view = 2;
 				contact.setEnabled(false);
+				
 				bodyToDestroy = contact.getFixtureA().getBody();
-				get = "Table";
 				
 			} else if (contact.getFixtureA().getUserData().equals("Player")
 					&& contact.getFixtureB().getUserData().equals("Firebox")) {
@@ -156,11 +127,17 @@ public class MyContactListener implements ContactListener {
 	}
 
 	public int getFuel() {
-		if (get.equals("Chair"))
-			return objC.getFuel();
-		else if (get.equalsIgnoreCase("Table"))
-			return objT.getFuel();
-		else
+		if (object == null) {
 			return 0;
+		}
+		
+		if (object instanceof Chair) { 
+			return ((Chair)object).getFuel();
+		}
+		if (object instanceof Table) { 
+			return ((Table)object).getFuel();
+		}
+		
+		return 0;
 	}
 }

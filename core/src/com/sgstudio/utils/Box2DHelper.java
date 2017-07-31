@@ -44,7 +44,7 @@ public class Box2DHelper {
 	
 	public static Body makeBoxAroundSpriteStatic(World world, Sprite sprite, Object userData) {
 		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyDef.BodyType.StaticBody;
+		bodyDef.type = BodyDef.BodyType.DynamicBody;
 		bodyDef.position.set(sprite.getX() / PIXELS_TO_METERS, sprite.getY() / PIXELS_TO_METERS);
 
 		Body body = world.createBody(bodyDef);

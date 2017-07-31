@@ -47,10 +47,6 @@ public class MyGame implements Screen {
 
 	public static SpriteBatch batch;
 
-	//Time values
-	private static long startTime;
-	private static float time = 0;
-	
 	private MusicGame music;
 	private final Main main;
 	private Demon demon;
@@ -152,7 +148,6 @@ public class MyGame implements Screen {
 		train.update();
 		demon.update();
 		rails.update();
-		listener.deliteObj();
 	}
 
 	@Override
@@ -177,7 +172,6 @@ public class MyGame implements Screen {
 		tut = new Tutorial(batch);
 		
 		//SetStartTime
-		MyGame.startTime = System.currentTimeMillis();
 		world = new World(new Vector2(0, -10), true);
 		listener = new MyContactListener(world);
 		world.setContactListener(listener);
@@ -241,13 +235,11 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean keyUp(int keycode) {
-
 				return false;
 			}
 
 			@Override
 			public boolean keyTyped(char character) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
@@ -276,7 +268,6 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean touchDragged(int screenX, int screenY, int pointer) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
@@ -292,7 +283,6 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean scrolled(int amount) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
@@ -306,19 +296,16 @@ public class MyGame implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 
 	}
 

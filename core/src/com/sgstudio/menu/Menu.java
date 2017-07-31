@@ -6,9 +6,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Tiles;
@@ -24,6 +28,8 @@ public class Menu implements Screen {
 	private Tiles tiles;
 	
 	private SpriteBatch batch;
+	
+	BitmapFont miniFont;
 	
 	private static Music sound;
 	private static MusicGame music;
@@ -51,6 +57,13 @@ public class Menu implements Screen {
 		sound = Gdx.audio.newMusic(Gdx.files.internal("audio/music/MainTheme.wav"));
 		sound.setLooping(true);
 		sound.setVolume(0.2f);
+		
+		FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("font/pixel.ttf"));
+		FreeTypeFontParameter param = new FreeTypeFontParameter();
+		param.borderColor = Color.BLACK;
+		param.borderWidth = 1;
+		param.size = 15;
+		miniFont = gen.generateFont(param);
 		
 		Gdx.input.setInputProcessor(new InputProcessor(){
 			@Override
@@ -168,8 +181,8 @@ public class Menu implements Screen {
 		else batch.draw(atlasSound.get("tiles0_1"), 15, 15);
 	}
 	
-	static float r=0,g=0,b=0;
-	static boolean upR=true, upG=true, upB=true;
+	float r=0,g=0,b=0;
+	boolean upR=true, upG=true, upB=true;
 	
 	public float getR() {return r;}
 	public float getG() {return g;}
@@ -192,6 +205,8 @@ public class Menu implements Screen {
 		batch.begin();
 		
 		renderMenu();
+		
+		miniFont.draw(batch, "The game for LudumDare39. Theme: Running out of Power.", 1, 12);
 		
 		batch.end();
 		switchColor();
