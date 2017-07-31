@@ -5,12 +5,9 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
@@ -38,12 +35,8 @@ public class Tutorial implements Screen {
 
 	Texture tut;
 	private Map<String, TextureRegion> atlasSound;
-	private Sound carbon;
-	private Sound putToOven;
 	/* Time values for actions */
 	private long actTime = 0;
-
-	private boolean Play = true, Moved = false, Pressed = false;
 
 	private MyContactListener listener;
 
@@ -118,6 +111,58 @@ public class Tutorial implements Screen {
 		checker = new Checker(main, locomotive, demon, hero);
 		atlasSound = Menu.getAtlasSound();
 		stop = new Texture("charstat.png");
+		
+		Gdx.input.setInputProcessor(new InputProcessor(){
+
+			@Override
+			public boolean keyDown(int keycode) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean keyUp(int keycode) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean keyTyped(char character) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean touchDragged(int screenX, int screenY, int pointer) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean mouseMoved(int screenX, int screenY) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean scrolled(int amount) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+		});
 	}
 
 	private void update() {
@@ -218,7 +263,7 @@ public class Tutorial implements Screen {
 			}
 		} else if ((isTut == 3)) {
 			checker.reset();
-			music.stopMusic();
+			music.stop();
 			main.setScreen(main.game);
 		}
 	}
