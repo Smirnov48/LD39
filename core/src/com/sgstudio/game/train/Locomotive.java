@@ -33,8 +33,10 @@ public class Locomotive {
 	private static World world;
 	private static Sprite sprite;
 	private static Body body;
+	@SuppressWarnings("unused")
 	private static MainHero hero;
 
+	@SuppressWarnings("static-access")
 	public Locomotive(Main main,SpriteBatch batch, World world) {
 		this.batch = batch;
 		this.world = world;

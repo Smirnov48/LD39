@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.WorldManifold;
 import com.sgstudio.game.models.Chair;
+import com.sgstudio.game.models.Table;
 
 public class MyContactListener implements ContactListener {
 	private boolean contact = false;
@@ -59,7 +60,7 @@ public class MyContactListener implements ContactListener {
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		WorldManifold manifold = contact.getWorldManifold();
-//		System.out.println(contact.getFixtureA().getUserData() + "  " + contact.getFixtureB().getUserData());
+		System.out.println(contact.getFixtureA().getUserData() + "  " + contact.getFixtureB().getUserData());
 		for(int j=0;j<manifold.getNumberOfContactPoints();j++){
 			if(contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player") &&
 					contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData() instanceof Chair){
@@ -68,6 +69,15 @@ public class MyContactListener implements ContactListener {
 				this.contactF = "Press 'F' to break chair";
 				i=0;
 				view=1;
+				contact.setEnabled(false);
+				destroy = contact.getFixtureA().getBody();
+			} else if(contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player") &&
+					contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData() instanceof Table){
+				obj = (Chair) contact.getFixtureA().getUserData();
+				this.contact = true;
+				this.contactF = "Press 'F' to break table";
+				i=0;
+				view=2;
 				contact.setEnabled(false);
 				destroy = contact.getFixtureA().getBody();
 			} else if(contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Player") &&

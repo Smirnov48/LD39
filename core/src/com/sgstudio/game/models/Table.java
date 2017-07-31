@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.train.Fuel;
 import com.sgstudio.utils.Box2DHelper;
 
-public class Chair {
+public class Table {
 	private Fuel fuel;
 	
 	private SpriteBatch batch;
@@ -17,9 +17,9 @@ public class Chair {
 	private World world;
 	private Body body;
 	
-	private int view=1;
+	private int view=2;
 	
-	public Chair(SpriteBatch batch, Sprite texture, World world){
+	public Table(SpriteBatch batch, Sprite texture, World world){
 		this.batch = batch;
 		this.world = world;
 		this.texture = texture;
@@ -53,6 +53,6 @@ public class Chair {
 		return Box2DHelper.getPosition(body);
 	}
 	
-	public int getFuel(){ return fuel.getFuel(1); }
+	public int getFuel(){ return fuel.getFuel(2); }
 	public boolean isBroken(){ return fuel.isBroken(); }
 }
