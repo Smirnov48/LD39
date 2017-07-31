@@ -205,7 +205,7 @@ public class MyGame implements Screen {
 				int swapValue = 0;
 				if (Gdx.input.isKeyPressed(Keys.F) && listener.getContactF().indexOf("F")==7) {
 					int Fuel = listener.getFuel();
-					System.out.println("� ���� " + i + " ������.");
+					System.out.println("In Pull " + i + " woods.");
 					if (hero.getWood() + Fuel > hero.getMaxWood())
 						swapValue = hero.getMaxWood() + Fuel - hero.getWood();
 						hero.updWood(Fuel);
@@ -213,15 +213,12 @@ public class MyGame implements Screen {
 					if (hero.getWood() + Fuel < hero.getMaxWood())
 						hero.updWood(Fuel);
 				} else if (Gdx.input.isKeyPressed(Keys.V)) {
-					//���� V ������
-					 //����������� ��������� i
-					// i ��������� ��� ��������� ������� �� �����������
-					System.out.println("� ���� " + i + " ������.");
+					System.out.println("In Pull " + i + " woods.");
 					if (hero.getWood() + i < hero.getMaxWood() && i > 0) {
 						hero.updWood(i);
-						System.out.println("�������� ������ " + i + " ������.");
+						System.out.println("Added " + i + " wood to Hero.");
 						i-=i % 11;
-						System.out.println("�������� � ���� " + i + " ������. ");
+						System.out.println("Added to Pull " + i + " wood. ");
 					}
 					if (hero.getWood() + i > hero.getMaxWood() && i > 0) {
 						swapValue = i - (hero.getMaxWood() - hero.getWood());
