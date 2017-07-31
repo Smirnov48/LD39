@@ -14,7 +14,6 @@ public class Animator {
 	final int FRAME_COLS = 8; 
 	final int FRAME_ROWS = 1;
 	
-    private boolean isLookLeft = false; 
     private Animation walkAnimation; 
     private Texture walkSheet; 
     private Texture stop;
@@ -24,6 +23,7 @@ public class Animator {
 	 
 	float stateTime;
 	private MainHero mainHero;
+	private boolean isLastLeft = false;
 	
     public Animator(MainHero mainHero) {
 		this.mainHero = mainHero;
@@ -44,29 +44,28 @@ public class Animator {
 	}
 	
     public void render() {
-		if (mainHero.getHeroX() > mainHero.getHeroX() - mainHero.getHeroDX()){
+
+    	float heroDX = mainHero.getHeroDX();
+    	
+		if (heroDX > 0.4f){
 	        stateTime += Gdx.graphics.getDeltaTime();	        
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);	        
 	        spriteBatch.draw(currentFrame, mainHero.getHeroX() - currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2,
-	        		currentFrame.getRegionWidth(), currentFrame.getRegionHeight()); 
-	    	if (mainHero.getHeroDX() >= 0.0f && mainHero.getHeroDX() < 0.2f) {
-	    		isLookLeft = false;
-	    	}
-		} else if(mainHero.getHeroX() < mainHero.getHeroX() - mainHero.getHeroDX()) {
+	        		currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
+	        isLastLeft = true;
+		} else if( heroDX < -0.4f) {
 		    stateTime += Gdx.graphics.getDeltaTime(); 
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
 	        spriteBatch.draw(currentFrame, mainHero.getHeroX() + currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2,
 	        		-currentFrame.getRegionWidth(), currentFrame.getRegionHeight()); 
-	    	if (mainHero.getHeroDX() <= 0.0f && mainHero.getHeroDX() > -0.2f) {
-	    		isLookLeft = true;
-	    	}
+	        isLastLeft = false;
 		} else {
-			if (isLookLeft) {
-				spriteBatch.draw(stop, mainHero.getHeroX() + stop.getWidth()/2, mainHero.getHeroY() - stop.getHeight()/2,
-						-stop.getWidth(), stop.getHeight());				
-			} else {
+			if (isLastLeft ) {
 				spriteBatch.draw(stop, mainHero.getHeroX() - stop.getWidth()/2, mainHero.getHeroY() - stop.getHeight()/2,
 		        		stop.getWidth(), stop.getHeight());
+	    	} else {
+				spriteBatch.draw(stop, mainHero.getHeroX() + stop.getWidth()/2, mainHero.getHeroY() - stop.getHeight()/2,
+					-stop.getWidth(), stop.getHeight());				
 			}
 		}
     }
