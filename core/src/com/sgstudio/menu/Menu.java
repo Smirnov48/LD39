@@ -206,6 +206,8 @@ public class Menu implements Screen {
 		
 		renderMenu();
 		
+		miniFont.draw(batch, "The game for LudumDare39. Theme: Running out of Power.", 1, 12);
+		
 		batch.end();
 		switchColor();
 	}
