@@ -88,7 +88,7 @@ public class Tutorial implements Screen {
 		staticCamera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+		camera.position.set(Gdx.graphics.getWidth() / 2 - 1000, Gdx.graphics.getHeight() / 2, 0);
 	}
 
 	@Override
@@ -169,11 +169,13 @@ public class Tutorial implements Screen {
 				world.step(1 / 60f, 6, 4);
 				update();
 				staticCamera.update();
-				camera.position.set(x, camera.position.y, 0);
+				camera.position.set(x+900, camera.position.y, 0);
 				camera.update();
-				if(x > demon.getDemonX()) {
-					x-=20;
-				} 
+				if(x > -4000) {
+					x-=12;
+				} else if (x > -4500) {
+					x-=8;
+				}
 
 				Gdx.gl.glClearColor(0, 0, 0, 1);
 				Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -212,7 +214,7 @@ public class Tutorial implements Screen {
 	}
 
 	public void cutScene() {
-		if ((camera.position.x > -6000) && cutSceneFlag) {
+		if ((camera.position.x > -4000) && cutSceneFlag) {
 			camera.position.x -= 1;
 		} 
 	}
