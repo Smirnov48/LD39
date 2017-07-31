@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -66,7 +67,7 @@ public class Box2DHelper {
 		return body;
 	}
 
-	public static Body makeBox(World world, Vector2 size, Vector2 pos, String userData) {
+	public static Body makeBox(World world, Vector2 size, Vector2 pos, Object userData) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
 
@@ -95,7 +96,7 @@ public class Box2DHelper {
 	}
 	
 	public static void addShapeBox(Body body, Vector2 size, Vector2 pos) {
-		addShapeBox(body, size, pos, 10f, false);
+		addShapeBox(body, size, pos, 10f, null, false);
 	}
 	
 	public static Body makeBox(World world, Vector2 size, String UserData) {
@@ -175,7 +176,7 @@ public class Box2DHelper {
 		return body;
 	}
 
-	public static void addShapeBox(Body body, Vector2 size, Vector2 pos, float i, boolean filter) {
+	public static void addShapeBox(Body body, Vector2 size, Vector2 pos, float i, Object userData, boolean filter) {
 		PolygonShape shape = new PolygonShape();
 		pos.x = pos.x / PIXELS_TO_METERS;
 		pos.y = pos.y /PIXELS_TO_METERS;			
@@ -188,7 +189,8 @@ public class Box2DHelper {
 			fixtureDef.filter.maskBits = 0;
 		}
 
-		body.createFixture(fixtureDef);
+		Fixture fix = body.createFixture(fixtureDef);
+		fix.setUserData(userData);
 		shape.dispose();
 	}
 }
