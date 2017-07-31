@@ -85,13 +85,13 @@ public class MainHero {
 		else if(body.getPosition().y>=0.85) jump = false;
 		
 		if (keys.getPressedLeft()) {
-			body.applyForceToCenter(-1.0f, 0, true);
+			body.applyForceToCenter(-.9f, 0, true);
 			if (body.getLinearVelocity().x < -5) {
 				body.setLinearVelocity(-5, body.getLinearVelocity().y);
 			}
 		}
 		if (keys.getPressedRight()) {
-			body.applyForceToCenter(1.0f, 0, true);
+			body.applyForceToCenter(0.9f, 0, true);
 			if (body.getLinearVelocity().x > 5) {
 				body.setLinearVelocity(5, body.getLinearVelocity().y);
 			}
