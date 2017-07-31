@@ -135,7 +135,7 @@ public class Box2DHelper {
 		return new Vector2(body.getPosition().x * PIXELS_TO_METERS, body.getPosition().y * PIXELS_TO_METERS);
 	}
 
-	public static Body makeCircleAroundSprite(World world, Sprite sprite) {
+	public static Body makeCircleAroundSprite(World world, Sprite sprite, String userData) {
 		BodyDef bodyDef = new BodyDef();
 		
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -151,9 +151,11 @@ public class Box2DHelper {
 		fixtureDef.density = 1f;
 		fixtureDef.friction = 0.90f;
 		fixtureDef.restitution = 0.1f;
-
+		
 		body.createFixture(fixtureDef);
 		shape.dispose();
+
+		if (userData != null) body.getFixtureList().get(0).setUserData(userData);
 		
 		return body;
 	}

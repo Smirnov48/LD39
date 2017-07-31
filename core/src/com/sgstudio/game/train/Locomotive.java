@@ -182,7 +182,6 @@ public class Locomotive {
 			speedUp = 0;
 			updSpeed(-2f);
 			}
-			System.out.println(distance);
 		}
 	}
 
