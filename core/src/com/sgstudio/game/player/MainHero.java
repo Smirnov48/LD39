@@ -80,31 +80,21 @@ public class MainHero {
 	}
 	
 	private boolean jump = false;
-	private float velocityX = 0; 
-	
 	public void update(boolean contact, String contactF) {
 		if(body.getPosition().y<=0.7) jump = true;
 		else if(body.getPosition().y>=0.85) jump = false;
 		
 		if (keys.getPressedLeft()) {
-			if (velocityX > 0) {
-				velocityX = 0;
+			body.applyForceToCenter(-1.0f, 0, true);
+			if (body.getLinearVelocity().x < -5) {
+				body.setLinearVelocity(-5, body.getLinearVelocity().y);
 			}
-			velocityX -= 0.1f;
-			if (velocityX < -5.0f) {
-				 velocityX = -5.0f;
-			}
-			body.setLinearVelocity(velocityX, body.getLinearVelocity().y);
 		}
 		if (keys.getPressedRight()) {
-			if (velocityX < 0) {
-				velocityX = 0;
+			body.applyForceToCenter(1.0f, 0, true);
+			if (body.getLinearVelocity().x > 5) {
+				body.setLinearVelocity(5, body.getLinearVelocity().y);
 			}
-			velocityX += 0.1f;
-			if (velocityX > 5.0f) {
-				 velocityX = 5.0f;
-			}
-			body.setLinearVelocity(velocityX, body.getLinearVelocity().y);
 		}
 		if (keys.getPressedSpace()) {
 			if(jump) body.applyForceToCenter(0, 5f, true);
