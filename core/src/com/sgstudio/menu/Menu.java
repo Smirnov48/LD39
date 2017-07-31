@@ -7,7 +7,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.sgstudio.game.music.MusicGame;
@@ -20,7 +19,6 @@ public class Menu implements Screen {
 	private static boolean Moved[] = {false, false, false, false, false};
 	private static boolean Pressed[] = {false, false, false, false, false};
 	private static boolean Play = true;
-	private OrthographicCamera camera;
 	
 	private final Main main;
 	private Tiles tiles;
@@ -38,10 +36,6 @@ public class Menu implements Screen {
 	
 	@Override
 	public void show() {
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); 
-		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-		camera.update();
-		
 		tiles = new Tiles();
 		music = new MusicGame();
 		tiles.createAtlas("atlas/menu.png", 3, 4);
@@ -76,20 +70,16 @@ public class Menu implements Screen {
 					if(screenY<=Gdx.graphics.getHeight()/2-height-height/2 && screenY>=Gdx.graphics.getHeight()/2-height*2-height/2)
 						Pressed[0] = true;
 					else Pressed[0] = false;
-					//Button - Settings
-					if(screenY<=Gdx.graphics.getHeight()/2-height/2 && screenY>=Gdx.graphics.getHeight()/2-height/2-height)
-						Pressed[1] = true;
-					else Pressed[1] = false;
 					//Button - About SumGamStudio
-					if(screenY<=Gdx.graphics.getHeight()/2+height/2 && screenY>=Gdx.graphics.getHeight()/2+height/2-height)
+					if(screenY<=Gdx.graphics.getHeight()/2-height/2 && screenY>=Gdx.graphics.getHeight()/2-height/2-height)
 						Pressed[2] = true;
 					else Pressed[2] = false;
 					//Button - Exit
-					if(screenY<=Gdx.graphics.getHeight()/2+height+height/2 && screenY>=Gdx.graphics.getHeight()/2+height/2)
+					if(screenY<=Gdx.graphics.getHeight()/2+height/2 && screenY>=Gdx.graphics.getHeight()/2+height/2-height)
 						Pressed[3] = true;
 					else Pressed[3] = false;
 				} else {
-					for(int i=0;i<4;i++) Pressed[i]=false;
+					for(int i=0;i<3;i++) Pressed[i]=false;
 				}
 				//Button - Sound
 				if(screenX>=15 && screenX<=15+atlasSound.get("tiles0_0").getRegionWidth()){
@@ -115,7 +105,7 @@ public class Menu implements Screen {
 					Play=!Play;
 					
 				}
-				for(int i=0;i<4;i++) Pressed[i]=false;
+				for(int i=0;i<3;i++) Pressed[i]=false;
 				return false;
 			}
 
@@ -129,20 +119,16 @@ public class Menu implements Screen {
 					if(screenY<=Gdx.graphics.getHeight()/2-height-height/2 && screenY>=Gdx.graphics.getHeight()/2-height*2-height/2)
 						Moved[0] = true;
 					else Moved[0] = false;
-					//Button - Settings
-					if(screenY<=Gdx.graphics.getHeight()/2-height/2 && screenY>=Gdx.graphics.getHeight()/2-height/2-height)
-						Moved[1] = true;
-					else Moved[1] = false;
 					//Button - About SumGamStudio
-					if(screenY<=Gdx.graphics.getHeight()/2+height/2 && screenY>=Gdx.graphics.getHeight()/2+height/2-height)
+					if(screenY<=Gdx.graphics.getHeight()/2-height/2 && screenY>=Gdx.graphics.getHeight()/2-height/2-height)
 						Moved[2] = true;
 					else Moved[2] = false;
 					//Button - Exit
-					if(screenY<=Gdx.graphics.getHeight()/2+height+height/2 && screenY>=Gdx.graphics.getHeight()/2+height/2)
+					if(screenY<=Gdx.graphics.getHeight()/2+height/2 && screenY>=Gdx.graphics.getHeight()/2+height/2-height)
 						Moved[3] = true;
 					else Moved[3] = false;
 				} else {
-					for(int i=0;i<4;i++) Moved[i]=false;
+					for(int i=0;i<3;i++) Moved[i]=false;
 				}
 				//Button - Sound
 				if(screenX>=15 && screenX<=15+atlasSound.get("tiles0_0").getRegionWidth()){
@@ -170,18 +156,14 @@ public class Menu implements Screen {
 		else if(Pressed[0] && Moved[0]) batch.draw(atlasMenu.get("tiles0_2"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2+height+height/2);
 		else batch.draw(atlasMenu.get("tiles0_1"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2+height+height/2);
 		
-		if(!Moved[1]) batch.draw(atlasMenu.get("tiles1_0"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2+height/2);
-		else if(Pressed[1] && Moved[1]) batch.draw(atlasMenu.get("tiles1_2"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2+height/2);
-		else batch.draw(atlasMenu.get("tiles1_1"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2+height/2);
+		if(!Moved[2]) batch.draw(atlasMenu.get("tiles2_0"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2+height/2);
+		else if(Pressed[2] && Moved[2]) batch.draw(atlasMenu.get("tiles2_2"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2+height/2);
+		else batch.draw(atlasMenu.get("tiles2_1"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2+height/2);
 		
-		if(!Moved[2]) batch.draw(atlasMenu.get("tiles2_0"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height/2);
-		else if(Pressed[2] && Moved[2]) batch.draw(atlasMenu.get("tiles2_2"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height/2);
-		else batch.draw(atlasMenu.get("tiles2_1"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height/2);
-		
-		if(!Moved[3]) batch.draw(atlasMenu.get("tiles3_0"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height-height/2);
-		else if(Pressed[3] && Moved[3]) batch.draw(atlasMenu.get("tiles3_2"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height-height/2);
-		else batch.draw(atlasMenu.get("tiles3_1"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height-height/2);
-		
+		if(!Moved[3]) batch.draw(atlasMenu.get("tiles3_0"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height/2);
+		else if(Pressed[3] && Moved[3]) batch.draw(atlasMenu.get("tiles3_2"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height/2);
+		else batch.draw(atlasMenu.get("tiles3_1"),Gdx.graphics.getWidth()/2-width/2, Gdx.graphics.getHeight()/2-height/2);
+			
 		if(Play) batch.draw(atlasSound.get("tiles0_0"), 15, 15);
 		else batch.draw(atlasSound.get("tiles0_1"), 15, 15);
 	}
@@ -206,7 +188,7 @@ public class Menu implements Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(r, g, b, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.setProjectionMatrix(camera.combined);
+		
 		batch.begin();
 		
 		renderMenu();
