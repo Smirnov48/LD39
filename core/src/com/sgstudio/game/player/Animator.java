@@ -51,7 +51,7 @@ public class Animator {
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);	        
 	        spriteBatch.draw(currentFrame, mainHero.getHeroX() - currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2,
 	        		currentFrame.getRegionWidth(), currentFrame.getRegionHeight()); 
-	    	if (mainHero.getHeroDX() > 0.0f && mainHero.getHeroDX() < 0.2f) {
+	    	if (mainHero.getHeroDX() >= 0.0f && mainHero.getHeroDX() < 0.2f) {
 	    		isLookLeft = false;
 	    	}
 		} else if(mainHero.getHeroX() < mainHero.getHeroX() - mainHero.getHeroDX()){
@@ -59,7 +59,7 @@ public class Animator {
 	        currentFrame = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
 	        spriteBatch.draw(currentFrame, mainHero.getHeroX() + currentFrame.getRegionWidth()/2, mainHero.getHeroY() - currentFrame.getRegionHeight()/2,
 	        		-currentFrame.getRegionWidth(), currentFrame.getRegionHeight()); 
-	    	if (mainHero.getHeroDX() < 0.0f && mainHero.getHeroDX() > -0.2f) {
+	    	if (mainHero.getHeroDX() <= 0.0f && mainHero.getHeroDX() > -0.2f) {
 	    		isLookLeft = true;
 	    	}
 		} else {
