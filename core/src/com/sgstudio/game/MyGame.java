@@ -156,7 +156,7 @@ public class MyGame implements Screen {
 		train = new Train(main, batch, world);
 		Locomotive locomotive = train.getLocomotive();
 		demon = new Demon(main, batch, locomotive, world);
-		pas = new Passenger(batch);
+		pas = new Passenger(batch, world);
 		man = new KeyManager();
 		background = new Background(batch, locomotive);
 		rails = new Rails(world, batch, locomotive);
@@ -184,7 +184,7 @@ public class MyGame implements Screen {
 				int swapValue = 0;
 				if (Gdx.input.isKeyPressed(Keys.F) && listener.getContactF().indexOf("F")==7) {
 					int Fuel = listener.getFuel();
-					System.out.println("In Pull " + i + " woods.");
+					System.out.println("In Pull " + Fuel + " woods.");
 					if (hero.getWood() + Fuel > hero.getMaxWood())
 						swapValue = hero.getMaxWood() + Fuel - hero.getWood();
 						hero.updWood(Fuel);

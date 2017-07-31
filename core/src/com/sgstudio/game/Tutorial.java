@@ -106,7 +106,7 @@ public class Tutorial implements Screen {
 		train = new Train(main, batch, world);
 		Locomotive locomotive = train.getLocomotive();
 		demon = new Demon(main, batch, locomotive, world);
-		pas = new Passenger(batch);
+		pas = new Passenger(batch, world);
 		man = new KeyManager();
 		background = new Background(batch, locomotive);
 		rails = new Rails(world, batch, locomotive);
