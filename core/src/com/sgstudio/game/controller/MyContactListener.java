@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.WorldManifold;
 import com.sgstudio.game.models.Chair;
+import com.sgstudio.game.models.Table;
 
 public class MyContactListener implements ContactListener {
 	private boolean contact = false;
@@ -22,7 +23,8 @@ public class MyContactListener implements ContactListener {
 	private Body destroy;
 	
 	private World world;
-	private Chair obj;
+	private Chair objC;
+	private Table objT;
 	
 	public MyContactListener(World world){
 		startTime = System.currentTimeMillis();
@@ -41,12 +43,19 @@ public class MyContactListener implements ContactListener {
 	
 	public void deliteObj(){
 		try{
-			if(obj.isBroken()){
+			if(objC.isBroken() || objT.isBroken()){
 				Gdx.app.postRunnable(new Runnable(){
 					@Override
 					public void run() {
 						try{
-							if(destroy != null && obj.isBroken()) world.destroyBody(destroy); 
+							if(destroy != null && objC.isBroken() && get.equals("Chair")){
+								world.destroyBody(destroy);
+								objC.delTexture();
+							}
+							else if(destroy != null && objT.isBroken() && get.equals("Table")){
+								world.destroyBody(destroy);
+								objT.delTexture();
+							}
 							destroy=null;
 						}
 						catch (java.lang.NullPointerException e) {Gdx.app.log("Error: ", e.getMessage());}
@@ -55,7 +64,8 @@ public class MyContactListener implements ContactListener {
 			}
 		} catch(java.lang.NullPointerException e){}
 	}
-
+	
+	private String get="";
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		WorldManifold manifold = contact.getWorldManifold();
@@ -63,13 +73,24 @@ public class MyContactListener implements ContactListener {
 		for(int j=0;j<manifold.getNumberOfContactPoints();j++){
 			if(contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player") &&
 					contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData() instanceof Chair){
-				obj = (Chair) contact.getFixtureA().getUserData();
+				objC = (Chair) contact.getFixtureA().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to break chair";
 				i=0;
 				view=1;
 				contact.setEnabled(false);
 				destroy = contact.getFixtureA().getBody();
+				get="Chair";
+			} else if(contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player") &&
+					contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData() instanceof Table){
+				objT = (Table) contact.getFixtureA().getUserData();
+				this.contact = true;
+				this.contactF = "Press 'F' to break table";
+				i=0;
+				view=2;
+				contact.setEnabled(false);
+				destroy = contact.getFixtureA().getBody();
+				get="Table";
 			} else if(contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Player") &&
 					contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Firebox")){
 				contact.setEnabled(false);
@@ -89,6 +110,7 @@ public class MyContactListener implements ContactListener {
 			if(i==1){
 				this.contact = false;
 				this.contactF = "";
+				this.get="";
 				view=0;
 			}
 		}
@@ -102,5 +124,9 @@ public class MyContactListener implements ContactListener {
 	public boolean getContact(){ return contact; }
 	public String getContactF(){ return contactF; }
 	public int getView(){ return view; }
-	public int getFuel(){ return obj.getFuel(); }
+	public int getFuel(){ 
+		if(get.equals("Chair")) return objC.getFuel(); 
+		else if(get.equalsIgnoreCase("Table")) return objT.getFuel();
+		else return 0;
+	}
 }

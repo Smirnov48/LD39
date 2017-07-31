@@ -13,11 +13,11 @@ import com.sgstudio.game.controller.KeyManager;
 import com.sgstudio.game.train.Locomotive;
 import com.sgstudio.utils.Box2DHelper;
 import com.sgstudio.utils.Tiles;
-import com.sgstudio.game.player.Animator;
 
 public class MainHero {
 	private Map<String, TextureRegion> atlasChar;
 	
+	@SuppressWarnings("unused")
 	private SpriteBatch batch;
 	public static Sprite sprite;
 	private Tiles tiles;
@@ -78,16 +78,19 @@ public class MainHero {
 	
 	public void dispose() {
 	}
-
+	
+	private boolean jump = false;
 	public void update(boolean contact, String contactF) {
+		if(body.getPosition().y<=0.7) jump = true;
+		else if(body.getPosition().y>=0.85) jump = false;
 		if (keys.getPressedLeft()) {
 			body.applyForceToCenter(-1.0f, 0, true);
 		}
 		if (keys.getPressedRight()) {
 			body.applyForceToCenter(1.0f, 0, true);
 		}
-		if (keys.getPressedUp()) {
-			body.applyForceToCenter(0, 1.5f, true);
+		if (keys.getPressedSpace()) {
+			if(jump) body.applyForceToCenter(0, 5f, true);
 		}
 		if (keys.getPressedE()) {
 			if(contact && contactF.equals("Press 'E' to put the wood")) putWood();

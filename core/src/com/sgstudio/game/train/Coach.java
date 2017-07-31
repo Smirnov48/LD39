@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.models.Chair;
+import com.sgstudio.game.models.Table;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Coach {
@@ -28,6 +29,7 @@ public class Coach {
 		sprite = new Sprite(img);
 		
 		createChair();
+		createTable();
 		
 		createPhysics();
 	}
@@ -39,6 +41,16 @@ public class Coach {
 		for(int i=0;i<number;i++){
 			chair[i] = new Chair(batch, chairT, world);
 			chair[i].createModel(number*-500-10, 60);
+		}
+	}
+	
+	private Table table[] = new Table[10];
+	private Sprite tableT;
+	private void createTable(){
+		tableT = new Sprite(new Texture("table1.png"));
+		for(int i=0;i<number;i++){
+			table[i] = new Table(batch, tableT, world);
+			table[i].createModel(number*-500+15, 60);
 		}
 	}
 
@@ -54,9 +66,10 @@ public class Coach {
 	}
 
 	public void render() {
-		for(int i=0;i<number;i++) chair[i].render();
 		Vector2 pos = Box2DHelper.getPosition(body);
 		batch.draw(sprite, number * -500 + pos.x - sprite.getWidth() / 2, pos.y + sprite.getHeight() + 10);
+		for(int i=0;i<number;i++) chair[i].render();
+		for(int i=0;i<number;i++) table[i].render();
 	}
 
 }
