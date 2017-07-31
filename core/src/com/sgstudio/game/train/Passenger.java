@@ -60,7 +60,7 @@ public class Passenger {
 				}
 			}
 		}
-	}
+	
 	
 	public void dispose() {
 		tex.dispose();
