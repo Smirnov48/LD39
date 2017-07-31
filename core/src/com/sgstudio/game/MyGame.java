@@ -147,7 +147,8 @@ public class MyGame implements Screen {
 		tex = new Texture("coor.png");
 		
 		chair = new Chair(batch, new Sprite(new Texture("atlas/test.png")), world);
-		chair.createModel(130, 50);
+		chair.createModel(60, 60);
+		chair.createModel(180, 60);
 		
 		checker = new Checker(main, locomotive, demon, hero);
 
@@ -155,8 +156,7 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean keyDown(int keycode) {
-
-				if (Gdx.input.isKeyPressed(Keys.F)) {
+				if (Gdx.input.isKeyPressed(Keys.F) && listener.getContactF().indexOf("F")==7) {
 					int Fuel = listener.getFuel();
 					if (hero.getWood() + Fuel > hero.getMaxWood())
 						i += hero.getWood() + Fuel - hero.getMaxWood();
