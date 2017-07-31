@@ -68,7 +68,7 @@ public class Locomotive {
 	}
 
 	private void createPhysics() {
-		Vector2 size = new Vector2(sprite.getWidth() / 2, 12);
+		Vector2 size = new Vector2(sprite.getWidth() / 2, 13);
 		Vector2 pos = new Vector2(0, 200);
 		body = Box2DHelper.makeBox(world, size, pos, "Locomotive");
 		size = new Vector2(sprite.getWidth() / 2 - 30, 5);
@@ -78,7 +78,7 @@ public class Locomotive {
 		pos = new Vector2(0, 256);
 		Box2DHelper.addShapeBox(body, size, pos);
 		size = new Vector2(15, 10);
-		pos = new Vector2(-180, 236);
+		pos = new Vector2(-170, 236);
 		Box2DHelper.addShapeBox(body, size, pos);
 		Box2DHelper.setTransform(body, 590, -165, 0);
 	}
