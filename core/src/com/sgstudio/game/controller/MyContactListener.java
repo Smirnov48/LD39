@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.WorldManifold;
+import com.sgstudio.game.models.Chair;
 
 public class MyContactListener implements ContactListener {
 	private boolean contact = false;
@@ -50,7 +51,7 @@ public class MyContactListener implements ContactListener {
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		WorldManifold manifold = contact.getWorldManifold();
-		System.out.println(contact.getFixtureA().getUserData() + "  " + contact.getFixtureB().getUserData());
+//		System.out.println(contact.getFixtureA().getUserData() + "  " + contact.getFixtureB().getUserData());
 		for(int j=0;j<manifold.getNumberOfContactPoints();j++){
 			if(contact.getFixtureA().getUserData() != null && contact.getFixtureA().getUserData().equals("Player") &&
 					contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Chair")){
@@ -90,5 +91,5 @@ public class MyContactListener implements ContactListener {
 	public String getContactF(){ return contactF; }
 	public int getView(){ return view; }
 	public Body getBodyFuel(){ return fuelBody; }
-	public int getFuel(){ return 0;}
+	public int getFuel(){ return Chair.getFuel();}
 }
