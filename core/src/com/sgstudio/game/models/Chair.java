@@ -7,14 +7,20 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.utils.Box2DHelper;
 
+<<<<<<< HEAD:core/src/com/sgstudio/game/models/Сhair.java
 public class Сhair {
+=======
+public class Chair {
+	private Map<String, TextureRegion> atlasWood;
+	
+>>>>>>> master:core/src/com/sgstudio/game/models/Chair.java
 	private SpriteBatch batch;
 	private Sprite texture;
 	
 	private World world;
 	private Body body;
 	
-	public Сhair(SpriteBatch batch, Sprite texture, World world){
+	public Chair(SpriteBatch batch, Sprite texture, World world){
 		this.batch = batch;
 		this.world = world;
 		this.texture = texture;
