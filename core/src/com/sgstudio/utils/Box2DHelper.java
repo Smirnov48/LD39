@@ -36,14 +36,36 @@ public class Box2DHelper {
 		body.createFixture(fixtureDef);
 		shape.dispose();
 		
-		if (userData != null) {
-			body.getFixtureList().get(0).setUserData(userData);
-		}
+		if (userData != null) body.getFixtureList().get(0).setUserData(userData);
+		
+		return body;
+	}
+	
+	public static Body makeBoxAroundSpriteStatic(World world, Sprite sprite, String userData) {
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.StaticBody;
+		bodyDef.position.set(sprite.getX() / PIXELS_TO_METERS, sprite.getY() / PIXELS_TO_METERS);
+
+		Body body = world.createBody(bodyDef);
+
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(sprite.getWidth() / 2 / PIXELS_TO_METERS, sprite.getHeight() / 2 / PIXELS_TO_METERS);
+
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1f;
+		fixtureDef.friction = 0.90f;
+		fixtureDef.restitution = 0.1f;
+
+		body.createFixture(fixtureDef);
+		shape.dispose();
+		
+		if (userData != null) body.getFixtureList().get(0).setUserData(userData);
 		
 		return body;
 	}
 
-	public static Body makeBox(World world, Vector2 size, Vector2 pos, String UserData) {
+	public static Body makeBox(World world, Vector2 size, Vector2 pos, String userData) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
 
@@ -66,7 +88,7 @@ public class Box2DHelper {
 		body.createFixture(fixtureDef);
 		shape.dispose();
 		
-		body.getFixtureList().get(0).setUserData(UserData);
+		if (userData != null) body.getFixtureList().get(0).setUserData(userData);
 
 		return body;
 	}

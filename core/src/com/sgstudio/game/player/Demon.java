@@ -46,7 +46,8 @@ public class Demon {
 	}
 
 	private void createPhysics() {
-		body = Box2DHelper.makeCircleAroundSprite(world, sprite);
+//		body = Box2DHelper.makeCircleAroundSprite(world, sprite);
+		body = Box2DHelper.makeBoxAroundSprite(world, sprite, "Monstr");
 		body.setType(BodyDef.BodyType.KinematicBody);
 		Box2DHelper.setTransform(body, (int) x, (int) sprite.getWidth() / 2 + 15, 0);
 		body.setAngularVelocity(-6);
