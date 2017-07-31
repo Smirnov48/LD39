@@ -59,7 +59,7 @@ public class Passenger {
 					cont1 = 0;
 				}
 			}
-	}
+		}
 	
 	
 	public void dispose() {
