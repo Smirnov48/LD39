@@ -1,7 +1,6 @@
 package com.sgstudio.game;
 
 import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
@@ -142,7 +141,7 @@ public class MyGame implements Screen {
 		}
 	}
 
-	private void update() {
+	public void update() {
 		checker.update();
 		background.update();
 		music.update();

@@ -11,6 +11,7 @@ public class Checker {
 	private Locomotive train;
 	private Demon demon;
 	private MainHero hero;
+	private MyGame newgame = new MyGame(main);;
 
 	public Checker(Main main,Locomotive train,Demon demon,MainHero hero) {
 		this.main = main;
@@ -34,12 +35,14 @@ public class Checker {
 	public void checkDefeat() {
 		//Demon on first van
 		if (demon.getDisToTrain() + demon.getDemonWidth() < 0) {
+			newgame.update();
 			main.setScreen(main.defeat);
 		}
 		
 		//Player near the Demon
 		if(hero.getHeroX() + 100 < demon.getDemonX()) {
 			main.setScreen(main.defeat);
+			newgame.update();
 		}
 	}
 
