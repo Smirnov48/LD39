@@ -79,9 +79,13 @@ public class MyContactListener implements ContactListener {
 		WorldManifold manifold = contact.getWorldManifold();
 
 		for (int j = 0; j < manifold.getNumberOfContactPoints(); j++) {
-			if (contact.getFixtureB().getUserData() != null && contact.getFixtureB().getUserData().equals("Player")
-					&& contact.getFixtureA().getUserData() != null
+			if (contact.getFixtureB().getUserData() == null || contact.getFixtureA().getUserData() == null) {
+				continue;
+			}
+
+			if (contact.getFixtureB().getUserData().equals("Player")
 					&& contact.getFixtureA().getUserData() instanceof Chair) {
+				
 				objC = (Chair) contact.getFixtureA().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to break chair";
@@ -90,10 +94,10 @@ public class MyContactListener implements ContactListener {
 				contact.setEnabled(false);
 				bodyToDestroy = contact.getFixtureA().getBody();
 				get = "Chair";
-			} else if (contact.getFixtureB().getUserData() != null
-					&& contact.getFixtureB().getUserData().equals("Player")
-					&& contact.getFixtureA().getUserData() != null
+
+			} else if (contact.getFixtureB().getUserData().equals("Player")
 					&& contact.getFixtureA().getUserData() instanceof Table) {
+				
 				objT = (Table) contact.getFixtureA().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to break table";
@@ -102,26 +106,27 @@ public class MyContactListener implements ContactListener {
 				contact.setEnabled(false);
 				bodyToDestroy = contact.getFixtureA().getBody();
 				get = "Table";
-			} else if (contact.getFixtureA().getUserData() != null
-					&& contact.getFixtureA().getUserData().equals("Player")
-					&& contact.getFixtureB().getUserData() != null
+				
+			} else if (contact.getFixtureA().getUserData().equals("Player")
 					&& contact.getFixtureB().getUserData().equals("Firebox")) {
+				
 				contact.setEnabled(false);
-			} else if (contact.getFixtureA().getUserData() != null
-					&& contact.getFixtureA().getUserData().equals("Locomotive")
-					&& contact.getFixtureB().getUserData() != null
+				
+			} else if (contact.getFixtureA().getUserData().equals("Locomotive")
 					&& contact.getFixtureB().getUserData().equals("Player")) {
+				
 				this.contact = true;
 				this.contactF = "Press 'E' to put the wood";
 				i = 0;
-			} else if (contact.getFixtureB().getUserData() != null
-					&& !contact.getFixtureB().getUserData().equals("Player")
-					&& contact.getFixtureA().getUserData() != null
+				
+			} else if (!contact.getFixtureB().getUserData().equals("Player")
 					&& !(contact.getFixtureA().getUserData() instanceof Chair)) {
+				
 				if (time != (System.currentTimeMillis() - startTime) / 250) {
 					time++;
 					i++;
 				}
+				
 			}
 
 			if (i == 1) {
