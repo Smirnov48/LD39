@@ -91,7 +91,7 @@ public class Tutorial implements Screen {
 	@Override
 	public void show() {
 		tut = new Texture("tutorial.png");
-		title1 = new Texture("title1.png");
+		title1 = new Texture("title2.png");
 		Box2D.init();
 		batch = new SpriteBatch();
 
