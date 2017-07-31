@@ -169,12 +169,23 @@ public class Tutorial implements Screen {
 				world.step(1 / 60f, 6, 4);
 				update();
 				staticCamera.update();
-				camera.position.set(x+900, camera.position.y, 0);
+				camera.position.set(x + 1400, camera.position.y, 0);
 				camera.update();
-				if(x > -4000) {
-					x-=12;
-				} else if (x > -4500) {
-					x-=8;
+				if (cutSceneFlag) {
+					if (x < demon.getDemonX() - 1400) {
+						cutSceneFlag = false;
+					}
+					if (x > -4900) {
+						x -= 12;
+					} else if (x >= -5409) {
+						x -= 8;
+					} else if (x > demon.getDemonX()- 1400) {
+						x-=40;
+					}
+				} else {
+					if (x < 0) {
+						x+=30;
+					}
 				}
 
 				Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -189,11 +200,10 @@ public class Tutorial implements Screen {
 				batch.setProjectionMatrix(camera.combined);
 				batch.begin();
 				train.render();
-				
-				//Draw a Hero
-				batch.draw(stop, 305, 45,
-						-stop.getWidth(), stop.getHeight());
-				//hero.render(listener.getContact(), listener.getContactF());
+
+				// Draw a Hero
+				batch.draw(stop, 305, 45, -stop.getWidth(), stop.getHeight());
+				// hero.render(listener.getContact(), listener.getContactF());
 				demon.render();
 
 				batch.end();
@@ -214,7 +224,7 @@ public class Tutorial implements Screen {
 	public void cutScene() {
 		if ((camera.position.x > -4000) && cutSceneFlag) {
 			camera.position.x -= 1;
-		} 
+		}
 	}
 
 	@Override
