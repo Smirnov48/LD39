@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -35,6 +36,9 @@ import com.sgstudio.utils.Box2DHelper;
 //import com.sgstudio.utils.Particle;
 
 public class MyGame implements Screen {
+	private Sound carbon;
+	private Sound putToOven;
+	
 	private boolean Play = true, Moved = false, Pressed = false;
 	
 	private MyContactListener listener;
@@ -197,6 +201,11 @@ public class MyGame implements Screen {
 		checker = new Checker(main, locomotive, demon, hero);
 		
 		atlasSound = Menu.getAtlasSound();
+		
+		carbon = Gdx.audio.newSound(Gdx.files.internal("audio/sound/Carbon.wav"));
+		carbon.stop();
+		putToOven = Gdx.audio.newSound(Gdx.files.internal("audio/sound/putToOven.wav"));
+		putToOven.stop();
 
 		Gdx.input.setInputProcessor(new InputProcessor() {
 
@@ -212,6 +221,7 @@ public class MyGame implements Screen {
 						i += swapValue;
 					if (hero.getWood() + Fuel < hero.getMaxWood())
 						hero.updWood(Fuel);
+					if(Fuel!=0) carbon.play();
 				} else if (Gdx.input.isKeyPressed(Keys.V)) {
 					System.out.println("In Pull " + i + " woods.");
 					if (hero.getWood() + i < hero.getMaxWood() && i > 0) {

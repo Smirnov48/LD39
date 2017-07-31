@@ -1,7 +1,5 @@
 package com.sgstudio.game.train;
 
-import com.sgstudio.utils.Random;
-
 public class Fuel {
 	private static final int StrikesСhair = 3;
 	private static final int StrikesTable = 5;
@@ -20,10 +18,7 @@ public class Fuel {
 	private int strikesF=0;
 	private boolean broken=false;
 	
-	private Random rand;
-	
 	public Fuel(int view){
-		rand = new Random();
 		this.view = view;
 	}
 	
@@ -89,13 +84,13 @@ public class Fuel {
 	private int fuelCounting(){
 		switch(view){
 			case(1):
-				return rand.randInt(2, 4);
+				return 3;
 			case(2):
-				return rand.randInt(5, 7);
+				return 6;
 			case(3):
-				return rand.randInt(8, 10);
+				return 9;
 			case(4):
-				return rand.randInt(11, 13);
+				return 12;
 		}
 		return 0;
 	}
