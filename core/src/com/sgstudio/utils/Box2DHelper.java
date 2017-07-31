@@ -44,7 +44,7 @@ public class Box2DHelper {
 	
 	public static Body makeBoxAroundSpriteStatic(World world, Sprite sprite, Object userData) {
 		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyDef.BodyType.StaticBody;
+		bodyDef.type = BodyDef.BodyType.DynamicBody;
 		bodyDef.position.set(sprite.getX() / PIXELS_TO_METERS, sprite.getY() / PIXELS_TO_METERS);
 
 		Body body = world.createBody(bodyDef);
@@ -95,17 +95,7 @@ public class Box2DHelper {
 	}
 	
 	public static void addShapeBox(Body body, Vector2 size, Vector2 pos) {
-		PolygonShape shape = new PolygonShape();
-		pos.x = pos.x / PIXELS_TO_METERS;
-		pos.y = pos.y /PIXELS_TO_METERS;			
-		shape.setAsBox(size.x / PIXELS_TO_METERS, size.y / PIXELS_TO_METERS, pos, 0);
-
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = shape;
-		fixtureDef.density = 10f;
-
-		body.createFixture(fixtureDef);
-		shape.dispose();
+		addShapeBox(body, size, pos, 10f, false);
 	}
 	
 	public static Body makeBox(World world, Vector2 size, String UserData) {
@@ -159,5 +149,46 @@ public class Box2DHelper {
 		if (userData != null) body.getFixtureList().get(0).setUserData(userData);
 		
 		return body;
+	}
+
+	public static Body makeCircle(World world, Vector2 size, Vector2 pos, String userData) {
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.DynamicBody;
+
+		Body body = world.createBody(bodyDef);
+		
+		CircleShape shape = new CircleShape();
+		pos.x = pos.x / PIXELS_TO_METERS;
+		pos.y = pos.y /PIXELS_TO_METERS;	
+		shape.setPosition(pos);
+		shape.setRadius(size.x / 2 / PIXELS_TO_METERS);
+
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1f;
+
+		body.createFixture(fixtureDef);
+		shape.dispose();
+		
+		if (userData != null) body.getFixtureList().get(0).setUserData(userData);
+
+		return body;
+	}
+
+	public static void addShapeBox(Body body, Vector2 size, Vector2 pos, float i, boolean filter) {
+		PolygonShape shape = new PolygonShape();
+		pos.x = pos.x / PIXELS_TO_METERS;
+		pos.y = pos.y /PIXELS_TO_METERS;			
+		shape.setAsBox(size.x / PIXELS_TO_METERS, size.y / PIXELS_TO_METERS, pos, 0);
+
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = i;
+		if (filter) {
+			fixtureDef.filter.maskBits = 0;
+		}
+
+		body.createFixture(fixtureDef);
+		shape.dispose();
 	}
 }

@@ -37,6 +37,7 @@ import com.sgstudio.utils.Box2DHelper;
 public class MyGame implements Screen {
 	private Sound carbon;
 	private Sound putToOven;
+	private Sound bang;
 	
 	private boolean Play = true, Moved = false, Pressed = false;
 	
@@ -85,37 +86,36 @@ public class MyGame implements Screen {
 
 	@Override
 	public void render(float delta) {
-			isTut = 1;
-			world.step(1 / 60f, 6, 4);
-			update();
-			staticCamera.update();
-			camera.position.set(hero.getPosition().x, camera.position.y, 0);
-			camera.update();
-	
-			Gdx.gl.glClearColor(0, 0, 0, 1);
-			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	
-			batch.setProjectionMatrix(staticCamera.combined);
-			batch.begin();
-			background.render();
-			rails.render();
-			stats.render(listener.getContact(), listener.getContactF());
-			map.render();
-			batch.end();
-			
-			batch.setProjectionMatrix(camera.combined);
-			batch.begin();
-			train.render();
-			pas.render();
-			hero.render(listener.getContact(), listener.getContactF());
-			demon.render();
-			
-			batch.draw(tex, -800, -600);
-			batch.end();
-	
-			Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
-			debugRenderer.render(world, debugMatrix);
+		isTut = 1;
+		world.step(1 / 60f, 6, 4);
+		update();
+		staticCamera.update();
+		camera.position.set(hero.getPosition().x, camera.position.y, 0);
+		camera.update();
+
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		batch.setProjectionMatrix(staticCamera.combined);
+		batch.begin();
+		background.render();
+		rails.render();
+		stats.render(listener.getContact(), listener.getContactF());
+		map.render();
+		batch.end();
 		
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();
+		train.render();
+		pas.render();
+		hero.render(listener.getContact(), listener.getContactF());
+		demon.render();
+		
+		batch.draw(tex, -800, -600);
+		batch.end();
+
+		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
+		debugRenderer.render(world, debugMatrix);
 	}
 
 	private void update() {
@@ -174,6 +174,8 @@ public class MyGame implements Screen {
 		carbon.stop();
 		putToOven = Gdx.audio.newSound(Gdx.files.internal("audio/sound/putToOven.wav"));
 		putToOven.stop();
+		bang = Gdx.audio.newSound(Gdx.files.internal("audio/sound/Bang.wav"));
+		bang.stop();
 
 		Gdx.input.setInputProcessor(new InputProcessor() {
 
@@ -189,6 +191,7 @@ public class MyGame implements Screen {
 						i += swapValue;
 					if (hero.getWood() + Fuel < hero.getMaxWood())
 						hero.updWood(Fuel);
+					if(Fuel==0) bang.play();
 					if(Fuel!=0) carbon.play();
 				} else if (Gdx.input.isKeyPressed(Keys.V)) {
 					System.out.println("In Pull " + i + " woods.");
@@ -272,15 +275,22 @@ public class MyGame implements Screen {
 	public void resize(int width, int height) {
 
 	}
-
+	
+	private boolean isPlaying;
 	@Override
 	public void pause() {
-
+		System.out.println("Pause");
+		isPlaying = Play;
+		music.setMuted(Play);
+		music.stopMusic();
+		if(isPlaying) Play=!Play;
 	}
 
 	@Override
 	public void resume() {
-
+		Play=true;
+		music.setMuted(Play);
+		if(isPlaying) Play=!Play;
 	}
 
 	public static SpriteBatch getBatch() {

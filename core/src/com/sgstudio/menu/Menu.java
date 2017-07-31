@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,6 +34,8 @@ public class Menu implements Screen {
 	
 	private static Music sound;
 	private static MusicGame music;
+	
+	private OrthographicCamera camera;
 
 	public Menu(final Main main) {
 		this.main = main;
@@ -42,6 +45,9 @@ public class Menu implements Screen {
 	
 	@Override
 	public void show() {
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); 
+		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+		
 		tiles = new Tiles();
 		music = new MusicGame();
 		tiles.createAtlas("atlas/menu.png", 3, 4);
@@ -181,15 +187,19 @@ public class Menu implements Screen {
 		else batch.draw(atlasSound.get("tiles0_1"), 15, 15);
 	}
 	
-	float r=0,g=0,b=0;
-	boolean upR=true, upG=true, upB=true;
+	static float r=0;
+	static float g=0;
+	static float b=0;
+	static boolean upR=true;
+	static boolean upG=true;
+	static boolean upB=true;
 	
-	public float getR() {return r;}
-	public float getG() {return g;}
-	public float getB() {return b;}
-	public boolean getupR() {return upR;}
-	public boolean getupG() {return upG;}
-	public boolean getupB() {return upB;}
+	public static float getR() {return r;}
+	public static float getG() {return g;}
+	public static float getB() {return b;}
+	public static boolean getupR() {return upR;}
+	public static boolean getupG() {return upG;}
+	public static boolean getupB() {return upB;}
 	
 	public void setR(float r) {this.r = r;}
 	public void setG(float g) {this.g = g;}
@@ -199,6 +209,8 @@ public class Menu implements Screen {
 	public void setupB(boolean upB) {this.upB = upB;}
 	@Override
 	public void render(float delta) {
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 		Gdx.gl.glClearColor(r, g, b, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		

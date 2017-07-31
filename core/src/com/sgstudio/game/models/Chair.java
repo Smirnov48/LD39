@@ -48,10 +48,12 @@ public class Chair implements Destroable {
 	private float x;
 
 	public void render() {
-		Vector2 pos = Box2DHelper.getPosition(body);
-		if (notDel)
-			batch.draw(texture, pos.x - texture.getWidth() / 2, pos.y - texture.getHeight() / 2);
-		x = pos.x;
+		if (body != null) {
+			Vector2 pos = Box2DHelper.getPosition(body);
+			if (notDel)
+				batch.draw(texture, pos.x - texture.getWidth() / 2, pos.y - texture.getHeight() / 2);
+			x = pos.x;
+		}
 	}
 
 	public void setPos(int x, int y) {
@@ -71,7 +73,10 @@ public class Chair implements Destroable {
 				@Override
 				public void run() {
 					try {
-						world.destroyBody(body);
+						if (body != null) {
+							world.destroyBody(body);
+							body = null;
+						}
 					} catch (java.lang.NullPointerException e) {
 						Gdx.app.log("Error: ", e.getMessage());
 					}
