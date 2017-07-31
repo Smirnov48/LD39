@@ -109,7 +109,7 @@ public class MainHero {
 		body = Box2DHelper.makeCircle(world, size, pos, "Player");
 		size = new Vector2(sprite.getWidth() / 2, sprite.getHeight()/2 - 10);
 		pos = new Vector2(0, 10);
-		Box2DHelper.addShapeBox(body, size, pos, 1, true);
+		Box2DHelper.addShapeBox(body, size, pos, 1, null, true);
 		
 		Box2DHelper.setTransform(body, 290, 60, 0);
 		body.setFixedRotation(true);

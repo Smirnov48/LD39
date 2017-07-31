@@ -58,9 +58,11 @@ public class Demon {
 		batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y - sprite.getHeight() / 2, sprite.getWidth() / 2, sprite.getHeight()/2, sprite.getWidth(), sprite.getHeight(), 1, 1, MathUtils.radiansToDegrees * body.getAngle());
 	}
 
+	
 	public void update() {
 		kinematic();
-		Box2DHelper.setTransform(body, (int) -(8500 * disToTrain/1000), (int) sprite.getWidth() / 2 + 15, body.getAngle());
+		body.setLinearVelocity(0.8f, 0);
+		//Box2DHelper.setTransform(body, (int) -(8500 * disToTrain/1000), (int) sprite.getWidth() / 2 + 15, body.getAngle());
 	}
 
 	public void kinematic() {
@@ -70,7 +72,6 @@ public class Demon {
 			speed += speed / 100 * 1;
 			disToTrain -= speed;
 			disToTrain += train.getSpeed();
-			System.out.println(disToTrain);
 		}
 	}
 

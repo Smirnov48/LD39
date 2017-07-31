@@ -5,7 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.sgstudio.game.train.Fuel;
 import com.sgstudio.utils.Box2DHelper;
 
@@ -88,5 +91,18 @@ public class Chair implements Destroable {
 
 	public boolean isBroken() {
 		return fuel.isBroken();
+	}
+
+	public void destroy() {
+		Array<Fixture> array = body.getFixtureList();
+		for (int i = 0; i < array.size; i++) {
+			Filter filter = new Filter();
+			filter.maskBits = 0;
+			array.get(i).setFilterData(filter);
+		}		
+	}
+	
+	public void onRails() {
+		body.applyForceToCenter(-3, 0, true);
 	}
 }

@@ -6,7 +6,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.sgstudio.game.models.Chair;
 import com.sgstudio.game.models.Table;
 import com.sgstudio.game.models.Wardrobe;
@@ -69,11 +72,11 @@ public class Coach {
 	private void createPhysics() {
 		Vector2 size = new Vector2(sprite.getWidth() / 2, 12);
 		Vector2 pos = new Vector2(number * -500, 200);
-		body = Box2DHelper.makeBox(world, size, pos, "Coach");
+		body = Box2DHelper.makeBox(world, size, pos, this);
 
 		size = new Vector2(sprite.getWidth() / 2 - 30, 5);
 		pos = new Vector2(number * -500, 316);
-		Box2DHelper.addShapeBox(body, size, pos);
+		Box2DHelper.addShapeBox(body, size, pos, 10, this, false);
 		Box2DHelper.setTransform(body, 132, -170, 0);
 	}
 
@@ -83,6 +86,16 @@ public class Coach {
 		for(int i=0;i<1;i++) chair[i].render();
 		for(int i=0;i<1;i++) table[i].render();
 //		for(int i=0;i<number;i++) wardrobe[i].render();
+	}
+
+	public void destroy() {
+		Array<Fixture> array = body.getFixtureList();
+		for (int i = 0; i < array.size; i++) {
+			Filter filter = new Filter();
+			filter.maskBits = 0;
+			array.get(i).setFilterData(filter);
+		}
+		//body.applyForceToCenter(0, 1000, true);
 	}
 
 }

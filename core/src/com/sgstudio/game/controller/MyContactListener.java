@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.WorldManifold;
 import com.sgstudio.game.models.Chair;
 import com.sgstudio.game.models.Table;
 import com.sgstudio.game.models.Wardrobe;
+import com.sgstudio.game.train.Coach;
 
 public class MyContactListener implements ContactListener {
 
@@ -49,6 +50,7 @@ public class MyContactListener implements ContactListener {
 			if (contact.getFixtureB().getUserData() == null || contact.getFixtureA().getUserData() == null) {
 				continue;
 			}
+			
 			if (contact.getFixtureB().getUserData().equals("Player") && contact.getFixtureA().getUserData() instanceof Chair) {
 				object = contact.getFixtureA().getUserData();
 				this.contact = true;
@@ -65,6 +67,21 @@ public class MyContactListener implements ContactListener {
 				view = 2;
 				contact.setEnabled(false);
 				bodyToDestroy = contact.getFixtureA().getBody();
+			} else  if (contact.getFixtureB().getUserData().equals("Monstr") && contact.getFixtureA().getUserData() instanceof Coach) {
+				Coach coach = (Coach) contact.getFixtureA().getUserData();
+				coach.destroy();
+			} else  if (contact.getFixtureB().getUserData().equals("Monstr") && contact.getFixtureA().getUserData() instanceof Chair) {
+				Chair coach = (Chair) contact.getFixtureA().getUserData();
+				coach.destroy();
+			} else  if (contact.getFixtureB().getUserData().equals("Monstr") && contact.getFixtureA().getUserData() instanceof Table) {
+				Table coach = (Table) contact.getFixtureA().getUserData();
+				coach.destroy();
+			} else  if (contact.getFixtureB().getUserData().equals("Rails") && contact.getFixtureA().getUserData() instanceof Chair) {
+				Chair coach = (Chair) contact.getFixtureA().getUserData();
+				coach.onRails();
+			} else  if (contact.getFixtureB().getUserData().equals("Rails") && contact.getFixtureA().getUserData() instanceof Table) {
+				Table coach = (Table) contact.getFixtureA().getUserData();
+				coach.onRails();
 			} else if (contact.getFixtureB().getUserData().equals("Player") && contact.getFixtureA().getUserData() instanceof Wardrobe) {
 				object = contact.getFixtureA().getUserData();
 				this.contact = true;
