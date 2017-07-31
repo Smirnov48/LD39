@@ -46,7 +46,7 @@ public class Demon {
 	}
 
 	private void createPhysics() {
-		body = Box2DHelper.makeBoxAroundSprite(world, sprite);
+		body = Box2DHelper.makeCircleAroundSprite(world, sprite, "Monstr");
 		body.setType(BodyDef.BodyType.KinematicBody);
 		Box2DHelper.setTransform(body, (int) x, (int) sprite.getWidth() / 2 + 15, 0);
 		body.setAngularVelocity(-6);
@@ -59,7 +59,7 @@ public class Demon {
 
 	public void update() {
 		kinematic();
-		body.getPosition().x = x;
+		body.getPosition().x = x / 100;
 	}
 
 	public void kinematic() {
@@ -68,7 +68,7 @@ public class Demon {
 			speed += speed / 100 * 1;
 			disToTrain -= speed;
 			disToTrain += train.getSpeed();
-			System.out.println("Demon in " + disToTrain + " meters.");
+			//System.out.println("Demon in " + disToTrain + " meters.");
 			if (disToTrain < 0) {
 				main.setScreen(main.defeat);
 			}

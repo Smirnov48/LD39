@@ -49,7 +49,7 @@ public class MainHero {
 		sprite = new Sprite(atlasChar.get("tiles0_2"));
 
 		maxWood = 10;
-		wood = 10;
+		wood = 0;
 
 		createPhysics();
 
@@ -68,8 +68,8 @@ public class MainHero {
 		NONE, WALKING, DEAD
 	}
 
-	public void render() {
-		update();
+	public void render(boolean contact, String contactF) {
+		update(contact,contactF);
 		Vector2 pos = Box2DHelper.getPosition(body);
 		animator.render();
 		//batch.draw(sprite, pos.x - sprite.getWidth() / 2, pos.y - sprite.getHeight() / 2);
@@ -81,7 +81,7 @@ public class MainHero {
 	public void dispose() {
 	}
 
-	public void update() {
+	public void update(boolean contact, String contactF) {
 		if (keys.getPressedLeft()) {
 			body.applyForceToCenter(-1.0f, 0, true);
 		}
@@ -92,7 +92,7 @@ public class MainHero {
 			body.applyForceToCenter(0, 1.5f, true);
 		}
 		if (keys.getPressedE()) {
-			putWood();
+			if(contact && contactF.equals("Press 'E' to put the wood")) putWood();
 		}
 	}
 

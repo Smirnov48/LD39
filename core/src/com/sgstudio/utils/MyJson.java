@@ -67,7 +67,7 @@ public class MyJson {
 		if (j.equals("")) {
 			j = "{ width: 800, height: 600 }";
 		}
-		System.out.println("--JSON-READ-BEGIN--\n"+j+"\n--JSON---END---");
+
 		settings = json.fromJson(Settings.class, j);
 	}
 	

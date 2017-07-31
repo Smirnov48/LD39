@@ -33,9 +33,7 @@ import com.sgstudio.utils.Box2DHelper;
 public class MyGame implements Screen {
 	private Chair chair;
 	
-	private Fuel obj1;
-	private Fuel obj2;
-	private Fuel obj3;
+	private MyContactListener listener;
 	
 	private Texture tex;
 
@@ -87,17 +85,18 @@ public class MyGame implements Screen {
 		batch.begin();
 		background.render();
 		rails.render();
-		stats.render();
+		stats.render(listener.getContact(), listener.getContactF());
 		map.render();
 		batch.end();
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		train.render();
-		hero.render();
-		demon.render();
 		pas.render();
 		chair.render();
+		hero.render(listener.getContact(), listener.getContactF());
+		demon.render();
+		
 		batch.draw(tex, -800, -600);
 		batch.end();
 
@@ -128,11 +127,12 @@ public class MyGame implements Screen {
 	@Override
 	public void show() {
 		Box2D.init();
-		world = new World(new Vector2(0, -10), true);
-		world.setContactListener(new MyContactListener());
-		debugRenderer = new Box2DDebugRenderer();
-
 		batch = main.getBatch();
+		world = new World(new Vector2(0, -10), true);
+		listener = new MyContactListener(world);
+		world.setContactListener(listener);
+		debugRenderer = new Box2DDebugRenderer();
+		
 		train = new Train(main, batch, world);
 		Locomotive locomotive = train.getLocomotive();
 				
@@ -145,13 +145,12 @@ public class MyGame implements Screen {
 		map = new MiniMap(batch, locomotive);
 		music = new MusicGame();
 		tex = new Texture("coor.png");
-
-		obj1 = new Fuel(1);
-		obj3 = new Fuel(2);
-		obj2 = new Fuel(3);
 		
 		chair = new Chair(batch, new Sprite(new Texture("atlas/test.png")), world);
-		chair.createModel(100, 50);
+		chair.createModel(60, 60);
+	
+		chair = new Chair(batch, new Sprite(new Texture("atlas/test.png")), world);
+		chair.createModel(180, 60);
 		
 		checker = new Checker(main, locomotive, demon, hero);
 
@@ -159,21 +158,8 @@ public class MyGame implements Screen {
 
 			@Override
 			public boolean keyDown(int keycode) {
-
-				if (Gdx.input.isKeyPressed(Keys.Z)) {
-					int Fuel = obj1.getFuel();
-					if (hero.getWood() + Fuel > hero.getMaxWood())
-						i += hero.getWood() + Fuel - hero.getMaxWood();
-					if (hero.getWood() + Fuel < hero.getMaxWood())
-						hero.updWood(Fuel);
-				} else if (Gdx.input.isKeyPressed(Keys.X)) {
-					int Fuel = obj2.getFuel();
-					if (hero.getWood() + Fuel > hero.getMaxWood())
-						i += hero.getWood() + Fuel - hero.getMaxWood();
-					if (hero.getWood() + Fuel < hero.getMaxWood())
-						hero.updWood(Fuel);
-				} else if (Gdx.input.isKeyPressed(Keys.C)) {
-					int Fuel = obj3.getFuel();
+				if (Gdx.input.isKeyPressed(Keys.F) && listener.getContactF().indexOf("F")==7) {
+					int Fuel = listener.getFuel();
 					if (hero.getWood() + Fuel > hero.getMaxWood())
 						i += hero.getWood() + Fuel - hero.getMaxWood();
 					if (hero.getWood() + Fuel < hero.getMaxWood())

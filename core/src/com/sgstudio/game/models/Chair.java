@@ -1,17 +1,15 @@
 package com.sgstudio.game.models;
 
-import java.util.Map;
-
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.sgstudio.game.train.Fuel;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Chair {
-	private Map<String, TextureRegion> atlasWood;
+	private Fuel fuel;
 	
 	private SpriteBatch batch;
 	private Sprite texture;
@@ -19,10 +17,14 @@ public class Chair {
 	private World world;
 	private Body body;
 	
+	private int view=1;
+	
 	public Chair(SpriteBatch batch, Sprite texture, World world){
 		this.batch = batch;
 		this.world = world;
 		this.texture = texture;
+		
+		fuel = new Fuel(view);
 	}
 	
 	public void createModel(int x, int y){
@@ -30,7 +32,7 @@ public class Chair {
 	}
 	
 	private void createPhysics(int x, int y) {
-		body = Box2DHelper.makeBox(world, new Vector2(texture.getWidth(), texture.getHeight()), new Vector2(0, 0), "Chair");
+		body = Box2DHelper.makeBoxAroundSpriteStatic(world, texture, this);
 		Box2DHelper.setTransform(body, x, y, 0);
 		body.setFixedRotation(true);
 	}
@@ -49,4 +51,7 @@ public class Chair {
 	public Vector2 getPosition() {
 		return Box2DHelper.getPosition(body);
 	}
+	
+	public int getFuel(){ return fuel.getFuel(1); }
+	public boolean isBroken(){ return fuel.isBroken(); }
 }
