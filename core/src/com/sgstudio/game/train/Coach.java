@@ -56,7 +56,7 @@ public class Coach {
 		}
 	}
 	
-	private Wardrobe wardrobe[] = new Wardrobe[10];
+/*	private Wardrobe wardrobe[] = new Wardrobe[10];
 	private Sprite wardrobeT;
 	private void createWardrobe(){
 		wardrobeT = new Sprite(new Texture("wardrobe2.png"));
@@ -64,7 +64,7 @@ public class Coach {
 			wardrobe[i] = new Wardrobe(batch, wardrobeT, world);
 			wardrobe[i].createModel(number*-500+45, 60);
 		}
-	}
+	}*/
 
 	private void createPhysics() {
 		Vector2 size = new Vector2(sprite.getWidth() / 2, 12);
