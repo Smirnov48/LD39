@@ -83,11 +83,14 @@ public class MainHero {
 	public void update(boolean contact, String contactF) {
 		if(body.getPosition().y<=0.7) jump = true;
 		else if(body.getPosition().y>=0.85) jump = false;
+		
 		if (keys.getPressedLeft()) {
-			body.applyForceToCenter(-1.0f, 0, true);
+			body.setTransform(body.getPosition().x-0.03f, body.getPosition().y, 0);
+//			body.applyForceToCenter(-.7f, 0, true);
 		}
 		if (keys.getPressedRight()) {
-			body.applyForceToCenter(1.0f, 0, true);
+			body.setTransform(body.getPosition().x+0.03f, body.getPosition().y, 0);
+//			body.applyForceToCenter(.7f, 0, true);
 		}
 		if (keys.getPressedSpace()) {
 			if(jump) body.applyForceToCenter(0, 5f, true);
