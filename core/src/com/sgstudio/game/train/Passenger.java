@@ -46,7 +46,7 @@ public class Passenger {
 					con = 800;
 					cont = 0;
 				} 
-			} else if ((i%2 == 0) || (i == 0)) {
+			} else if (i%2 == 0) {
 					if(sprite[i].getX() + con1 > sprite[i].getX()){
 						sprite[i].setPosition(sprite[i].getX() - 1, sprite[i].getY());
 						sprite[i].draw(batch);
