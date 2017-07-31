@@ -59,7 +59,7 @@ public class Locomotive {
 		
 		//Physics
 		createPhysics();
-		p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
+		//p.load(Gdx.files.internal("particle/smoke"), Gdx.files.internal(""));
 	}
 
 	private void createPhysics() {
