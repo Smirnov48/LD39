@@ -78,16 +78,20 @@ public class MainHero {
 	
 	public void dispose() {
 	}
-
+	
+	private boolean jump = false;
 	public void update(boolean contact, String contactF) {
+		if(body.getPosition().y<=0.7) jump = true;
+		else if(body.getPosition().y>=0.85) jump = false;
 		if (keys.getPressedLeft()) {
 			body.applyForceToCenter(-1.0f, 0, true);
+			System.out.println(body.getPosition().y);
 		}
 		if (keys.getPressedRight()) {
 			body.applyForceToCenter(1.0f, 0, true);
 		}
 		if (keys.getPressedUp()) {
-			body.applyForceToCenter(0, 1.5f, true);
+			if(jump) body.applyForceToCenter(0, 5f, true);
 		}
 		if (keys.getPressedE()) {
 			if(contact && contactF.equals("Press 'E' to put the wood")) putWood();

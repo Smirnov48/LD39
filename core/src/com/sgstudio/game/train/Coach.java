@@ -28,6 +28,7 @@ public class Coach {
 		sprite = new Sprite(img);
 		
 		createChair();
+//		createTable();
 		
 		createPhysics();
 	}
@@ -39,6 +40,16 @@ public class Coach {
 		for(int i=0;i<number;i++){
 			chair[i] = new Chair(batch, chairT, world);
 			chair[i].createModel(number*-500-10, 60);
+		}
+	}
+	
+	private Chair table[] = new Chair[10];
+	private Sprite tableT;
+	private void createTable(){
+		chairT = new Sprite(new Texture("atlas/test.png"));
+		for(int i=0;i<number;i++){
+			chair[i] = new Chair(batch, chairT, world);
+			chair[i].createModel(number*-500, 60);
 		}
 	}
 
@@ -54,9 +65,10 @@ public class Coach {
 	}
 
 	public void render() {
-		for(int i=0;i<number;i++) chair[i].render();
 		Vector2 pos = Box2DHelper.getPosition(body);
 		batch.draw(sprite, number * -500 + pos.x - sprite.getWidth() / 2, pos.y + sprite.getHeight() + 10);
+		for(int i=0;i<number;i++) chair[i].render();
+//		for(int i=0;i<number;i++) table[i].render();
 	}
 
 }
