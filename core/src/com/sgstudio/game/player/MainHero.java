@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.sgstudio.game.MyGame;
 import com.sgstudio.game.controller.KeyManager;
 import com.sgstudio.game.train.Locomotive;
+import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 import com.sgstudio.utils.Tiles;
 
@@ -58,8 +59,11 @@ public class MainHero {
 	/*Time values for actions*/
 	private long actTime = 0;
 
-	public MainHero(SpriteBatch batch, World world, Locomotive train) {
+	private Main main;
+
+	public MainHero(Main main, SpriteBatch batch, World world, Locomotive train) {
 		
+		this.main = main;
 		/*Wood Hero Pull*/
 		maxWood = 20;
 		wood = 0;
@@ -109,7 +113,7 @@ public class MainHero {
 		body = Box2DHelper.makeCircle(world, size, pos, this);
 		size = new Vector2(sprite.getWidth() / 2, sprite.getHeight()/2 - 10);
 		pos = new Vector2(0, 10);
-		Box2DHelper.addShapeBox(body, size, pos, 1, null, true);
+		Box2DHelper.addShapeBox(body, size, pos, 1, this, true);
 		
 		Box2DHelper.setTransform(body, 290, 60, 0);
 		body.setFixedRotation(true);
@@ -247,7 +251,7 @@ public class MainHero {
 	}
 
 	public void destroy() {
-		//main.setScreen(main.defeat);		
+		main.setScreen(main.defeat);		
 	}
 
 	public void onRails() {
