@@ -92,6 +92,7 @@ public class Locomotive {
 		pos = new Vector2(-170, 236);
 		Box2DHelper.addShapeBox(body, size, pos, 0f, this, false);
 		Box2DHelper.setTransform(body, 590, -165, 0);
+		body.setType(BodyDef.BodyType.StaticBody);
 	}
 
 	//Getters
