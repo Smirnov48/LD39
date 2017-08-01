@@ -55,7 +55,7 @@ public class Locomotive {
 		this.world = world;
 
 		//Wood and Oven stats
-		ovenWood = 5;
+		ovenWood = 20;
 		maxOvenWood = 300;
 		wood = 100;
 		ovenFire = true;
