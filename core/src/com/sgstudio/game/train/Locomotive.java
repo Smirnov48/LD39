@@ -226,7 +226,6 @@ public class Locomotive {
 
 	public void reset() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void destroy() {

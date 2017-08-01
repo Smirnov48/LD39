@@ -61,7 +61,7 @@ public class Demon {
 	
 	public void update() {
 		kinematic();
-		body.setLinearVelocity(2.78f, 0);
+		body.setLinearVelocity(0.78f, 0);
 	}
 
 	public void kinematic() {

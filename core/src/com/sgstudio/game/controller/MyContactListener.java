@@ -11,6 +11,7 @@ import com.sgstudio.game.models.Chair;
 import com.sgstudio.game.models.Table;
 import com.sgstudio.game.models.Wardrobe;
 import com.sgstudio.game.models.Wood;
+import com.sgstudio.game.player.MainHero;
 import com.sgstudio.game.train.Coach;
 import com.sgstudio.game.train.Locomotive;
 
@@ -53,7 +54,7 @@ public class MyContactListener implements ContactListener {
 				continue;
 			}
 			
-			if (contact.getFixtureB().getUserData().equals("Player") && contact.getFixtureA().getUserData() instanceof Chair) {
+			if (contact.getFixtureB().getUserData() instanceof MainHero  && contact.getFixtureA().getUserData() instanceof Chair) {
 				object = contact.getFixtureA().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to break chair";
@@ -61,7 +62,7 @@ public class MyContactListener implements ContactListener {
 				view = 1;
 				contact.setEnabled(false);
 				bodyToDestroy = contact.getFixtureA().getBody();
-			} else if (contact.getFixtureB().getUserData().equals("Player") && contact.getFixtureA().getUserData() instanceof Table) {
+			} else if (contact.getFixtureB().getUserData() instanceof MainHero && contact.getFixtureA().getUserData() instanceof Table) {
 				object = contact.getFixtureA().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to break table";
