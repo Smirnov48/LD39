@@ -197,7 +197,7 @@ public class Tutorial implements Screen {
 				Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 				Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS,
 						Box2DHelper.PIXELS_TO_METERS, 0);
-				debugRenderer.render(world, debugMatrix);
+//				debugRenderer.render(world, debugMatrix);
 				batch.end();
 
 				batch.setProjectionMatrix(staticCamera.combined);
@@ -262,7 +262,7 @@ public class Tutorial implements Screen {
 
 				Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS,
 						Box2DHelper.PIXELS_TO_METERS, 0);
-				debugRenderer.render(world, debugMatrix);
+//				debugRenderer.render(world, debugMatrix);
 			} else {
 				isTut = 3;
 				actTime = System.currentTimeMillis();

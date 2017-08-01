@@ -97,7 +97,7 @@ public class MyGame implements Screen {
 	@Override
 	public void render(float delta) {
 		stateTime += Gdx.graphics.getDeltaTime();
-		currentFrame = walkAnimation.getKeyFrame(stateTime, true);
+		currentFrame = walkAnimation.getKeyFrame(stateTime, false);
 		isTut = 1;
 		world.step(1 / 60f, 6, 4);
 		update();
@@ -123,11 +123,11 @@ public class MyGame implements Screen {
 		hero.render(listener.getContact(), listener.getContactF());
 		demon.render();
 		
-		batch.draw(tex, -800, -600);
+//		batch.draw(tex, -800, -600);
 		batch.end();
 
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(Box2DHelper.PIXELS_TO_METERS, Box2DHelper.PIXELS_TO_METERS, 0);
-		debugRenderer.render(world, debugMatrix);
+//		debugRenderer.render(world, debugMatrix);
 	}
 
 	public void update() {
