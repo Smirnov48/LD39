@@ -84,9 +84,9 @@ public class Fuel {
 	private int fuelCounting(){
 		switch(view){
 			case(1):
-				return 1;
+				return 2;
 			case(2):
-				return 3;
+				return 6;
 			case(3):
 				return 4;
 			case(4):
