@@ -76,7 +76,7 @@ public class MainHero {
 		/*Graphics*/
 		this.batch = MyGame.getBatch();
 		tiles = new Tiles();
-		tiles.createAtlas("Char.png", 3, 1);
+		tiles.createAtlas("char.png", 3, 1);
 		atlasChar = tiles.getTextureRegion();
 		sprite = new Sprite(atlasChar.get("tiles0_2"));
 		animator = new Animator(this);
