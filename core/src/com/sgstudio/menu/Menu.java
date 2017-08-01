@@ -50,6 +50,9 @@ public class Menu implements Screen {
 		
 		tiles = new Tiles();
 		music = new MusicGame();
+		music.stop();
+		music.setMuted(true);
+		music.setMusicThree();
 		tiles.createAtlas("atlas/menu.png", 3, 4);
 		atlasMenu = tiles.getTextureRegion();
 		
