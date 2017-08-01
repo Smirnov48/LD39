@@ -62,14 +62,14 @@ public class Demon {
 	
 	public void update() {
 		kinematic();
-		body.setLinearVelocity(0.78f, 0);
+		body.setLinearVelocity(0.78f - train.getSpeed()/100, 0);
 	}
 
 	public void kinematic() {
 		if (time != (System.currentTimeMillis() - startTime) / 1000) {
 			time++;
 			
-			speed += speed / 100 * 1;
+			System.out.println(train.getSpeed());
 			disToTrain -= speed;
 			disToTrain += train.getSpeed();
 		}
