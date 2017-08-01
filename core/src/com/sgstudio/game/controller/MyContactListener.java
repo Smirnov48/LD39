@@ -53,7 +53,8 @@ public class MyContactListener implements ContactListener {
 			if (contact.getFixtureB().getUserData() == null || contact.getFixtureA().getUserData() == null) {
 				continue;
 			}
-			
+
+			//			System.out.println(contact.getFixtureB().getUserData() +"&&"+ contact.getFixtureA().getUserData());
 			if (contact.getFixtureB().getUserData() instanceof MainHero  && contact.getFixtureA().getUserData() instanceof Chair) {
 				object = contact.getFixtureA().getUserData();
 				this.contact = true;
@@ -96,11 +97,11 @@ public class MyContactListener implements ContactListener {
 			} else  if (contact.getFixtureB().getUserData().equals("Rails") && contact.getFixtureA().getUserData() instanceof Table) {
 				Table coach = (Table) contact.getFixtureA().getUserData();
 				coach.onRails();
-			}if (contact.getFixtureB().getUserData().equals("Rails") && contact.getFixtureA().getUserData() instanceof MainHero) {
-				MainHero coach = (MainHero) contact.getFixtureA().getUserData();
+			}if (contact.getFixtureA().getUserData().equals("Rails") && contact.getFixtureB().getUserData() instanceof MainHero) {
+				MainHero coach = (MainHero) contact.getFixtureB().getUserData();
 				coach.onRails();
-			} else  if (contact.getFixtureB().getUserData().equals("Monstr") && contact.getFixtureA().getUserData() instanceof MainHero) {
-				MainHero coach = (MainHero) contact.getFixtureA().getUserData();
+			} else  if (contact.getFixtureA().getUserData().equals("Monstr") && contact.getFixtureB().getUserData() instanceof MainHero) {
+				MainHero coach = (MainHero) contact.getFixtureB().getUserData();
 				coach.destroy();
 			} else if (contact.getFixtureA().getUserData() instanceof Locomotive && contact.getFixtureB().getUserData() instanceof MainHero) {
 				this.contact = true;

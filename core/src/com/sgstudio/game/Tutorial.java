@@ -111,7 +111,7 @@ public class Tutorial implements Screen {
 		man = new KeyManager();
 		background = new Background(batch, locomotive);
 		rails = new Rails(world, batch, locomotive);
-		hero = new MainHero(batch, world, locomotive);
+		hero = new MainHero(main, batch, world, locomotive);
 		stats = new Stats(batch, hero, locomotive);
 		map = new MiniMap(batch, locomotive);
 		music = new MusicGame();
