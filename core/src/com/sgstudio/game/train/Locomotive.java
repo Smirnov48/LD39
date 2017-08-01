@@ -1,5 +1,8 @@
 package com.sgstudio.game.train;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -8,7 +11,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.sgstudio.game.player.MainHero;
 import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
@@ -40,8 +46,11 @@ public class Locomotive {
 	private MainHero hero;
 	private boolean first = true;
 
+	private Main main;
+
 	@SuppressWarnings("static-access")
 	public Locomotive(Main main,SpriteBatch batch, World world) {
+		this.main = main;
 		this.batch = batch;
 		this.world = world;
 
@@ -72,16 +81,16 @@ public class Locomotive {
 	private void createPhysics() {
 		Vector2 size = new Vector2(sprite.getWidth() / 2, 13);
 		Vector2 pos = new Vector2(0, 200);
-		body = Box2DHelper.makeBox(world, size, pos, "Locomotive");
+		body = Box2DHelper.makeBox(world, size, pos, this);
 		size = new Vector2(sprite.getWidth() / 2 - 30, 5);
 		pos = new Vector2(0, 316);
-		Box2DHelper.addShapeBox(body, size, pos);
+		Box2DHelper.addShapeBox(body, size, pos, 0f, this, false);
 		size = new Vector2(sprite.getWidth() / 2 - 40, 50);
 		pos = new Vector2(0, 256);
-		Box2DHelper.addShapeBox(body, size, pos);
+		Box2DHelper.addShapeBox(body, size, pos, 0f, this, false);
 		size = new Vector2(15, 10);
 		pos = new Vector2(-170, 236);
-		Box2DHelper.addShapeBox(body, size, pos);
+		Box2DHelper.addShapeBox(body, size, pos, 0f, this, false);
 		Box2DHelper.setTransform(body, 590, -165, 0);
 	}
 
@@ -217,6 +226,15 @@ public class Locomotive {
 
 	public void reset() {
 		// TODO Auto-generated method stub
-		
+	}
+
+	public void destroy() {
+		Array<Fixture> array = body.getFixtureList();
+		for (int i = 0; i < array.size; i++) {
+			Filter filter = new Filter();
+			filter.maskBits = 0;
+			array.get(i).setFilterData(filter);
+		}
+		main.setScreen(main.defeat);
 	}
 }

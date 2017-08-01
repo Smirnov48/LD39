@@ -34,12 +34,14 @@ import com.sgstudio.utils.Box2DHelper;
 public class Tutorial implements Screen {
 
 	Texture tut;
+	@SuppressWarnings("unused")
 	private Map<String, TextureRegion> atlasSound;
 	/* Time values for actions */
 	private long actTime = 0;
 
 	private MyContactListener listener;
 
+	@SuppressWarnings("unused")
 	private Texture tex;
 	private Texture title1;
 
@@ -69,6 +71,7 @@ public class Tutorial implements Screen {
 
 	private Checker checker;
 	private int isTut = 2;
+	@SuppressWarnings("unused")
 	private float disToMonsterFromCamera;
 
 	public KeyManager man;
@@ -112,6 +115,7 @@ public class Tutorial implements Screen {
 		stats = new Stats(batch, hero, locomotive);
 		map = new MiniMap(batch, locomotive);
 		music = new MusicGame();
+		music.setMusicOne();
 
 		checker = new Checker(main, locomotive, demon, hero);
 		atlasSound = Menu.getAtlasSound();
@@ -121,55 +125,48 @@ public class Tutorial implements Screen {
 
 			@Override
 			public boolean keyDown(int keycode) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean keyUp(int keycode) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean keyTyped(char character) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean touchDragged(int screenX, int screenY, int pointer) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean mouseMoved(int screenX, int screenY) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 
 			@Override
 			public boolean scrolled(int amount) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 			
 		});
 	}
 
+	@SuppressWarnings("unused")
 	private void update() {
 		checker.update();
 		background.update();
@@ -281,22 +278,18 @@ public class Tutorial implements Screen {
 
 	public void cutScene() {
 		disToMonsterFromCamera = -8340 + camera.position.x;
-
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override

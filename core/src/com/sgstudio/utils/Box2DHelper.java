@@ -152,7 +152,7 @@ public class Box2DHelper {
 		return body;
 	}
 
-	public static Body makeCircle(World world, Vector2 size, Vector2 pos, String userData) {
+	public static Body makeCircle(World world, Vector2 size, Vector2 pos, Object userData) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
 

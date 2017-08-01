@@ -106,7 +106,7 @@ public class MainHero {
 	private void createPhysics() {
 		Vector2 size = new Vector2(sprite.getWidth(), sprite.getHeight());
 		Vector2 pos = new Vector2(0, -12);
-		body = Box2DHelper.makeCircle(world, size, pos, "Player");
+		body = Box2DHelper.makeCircle(world, size, pos, this);
 		size = new Vector2(sprite.getWidth() / 2, sprite.getHeight()/2 - 10);
 		pos = new Vector2(0, 10);
 		Box2DHelper.addShapeBox(body, size, pos, 1, null, true);

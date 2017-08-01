@@ -23,6 +23,7 @@ import com.sgstudio.game.graphics.MiniMap;
 import com.sgstudio.game.graphics.Stats;
 import com.sgstudio.game.ground.Background;
 import com.sgstudio.game.ground.Rails;
+import com.sgstudio.game.models.Wood;
 import com.sgstudio.game.music.MusicGame;
 import com.sgstudio.game.player.Demon;
 import com.sgstudio.game.player.MainHero;
@@ -43,6 +44,8 @@ public class MyGame implements Screen {
 	private Sound carbon;
 	private Sound putToOven;
 	private Sound bang;
+	
+	private Map<String, TextureRegion> atlasWood;
 	
 	private boolean Play = true, Moved = false, Pressed = false;
 	
@@ -75,6 +78,7 @@ public class MyGame implements Screen {
 	private OrthographicCamera staticCamera;
 	
 	private Checker checker;
+	@SuppressWarnings("unused")
 	private int isTut = 2;
 	
 	public KeyManager man;
@@ -185,6 +189,7 @@ public class MyGame implements Screen {
 		bang.stop();
 		
 		music.setMuted(true);
+		music.setMusicThree();
 		
 		walkSheet = new Texture(Gdx.files.internal("atlas/charHit.png"));
 		TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);
@@ -210,6 +215,9 @@ public class MyGame implements Screen {
 						swapValue = hero.getMaxWood() + Fuel - hero.getWood();
 						hero.updWood(Fuel);
 						i += swapValue;
+						Wood wood = new Wood(batch, null, world);
+						wood.setWood(i);
+						i=0;
 					if (hero.getWood() + Fuel < hero.getMaxWood())
 						hero.updWood(Fuel);
 					if(Fuel==0) {

@@ -187,9 +187,9 @@ public class Menu implements Screen {
 		else batch.draw(atlasSound.get("tiles0_1"), 15, 15);
 	}
 	
-	static float r=0;
-	static float g=0;
-	static float b=0;
+	static float r=0.57f;
+	static float g=0.26f;
+	static float b=0.41f;
 	static boolean upR=true;
 	static boolean upG=true;
 	static boolean upB=true;
@@ -201,12 +201,12 @@ public class Menu implements Screen {
 	public static boolean getupG() {return upG;}
 	public static boolean getupB() {return upB;}
 	
-	public void setR(float r) {this.r = r;}
-	public void setG(float g) {this.g = g;}
-	public void setB(float b) {this.b = b;}
-	public void setupR(boolean upR) {this.upR = upR;}
-	public void setupG(boolean upG) {this.upG = upG;}
-	public void setupB(boolean upB) {this.upB = upB;}
+	public void setR(float r) {Menu.r = r;}
+	public void setG(float g) {Menu.g = g;}
+	public void setB(float b) {Menu.b = b;}
+	public void setupR(boolean upR) {Menu.upR = upR;}
+	public void setupG(boolean upG) {Menu.upG = upG;}
+	public void setupB(boolean upB) {Menu.upB = upB;}
 	@Override
 	public void render(float delta) {
 		camera.update();

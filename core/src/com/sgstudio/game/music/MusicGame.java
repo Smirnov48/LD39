@@ -4,16 +4,32 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
 public class MusicGame {
-	private Music One, Two;
+	private Music One, Two, Three;
 	public static boolean stade = true;
 	
 	public MusicGame(){
 		One = Gdx.audio.newMusic(Gdx.files.internal("audio/music/ATrainyFromRomashkovo.wav"));
-		One.play();
 		One.setVolume(0);
 		Two = Gdx.audio.newMusic(Gdx.files.internal("audio/music/BlueCoach.wav"));
-		Two.stop();
 		Two.setVolume(0);
+		Three = Gdx.audio.newMusic(Gdx.files.internal("audio/music/LastSong.wav"));
+		Three.setVolume(0);
+	}
+	
+	public void setMusicOne(){
+		One.play();
+		Two.stop();
+		Three.stop();
+	}
+	public void setMusicTwo(){
+		One.stop();
+		Two.play();
+		Three.stop();
+	}
+	public void setMusicThree(){
+		One.stop();
+		Two.stop();
+		Three.play();
 	}
 	
 	public void update(){
@@ -31,6 +47,10 @@ public class MusicGame {
 			if(Two.getPosition()<.6f) Two.setVolume(Two.getVolume()+.005f);
 			else if(Two.getPosition()>=29f) Two.setVolume(Two.getVolume()-.005f);
 //			System.out.println("[Two] Position: " + Two.getPosition() + "  Time:" + Two.getVolume());
+		} else if(Three.isPlaying()){
+			if(Three.getPosition()<.6f) Three.setVolume(Three.getVolume()+.005f);
+			else if(Three.getPosition()>=108f) Three.setVolume(Three.getVolume()-.005f);
+			System.out.println("[Three] Position: " + Three.getPosition() + "  Time:" + Three.getVolume());
 		}
 		
 		if(One.getPosition()>=25.5f){
@@ -41,6 +61,10 @@ public class MusicGame {
 			Two.stop();
 			One.play();
 		}
+		if(Three.getPosition()>=108.5f){
+			Two.stop();
+			One.play();
+		}
 	}
 	
 	public void stopMusic() {
@@ -48,6 +72,8 @@ public class MusicGame {
 			if(One.getPosition()>=27f) One.setVolume(One.getVolume()-.005f);
 		} else if(Two.isPlaying()){
 			if(Two.getPosition()>=29f) Two.setVolume(Two.getVolume()-.005f);
+		} else if(Three.isPlaying()){
+			if(Three.getPosition()>=29f) Three.setVolume(Three.getVolume()-.005f);
 		}
 	}
 	
@@ -55,7 +81,9 @@ public class MusicGame {
 		if(One.isPlaying()){
 			One.stop();
 		} else if(Two.isPlaying()){
-			One.stop();
+			Two.stop();
+		} else if(Three.isPlaying()){
+			Three.stop();
 		}
 	}
 	
