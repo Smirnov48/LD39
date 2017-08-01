@@ -224,20 +224,20 @@ public class Tutorial implements Screen {
 					/* To Potato */
 					if ((camera.position.x > -8400) && (cutSceneFlag) && (cutSceneFlag2)) {
 						x -= 40;
-						System.out.println("ToPotato");
+						//System.out.println("ToPotato");
 						if (camera.position.x < -5900) {
 							actTime = System.currentTimeMillis();
 							cutSceneFlag = false;
 						}
 					} else if ((!cutSceneFlag) && (System.currentTimeMillis() - actTime < 2100)
 							&& (cutSceneFlag2)) { /* Stopping 2 seconds */
-						System.out.println("Wait");
+						//System.out.println("Wait");
 						if (System.currentTimeMillis() - actTime > 2000) {
 							cutSceneFlag2 = false;
 						}
-					} else if ((!cutSceneFlag) && (!cutSceneFlag2) && (camera.position.x < 300)) {
+					} else if ((!cutSceneFlag) && (!cutSceneFlag2) && (camera.position.x < 320)) {
 						x += 40;
-						System.out.println("ToHero");
+						//System.out.println("ToHero");
 					}
 				}
 				Gdx.gl.glClearColor(0, 0, 0, 1);
