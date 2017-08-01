@@ -50,7 +50,7 @@ public class MusicGame {
 		} else if(Three.isPlaying()){
 			if(Three.getPosition()<.6f) Three.setVolume(Three.getVolume()+.005f);
 			else if(Three.getPosition()>=108f) Three.setVolume(Three.getVolume()-.005f);
-			System.out.println("[Three] Position: " + Three.getPosition() + "  Time:" + Three.getVolume());
+//			System.out.println("[Three] Position: " + Three.getPosition() + "  Time:" + Three.getVolume());
 		}
 		
 		if(One.getPosition()>=25.5f){

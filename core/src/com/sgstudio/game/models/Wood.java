@@ -1,5 +1,9 @@
 package com.sgstudio.game.models;
 
+import java.util.ArrayList;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -30,7 +34,7 @@ public class Wood {
 		notDel=!notDel;
 	}
 	
-	public void createModel(int x, int y){
+	public void createModel(float x, float y){
 		createPhysics(x, y);
 	}
 	
@@ -42,9 +46,9 @@ public class Wood {
 		return Box2DHelper.getPosition(body);
 	}
 	
-	private void createPhysics(int x, int y) {
+	private void createPhysics(float x, float y) {
 		body = Box2DHelper.makeBoxAroundSpriteStatic(world, texture, this);
-		Box2DHelper.setTransform(body, x, y, 0);
+		Box2DHelper.setTransformNormal(body, x, y, 0);
 		body.setFixedRotation(true);
 	}
 	
@@ -55,6 +59,26 @@ public class Wood {
 			Vector2 pos = Box2DHelper.getPosition(body);
 			if(notDel) batch.draw(texture, pos.x - texture.getWidth() / 2,  pos.y - texture.getHeight() / 2 );
 			x = pos.x;
+		}
+	}
+	
+	public void del(){
+		if (wood==0) {
+			notDel = false;
+			
+			Gdx.app.postRunnable(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						if (body != null) {
+							world.destroyBody(body);
+							body = null;
+						}
+					} catch (java.lang.NullPointerException e) {
+						Gdx.app.log("Error: ", e.getMessage());
+					}
+				}
+			});
 		}
 	}
 	

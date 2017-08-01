@@ -122,6 +122,9 @@ public class Box2DHelper {
 	public static void setTransform(Body body, int x, int y, float f) {
 		body.setTransform(new Vector2(x / PIXELS_TO_METERS, y / PIXELS_TO_METERS), f);
 	}
+	public static void setTransformNormal(Body body, float x, float y, int f) {
+		body.setTransform(new Vector2(x / PIXELS_TO_METERS, y / PIXELS_TO_METERS), f);
+	}
 
 	public static Vector2 getPosition(Body body) {
 		return new Vector2(body.getPosition().x * PIXELS_TO_METERS, body.getPosition().y * PIXELS_TO_METERS);

@@ -76,7 +76,6 @@ public class MyContactListener implements ContactListener {
 				this.contact = true;
 				this.contactF = "Press 'F' to raise the wood";
 				i = 0;
-				view = 2;
 				contact.setEnabled(false);
 				bodyToDestroy = contact.getFixtureA().getBody();
 			} else  if (contact.getFixtureB().getUserData().equals("Monstr") && contact.getFixtureA().getUserData() instanceof Coach) {

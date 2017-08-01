@@ -1,5 +1,6 @@
 package com.sgstudio.game;
 
+import java.util.ArrayList;
 import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
@@ -34,6 +36,7 @@ import com.sgstudio.main.Main;
 import com.sgstudio.menu.Menu;
 import com.sgstudio.utils.Box2DHelper;
 //import com.sgstudio.utils.Particle;
+import com.sgstudio.utils.Tiles;
 
 public class MyGame implements Screen {
 	private final int FRAME_COLS = 4, FRAME_ROWS = 1;
@@ -46,6 +49,9 @@ public class MyGame implements Screen {
 	private Sound bang;
 	
 	private Map<String, TextureRegion> atlasWood;
+	private Tiles tiles;
+	
+	private ArrayList<Wood> arr = new ArrayList<Wood>();
 	
 	private boolean Play = true, Moved = false, Pressed = false;
 	
@@ -123,6 +129,8 @@ public class MyGame implements Screen {
 		hero.render(listener.getContact(), listener.getContactF());
 		demon.render();
 		
+		for(Wood wood : arr) wood.render();
+		
 		batch.draw(tex, -800, -600);
 		batch.end();
 
@@ -157,7 +165,7 @@ public class MyGame implements Screen {
 		Box2D.init();
 		batch = main.getBatch();
 		
-		world = new World(new Vector2(0, -10), true);
+		world = new World(new Vector2(0, -10), false);
 		listener = new MyContactListener(world);
 		world.setContactListener(listener);
 		debugRenderer = new Box2DDebugRenderer();
@@ -203,20 +211,39 @@ public class MyGame implements Screen {
 		walkAnimation = new Animation<TextureRegion>(0.005f, walkFrames);
 		stateTime = 0f;
 		
+		tiles = new Tiles();
+		tiles.createAtlas("atlas/wood.png", 2, 1);
+		atlasWood = tiles.getTextureRegion();
+		
 		Gdx.input.setInputProcessor(new InputProcessor() {
 
 			@Override
 			public boolean keyDown(int keycode) {
 				int swapValue = 0;
 				if (Gdx.input.isKeyPressed(Keys.F) && listener.getContactF().indexOf("F")==7) {
-					int Fuel = listener.getFuel();
+					int Fuel=0;
+					if(!listener.getContactF().equals("Press 'F' to raise the wood")) Fuel = listener.getFuel();
+					else{
+						for(Wood wood : arr){
+							if(wood.getPosition().x <= hero.getHeroX()+27 && wood.getPosition().x >= hero.getHeroX()){
+								Fuel = wood.getWood();
+								wood.setWood(0);
+								wood.del();
+								arr.remove(wood);
+							}
+						}
+					}
 					System.out.println("In Pull " + Fuel + " woods.");
 					if (hero.getWood() + Fuel > hero.getMaxWood())
 						swapValue = hero.getMaxWood() + Fuel - hero.getWood();
 						hero.updWood(Fuel);
 						i += swapValue;
-						Wood wood = new Wood(batch, null, world);
-						wood.setWood(i);
+						if(i!=0){
+							Wood wood = new Wood(batch, new Sprite(atlasWood.get("tiles0_0")), world);
+							wood.createModel(hero.getHeroX(), hero.getHeroY());
+							wood.setWood(i);
+							arr.add(wood);
+						}
 						i=0;
 					if (hero.getWood() + Fuel < hero.getMaxWood())
 						hero.updWood(Fuel);
