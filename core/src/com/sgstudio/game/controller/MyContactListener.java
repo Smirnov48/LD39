@@ -96,6 +96,12 @@ public class MyContactListener implements ContactListener {
 			} else  if (contact.getFixtureB().getUserData().equals("Rails") && contact.getFixtureA().getUserData() instanceof Table) {
 				Table coach = (Table) contact.getFixtureA().getUserData();
 				coach.onRails();
+			}if (contact.getFixtureB().getUserData().equals("Rails") && contact.getFixtureA().getUserData() instanceof MainHero) {
+				MainHero coach = (MainHero) contact.getFixtureA().getUserData();
+				coach.onRails();
+			} else  if (contact.getFixtureB().getUserData().equals("Monstr") && contact.getFixtureA().getUserData() instanceof MainHero) {
+				MainHero coach = (MainHero) contact.getFixtureA().getUserData();
+				coach.destroy();
 			} else if (contact.getFixtureA().getUserData() instanceof Locomotive && contact.getFixtureB().getUserData() instanceof MainHero) {
 				this.contact = true;
 				this.contactF = "Press 'E' to put the wood";

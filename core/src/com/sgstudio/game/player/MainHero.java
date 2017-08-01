@@ -245,4 +245,12 @@ public class MainHero {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void destroy() {
+		//main.setScreen(main.defeat);		
+	}
+
+	public void onRails() {
+		body.applyForceToCenter(-3, 0, true);		
+	}
 }
