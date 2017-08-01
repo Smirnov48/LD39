@@ -8,10 +8,8 @@ import com.sgstudio.game.MyGame;
 import com.sgstudio.game.Tutorial;
 import com.sgstudio.game.Victory;
 import com.sgstudio.menu.Menu;
-import com.sgstudio.utils.MyJson;
 
 public class Main extends Game {
-	private MyJson json;
 	
 	public MyGame game;
 	public Menu menu;
@@ -25,7 +23,6 @@ public class Main extends Game {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		json = new MyJson();
 		game = new MyGame(this);
 		menu = new Menu(this);
 		defeat = new Defeat(this);
@@ -44,9 +41,7 @@ public class Main extends Game {
 	
 	@Override
 	public void resize(int width, int height) {
-		json.setPlayingMusic(true);
-		json.setResolution(width, height);
-		json.writeToFile();
+		
 	}
 	
 	@Override
