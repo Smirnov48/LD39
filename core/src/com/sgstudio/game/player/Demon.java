@@ -13,7 +13,7 @@ import com.sgstudio.main.Main;
 import com.sgstudio.utils.Box2DHelper;
 
 public class Demon {
-
+	
 	private float speed;
 	private Locomotive train;
 	private SpriteBatch batch;
@@ -23,7 +23,7 @@ public class Demon {
 	private float time = 0;
 	private Main main;
 	private Texture patato;
-	private float x;
+	public static float x;
 	private World world;
 	private Sprite sprite;
 	private Body body;

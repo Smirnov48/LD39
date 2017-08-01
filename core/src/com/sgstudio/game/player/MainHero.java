@@ -62,7 +62,7 @@ public class MainHero {
 		
 		/*Wood Hero Pull*/
 		maxWood = 20;
-		wood = 0;
+		wood = 20;
 		
 		/*Supposed classes*/
 		this.train = train;
