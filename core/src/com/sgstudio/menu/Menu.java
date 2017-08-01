@@ -163,7 +163,7 @@ public class Menu implements Screen {
 			public boolean scrolled(int amount) { return false; }
 		});
 		
-		if((Play)&& (!music.isMuted())) sound.play();
+		if((Play) && (!music.isMuted())) sound.play();
 	}
 	
 	public static Map<String, TextureRegion> getAtlasSound(){ return atlasSound; }
