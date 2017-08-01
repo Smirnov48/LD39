@@ -36,6 +36,7 @@ public class Demon {
 		this.batch = batch;
 		this.train = train;
 		speed = 25;
+		speed = 78;
 		// speedUp = 0.05f;
 		way = train.getWay();
 		disToTrain = 1000 + train.getDistance();
