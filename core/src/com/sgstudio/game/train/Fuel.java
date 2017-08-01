@@ -27,7 +27,7 @@ public class Fuel {
 	public int getFuel(int view){
 		switch(view){
 			case (1):
-				System.out.println(StrikesСhair);
+				//System.out.println(StrikesСhair);
 				if(!broken) System.out.println(strikesF + "/" + StrikesСhair);
 				else System.out.println("Obj broken!");
 				break;

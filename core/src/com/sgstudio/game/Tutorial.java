@@ -208,7 +208,6 @@ public class Tutorial implements Screen {
 				batch.end();
 			} else {
 				isTut = 1;
-				System.out.println("CutScene!!");
 				actTime = System.currentTimeMillis();
 			}
 		} else if ((isTut == 1)) {
