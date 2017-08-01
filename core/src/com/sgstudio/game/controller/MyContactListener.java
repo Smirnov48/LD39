@@ -70,7 +70,7 @@ public class MyContactListener implements ContactListener {
 				view = 2;
 				contact.setEnabled(false);
 				bodyToDestroy = contact.getFixtureA().getBody();
-			} else if (contact.getFixtureB().getUserData().equals("Player") && contact.getFixtureA().getUserData() instanceof Wood) {
+			} else if (contact.getFixtureB().getUserData() instanceof MainHero && contact.getFixtureA().getUserData() instanceof Wood) {
 				object = contact.getFixtureA().getUserData();
 				this.contact = true;
 				this.contactF = "Press 'F' to raise the wood";
@@ -96,21 +96,11 @@ public class MyContactListener implements ContactListener {
 			} else  if (contact.getFixtureB().getUserData().equals("Rails") && contact.getFixtureA().getUserData() instanceof Table) {
 				Table coach = (Table) contact.getFixtureA().getUserData();
 				coach.onRails();
-			} else if (contact.getFixtureB().getUserData().equals("Player") && contact.getFixtureA().getUserData() instanceof Wardrobe) {
-				object = contact.getFixtureA().getUserData();
-				this.contact = true;
-				this.contactF = "Press 'F' to break wardrobe";
-				i = 0;
-				view = 4;
-				contact.setEnabled(false);
-				bodyToDestroy = contact.getFixtureA().getBody();
-			} else if (contact.getFixtureA().getUserData().equals("Player") && contact.getFixtureB().getUserData().equals("Firebox")) {
-				contact.setEnabled(false);
-			} else if (contact.getFixtureA().getUserData().equals("Locomotive") && contact.getFixtureB().getUserData().equals("Player")) {
+			} else if (contact.getFixtureA().getUserData() instanceof Locomotive && contact.getFixtureB().getUserData() instanceof MainHero) {
 				this.contact = true;
 				this.contactF = "Press 'E' to put the wood";
 				i = 0;
-			} else if (!contact.getFixtureB().getUserData().equals("Player") && !(contact.getFixtureA().getUserData() instanceof Chair)) {
+			} else if (!(contact.getFixtureB().getUserData() instanceof MainHero) && !(contact.getFixtureA().getUserData() instanceof Chair)) {
 				if (time != (System.currentTimeMillis() - startTime) / 250) {
 					time++;
 					i++;
