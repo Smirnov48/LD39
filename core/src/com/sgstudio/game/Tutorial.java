@@ -211,7 +211,7 @@ public class Tutorial implements Screen {
 				actTime = System.currentTimeMillis();
 			}
 		} else if ((isTut == 1)) {
-			if (!man.getPressedEnter() || (System.currentTimeMillis() - actTime < 100)) {
+			if (!man.getPressedEnter() || (System.currentTimeMillis() - actTime < 200)) {
 				world.step(1 / 60f, 6, 4);
 				background.update();
 				music.update();
