@@ -4,18 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
 public class MusicGame {
-//	private Music One, Two, Three;
-//	private Music One, Three;
-	private Music Three;
+	private static Music One = null; 
+	private static Music Two = null; 
+	private static Music Three = null;
 	public static boolean stade = true;
 	
 	public MusicGame(){
+		 
 //		One = Gdx.audio.newMusic(Gdx.files.internal("audio/music/BlueCoach.ogg"));
 //		One.setVolume(0);
 //		Two = Gdx.audio.newMusic(Gdx.files.internal("audio/music/ATrainyFromRomashkovo.ogg"));
 //		Two.setVolume(0);
-		Three = Gdx.audio.newMusic(Gdx.files.internal("audio/music/LastSong.ogg"));
-		Three.setVolume(0);
+		if (Three == null) {
+			Three = Gdx.audio.newMusic(Gdx.files.internal("audio/music/LastSong.ogg"));
+			Three.setVolume(0);
+		}
 	}
 	
 //	public void setMusicOne(){
@@ -52,9 +55,17 @@ public class MusicGame {
 //			System.out.println("[Two] Position: " + Two.getPosition() + "  Time:" + Two.getVolume());
 //		} 
 		if(Three.isPlaying()){
-			if(Three.getPosition()<.6f) Three.setVolume(Three.getVolume()+.005f);
-			else if(Three.getPosition()>=108f) Three.setVolume(Three.getVolume()-.005f);
-//			System.out.println("[Three] Position: " + Three.getPosition() + "  Time:" + Three.getVolume());
+			if(Three.getPosition()<.6f) {
+				if (Three.getVolume() < 0.3) {
+					Three.setVolume(Three.getVolume()+.005f);
+				}
+			}				
+			else if(Three.getPosition()>=108f) {
+				if (Three.getVolume() > 0.3) {
+					Three.setVolume(Three.getVolume()-.005f);
+				}
+			}
+			System.out.println("[Three] Position: " + Three.getPosition() + "  Time:" + Three.getVolume() + "Volume:" + Three.getVolume());
 		}
 		
 //		if(One.getPosition()>=25.5f){
