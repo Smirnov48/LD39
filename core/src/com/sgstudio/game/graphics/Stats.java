@@ -55,9 +55,9 @@ public class Stats {
 		this.train = train;
 		
 		
-		System.out.println("All stats has been uploading.");
-		System.out.println("Wood: " + hero.getWood() + "/" + hero.getMaxWood());
-		System.out.println("Fuel: " + train.getOvenWood() + "/" + train.getMaxOvenWood());
+		//System.out.println("All stats has been uploading.");
+		//System.out.println("Wood: " + hero.getWood() + "/" + hero.getMaxWood());
+//		System.out.println("Fuel: " + train.getOvenWood() + "/" + train.getMaxOvenWood());
 	}
 	
 	public void render(boolean contact, String contactF) {

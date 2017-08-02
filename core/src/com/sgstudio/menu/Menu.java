@@ -64,7 +64,7 @@ public class Menu implements Screen {
 		
 		sound = Gdx.audio.newMusic(Gdx.files.internal("audio/music/MainTheme.ogg"));
 		sound.setLooping(true);
-		sound.setVolume(0.2f);
+		sound.setVolume(0.5f);
 		
 		FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("font/pixel.ttf"));
 		FreeTypeFontParameter param = new FreeTypeFontParameter();

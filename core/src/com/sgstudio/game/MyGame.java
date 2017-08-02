@@ -210,7 +210,7 @@ public class MyGame implements Screen {
 				int swapValue = 0;
 				if (Gdx.input.isKeyPressed(Keys.F) && listener.getContactF().indexOf("F")==7) {
 					int Fuel = listener.getFuel();
-					System.out.println("In Pull " + Fuel + " woods.");
+					//System.out.println("In Pull " + Fuel + " woods.");
 					if (hero.getWood() + Fuel > hero.getMaxWood())
 						swapValue = hero.getMaxWood() + Fuel - hero.getWood();
 						hero.updWood(Fuel);
@@ -228,12 +228,12 @@ public class MyGame implements Screen {
 					}
 					if(Fuel!=0) carbon.play(0.7f);
 				} else if (Gdx.input.isKeyPressed(Keys.V)) {
-					System.out.println("In Pull " + i + " woods.");
+					//System.out.println("In Pull " + i + " woods.");
 					if (hero.getWood() + i < hero.getMaxWood() && i > 0) {
 						hero.updWood(i);
-						System.out.println("Added " + i + " wood to Hero.");
+						//System.out.println("Added " + i + " wood to Hero.");
 						i-=i % 11;
-						System.out.println("Added to Pull " + i + " wood. ");
+						//System.out.println("Added to Pull " + i + " wood. ");
 					}
 					if (hero.getWood() + i > hero.getMaxWood() && i > 0) {
 						swapValue = i - (hero.getMaxWood() - hero.getWood());
@@ -313,7 +313,7 @@ public class MyGame implements Screen {
 	private boolean isPlaying;
 	@Override
 	public void pause() {
-		System.out.println("Pause");
+		//System.out.println("Pause");
 		isPlaying = Play;
 		music.setMuted(Play);
 		music.stopMusic();

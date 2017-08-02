@@ -55,17 +55,17 @@ public class MusicGame {
 //			System.out.println("[Two] Position: " + Two.getPosition() + "  Time:" + Two.getVolume());
 //		} 
 		if(Three.isPlaying()){
-			if(Three.getPosition()<.6f) {
-				if (Three.getVolume() < 0.3) {
+			if(Three.getPosition() < 1.6f) {
+				if (Three.getVolume() < 0.5) {
 					Three.setVolume(Three.getVolume()+.005f);
 				}
 			}				
-			else if(Three.getPosition()>=108f) {
-				if (Three.getVolume() > 0.3) {
+			else if(Three.getPosition() >= 107f) {
+				if (Three.getVolume() > 0.5) {
 					Three.setVolume(Three.getVolume()-.005f);
 				}
 			}
-			System.out.println("[Three] Position: " + Three.getPosition() + "  Time:" + Three.getVolume() + "Volume:" + Three.getVolume());
+			//System.out.println("[Three] Position: " + Three.getPosition() + "  Time:" + Three.getVolume() + "Volume:" + Three.getVolume());
 		}
 		
 //		if(One.getPosition()>=25.5f){

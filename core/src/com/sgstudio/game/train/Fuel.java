@@ -25,6 +25,7 @@ public class Fuel {
 	public boolean isBroken(){ return broken; }
 	
 	public int getFuel(int view){
+		/*
 		switch(view){
 			case (1):
 				System.out.println(StrikesСhair);
@@ -44,6 +45,7 @@ public class Fuel {
 				else System.out.println("Obj broken!");
 				break;
 		}
+		*/
 		if(!broken) if(getBroken()){
 			broken=true;
 			return fuelCounting();

@@ -38,7 +38,7 @@ public class AboutSGstudio implements Screen{
 	public void show() {
 		sound = Gdx.audio.newMusic(Gdx.files.internal("audio/music/BlueCoach.ogg"));
 		sound.setLooping(true);
-		sound.setVolume(0.2f);
+		sound.setVolume(0.5f);
 		sound.play();
 
 		batch = main.getBatch();

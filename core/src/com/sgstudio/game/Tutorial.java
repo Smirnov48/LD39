@@ -266,7 +266,7 @@ public class Tutorial implements Screen {
 			} else {
 				isTut = 3;
 				actTime = System.currentTimeMillis();
-				System.out.println("Game!!");
+				//System.out.println("Game!!");
 			}
 		} else if ((isTut == 3)) {
 			checker.reset();
