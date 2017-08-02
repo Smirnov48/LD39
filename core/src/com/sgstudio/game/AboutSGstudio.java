@@ -3,6 +3,7 @@ package com.sgstudio.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -27,6 +28,7 @@ public class AboutSGstudio implements Screen{
 	private static boolean Pressed = false;
 	private static boolean Play = true;
 	private Menu menu;
+	private Music sound;
 	
 	public AboutSGstudio(Main main) {
 		this.main = main;
@@ -34,6 +36,11 @@ public class AboutSGstudio implements Screen{
 
 	@Override
 	public void show() {
+		sound = Gdx.audio.newMusic(Gdx.files.internal("audio/music/BlueCoach.ogg"));
+		sound.setLooping(true);
+		sound.setVolume(0.2f);
+		sound.play();
+
 		batch = main.getBatch();
 		back1 = new Texture("pashasimages/back1.png");
 		back2 = new Texture("pashasimages/back2.png");
@@ -198,6 +205,8 @@ public class AboutSGstudio implements Screen{
 	}
 
 	@Override
-	public void dispose() {}
+	public void dispose() {
+		sound.dispose();
+	}
 
 }
