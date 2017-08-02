@@ -63,7 +63,7 @@ public class Menu implements Screen {
 		width = atlasMenu.get("tiles0_0").getRegionWidth();
 		height = atlasMenu.get("tiles0_0").getRegionHeight();
 		
-		sound = Gdx.audio.newMusic(Gdx.files.internal("audio/music/MainTheme.wav"));
+		sound = Gdx.audio.newMusic(Gdx.files.internal("audio/music/MainTheme.ogg"));
 		sound.setLooping(true);
 		sound.setVolume(0.2f);
 		

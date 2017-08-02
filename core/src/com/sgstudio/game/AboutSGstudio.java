@@ -38,8 +38,8 @@ public class AboutSGstudio implements Screen{
 		back1 = new Texture("pashasimages/back1.png");
 		back2 = new Texture("pashasimages/back2.png");
 		back3 = new Texture("pashasimages/back3.png");
-		text = new Texture("pashasimages/text.psd");
-		title = new Texture("pashasimages/title.psd");
+		text = new Texture("pashasimages/text.png");
+		title = new Texture("pashasimages/title.png");
 		posofx = 50;
 		posofy = 50;
 		posoftextx = 50;

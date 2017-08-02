@@ -38,7 +38,7 @@ public class Victory implements Screen {
 		button1 = new Texture("pashasimages/button1.png");
 		button2 = new Texture("pashasimages/button2.png");
 		button3 = new Texture("pashasimages/button3.png");
-		win = new Texture("pashasimages/win.psd");
+		win = new Texture("pashasimages/win.png");
 		Gdx.input.setInputProcessor(new InputProcessor(){
 
 			@Override

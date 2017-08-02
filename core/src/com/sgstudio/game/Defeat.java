@@ -41,7 +41,7 @@ public class Defeat implements Screen{
 		button1 = new Texture("pashasimages/button1.png");
 		button2 = new Texture("pashasimages/button2.png");
 		button3 = new Texture("pashasimages/button3.png");
-		lose = new Texture("pashasimages/lose.psd");
+		lose = new Texture("pashasimages/lose.png");
 		Gdx.input.setInputProcessor(new InputProcessor(){
 
 			@Override

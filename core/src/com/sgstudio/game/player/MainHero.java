@@ -99,10 +99,10 @@ public class MainHero {
 		smallFont = gen.generateFont(param);
 		
 		/*Music*/
-		putToOven = Gdx.audio.newSound(Gdx.files.internal("audio/sound/putToOven.wav"));
+		putToOven = Gdx.audio.newSound(Gdx.files.internal("audio/sound/putToOven.ogg"));
 		putToOven.stop();
 		
-		jumpSound = Gdx.audio.newSound(Gdx.files.internal("audio/sound/Jump.wav"));
+		jumpSound = Gdx.audio.newSound(Gdx.files.internal("audio/sound/Jump.ogg"));
 		jumpSound.setLooping(0, false);
 		jumpSound.stop();
 	}
@@ -195,14 +195,14 @@ public class MainHero {
 				body.applyForceToCenter(0, 5f, true);
 				if (System.currentTimeMillis() - soundTime > 400) {
 					soundTime = System.currentTimeMillis(); 
-					jumpSound.play();
+					jumpSound.play(0.7f);
 				}
 			}
 		}
 		if (keys.getPressedE()) {
 			if(contact && contactF.equals("Press 'E' to put the wood")){
 				if(wood!=0){
-					putToOven.play();
+					putToOven.play(0.7f);
 					putWood();
 				}
 			}

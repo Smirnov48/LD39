@@ -181,11 +181,11 @@ public class MyGame implements Screen {
 		
 		atlasSound = Menu.getAtlasSound();
 		
-		carbon = Gdx.audio.newSound(Gdx.files.internal("audio/sound/Carbon.wav"));
+		carbon = Gdx.audio.newSound(Gdx.files.internal("audio/sound/Carbon.ogg"));
 		carbon.stop();
-		putToOven = Gdx.audio.newSound(Gdx.files.internal("audio/sound/putToOven.wav"));
+		putToOven = Gdx.audio.newSound(Gdx.files.internal("audio/sound/putToOven.ogg"));
 		putToOven.stop();
-		bang = Gdx.audio.newSound(Gdx.files.internal("audio/sound/Bang.wav"));
+		bang = Gdx.audio.newSound(Gdx.files.internal("audio/sound/Bang.ogg"));
 		bang.stop();
 		
 		music.setMuted(true);
@@ -224,9 +224,9 @@ public class MyGame implements Screen {
 						batch.begin();
 						batch.draw(currentFrame, 0, 100);
 						batch.end();
-						bang.play();
+						bang.play(0.7f);
 					}
-					if(Fuel!=0) carbon.play();
+					if(Fuel!=0) carbon.play(0.7f);
 				} else if (Gdx.input.isKeyPressed(Keys.V)) {
 					System.out.println("In Pull " + i + " woods.");
 					if (hero.getWood() + i < hero.getMaxWood() && i > 0) {

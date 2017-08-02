@@ -10,11 +10,11 @@ public class MusicGame {
 	public static boolean stade = true;
 	
 	public MusicGame(){
-//		One = Gdx.audio.newMusic(Gdx.files.internal("audio/music/BlueCoach.wav"));
+//		One = Gdx.audio.newMusic(Gdx.files.internal("audio/music/BlueCoach.ogg"));
 //		One.setVolume(0);
-//		Two = Gdx.audio.newMusic(Gdx.files.internal("audio/music/ATrainyFromRomashkovo.wav"));
+//		Two = Gdx.audio.newMusic(Gdx.files.internal("audio/music/ATrainyFromRomashkovo.ogg"));
 //		Two.setVolume(0);
-		Three = Gdx.audio.newMusic(Gdx.files.internal("audio/music/LastSong.wav"));
+		Three = Gdx.audio.newMusic(Gdx.files.internal("audio/music/LastSong.ogg"));
 		Three.setVolume(0);
 	}
 	
